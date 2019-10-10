@@ -35,8 +35,8 @@
     
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="Cloud in the sky, fish in the river" />
-    <link rel="shortcut icon" href="https://jumpjumpsparrow.github.io/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="https://jumpjumpsparrow.github.io/start" />
+    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://localhost:4000/start" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
@@ -57,8 +57,8 @@
 岁月是个单行道，积累的同时也要分享，在这里将会记录一些 技术开发、生活见闻等一些内容，欢迎一起讨论.
 
 " />
-    <meta property="og:url" content="https://jumpjumpsparrow.github.io/start" />
-    <meta property="og:image" content="https://jumpjumpsparrow.github.io/assets/images/car.jpg" />
+    <meta property="og:url" content="http://localhost:4000/start" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/car.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/false" />
     <meta property="article:author" content="https://www.facebook.com/false" />
     <meta property="article:published_time" content="2019-06-01T18:00:00+08:00" />
@@ -80,8 +80,8 @@
 岁月是个单行道，积累的同时也要分享，在这里将会记录一些 技术开发、生活见闻等一些内容，欢迎一起讨论.
 
 " />
-    <meta name="twitter:url" content="https://jumpjumpsparrow.github.io/" />
-    <meta name="twitter:image" content="https://jumpjumpsparrow.github.io/assets/images/car.jpg" />
+    <meta name="twitter:url" content="http://localhost:4000/" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/car.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Miaocf" />
     <meta name="twitter:label2" content="Filed under" />
@@ -98,18 +98,18 @@
     "publisher": {
         "@type": "Organization",
         "name": "Miaocf",
-        "logo": "https://jumpjumpsparrow.github.io/assets/images/blog-icon.png"
+        "logo": "http://localhost:4000/assets/images/blog-icon.png"
     },
-    "url": "https://jumpjumpsparrow.github.io/start",
+    "url": "http://localhost:4000/start",
     "image": {
         "@type": "ImageObject",
-        "url": "https://jumpjumpsparrow.github.io/assets/images/car.jpg",
+        "url": "http://localhost:4000/assets/images/car.jpg",
         "width": 2000,
         "height": 666
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://jumpjumpsparrow.github.io/start"
+        "@id": "http://localhost:4000/start"
     },
     "description": "Hey! Welcome to Miaocf’s blog, it’s great to have you :)
 
@@ -156,7 +156,7 @@ into the {body} of the default.hbs template -->
     <div class="site-nav-left">
         
             
-                <a class="site-nav-logo" href="https://jumpjumpsparrow.github.io/"><img src="/assets/images/blog-icon.png" alt="Miaocf" /></a>
+                <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.png" alt="Miaocf" /></a>
             
         
         
@@ -294,6 +294,55 @@ gitment.render('gitmentContainer');
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/haskell">
+                <div class="post-card-image" style="background-image: url(/assets/images/writing.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/haskell">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Functional</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">Haskell 函数式编程</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/Miaocf/">Miaocf</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
             
@@ -305,7 +354,7 @@ gitment.render('gitmentContainer');
 <!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
 <div class="floating-header">
     <div class="floating-header-logo">
-        <a href="https://jumpjumpsparrow.github.io/">
+        <a href="http://localhost:4000/">
             
                 <img src="/assets/images/favicon.png" alt="Miaocf icon" />
             
@@ -349,7 +398,7 @@ gitment.render('gitmentContainer');
         <!-- The footer at the very bottom of the screen -->
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="https://jumpjumpsparrow.github.io/">Miaocf</a> &copy; 2019</section>
+                <section class="copyright"><a href="http://localhost:4000/">Miaocf</a> &copy; 2019</section>
                 <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
                     <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
                     <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
