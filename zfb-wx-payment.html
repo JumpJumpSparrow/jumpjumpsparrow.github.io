@@ -11,7 +11,7 @@
 
 
 
-    <title>iOS 支付宝&微信-支付接口封装指南</title>
+    <title>支付宝支付 微信支付接口不统一？ 盘他！</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -42,9 +42,8 @@
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Miaocf" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="iOS 支付宝&微信-支付接口封装指南" />
-    <meta property="og:description" content="微信支付宝 接口封装指南
-" />
+    <meta property="og:title" content="支付宝支付 微信支付接口不统一？ 盘他！" />
+    <meta property="og:description" content="  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。    首先我们来看支付宝支付SDK的API是怎么设计的： /** * 支付接口 * * @param orderStr 支付订单信息字串 * @param schemeStr 调用支付的app注册在info.plist中的scheme * @param completionBlock 支付结果回调Block，用于wap支付结果回调 跳转支付宝支付时只有当processOrderWithPaymentResult接口的completionBlock为nil时会使用这个bolock */ - (void)payOrder:(NSString *)orderStr fromScheme:(NSString *)schemeStr callback:(CompletionBlock)completionBlock;   支付宝SDK的设计十分简洁，只有三个参数，分别负责：1.支付信息 2.进程跳转的 scheme 3.支付结果回调 block。   然后看一下微信支付的API： /*! @brief 发送请求到微信，等待微信返回onResp * * 函数调用后，会切换到微信的界面。第三方应用程序等待微信返回onResp。微信在异步处理完成后一定会调用onResp。支持以下类型 * SendAuthReq、SendMessageToWXReq、PayReq等。 * @param req" />
     <meta property="og:url" content="http://localhost:4000/zfb-wx-payment" />
     <meta property="og:image" content="http://localhost:4000/assets/images/car.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/false" />
@@ -53,9 +52,8 @@
     <meta property="article:modified_time" content="2019-06-11T02:00:00+08:00" />
     <meta property="article:tag" content="Ios" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="iOS 支付宝&微信-支付接口封装指南" />
-    <meta name="twitter:description" content="微信支付宝 接口封装指南
-" />
+    <meta name="twitter:title" content="支付宝支付 微信支付接口不统一？ 盘他！" />
+    <meta name="twitter:description" content="  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。    首先我们来看支付宝支付SDK的API是怎么设计的： /** * 支付接口 * * @param orderStr 支付订单信息字串 * @param schemeStr 调用支付的app注册在info.plist中的scheme * @param completionBlock 支付结果回调Block，用于wap支付结果回调 跳转支付宝支付时只有当processOrderWithPaymentResult接口的completionBlock为nil时会使用这个bolock */ - (void)payOrder:(NSString *)orderStr fromScheme:(NSString *)schemeStr callback:(CompletionBlock)completionBlock;   支付宝SDK的设计十分简洁，只有三个参数，分别负责：1.支付信息 2.进程跳转的 scheme 3.支付结果回调 block。   然后看一下微信支付的API： /*! @brief 发送请求到微信，等待微信返回onResp * * 函数调用后，会切换到微信的界面。第三方应用程序等待微信返回onResp。微信在异步处理完成后一定会调用onResp。支持以下类型 * SendAuthReq、SendMessageToWXReq、PayReq等。 * @param req" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/car.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -87,8 +85,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/zfb-wx-payment"
     },
-    "description": "微信支付宝 接口封装指南
-"
+    "description": "  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。    首先我们来看支付宝支付SDK的API是怎么设计的： /** * 支付接口 * * @param orderStr 支付订单信息字串 * @param schemeStr 调用支付的app注册在info.plist中的scheme * @param completionBlock 支付结果回调Block，用于wap支付结果回调 跳转支付宝支付时只有当processOrderWithPaymentResult接口的completionBlock为nil时会使用这个bolock */ - (void)payOrder:(NSString *)orderStr fromScheme:(NSString *)schemeStr callback:(CompletionBlock)completionBlock;   支付宝SDK的设计十分简洁，只有三个参数，分别负责：1.支付信息 2.进程跳转的 scheme 3.支付结果回调 block。   然后看一下微信支付的API： /*! @brief 发送请求到微信，等待微信返回onResp * * 函数调用后，会切换到微信的界面。第三方应用程序等待微信返回onResp。微信在异步处理完成后一定会调用onResp。支持以下类型 * SendAuthReq、SendMessageToWXReq、PayReq等。 * @param req"
 }
     </script>
 
@@ -101,7 +98,7 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="iOS 支付宝&微信-支付接口封装指南" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="支付宝支付 微信支付接口不统一？ 盘他！" href="/feed.xml" />
 
 
 </head>
@@ -165,7 +162,7 @@ into the {body} of the default.hbs template -->
                         
                     
                 </section>
-                <h1 class="post-full-title">iOS 支付宝&微信-支付接口封装指南</h1>
+                <h1 class="post-full-title">支付宝支付 微信支付接口不统一？ 盘他！</h1>
             </header>
 
             
@@ -175,7 +172,95 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>微信支付宝 接口封装指南</p>
+                    <p>  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。</p>
+
+<p>   首先我们来看支付宝支付SDK的API是怎么设计的：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+ *  支付接口
+ *
+ *  @param orderStr        支付订单信息字串
+ *  @param schemeStr       调用支付的app注册在info.plist中的scheme
+ *  @param completionBlock 支付结果回调Block，用于wap支付结果回调
+                           跳转支付宝支付时只有当processOrderWithPaymentResult接口的completionBlock为nil时会使用这个bolock
+ */
+- (void)payOrder:(NSString *)orderStr
+      fromScheme:(NSString *)schemeStr
+        callback:(CompletionBlock)completionBlock;
+
+</code></pre></div></div>
+
+<p>  支付宝SDK的设计十分简洁，只有三个参数，分别负责：1.支付信息 2.进程跳转的 scheme 3.支付结果回调 block。</p>
+
+<p>  然后看一下微信支付的API：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*! @brief 发送请求到微信，等待微信返回onResp
+ *
+ * 函数调用后，会切换到微信的界面。第三方应用程序等待微信返回onResp。微信在异步处理完成后一定会调用onResp。支持以下类型
+ * SendAuthReq、SendMessageToWXReq、PayReq等。
+ * @param req 具体的发送请求，在调用函数后，请自己释放。
+ * @return 成功返回YES，失败返回NO。
+ */
++ (BOOL)sendReq:(BaseReq*)req;
+/*! @brief 处理微信通过URL启动App时传递的数据
+ *
+ * 需要在 application:openURL:sourceApplication:annotation:或者application:handleOpenURL中调用。
+ * @param url 微信启动第三方应用时传递过来的URL
+ * @param delegate  WXApiDelegate对象，用来接收微信触发的消息。
+ * @return 成功返回YES，失败返回NO。
+ */
++ (BOOL)handleOpenURL:(NSURL *)url delegate:(nullable id&lt;WXApiDelegate&gt;)delegate;
+
+</code></pre></div></div>
+<p>  要发起微信支付，首先要实例化 一个<code class="highlighter-rouge">PayReq</code>对象，接着将这个对象的6个字段分别赋值，然后发起支付请求，等从微信返回到APP后，再从代理方法获取支付结果。相比支付宝SDK提供的接口，要繁琐了不少,可见接口设计是多么的重要，（当然支付宝的入参是事先拼接好的，拼接工作可以移交给后端）。</p>
+
+<p>  我们希望不管是微信支付还是支付宝支付，都能有统一风格的调用接口，方便逻辑复用，那么接下来的工作就是通过封装 使这这两者的接口统一。</p>
+
+<p>在这里，我们设想的接口是：</p>
+<ol>
+  <li>只有一个入参，组织参数的方式尽量简单</li>
+  <li>回调直接给出结果</li>
+</ol>
+
+<p>以下是设计的接口：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typedef void(^PayResult)(PayResponse *result);
+typedef void(^wxShareCallback)(int resp);
+@interface PaymentHub : NSObject&lt;WXApiDelegate&gt;
+/**
+ 获取 单利
+ @return 返回单利实例
+ */
++ (instancetype)hub;
+/**
+ 支付宝支付
+ @param orderStr 支付订单加密信息
+ @param callback 支付结果回调
+ */
+- (void)AlipayWithOrder:(NSString *)orderStr callback:(PayResult)callback;
+
+/**
+ 微信支付
+ @param request 微信支付所需参数
+ @param callback 支付结果回调
+ */
+- (void)WXpayWithRequest:(PayReq *)request callback:(PayResult)callback;
+
+/**
+ 进程间通信处理
+ @param url 进程间 交换的数据
+ @param callback 微信分享回调
+ */
+- (void)handleOpenUrl:(NSURL *)url response:(wxShareCallback)callback;
++ (PayReq *)fromMap:(NSDictionary *)dict;
+
+</code></pre></div></div>
+
+<p>为了方便组织微信支付所需的字段，<code class="highlighter-rouge">fromMap </code>方法可以将包含数据的字典转换为 一个<code class="highlighter-rouge">PayReq </code>实例对象。在封装里，将微信SDK的 代理指定为 <code class="highlighter-rouge">PaymentHub </code>的实例，在实例内部处理微信的代理回调。
+考虑到微信SDK还可能会负责分享，在<code class="highlighter-rouge">handleOpenUrl </code>方法里需要做区分处理。</p>
+
+<p><a href="https://github.com/JumpJumpSparrow/DemoCollection.git">demo链接</a></p>
+
 
                 </div>
             </section>
@@ -450,13 +535,13 @@ gitment.render('gitmentContainer');
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">iOS 支付宝&微信-支付接口封装指南</div>
+    <div class="floating-header-title">支付宝支付 微信支付接口不统一？ 盘他！</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=iOS+%E6%94%AF%E4%BB%98%E5%AE%9D%26%E5%BE%AE%E4%BF%A1-%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E5%B0%81%E8%A3%85%E6%8C%87%E5%8D%97&amp;url=zfb-wx-payment"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98+%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%8E%A5%E5%8F%A3%E4%B8%8D%E7%BB%9F%E4%B8%80%EF%BC%9F+%E7%9B%98%E4%BB%96%EF%BC%81&amp;url=zfb-wx-payment"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-10T16:50:54+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">Building Objective-C static libraries with categories</title><link href="http://localhost:4000/yykit-micro" rel="alternate" type="text/html" title="Building Objective-C static libraries with categories" /><published>2019-09-25T02:00:00+08:00</published><updated>2019-09-25T02:00:00+08:00</updated><id>http://localhost:4000/yykit-micro</id><content type="html" xml:base="http://localhost:4000/yykit-micro">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-10T19:22:57+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">Building Objective-C static libraries with categories</title><link href="http://localhost:4000/yykit-micro" rel="alternate" type="text/html" title="Building Objective-C static libraries with categories" /><published>2019-09-25T02:00:00+08:00</published><updated>2019-09-25T02:00:00+08:00</updated><id>http://localhost:4000/yykit-micro</id><content type="html" xml:base="http://localhost:4000/yykit-micro">&lt;blockquote&gt;
   &lt;p&gt;Q:  How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -652,4 +652,91 @@ client_secret: xxxxxx
 &lt;p&gt;  关于统计，这个看你自己需不需要加。我这里加的是&lt;a href=&quot;https://tongji.baidu.com/web/welcome/login&quot;&gt;百度统计&lt;/a&gt;,官方有较详细的接入文档。可以查看博客的浏览人数和页面UV、PV。&lt;/p&gt;
 
 &lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
-&lt;p&gt;使用 GitHub page 存放博客，充当免费服务器的角色，Jekyll 将文本解析成 html 页面，这样博客一经建成，就无须维护，只需要专心写内容就可以了。&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。</summary></entry><entry><title type="html">iOS 支付宝&amp;amp;微信-支付接口封装指南</title><link href="http://localhost:4000/zfb-wx-payment" rel="alternate" type="text/html" title="iOS 支付宝&amp;微信-支付接口封装指南" /><published>2019-06-11T02:00:00+08:00</published><updated>2019-06-11T02:00:00+08:00</updated><id>http://localhost:4000/zfb-wx-payment</id><content type="html" xml:base="http://localhost:4000/zfb-wx-payment">&lt;p&gt;微信支付宝 接口封装指南&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">微信支付宝 接口封装指南</summary></entry></feed>
+&lt;p&gt;使用 GitHub page 存放博客，充当免费服务器的角色，Jekyll 将文本解析成 html 页面，这样博客一经建成，就无须维护，只需要专心写内容就可以了。&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。</summary></entry><entry><title type="html">支付宝支付 微信支付接口不统一？ 盘他！</title><link href="http://localhost:4000/zfb-wx-payment" rel="alternate" type="text/html" title="支付宝支付 微信支付接口不统一？ 盘他！" /><published>2019-06-11T02:00:00+08:00</published><updated>2019-06-11T02:00:00+08:00</updated><id>http://localhost:4000/zfb-wx-payment</id><content type="html" xml:base="http://localhost:4000/zfb-wx-payment">&lt;p&gt;  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。&lt;/p&gt;
+
+&lt;p&gt;   首先我们来看支付宝支付SDK的API是怎么设计的：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
+ *  支付接口
+ *
+ *  @param orderStr        支付订单信息字串
+ *  @param schemeStr       调用支付的app注册在info.plist中的scheme
+ *  @param completionBlock 支付结果回调Block，用于wap支付结果回调
+                           跳转支付宝支付时只有当processOrderWithPaymentResult接口的completionBlock为nil时会使用这个bolock
+ */
+- (void)payOrder:(NSString *)orderStr
+      fromScheme:(NSString *)schemeStr
+        callback:(CompletionBlock)completionBlock;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;  支付宝SDK的设计十分简洁，只有三个参数，分别负责：1.支付信息 2.进程跳转的 scheme 3.支付结果回调 block。&lt;/p&gt;
+
+&lt;p&gt;  然后看一下微信支付的API：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*! @brief 发送请求到微信，等待微信返回onResp
+ *
+ * 函数调用后，会切换到微信的界面。第三方应用程序等待微信返回onResp。微信在异步处理完成后一定会调用onResp。支持以下类型
+ * SendAuthReq、SendMessageToWXReq、PayReq等。
+ * @param req 具体的发送请求，在调用函数后，请自己释放。
+ * @return 成功返回YES，失败返回NO。
+ */
++ (BOOL)sendReq:(BaseReq*)req;
+/*! @brief 处理微信通过URL启动App时传递的数据
+ *
+ * 需要在 application:openURL:sourceApplication:annotation:或者application:handleOpenURL中调用。
+ * @param url 微信启动第三方应用时传递过来的URL
+ * @param delegate  WXApiDelegate对象，用来接收微信触发的消息。
+ * @return 成功返回YES，失败返回NO。
+ */
++ (BOOL)handleOpenURL:(NSURL *)url delegate:(nullable id&amp;lt;WXApiDelegate&amp;gt;)delegate;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;  要发起微信支付，首先要实例化 一个&lt;code class=&quot;highlighter-rouge&quot;&gt;PayReq&lt;/code&gt;对象，接着将这个对象的6个字段分别赋值，然后发起支付请求，等从微信返回到APP后，再从代理方法获取支付结果。相比支付宝SDK提供的接口，要繁琐了不少,可见接口设计是多么的重要，（当然支付宝的入参是事先拼接好的，拼接工作可以移交给后端）。&lt;/p&gt;
+
+&lt;p&gt;  我们希望不管是微信支付还是支付宝支付，都能有统一风格的调用接口，方便逻辑复用，那么接下来的工作就是通过封装 使这这两者的接口统一。&lt;/p&gt;
+
+&lt;p&gt;在这里，我们设想的接口是：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;只有一个入参，组织参数的方式尽量简单&lt;/li&gt;
+  &lt;li&gt;回调直接给出结果&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;以下是设计的接口：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;typedef void(^PayResult)(PayResponse *result);
+typedef void(^wxShareCallback)(int resp);
+@interface PaymentHub : NSObject&amp;lt;WXApiDelegate&amp;gt;
+/**
+ 获取 单利
+ @return 返回单利实例
+ */
++ (instancetype)hub;
+/**
+ 支付宝支付
+ @param orderStr 支付订单加密信息
+ @param callback 支付结果回调
+ */
+- (void)AlipayWithOrder:(NSString *)orderStr callback:(PayResult)callback;
+
+/**
+ 微信支付
+ @param request 微信支付所需参数
+ @param callback 支付结果回调
+ */
+- (void)WXpayWithRequest:(PayReq *)request callback:(PayResult)callback;
+
+/**
+ 进程间通信处理
+ @param url 进程间 交换的数据
+ @param callback 微信分享回调
+ */
+- (void)handleOpenUrl:(NSURL *)url response:(wxShareCallback)callback;
++ (PayReq *)fromMap:(NSDictionary *)dict;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;为了方便组织微信支付所需的字段，&lt;code class=&quot;highlighter-rouge&quot;&gt;fromMap &lt;/code&gt;方法可以将包含数据的字典转换为 一个&lt;code class=&quot;highlighter-rouge&quot;&gt;PayReq &lt;/code&gt;实例对象。在封装里，将微信SDK的 代理指定为 &lt;code class=&quot;highlighter-rouge&quot;&gt;PaymentHub &lt;/code&gt;的实例，在实例内部处理微信的代理回调。
+考虑到微信SDK还可能会负责分享，在&lt;code class=&quot;highlighter-rouge&quot;&gt;handleOpenUrl &lt;/code&gt;方法里需要做区分处理。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/DemoCollection.git&quot;&gt;demo链接&lt;/a&gt;&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。</summary></entry></feed>
