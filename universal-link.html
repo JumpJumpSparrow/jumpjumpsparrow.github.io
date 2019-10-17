@@ -11,7 +11,7 @@
 
 
 
-    <title>使用 shell 脚本配置iOS工程生成多个APP</title>
+    <title>iOS universal-link 通用链接配置</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -36,24 +36,38 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="Cloud in the sky, fish in the river" />
     <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="http://localhost:4000/script-configure" />
+    <link rel="canonical" href="http://localhost:4000/universal-link" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Miaocf" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="使用 shell 脚本配置iOS工程生成多个APP" />
-    <meta property="og:description" content="  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。 1. 需求分析 在配置工程中我们需要事先知道有哪些配置项： APP 启动图、图标等资源文件。 APP 名称、版本号、bundleID。 APP 相关的微信 APPKey、scheme。 网络环境、部分代码替换。 provisioning profile 修改 分析以上需要配置的项，我们可以发现这些配置项可以分为三类，分别是： 资源文件替换 plist 字段修改 部分代码替换 接下来介绍如何实现满足以上需求的Shell脚本。 2. 脚本设计&amp;实现 2.1 创建脚本   首先创建一个shell脚本文件，在命令行工具中输入touch xxx.sh就可以创建shell脚本文件,在这里将shell脚本命名为：projectDeploy.sh。   运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:sh projectDeploy.sh命令就可以运行脚本了。 2.2 脚本传参 我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种： while getopts ":e:s:" opt do case $opt in e) environment=$OPTARG;; s) supplier=$OPTARG;; ?) echo "请输入正确的参数" exit 1;;" />
-    <meta property="og:url" content="http://localhost:4000/script-configure" />
+    <meta property="og:title" content="iOS universal-link 通用链接配置" />
+    <meta property="og:description" content="iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
+
+1.概念
+2.流程
+3.配置项
+4.流程图
+（待完成）
+" />
+    <meta property="og:url" content="http://localhost:4000/universal-link" />
     <meta property="og:image" content="http://localhost:4000/assets/images/xxx.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/false" />
     <meta property="article:author" content="https://www.facebook.com/false" />
-    <meta property="article:published_time" content="2019-09-20T07:00:00+08:00" />
-    <meta property="article:modified_time" content="2019-09-20T07:00:00+08:00" />
+    <meta property="article:published_time" content="2019-10-11T02:00:00+08:00" />
+    <meta property="article:modified_time" content="2019-10-11T02:00:00+08:00" />
     <meta property="article:tag" content="Ios" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="使用 shell 脚本配置iOS工程生成多个APP" />
-    <meta name="twitter:description" content="  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。 1. 需求分析 在配置工程中我们需要事先知道有哪些配置项： APP 启动图、图标等资源文件。 APP 名称、版本号、bundleID。 APP 相关的微信 APPKey、scheme。 网络环境、部分代码替换。 provisioning profile 修改 分析以上需要配置的项，我们可以发现这些配置项可以分为三类，分别是： 资源文件替换 plist 字段修改 部分代码替换 接下来介绍如何实现满足以上需求的Shell脚本。 2. 脚本设计&amp;实现 2.1 创建脚本   首先创建一个shell脚本文件，在命令行工具中输入touch xxx.sh就可以创建shell脚本文件,在这里将shell脚本命名为：projectDeploy.sh。   运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:sh projectDeploy.sh命令就可以运行脚本了。 2.2 脚本传参 我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种： while getopts ":e:s:" opt do case $opt in e) environment=$OPTARG;; s) supplier=$OPTARG;; ?) echo "请输入正确的参数" exit 1;;" />
+    <meta name="twitter:title" content="iOS universal-link 通用链接配置" />
+    <meta name="twitter:description" content="iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
+
+1.概念
+2.流程
+3.配置项
+4.流程图
+（待完成）
+" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/xxx.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -74,7 +88,7 @@
         "name": "Miaocf",
         "logo": "http://localhost:4000/assets/images/blog-icon.png"
     },
-    "url": "http://localhost:4000/script-configure",
+    "url": "http://localhost:4000/universal-link",
     "image": {
         "@type": "ImageObject",
         "url": "http://localhost:4000/assets/images/xxx.jpg",
@@ -83,9 +97,16 @@
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:4000/script-configure"
+        "@id": "http://localhost:4000/universal-link"
     },
-    "description": "  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。 1. 需求分析 在配置工程中我们需要事先知道有哪些配置项： APP 启动图、图标等资源文件。 APP 名称、版本号、bundleID。 APP 相关的微信 APPKey、scheme。 网络环境、部分代码替换。 provisioning profile 修改 分析以上需要配置的项，我们可以发现这些配置项可以分为三类，分别是： 资源文件替换 plist 字段修改 部分代码替换 接下来介绍如何实现满足以上需求的Shell脚本。 2. 脚本设计&amp;实现 2.1 创建脚本   首先创建一个shell脚本文件，在命令行工具中输入touch xxx.sh就可以创建shell脚本文件,在这里将shell脚本命名为：projectDeploy.sh。   运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:sh projectDeploy.sh命令就可以运行脚本了。 2.2 脚本传参 我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种： while getopts ":e:s:" opt do case $opt in e) environment=$OPTARG;; s) supplier=$OPTARG;; ?) echo "请输入正确的参数" exit 1;;"
+    "description": "iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
+
+1.概念
+2.流程
+3.配置项
+4.流程图
+（待完成）
+"
 }
     </script>
 
@@ -98,7 +119,7 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="使用 shell 脚本配置iOS工程生成多个APP" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="iOS universal-link 通用链接配置" href="/feed.xml" />
 
 
 </head>
@@ -152,7 +173,7 @@ into the {body} of the default.hbs template -->
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="20 September 2019">20 September 2019</time>
+                    <time class="post-full-meta-date" datetime="11 October 2019">11 October 2019</time>
                     
                         <span class="date-divider">/</span>
                         
@@ -162,7 +183,7 @@ into the {body} of the default.hbs template -->
                         
                     
                 </section>
-                <h1 class="post-full-title">使用 shell 脚本配置iOS工程生成多个APP</h1>
+                <h1 class="post-full-title">iOS universal-link 通用链接配置</h1>
             </header>
 
             
@@ -172,115 +193,13 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。</p>
+                    <p>iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。</p>
 
-<h3 id="1-需求分析">1. 需求分析</h3>
-
-<p>在配置工程中我们需要事先知道有哪些配置项：</p>
-
-<ol>
-  <li>APP 启动图、图标等资源文件。</li>
-  <li>APP 名称、版本号、bundleID。</li>
-  <li>APP 相关的微信 APPKey、scheme。</li>
-  <li>网络环境、部分代码替换。</li>
-  <li>provisioning profile 修改</li>
-</ol>
-
-<p>分析以上需要配置的项，我们可以发现这些配置项可以分为<strong>三类</strong>，分别是：</p>
-
-<ol>
-  <li>资源文件替换</li>
-  <li>plist 字段修改</li>
-  <li>部分代码替换</li>
-</ol>
-
-<p>接下来介绍如何实现满足以上需求的Shell脚本。</p>
-
-<h3 id="2-脚本设计实现">2. 脚本设计&amp;实现</h3>
-
-<h4 id="21-创建脚本">2.1 创建脚本</h4>
-
-<p>  首先创建一个shell脚本文件，在命令行工具中输入<code class="highlighter-rouge">touch xxx.sh</code>就可以创建shell脚本文件,在这里将shell脚本命名为：<code class="highlighter-rouge">projectDeploy.sh</code>。<br />
-  运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:<code class="highlighter-rouge">sh projectDeploy.sh</code>命令就可以运行脚本了。</p>
-<h4 id="22-脚本传参">2.2 脚本传参</h4>
-<p>我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种：</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while getopts ":e:s:" opt
-
-do
-    case $opt in
-        e)
-            environment=$OPTARG;;
-
-        s)
-            supplier=$OPTARG;;
-
-        ?)
-            echo "请输入正确的参数"
-            exit 1;;
-    esac
-done
-
-</code></pre></div></div>
-
-<p>这里定义了两个全局变量 <code class="highlighter-rouge">environment</code> 和 <code class="highlighter-rouge">supplier</code>，当调用脚本时，输入命令 <code class="highlighter-rouge">sh projectDeploy.sh -e prd -s xxx</code><br />
-这种传参的好处是，指定了具体变量对应的值，不必保持参数的顺序。</p>
-
-<h4 id="23-资源替换">2.3 资源替换</h4>
-
-<p>  资源替换这里使用了shell脚本里的 <code class="highlighter-rouge">copy</code> 命令：
-<code class="highlighter-rouge">cp source_file_directory destination_directory</code>。<br />
-将要替换的资源文件复制到指定位置，有时需要事先将路径下的文件清理一下再进行copy 操作：
-<code class="highlighter-rouge">rm -rf destination_directory</code></p>
-
-<p>  如果有同名文件存在，copy操作会覆盖原文件。<br />
-  这一操作可以用来替换启动图、桌面图标、图片资源、SDK、代码文件等文件类替换需求。</p>
-
-<h4 id="24-plist-字段修改">2.4 plist 字段修改</h4>
-
-<p><code class="highlighter-rouge">APP桌面名称</code>、<code class="highlighter-rouge">版本号</code>、<code class="highlighter-rouge">bundleID</code>、<code class="highlighter-rouge">scheme</code>等等plist 内的值需要替换，<br />
-这里我们使用 MAC 自带的plist 文件编辑工具 <code class="highlighter-rouge">PlistBuddy</code> 来实现plist文件的维护，
-这个工具的访问路径为：<code class="highlighter-rouge">/usr/libexec/PlistBuddy</code></p>
-
-<p>具体命令为：</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/libexec/PlistBuddy -c "set CFBundleIdentifier com.xxx.xxx" ${project_infoplist_path}  
-/usr/libexec/PlistBuddy -c "set CFBundleShortVersionString ${appVersion}" ${project_infoplist_path}
-/usr/libexec/PlistBuddy -c "set CFBundleDisplayName xxx" ${project_infoplist_path}
-</code></pre></div></div>
-
-<p><em>scheme 值修改</em></p>
-
-<p>  因为 scheme 的数据结构为 数组元素可能是字典，字典key对应的value可能是数组，因此需要事先知道要修改的值的数据结构和位置，在使用 plist 工具时指定字典对应的key，数组对应的下标：</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/libexec/PlistBuddy -c "set CFBundleURLTypes:0:CFBundleURLSchemes:0 xxx.xxx.xxx" ${project_infoplist_path}
-</code></pre></div></div>
-
-<p>  以上命令的意思是取 <code class="highlighter-rouge">CFBundleURLTypes</code> 数组下的第一个元素 X，再取 X 下 <code class="highlighter-rouge">CFBundleURLSchemes</code> 数组下的第一个元素 Y，并更新Y的值为<code class="highlighter-rouge">xxx.xxx.xxx</code>。</p>
-
-<p>  至于 provisioning profile 的替换，只需要在打包脚本里去指定就可以了，至于<code class="highlighter-rouge">project.pbxproj</code>文件的一些配置，也可以用 2.5 的方法去配置，见下一部分。</p>
-
-<h4 id="25-部分代码替换">2.5 部分代码替换</h4>
-
-<p>  假如需要修改代码里的部分字符，或批量修改某个变量名称，这里就用到了 <code class="highlighter-rouge">sed</code> 命令.
-这里讲一个 <code class="highlighter-rouge">sed </code>命令的用法，如果有其他特殊需求，可查询sed 命令的其他用法：</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i '' 's/^\#define XXX_XX_URL.*$/\#define XXX_XX_URL  @\"www.junziboxue.com\"/g' ${configureFile}
-</code></pre></div></div>
-
-<p>  这个命令的意思是，匹配所有 <code class="highlighter-rouge">#define XXX_XX_URL</code> 宏，然后替换为 <code class="highlighter-rouge">#define XXX_XX_URL  @"www.junziboxue.com"</code>，这里是整行替换。shell 命令里需要对一些特殊字符进行转义，在这里需要注意。</p>
-
-<p><em><code class="highlighter-rouge">^\#define XXX_XX_URL.*$</code></em> 是一个正则表达式，表示所有 以 <code class="highlighter-rouge">#define XXX_XX_URL</code> 开头的字符，<code class="highlighter-rouge">/g</code>表示全局替换。
-具体 sed 的其他用法可自行查询。</p>
-
-<h3 id="3-总结">3 总结</h3>
-
-<p>  在掌握以上方法后，我们基本可以任意配置一份代码工程，修改其一些APP的基本配置。
-假如要配置的项很多，可能导致脚本非常臃肿，面对这样的情况，我们需要设计一下脚本的结构：<br />
-  我们可以把要配置的项剥离出来，然后设计一个函数执行具体配置，然后在函数内传入参数去指定具体的配置。
-或者将配置项事先写好，然后让函数取读就可以了。</p>
-
-<p><a href="https://github.com/JumpJumpSparrow/deploy_project_with_shell_script.git">script_demo</a></p>
+<p>1.概念
+2.流程
+3.配置项
+4.流程图
+（待完成）</p>
 
                 </div>
             </section>
@@ -375,11 +294,6 @@ gitment.render('gitmentContainer');
                                 
                                   
                                     
-                                        
-                                        
-                                            <li><a href="/universal-link">iOS universal-link 通用链接配置</a></li>
-                                        
-                                    
                                   
                                 
                                   
@@ -395,6 +309,8 @@ gitment.render('gitmentContainer');
                                     
                                         
                                         
+                                            <li><a href="/yykit-micro">Building Objective-C static libraries with categories</a></li>
+                                        
                                     
                                   
                                 
@@ -406,6 +322,9 @@ gitment.render('gitmentContainer');
                                   
                                 
                                   
+                                    
+                                        
+                                        
                                     
                                   
                                 
@@ -463,12 +382,12 @@ gitment.render('gitmentContainer');
 
     <article class="post-card post-template">
         
-            <a class="post-card-image-link" href="/textfield-height-auto-adjust">
+            <a class="post-card-image-link" href="/emoji-filter">
                 <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/textfield-height-auto-adjust">
+            <a class="post-card-content-link" href="/emoji-filter">
                 <header class="post-card-header">
                     
                         
@@ -478,7 +397,7 @@ gitment.render('gitmentContainer');
                         
                     
 
-                    <h2 class="post-card-title">UITextField 随键盘高度自适应</h2>
+                    <h2 class="post-card-title">iOS Emoji 过滤</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -515,12 +434,12 @@ gitment.render('gitmentContainer');
 
     <article class="post-card post-template">
         
-            <a class="post-card-image-link" href="/ios-shadow-roundcorner-offscreen">
+            <a class="post-card-image-link" href="/frame-rate-monitor">
                 <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/ios-shadow-roundcorner-offscreen">
+            <a class="post-card-content-link" href="/frame-rate-monitor">
                 <header class="post-card-header">
                     
                         
@@ -530,7 +449,7 @@ gitment.render('gitmentContainer');
                         
                     
 
-                    <h2 class="post-card-title">iOS 圆角+阴影+离屏渲染问题</h2>
+                    <h2 class="post-card-title">iOS 屏幕卡顿检测与排查</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -576,18 +495,18 @@ gitment.render('gitmentContainer');
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">使用 shell 脚本配置iOS工程生成多个APP</div>
+    <div class="floating-header-title">iOS universal-link 通用链接配置</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E4%BD%BF%E7%94%A8+shell+%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AEiOS%E5%B7%A5%E7%A8%8B%E7%94%9F%E6%88%90%E5%A4%9A%E4%B8%AAAPP&amp;url=script-configure"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=iOS+universal-link+%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5%E9%85%8D%E7%BD%AE&amp;url=universal-link"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=script-configure"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=universal-link"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

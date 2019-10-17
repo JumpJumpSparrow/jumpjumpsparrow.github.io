@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-10T16:50:54+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">Building Objective-C static libraries with categories</title><link href="http://localhost:4000/yykit-micro" rel="alternate" type="text/html" title="Building Objective-C static libraries with categories" /><published>2019-09-25T02:00:00+08:00</published><updated>2019-09-25T02:00:00+08:00</updated><id>http://localhost:4000/yykit-micro</id><content type="html" xml:base="http://localhost:4000/yykit-micro">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-17T17:06:12+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">iOS Emoji 过滤</title><link href="http://localhost:4000/emoji-filter" rel="alternate" type="text/html" title="iOS Emoji 过滤" /><published>2019-10-13T01:00:00+08:00</published><updated>2019-10-13T01:00:00+08:00</updated><id>http://localhost:4000/emoji-filter</id><content type="html" xml:base="http://localhost:4000/emoji-filter">&lt;p&gt;  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。&lt;/p&gt;
+
+&lt;h3 id=&quot;什么是-emoji-&quot;&gt;什么是 emoji ？&lt;/h3&gt;
+&lt;p&gt;  emoji 最早是由日本人&lt;em&gt;栗田穰崇&lt;/em&gt; (Shigetaka Kurita)创作的。emoji 是一些图形符号，例如：😊👏🚗🌞。和普通文字符号不同，emoji 通过一些图案来表达一些辨识度较高的场景或者含义，使阅读体验更好。在此可以查找各种 emoji &lt;a href=&quot;https://emojipedia.org&quot;&gt;emojipedia&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;(未完待续)d&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。</summary></entry><entry><title type="html">iOS universal-link 通用链接配置</title><link href="http://localhost:4000/universal-link" rel="alternate" type="text/html" title="iOS universal-link 通用链接配置" /><published>2019-10-11T02:00:00+08:00</published><updated>2019-10-11T02:00:00+08:00</updated><id>http://localhost:4000/universal-link</id><content type="html" xml:base="http://localhost:4000/universal-link">&lt;p&gt;iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。&lt;/p&gt;
+
+&lt;p&gt;1.概念
+2.流程
+3.配置项
+4.流程图
+（待完成）&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。</summary></entry><entry><title type="html">iOS 屏幕卡顿检测与排查</title><link href="http://localhost:4000/frame-rate-monitor" rel="alternate" type="text/html" title="iOS 屏幕卡顿检测与排查" /><published>2019-10-11T02:00:00+08:00</published><updated>2019-10-11T02:00:00+08:00</updated><id>http://localhost:4000/frame-rate-monitor</id><content type="html" xml:base="http://localhost:4000/frame-rate-monitor">&lt;ol&gt;
+  &lt;li&gt;卡顿发生检测&lt;/li&gt;
+  &lt;li&gt;卡顿原因排查
+（待完成）&lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">卡顿发生检测 卡顿原因排查 （待完成）</summary></entry><entry><title type="html">Building Objective-C static libraries with categories</title><link href="http://localhost:4000/yykit-micro" rel="alternate" type="text/html" title="Building Objective-C static libraries with categories" /><published>2019-09-25T02:00:00+08:00</published><updated>2019-09-25T02:00:00+08:00</updated><id>http://localhost:4000/yykit-micro</id><content type="html" xml:base="http://localhost:4000/yykit-micro">&lt;blockquote&gt;
   &lt;p&gt;Q:  How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -596,60 +611,4 @@ year
 half-decade
 decade
 two-decade
-three-decade&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">时间尺度对人生的影响</summary></entry><entry><title type="html">iOS 网络封装</title><link href="http://localhost:4000/network-encapsulation" rel="alternate" type="text/html" title="iOS 网络封装" /><published>2019-07-01T10:53:00+08:00</published><updated>2019-07-01T10:53:00+08:00</updated><id>http://localhost:4000/network-encapsulation</id><content type="html" xml:base="http://localhost:4000/network-encapsulation">&lt;p&gt;网络封装&lt;/p&gt;
-
-&lt;p&gt;request:&lt;/p&gt;
-
-&lt;p&gt;useragent&lt;/p&gt;
-
-&lt;p&gt;cookies&lt;/p&gt;
-
-&lt;p&gt;response:
-errorcode&lt;/p&gt;
-
-&lt;p&gt;302 301条转&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">网络封装</summary></entry><entry><title type="html">Blog 搭建与部署</title><link href="http://localhost:4000/blog" rel="alternate" type="text/html" title="Blog 搭建与部署" /><published>2019-06-11T02:00:00+08:00</published><updated>2019-06-11T02:00:00+08:00</updated><id>http://localhost:4000/blog</id><content type="html" xml:base="http://localhost:4000/blog">&lt;p&gt;  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。&lt;/p&gt;
-
-&lt;p&gt;  在搭建自己的博客网站时，我希望只专注于组织内容，页面生成、部署等其他不关键的工作尽量简单。现在已经有了比较好的方案可以满足以上需求。在这里介绍如何花费较少的精力去搭建一个静态页面的个人博客。在这里只说一下大概过程，具体细节 search the web，你会得到你想要的一切。&lt;/p&gt;
-
-&lt;h3 id=&quot;1-博客静态网站工具&quot;&gt;1. 博客静态网站工具&lt;/h3&gt;
-
-&lt;p&gt;   这里我们用 Markdown 格式去写一些博客，使用 &lt;a href=&quot;https://www.jekyll.com.cn/docs&quot;&gt;Jekyll&lt;/a&gt;、&lt;a href=&quot;https://hexo.io/zh-cn/&quot;&gt;Hexo&lt;/a&gt; 等转换工具，将纯文本文件转换为 HTML 页面。Jekyll、Hexo 两者的主要区别在于，Jekyll 需要 Ruby 环境，而 Hexo 只需要 NodeJS 运行环境。
-   两者各有大量的主题可供选择，那么问题来了，究竟选择 Jekyll 还是 Hexo ？这里建议选择有你喜欢的主题的那个。因为我在搭博客的时候最先接触 Jekyll，所以在这里介绍一下 Jekyll 的配置方法。&lt;/p&gt;
-
-&lt;p&gt;具体环境安装参考官方文档。&lt;/p&gt;
-
-&lt;h3 id=&quot;2-模版配置&quot;&gt;2. 模版配置&lt;/h3&gt;
-
-&lt;p&gt;  下载完模版后，需要修改 _config.yml 配置文件，里面包含了关于博客站点的大部分配置。
-如果你具备一些前端技能，可以自定义模版里的一些样式。模版的目录结构可参考&lt;a href=&quot;https://www.jekyll.com.cn/docs/structure/&quot;&gt;官方文档&lt;/a&gt;，文档中详细地介绍了每个文件的具体功能。&lt;/p&gt;
-
-&lt;h3 id=&quot;3-生成静态页面&quot;&gt;3. 生成静态页面&lt;/h3&gt;
-
-&lt;p&gt;  在编辑博客时，保存操作会触发编译动作，将你的博客文本渲染成 Html 页面，在浏览器刷新即可看到最新的博客内容。在 Jekyll 转换完所有的文件之后，将默认在 &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; 下放置生成的站点文件。你也可以在 _config.yml 中添加配置 &lt;code class=&quot;highlighter-rouge&quot;&gt;destination: ../Blog_source/&lt;/code&gt; 设置相对路径，这样生成的站点文件就会存放在你设置的路径下，方便用 git 工具管理。&lt;/p&gt;
-
-&lt;h3 id=&quot;4-github-设置&quot;&gt;4. GitHub 设置&lt;/h3&gt;
-
-&lt;p&gt;  在这里，你需要创建一个 &lt;a href=&quot;https://pages.github.com&quot;&gt;github page&lt;/a&gt; repository，具体操作见文档。这个就是就是用来存放你站点文件的 repo。创建完毕之后，需要在 config.yml 文件中添加 github 相关的配置，配置项如下。&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#gitment
-owner: XXX
-repo: XXX
-branch: master
-client_id: xxxxxxx
-client_secret: xxxxxx
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;5-绑定域名&quot;&gt;5. 绑定域名&lt;/h3&gt;
-
-&lt;p&gt;  首先你需要掏点银子买个自己的域名（摊手）,这里都是固定的操作没啥好说的，具体细节可以参考&lt;a href=&quot;https://cloud.tencent.com/developer/article/1421879&quot;&gt;这位施主&lt;/a&gt;文章。&lt;/p&gt;
-
-&lt;p&gt;  当然你也可以不绑定域名，省下一笔银子来顿烧烤，但是作为一个独立 bloger ，自己的域名还是要有的，不然没有 bigger。&lt;/p&gt;
-
-&lt;h3 id=&quot;6-添加评论和统计功能&quot;&gt;6. 添加评论和统计功能&lt;/h3&gt;
-
-&lt;p&gt;  这个就需要你了解一点点前端的技能了，我们现说评论：评论有很多平台在做，比如“多说”，“畅言”，“友言”，“新浪云跟贴”，但大多都不太靠谱，关的关、封的封。这里 使用&lt;a href=&quot;https://imsun.net/posts/gitment-introduction/&quot;&gt;Gitment&lt;/a&gt;来实现博客的评论功能，具体细节可参考大神的文章。&lt;/p&gt;
-
-&lt;p&gt;  关于统计，这个看你自己需不需要加。我这里加的是&lt;a href=&quot;https://tongji.baidu.com/web/welcome/login&quot;&gt;百度统计&lt;/a&gt;,官方有较详细的接入文档。可以查看博客的浏览人数和页面UV、PV。&lt;/p&gt;
-
-&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
-&lt;p&gt;使用 GitHub page 存放博客，充当免费服务器的角色，Jekyll 将文本解析成 html 页面，这样博客一经建成，就无须维护，只需要专心写内容就可以了。&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。</summary></entry><entry><title type="html">iOS 支付宝&amp;amp;微信-支付接口封装指南</title><link href="http://localhost:4000/zfb-wx-payment" rel="alternate" type="text/html" title="iOS 支付宝&amp;微信-支付接口封装指南" /><published>2019-06-11T02:00:00+08:00</published><updated>2019-06-11T02:00:00+08:00</updated><id>http://localhost:4000/zfb-wx-payment</id><content type="html" xml:base="http://localhost:4000/zfb-wx-payment">&lt;p&gt;微信支付宝 接口封装指南&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">微信支付宝 接口封装指南</summary></entry></feed>
+three-decade&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">时间尺度对人生的影响</summary></entry></feed>
