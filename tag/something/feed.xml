@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/something/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-10-17T17:06:12+08:00</updated>
+  <updated>2019-11-14T16:46:34+08:00</updated>
   <id>http://localhost:4000/tag/something/feed.xml</id>
 
   
@@ -30,6 +30,94 @@
   
   
 
+  
+    <entry>
+      <title type="html">关于自动驾驶伦理问题的思考</title>
+      <link href="http://localhost:4000/auto-pilot-ethics" rel="alternate" type="text/html" title="关于自动驾驶伦理问题的思考" />
+      <published>2019-11-08T00:00:00+08:00</published>
+      <updated>2019-11-08T00:00:00+08:00</updated>
+      <id>http://localhost:4000/auto-pilot-ethics</id>
+      <content type="html" xml:base="http://localhost:4000/auto-pilot-ethics">&lt;p&gt;  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。&lt;/p&gt;
+
+&lt;p&gt;  目前市场上已经出现了可以自动驾驶的汽车，比如特斯拉、百度的阿波龙。 其中自动驾驶应用较为激进的当属特斯拉无疑。近几年 (2016-2018) 特斯拉的几起事故，可能与自动驾驶技术尚未完全成熟有关。而百度已获得全国首批T4道路测试牌照，自动驾达到L4级别的&lt;a href=&quot;http://apollo.auto/minibus/index_cn.html&quot;&gt;阿波龙&lt;/a&gt;已经于2018年7月4日正式量产下线，已经在多地开始展开试用。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/autopilot/apollo.jpg&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（图为阿波龙自动驾驶汽车）&lt;/p&gt;
+
+&lt;p&gt;  随着人工智能 AI (Artificial Intelligence) 的事件处理能力和数据分析精度变得更强更高，自动驾驶技术也开始进入了实用阶段。当然，实现自动驾驶除了 AI 必不可少以外，还需要计算机视觉、高精度地图、5G高速通信技术、激光雷达等环境感知技术。可以预见到不久的将来，自动驾驶功能将会成为汽车的标配功能，AI 也继 水、电、网络之后，势必成为生活中必不可少的基础元素，潜入到生活的方方面面。&lt;/p&gt;
+
+&lt;p&gt;  然而 AI 作为自动驾驶的主要决策单元，代替驾驶员做出决策，控制车辆在道路上行走，这将带来一系列的社会伦理问题和法律问题。在这里列出一些自动驾驶在不久的将来可能会遇到的问题，与大家一起讨论、思考。&lt;/p&gt;
+
+&lt;h4 id=&quot;问题1&quot;&gt;问题1&lt;/h4&gt;
+
+&lt;p&gt;自动驾驶汽车行驶过程中，遇突发事故，选择避让可能危及行人生命安全，不避让可能会导致乘客伤亡，AI 该如何决策？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/autopilot/user-innocent-accident.png&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里存在三个问题需要回答：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;用户&lt;/em&gt;&lt;/strong&gt;和&lt;strong&gt;&lt;em&gt;行人&lt;/em&gt;&lt;/strong&gt;都是无辜者，AI 有了干预的机会后，突来的意外应该降临到谁身上？&lt;/li&gt;
+  &lt;li&gt;自动驾驶汽车作为一款产品，AI 是优先保护用户的安全？还是优先保护行人的安全？&lt;/li&gt;
+  &lt;li&gt;遇到以上场景，自动驾驶是否需要&lt;strong&gt;&lt;em&gt;乘客&lt;/em&gt;&lt;/strong&gt;做出决策？或者说乘客的决定和AI的决定哪个有效？（自动驾驶里弱化了 司机 的角色，司机更多是 可以干预驾驶的乘客）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;问题2&quot;&gt;问题2&lt;/h4&gt;
+
+&lt;p&gt;一辆火车失控，即将撞向铁路上的五个人，这时 AI 可以控制扳手让火车转向，撞向另外一条轨道上的一个人。是将伤亡将到最小，还是让事故继续发生？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/autopilot/which-one-to-choose.png&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;人性、道德、法律，到底是谁做出了最终抉择？&lt;/p&gt;
+
+&lt;p&gt;  这其实是美国哈佛大学政治哲学教授迈克尔·桑德尔，在公开课中设想的场景，用以描述行为选择的道德困境。在这里只是把人改为了 AI。在这里，不管 AI 如何处理，其最终决的选择实际来自于人，或者来自于人已经定制好的算法，AI 通过算法计算，忠实地执行了这个决定。&lt;/p&gt;
+
+&lt;h4 id=&quot;一些思考&quot;&gt;一些思考&lt;/h4&gt;
+
+&lt;p&gt;  人可以为自己的决策和行为负责，那么AI的决策和行为谁来负责呢？&lt;/p&gt;
+
+&lt;p&gt;  我认为这应该是社会群体层的共识问题，社会群体中的每个个体需要事先知晓 并接受 AI 的决策策略，在事故发生后， 所有人必须为算法的执行结果负责，因为这个是整个社会群体已经认可的选择。&lt;/p&gt;
+
+&lt;p&gt;  当然 在现实中很难发生这种特殊情况，特别案例还需要根据实际情况具体分析，这里只是纯为讨论而假设的场景。&lt;/p&gt;
+
+&lt;p&gt;自动驾驶不光光是 技术上的问题，法律和相关规范 是自动驾驶可以正常运行的必要条件。&lt;/p&gt;
+
+&lt;p&gt;期待自动驾驶早点普及使用，在那之前，希望相关法律和规范已经落地执行。&lt;/p&gt;
+
+&lt;p&gt;还有，没事不要到马路上溜达。&lt;/p&gt;
+
+&lt;p&gt;  写文章很有难度啊，写不下去了先在这里吐个槽，提升写作能力太有必要了。清楚明白地表达观点，并且让读者轻易的捕捉到你要表达的意思 ，让文章读起来感觉顺畅，同时保持整体有结构和层次，这些都不是那么容易的兼顾的到。想要提升写作能力，一番磨练必不可少啊。&lt;/p&gt;
+
+&lt;p&gt;有问题或想法可以联系我讨论，邮箱：&lt;code class=&quot;highlighter-rouge&quot;&gt;meowchunfat@hotmail.com&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="something" />
+      
+
+      
+        <summary type="html">  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">CocoaPods 私有库搭建</title>
@@ -415,6 +503,42 @@ client_secret: xxxxxx
 
       
         <summary type="html">  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">TODO_LIST</title>
+      <link href="http://localhost:4000/to-do-list-origin" rel="alternate" type="text/html" title="TODO_LIST" />
+      <published>1970-01-01T08:00:00+08:00</published>
+      <updated>1970-01-01T08:00:00+08:00</updated>
+      <id>http://localhost:4000/to-do-list-origin</id>
+      <content type="html" xml:base="http://localhost:4000/to-do-list-origin">&lt;p&gt;因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈&lt;/p&gt;
+
+&lt;p&gt;为了表示这里是博客起源，特意把保存这篇博客的源文件 命名为 &lt;code class=&quot;highlighter-rouge&quot;&gt;1970-01-01-to-do-list-origin.md&lt;/code&gt;，懂计算机的朋应该会明白，哈哈。为了避免误会，这里记录这个文件的实际生成日期是&lt;code class=&quot;highlighter-rouge&quot;&gt;date: 2019-11-12 19:40:00&lt;/code&gt;.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="something" />
+      
+
+      
+        <summary type="html">因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈</summary>
       
 
       

@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/ios/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-10-17T17:06:12+08:00</updated>
+  <updated>2019-11-14T16:46:34+08:00</updated>
   <id>http://localhost:4000/tag/ios/feed.xml</id>
 
   
@@ -30,6 +30,62 @@
   
   
 
+  
+    <entry>
+      <title type="html">iOS 关于 UIView 重绘的几个接口</title>
+      <link href="http://localhost:4000/UIView-drawing-cycle" rel="alternate" type="text/html" title="iOS 关于 UIView 重绘的几个接口" />
+      <published>2019-10-18T00:00:00+08:00</published>
+      <updated>2019-10-18T00:00:00+08:00</updated>
+      <id>http://localhost:4000/UIView-drawing-cycle</id>
+      <content type="html" xml:base="http://localhost:4000/UIView-drawing-cycle">&lt;p&gt;在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。&lt;/p&gt;
+
+&lt;h3 id=&quot;setneedslayout&quot;&gt;setNeedsLayout&lt;/h3&gt;
+&lt;p&gt;Invalidates the current layout of the receiver and triggers a layout update during the next update cycle.&lt;br /&gt;
+Call this method on your application’s main thread when you want to adjust the layout of a view’s subviews. This method makes a note of the request and returns immediately. Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate all of your layout updates to one update cycle, which is usually better for performance.&lt;/p&gt;
+
+&lt;h3 id=&quot;layoutifneeded&quot;&gt;layoutIfNeeded&lt;/h3&gt;
+&lt;p&gt;Recalculate the receiver’s layout, if required.&lt;/p&gt;
+
+&lt;p&gt;When this message is received, the layer’s super layers are traversed until a ancestor layer is found that does not require layout. Then layout is performed on the entire layer-tree beneath that ancestor.&lt;/p&gt;
+
+&lt;h3 id=&quot;layoutsubviews&quot;&gt;layoutSubviews&lt;/h3&gt;
+
+&lt;p&gt;The default implementation of this method does nothing on iOS 5.1 and earlier. Otherwise, the default implementation uses any constraints you have set to determine the size and position of any subviews.&lt;/p&gt;
+
+&lt;p&gt;Subclasses can override this method as needed to perform more precise layout of their subviews. You should override this method only if the autoresizing and constraint-based behaviors of the subviews do not offer the behavior you want. You can use your implementation to set the frame rectangles of your subviews directly.&lt;/p&gt;
+
+&lt;p&gt;You should not call this method directly. If you want to force a layout update, call the &lt;code class=&quot;highlighter-rouge&quot;&gt;setNeedsLayout&lt;/code&gt; method instead to do so prior to the next drawing update. If you want to update the layout of your views immediately, call the &lt;code class=&quot;highlighter-rouge&quot;&gt;layoutIfNeeded&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;h3 id=&quot;setneedsdisplay&quot;&gt;setNeedsDisplay&lt;/h3&gt;
+
+&lt;p&gt;Recalculate the receiver’s layout, if required.&lt;br /&gt;
+When this message is received, the layer’s super layers are traversed until a ancestor layer is found that does not require layout. Then layout is performed on the entire layer-tree beneath that ancestor.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="iOS" />
+      
+
+      
+        <summary type="html">在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">iOS Emoji 过滤</title>

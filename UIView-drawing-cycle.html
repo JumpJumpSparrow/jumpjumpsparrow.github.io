@@ -11,7 +11,7 @@
 
 
 
-    <title>Time Range 如何影响你的人生</title>
+    <title>iOS 关于 UIView 重绘的几个接口</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -36,52 +36,30 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="Cloud in the sky, fish in the river" />
     <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="http://localhost:4000/time-range" />
+    <link rel="canonical" href="http://localhost:4000/UIView-drawing-cycle" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Miaocf" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Time Range 如何影响你的人生" />
-    <meta property="og:description" content="时间尺度对人生的影响
-
-hour
-day
-week
-month
-year
-half-decade
-decade
-two-decade
-three-decade
-" />
-    <meta property="og:url" content="http://localhost:4000/time-range" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/writing.jpg" />
+    <meta property="og:title" content="iOS 关于 UIView 重绘的几个接口" />
+    <meta property="og:description" content="在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。 setNeedsLayout Invalidates the current layout of the receiver and triggers a layout update during the next update cycle. Call this method on your application’s main thread when you want to adjust the layout of a view’s subviews. This method makes a note of the request" />
+    <meta property="og:url" content="http://localhost:4000/UIView-drawing-cycle" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/xxx.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/false" />
     <meta property="article:author" content="https://www.facebook.com/false" />
-    <meta property="article:published_time" content="2019-07-01T10:53:00+08:00" />
-    <meta property="article:modified_time" content="2019-07-01T10:53:00+08:00" />
-    <meta property="article:tag" content="Something" />
+    <meta property="article:published_time" content="2019-10-18T00:00:00+08:00" />
+    <meta property="article:modified_time" content="2019-10-18T00:00:00+08:00" />
+    <meta property="article:tag" content="Ios" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Time Range 如何影响你的人生" />
-    <meta name="twitter:description" content="时间尺度对人生的影响
-
-hour
-day
-week
-month
-year
-half-decade
-decade
-two-decade
-three-decade
-" />
+    <meta name="twitter:title" content="iOS 关于 UIView 重绘的几个接口" />
+    <meta name="twitter:description" content="在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。 setNeedsLayout Invalidates the current layout of the receiver and triggers a layout update during the next update cycle. Call this method on your application’s main thread when you want to adjust the layout of a view’s subviews. This method makes a note of the request" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/writing.jpg" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/xxx.jpg" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="Miaocf" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Something" />
+    <meta name="twitter:data2" content="Ios" />
     <meta name="twitter:site" content="@false" />
     <meta name="twitter:creator" content="@false" />
     <meta property="og:image:width" content="1400" />
@@ -96,29 +74,18 @@ three-decade
         "name": "Miaocf",
         "logo": "http://localhost:4000/assets/images/blog-icon.png"
     },
-    "url": "http://localhost:4000/time-range",
+    "url": "http://localhost:4000/UIView-drawing-cycle",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/writing.jpg",
+        "url": "http://localhost:4000/assets/images/xxx.jpg",
         "width": 2000,
         "height": 666
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:4000/time-range"
+        "@id": "http://localhost:4000/UIView-drawing-cycle"
     },
-    "description": "时间尺度对人生的影响
-
-hour
-day
-week
-month
-year
-half-decade
-decade
-two-decade
-three-decade
-"
+    "description": "在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。 setNeedsLayout Invalidates the current layout of the receiver and triggers a layout update during the next update cycle. Call this method on your application’s main thread when you want to adjust the layout of a view’s subviews. This method makes a note of the request"
 }
     </script>
 
@@ -131,7 +98,7 @@ three-decade
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="Time Range 如何影响你的人生" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="iOS 关于 UIView 重绘的几个接口" href="/feed.xml" />
 
 
 </head>
@@ -181,41 +148,53 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full post tag-something ">
+        <article class="post-full post tag-iOS ">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime=" 1 July 2019"> 1 July 2019</time>
+                    <time class="post-full-meta-date" datetime="18 October 2019">18 October 2019</time>
                     
                         <span class="date-divider">/</span>
                         
                             
-                               <a href='/tag/something/'>SOMETHING</a>
+                               <a href='/tag/ios/'>IOS</a>
                             
                         
                     
                 </section>
-                <h1 class="post-full-title">Time Range 如何影响你的人生</h1>
+                <h1 class="post-full-title">iOS 关于 UIView 重绘的几个接口</h1>
             </header>
 
             
-            <figure class="post-full-image" style="background-image: url(/assets/images/writing.jpg)">
+            <figure class="post-full-image" style="background-image: url(/assets/images/xxx.jpg)">
             </figure>
             
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>时间尺度对人生的影响</p>
+                    <p>在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。</p>
 
-<p>hour
-day
-week
-month
-year
-half-decade
-decade
-two-decade
-three-decade</p>
+<h3 id="setneedslayout">setNeedsLayout</h3>
+<p>Invalidates the current layout of the receiver and triggers a layout update during the next update cycle.<br />
+Call this method on your application’s main thread when you want to adjust the layout of a view’s subviews. This method makes a note of the request and returns immediately. Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate all of your layout updates to one update cycle, which is usually better for performance.</p>
+
+<h3 id="layoutifneeded">layoutIfNeeded</h3>
+<p>Recalculate the receiver’s layout, if required.</p>
+
+<p>When this message is received, the layer’s super layers are traversed until a ancestor layer is found that does not require layout. Then layout is performed on the entire layer-tree beneath that ancestor.</p>
+
+<h3 id="layoutsubviews">layoutSubviews</h3>
+
+<p>The default implementation of this method does nothing on iOS 5.1 and earlier. Otherwise, the default implementation uses any constraints you have set to determine the size and position of any subviews.</p>
+
+<p>Subclasses can override this method as needed to perform more precise layout of their subviews. You should override this method only if the autoresizing and constraint-based behaviors of the subviews do not offer the behavior you want. You can use your implementation to set the frame rectangles of your subviews directly.</p>
+
+<p>You should not call this method directly. If you want to force a layout update, call the <code class="highlighter-rouge">setNeedsLayout</code> method instead to do so prior to the next drawing update. If you want to update the layout of your views immediately, call the <code class="highlighter-rouge">layoutIfNeeded</code> method.</p>
+
+<h3 id="setneedsdisplay">setNeedsDisplay</h3>
+
+<p>Recalculate the receiver’s layout, if required.<br />
+When this message is received, the layer’s super layers are traversed until a ancestor layer is found that does not require layout. Then layout is performed on the entire layer-tree beneath that ancestor.</p>
 
                 </div>
             </section>
@@ -290,7 +269,7 @@ gitment.render('gitmentContainer');
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; Miaocf &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/something/">Something</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/ios/">Ios</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -304,29 +283,6 @@ gitment.render('gitmentContainer');
                                   
                                 
                                   
-                                    
-                                        
-                                        
-                                            <li><a href="/auto-pilot-ethics">关于自动驾驶伦理问题的思考</a></li>
-                                        
-                                    
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
                                 
                                   
                                 
@@ -334,9 +290,13 @@ gitment.render('gitmentContainer');
                                 
                                   
                                     
+                                  
+                                
+                                  
+                                    
                                         
                                         
-                                            <li><a href="/cocoapods-private">CocoaPods 私有库搭建</a></li>
+                                            <li><a href="/emoji-filter">iOS Emoji 过滤</a></li>
                                         
                                     
                                   
@@ -345,12 +305,17 @@ gitment.render('gitmentContainer');
                                     
                                         
                                         
-                                            <li><a href="/software-engineer">如何看待软件工程师</a></li>
+                                            <li><a href="/universal-link">iOS universal-link 通用链接配置</a></li>
                                         
                                     
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                            <li><a href="/frame-rate-monitor">iOS 屏幕卡顿检测与排查</a></li>
+                                        
                                     
                                   
                                 
@@ -369,6 +334,22 @@ gitment.render('gitmentContainer');
                                   
                                 
                                   
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
                                 
                                   
                                 
@@ -381,14 +362,27 @@ gitment.render('gitmentContainer');
                                         
                                         
                                     
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/something/">
+                            <a href="/tag/ios/">
                                 
-                                    See all 6 posts  →
+                                    See all 9 posts  →
                                 
                             </a>
                         </footer>
@@ -400,24 +394,14 @@ gitment.render('gitmentContainer');
             
                 
 
-    <article class="post-card post-template">
-        
-            <a class="post-card-image-link" href="/software-engineer">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
+    <article class="post-card  no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/software-engineer">
+            <a class="post-card-content-link" href="/how-dose-technology-create-values">
                 <header class="post-card-header">
                     
-                        
-                            
-                                <span class="post-card-tags">Something</span>
-                            
-                        
-                    
 
-                    <h2 class="post-card-title">如何看待软件工程师</h2>
+                    <h2 class="post-card-title">How Dose Technology Create Values</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -427,13 +411,6 @@ gitment.render('gitmentContainer');
             </a>
             <footer class="post-card-meta">
                 
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
                     
                 
                 <span class="reading-time">
@@ -454,22 +431,22 @@ gitment.render('gitmentContainer');
 
     <article class="post-card post-template">
         
-            <a class="post-card-image-link" href="/network-encapsulation">
+            <a class="post-card-image-link" href="/emoji-filter">
                 <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/network-encapsulation">
+            <a class="post-card-content-link" href="/emoji-filter">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Something</span>
+                                <span class="post-card-tags">Ios</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">iOS 网络封装</h2>
+                    <h2 class="post-card-title">iOS Emoji 过滤</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -515,18 +492,18 @@ gitment.render('gitmentContainer');
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">Time Range 如何影响你的人生</div>
+    <div class="floating-header-title">iOS 关于 UIView 重绘的几个接口</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Time+Range+%E5%A6%82%E4%BD%95%E5%BD%B1%E5%93%8D%E4%BD%A0%E7%9A%84%E4%BA%BA%E7%94%9F&amp;url=time-range"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=iOS+%E5%85%B3%E4%BA%8E+UIView+%E9%87%8D%E7%BB%98%E7%9A%84%E5%87%A0%E4%B8%AA%E6%8E%A5%E5%8F%A3&amp;url=UIView-drawing-cycle"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=time-range"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=UIView-drawing-cycle"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

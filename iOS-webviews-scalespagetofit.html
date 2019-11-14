@@ -1,0 +1,36 @@
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">'UTF-8'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">'viewport'</span> <span class="na">content=</span><span class="s">'width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">'format-detection'</span> <span class="na">content=</span><span class="s">'telephone=no'</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<pre><code class="language-objective-c">// html 中，图片宽度为 750 px，
+// 为了铺满屏幕，计算 initial-scale 初始缩放比例
+// html 中的尺寸为 750, 手机使用的不是物理像素，而是点；
+    
+CGFloat w = [[UIScreen mainScreen] bounds].size.width;
+CGFloat ratio = w/750.0;
+</code></pre>
+
+<p>或者直接在加载页面之前，注入一段 JS 代码：</p>
+
+<pre><code class="language-objective-c">CGFloat w = [[UIScreen mainScreen] bounds].size.width;
+CGFloat ratio = w/750.0;
+
+NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width,initial-scale=ratio,minimum-scale=0.30, maximum-scale=3.0, user-scalable=0'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+
+jScript = [jScript stringByReplacingOccurrencesOfString:@"ratio" withString:[NSString stringWithFormat:@"%f",ratio]];
+
+
+WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+[wkUController addUserScript:wkUScript];
+
+WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
+wkWebConfig.userContentController = wkUController;
+
+wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebConfig];
+</code></pre>
+
+<p>这样，webview 跟据当前 屏幕大小，自适应缩放 H5页面的大小。</p>
+
+<p><a href="https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit">参考链接</a></p>
