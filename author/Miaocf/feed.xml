@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/author/Miaocf/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-11-14T16:59:11+08:00</updated>
+  <updated>2019-11-14T17:03:32+08:00</updated>
   <id>http://localhost:4000/author/Miaocf/feed.xml</id>
 
   
@@ -45,7 +45,7 @@
 
 &lt;p&gt;（图为阿波龙自动驾驶汽车）&lt;/p&gt;
 
-&lt;p&gt;  随着人工智能 AI (Artificial Intelligence) 的事件处理能力和数据分析精度变得更强更高，自动驾驶技术也开始进入了实用阶段。当然，实现自动驾驶除了 AI 必不可少以外，还需要计算机视觉、高精度地图、5G高速通信技术、激光雷达等环境感知技术。可以预见到不久的将来，自动驾驶功能将会成为汽车的标配功能，AI 也继 水、电、网络之后，势必成为生活中必不可少的基础元素，潜入到生活的方方面面。&lt;/p&gt;
+&lt;p&gt;  随着人工智能 AI (&lt;code class=&quot;highlighter-rouge&quot;&gt;Artificial Intelligence&lt;/code&gt;) 的事件处理能力和数据分析精度变得更强更高，自动驾驶技术也开始进入了实用阶段。当然，实现自动驾驶除了 AI 必不可少以外，还需要&lt;code class=&quot;highlighter-rouge&quot;&gt;计算机视觉&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;高精度地图&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;5G高速通信技术&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;激光雷达&lt;/code&gt;等环境感知技术。可以预见到不久的将来，自动驾驶功能将会成为汽车的标配功能，&lt;code class=&quot;highlighter-rouge&quot;&gt;AI&lt;/code&gt; 也继 &lt;code class=&quot;highlighter-rouge&quot;&gt;水&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;电&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;网络&lt;/code&gt;之后，势必成为生活中必不可少的基础元素，潜入到生活的方方面面。&lt;/p&gt;
 
 &lt;p&gt;  然而 AI 作为自动驾驶的主要决策单元，代替驾驶员做出决策，控制车辆在道路上行走，这将带来一系列的社会伦理问题和法律问题。在这里列出一些自动驾驶在不久的将来可能会遇到的问题，与大家一起讨论、思考。&lt;/p&gt;
 
