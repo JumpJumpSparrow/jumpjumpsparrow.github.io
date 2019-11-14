@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/something/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-11-14T16:46:34+08:00</updated>
+  <updated>2019-11-14T16:56:36+08:00</updated>
   <id>http://localhost:4000/tag/something/feed.xml</id>
 
   
@@ -55,7 +55,7 @@
 
 &lt;p&gt;&lt;img src=&quot;../assets/images/autopilot/user-innocent-accident.png&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;这里存在三个问题需要回答：&lt;/p&gt;
+&lt;p&gt;这里有三个问题需要回答：&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;strong&gt;&lt;em&gt;用户&lt;/em&gt;&lt;/strong&gt;和&lt;strong&gt;&lt;em&gt;行人&lt;/em&gt;&lt;/strong&gt;都是无辜者，AI 有了干预的机会后，突来的意外应该降临到谁身上？&lt;/li&gt;
@@ -73,13 +73,13 @@
 
 &lt;p&gt;  这其实是美国哈佛大学政治哲学教授迈克尔·桑德尔，在公开课中设想的场景，用以描述行为选择的道德困境。在这里只是把人改为了 AI。在这里，不管 AI 如何处理，其最终决的选择实际来自于人，或者来自于人已经定制好的算法，AI 通过算法计算，忠实地执行了这个决定。&lt;/p&gt;
 
-&lt;h4 id=&quot;一些思考&quot;&gt;一些思考&lt;/h4&gt;
-
 &lt;p&gt;  人可以为自己的决策和行为负责，那么AI的决策和行为谁来负责呢？&lt;/p&gt;
 
 &lt;p&gt;  我认为这应该是社会群体层的共识问题，社会群体中的每个个体需要事先知晓 并接受 AI 的决策策略，在事故发生后， 所有人必须为算法的执行结果负责，因为这个是整个社会群体已经认可的选择。&lt;/p&gt;
 
 &lt;p&gt;  当然 在现实中很难发生这种特殊情况，特别案例还需要根据实际情况具体分析，这里只是纯为讨论而假设的场景。&lt;/p&gt;
+
+&lt;h3 id=&quot;end&quot;&gt;end&lt;/h3&gt;
 
 &lt;p&gt;自动驾驶不光光是 技术上的问题，法律和相关规范 是自动驾驶可以正常运行的必要条件。&lt;/p&gt;
 
