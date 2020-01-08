@@ -43,7 +43,7 @@
     <meta property="og:site_name" content="Miaocf" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="批量并发-事件管理队列" />
-    <meta property="og:description" content="首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。 模型抽象 商品详情页需要的数据有： 商品属性信息，包含商品ID、商品名、图册等等 商品销售信息，包含价格、销售状态、优惠信息 SKU/SPU 信息 商品运费信息 商品物流信息，最早可达时间信息 评价列表信息 推荐商品列表 这里暂时列出这些 根据以上列表不难看出，商品属性、销售信息和SKU/SPU信息最为重要，运费、物流信息次之，评价、推荐信息优先级最低。 在这里，把所有事件分成多个批次，每个批次包含多个相互独立的事件，依次执行每个批次， 当优先级高的批次执行完之后，再执行优先级低的批次，如此形成一个队列。 因为执行队列保持顺序执行，依赖关系也被很好的隔离开来。 代码实现 由于多个事件分为多个批次执行，而且批次之间需要保持顺序，所以这里使用单向链表构建事件队列。 首先创建一个 队列模型类 EventScheduleManager，然后在 EventScheduleManager 的子类内部创建队列。 EventUnit 事件类，包含唯一标志符、执行方法、执行状态。 EventMark 队列节点类，包含事件集合、批次名称 EventScheduleManager 队列管理类 EventScheduleDelegate 队列回调事件 子类内部创建队列 - (void)createSchedule { // 清空 [self clearAllEvents]; //第一阶段 EventUnit" />
+    <meta property="og:description" content="首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。 模型抽象 商品详情页需要的数据有： 商品属性信息，包含商品ID、商品名、图册等等 商品销售信息，包含价格、销售状态、优惠信息 SKU/SPU 信息 商品运费信息 商品物流信息，最早可达时间信息 评价列表信息 推荐商品列表 这里暂时列出这些 根据以上列表不难看出，商品属性、销售信息和SKU/SPU信息最为重要，运费、物流信息次之，评价、推荐信息优先级最低。 在这里，把所有事件分成多个批次，每个批次包含多个相互独立的事件，依次执行每个批次， 当优先级高的批次执行完之后，再执行优先级低的批次，如此形成一个队列。 因为执行队列保持顺序执行，依赖关系也被很好的隔离开来。 代码实现 由于多个事件分为多个批次执行，而且批次之间需要保持顺序，所以这里使用单向链表构建事件队列。 首先创建一个 队列模型类 EventScheduleManager，然后在 EventScheduleManager 的子类内部创建队列。 EventUnit 事件类，包含唯一标志符、执行方法、执行状态。 EventMark 队列节点类，包含事件集合、批次名称 EventScheduleManager 队列管理类 EventScheduleDelegate 队列回调事件 创建子类继承EventScheduleManager，在子类内部创建队列： - (void)createSchedule { // 清空 [self clearAllEvents]; //第一阶段 EventUnit" />
     <meta property="og:url" content="http://localhost:4000/concurrent-events-queue" />
     <meta property="og:image" content="http://localhost:4000/assets/images/xxx.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/false" />
@@ -53,7 +53,7 @@
     <meta property="article:tag" content="Ios" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="批量并发-事件管理队列" />
-    <meta name="twitter:description" content="首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。 模型抽象 商品详情页需要的数据有： 商品属性信息，包含商品ID、商品名、图册等等 商品销售信息，包含价格、销售状态、优惠信息 SKU/SPU 信息 商品运费信息 商品物流信息，最早可达时间信息 评价列表信息 推荐商品列表 这里暂时列出这些 根据以上列表不难看出，商品属性、销售信息和SKU/SPU信息最为重要，运费、物流信息次之，评价、推荐信息优先级最低。 在这里，把所有事件分成多个批次，每个批次包含多个相互独立的事件，依次执行每个批次， 当优先级高的批次执行完之后，再执行优先级低的批次，如此形成一个队列。 因为执行队列保持顺序执行，依赖关系也被很好的隔离开来。 代码实现 由于多个事件分为多个批次执行，而且批次之间需要保持顺序，所以这里使用单向链表构建事件队列。 首先创建一个 队列模型类 EventScheduleManager，然后在 EventScheduleManager 的子类内部创建队列。 EventUnit 事件类，包含唯一标志符、执行方法、执行状态。 EventMark 队列节点类，包含事件集合、批次名称 EventScheduleManager 队列管理类 EventScheduleDelegate 队列回调事件 子类内部创建队列 - (void)createSchedule { // 清空 [self clearAllEvents]; //第一阶段 EventUnit" />
+    <meta name="twitter:description" content="首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。 模型抽象 商品详情页需要的数据有： 商品属性信息，包含商品ID、商品名、图册等等 商品销售信息，包含价格、销售状态、优惠信息 SKU/SPU 信息 商品运费信息 商品物流信息，最早可达时间信息 评价列表信息 推荐商品列表 这里暂时列出这些 根据以上列表不难看出，商品属性、销售信息和SKU/SPU信息最为重要，运费、物流信息次之，评价、推荐信息优先级最低。 在这里，把所有事件分成多个批次，每个批次包含多个相互独立的事件，依次执行每个批次， 当优先级高的批次执行完之后，再执行优先级低的批次，如此形成一个队列。 因为执行队列保持顺序执行，依赖关系也被很好的隔离开来。 代码实现 由于多个事件分为多个批次执行，而且批次之间需要保持顺序，所以这里使用单向链表构建事件队列。 首先创建一个 队列模型类 EventScheduleManager，然后在 EventScheduleManager 的子类内部创建队列。 EventUnit 事件类，包含唯一标志符、执行方法、执行状态。 EventMark 队列节点类，包含事件集合、批次名称 EventScheduleManager 队列管理类 EventScheduleDelegate 队列回调事件 创建子类继承EventScheduleManager，在子类内部创建队列： - (void)createSchedule { // 清空 [self clearAllEvents]; //第一阶段 EventUnit" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/xxx.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -85,7 +85,7 @@
         "@type": "WebPage",
         "@id": "http://localhost:4000/concurrent-events-queue"
     },
-    "description": "首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。 模型抽象 商品详情页需要的数据有： 商品属性信息，包含商品ID、商品名、图册等等 商品销售信息，包含价格、销售状态、优惠信息 SKU/SPU 信息 商品运费信息 商品物流信息，最早可达时间信息 评价列表信息 推荐商品列表 这里暂时列出这些 根据以上列表不难看出，商品属性、销售信息和SKU/SPU信息最为重要，运费、物流信息次之，评价、推荐信息优先级最低。 在这里，把所有事件分成多个批次，每个批次包含多个相互独立的事件，依次执行每个批次， 当优先级高的批次执行完之后，再执行优先级低的批次，如此形成一个队列。 因为执行队列保持顺序执行，依赖关系也被很好的隔离开来。 代码实现 由于多个事件分为多个批次执行，而且批次之间需要保持顺序，所以这里使用单向链表构建事件队列。 首先创建一个 队列模型类 EventScheduleManager，然后在 EventScheduleManager 的子类内部创建队列。 EventUnit 事件类，包含唯一标志符、执行方法、执行状态。 EventMark 队列节点类，包含事件集合、批次名称 EventScheduleManager 队列管理类 EventScheduleDelegate 队列回调事件 子类内部创建队列 - (void)createSchedule { // 清空 [self clearAllEvents]; //第一阶段 EventUnit"
+    "description": "首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。 模型抽象 商品详情页需要的数据有： 商品属性信息，包含商品ID、商品名、图册等等 商品销售信息，包含价格、销售状态、优惠信息 SKU/SPU 信息 商品运费信息 商品物流信息，最早可达时间信息 评价列表信息 推荐商品列表 这里暂时列出这些 根据以上列表不难看出，商品属性、销售信息和SKU/SPU信息最为重要，运费、物流信息次之，评价、推荐信息优先级最低。 在这里，把所有事件分成多个批次，每个批次包含多个相互独立的事件，依次执行每个批次， 当优先级高的批次执行完之后，再执行优先级低的批次，如此形成一个队列。 因为执行队列保持顺序执行，依赖关系也被很好的隔离开来。 代码实现 由于多个事件分为多个批次执行，而且批次之间需要保持顺序，所以这里使用单向链表构建事件队列。 首先创建一个 队列模型类 EventScheduleManager，然后在 EventScheduleManager 的子类内部创建队列。 EventUnit 事件类，包含唯一标志符、执行方法、执行状态。 EventMark 队列节点类，包含事件集合、批次名称 EventScheduleManager 队列管理类 EventScheduleDelegate 队列回调事件 创建子类继承EventScheduleManager，在子类内部创建队列： - (void)createSchedule { // 清空 [self clearAllEvents]; //第一阶段 EventUnit"
 }
     </script>
 
@@ -210,7 +210,7 @@ into the {body} of the default.hbs template -->
 <code class="highlighter-rouge">EventScheduleManager</code>  队列管理类<br />
 <code class="highlighter-rouge">EventScheduleDelegate</code> 队列回调事件</p>
 
-<p>子类内部创建队列</p>
+<p>创建子类继承<code class="highlighter-rouge">EventScheduleManager</code>，在子类内部创建队列：</p>
 
 <pre><code class="language-Objective-C">- (void)createSchedule {
     // 清空
@@ -269,6 +269,7 @@ into the {body} of the default.hbs template -->
     [self push:mark_4];
 }
 </code></pre>
+<p>父类执行方法</p>
 
 <pre><code class="language-Objective-C">// 开始执行
 - (void)start {
@@ -300,6 +301,16 @@ into the {body} of the default.hbs template -->
     [self.lock unlock];
 }
 </code></pre>
+
+<p>在管理事件队列处，生成队列实例，创建队列，开启队列执行。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    self.scheduleManager = [[ProductDetailSchedule alloc] init];  
+    self.scheduleManager.delegate = self;  
+    // 创建队列
+    [self.scheduleManager createSchedule];  
+    [self.scheduleManager start];
+    
+</code></pre></div></div>
 
 <p>事件方法执行, 这里根据字符串转方法，在子线程异步执行</p>
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-08T17:35:14+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">批量并发-事件管理队列</title><link href="http://localhost:4000/concurrent-events-queue" rel="alternate" type="text/html" title="批量并发-事件管理队列" /><published>2019-12-18T07:00:00+08:00</published><updated>2019-12-18T07:00:00+08:00</updated><id>http://localhost:4000/concurrent-events-queue</id><content type="html" xml:base="http://localhost:4000/concurrent-events-queue">&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-08T17:43:56+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">批量并发-事件管理队列</title><link href="http://localhost:4000/concurrent-events-queue" rel="alternate" type="text/html" title="批量并发-事件管理队列" /><published>2019-12-18T07:00:00+08:00</published><updated>2019-12-18T07:00:00+08:00</updated><id>http://localhost:4000/concurrent-events-queue</id><content type="html" xml:base="http://localhost:4000/concurrent-events-queue">&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
 
 &lt;h3 id=&quot;模型抽象&quot;&gt;模型抽象&lt;/h3&gt;
 
@@ -36,7 +36,7 @@
 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;  队列管理类&lt;br /&gt;
 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleDelegate&lt;/code&gt; 队列回调事件&lt;/p&gt;
 
-&lt;p&gt;子类内部创建队列&lt;/p&gt;
+&lt;p&gt;创建子类继承&lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;，在子类内部创建队列：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;- (void)createSchedule {
     // 清空
@@ -95,6 +95,7 @@
     [self push:mark_4];
 }
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;父类执行方法&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;// 开始执行
 - (void)start {
@@ -126,6 +127,16 @@
     [self.lock unlock];
 }
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在管理事件队列处，生成队列实例，创建队列，开启队列执行。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    self.scheduleManager = [[ProductDetailSchedule alloc] init];  
+    self.scheduleManager.delegate = self;  
+    // 创建队列
+    [self.scheduleManager createSchedule];  
+    [self.scheduleManager start];
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;事件方法执行, 这里根据字符串转方法，在子线程异步执行&lt;/p&gt;
 
