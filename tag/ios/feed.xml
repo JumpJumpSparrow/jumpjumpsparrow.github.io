@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/ios/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-11-14T17:03:32+08:00</updated>
+  <updated>2020-01-08T17:35:14+08:00</updated>
   <id>http://localhost:4000/tag/ios/feed.xml</id>
 
   
@@ -30,6 +30,189 @@
   
   
 
+  
+    <entry>
+      <title type="html">批量并发-事件管理队列</title>
+      <link href="http://localhost:4000/concurrent-events-queue" rel="alternate" type="text/html" title="批量并发-事件管理队列" />
+      <published>2019-12-18T07:00:00+08:00</published>
+      <updated>2019-12-18T07:00:00+08:00</updated>
+      <id>http://localhost:4000/concurrent-events-queue</id>
+      <content type="html" xml:base="http://localhost:4000/concurrent-events-queue">&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;h3 id=&quot;模型抽象&quot;&gt;模型抽象&lt;/h3&gt;
+
+&lt;p&gt;商品详情页需要的数据有：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;商品属性信息，包含商品ID、商品名、图册等等&lt;/li&gt;
+  &lt;li&gt;商品销售信息，包含价格、销售状态、优惠信息&lt;/li&gt;
+  &lt;li&gt;SKU/SPU 信息&lt;/li&gt;
+  &lt;li&gt;商品运费信息&lt;/li&gt;
+  &lt;li&gt;商品物流信息，最早可达时间信息&lt;/li&gt;
+  &lt;li&gt;评价列表信息&lt;/li&gt;
+  &lt;li&gt;推荐商品列表&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这里暂时列出这些&lt;/p&gt;
+
+&lt;p&gt;根据以上列表不难看出，商品属性、销售信息和SKU/SPU信息最为重要，运费、物流信息次之，评价、推荐信息优先级最低。&lt;/p&gt;
+
+&lt;p&gt;在这里，把所有事件分成多个批次，每个批次包含多个相互独立的事件，依次执行每个批次，
+当优先级高的批次执行完之后，再执行优先级低的批次，如此形成一个队列。
+因为执行队列保持顺序执行，依赖关系也被很好的隔离开来。
+&lt;img src=&quot;../assets/article_assets/envent-schedule.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;代码实现&quot;&gt;代码实现&lt;/h3&gt;
+
+&lt;p&gt;由于多个事件分为多个批次执行，而且批次之间需要保持顺序，所以这里使用单向链表构建事件队列。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/article_assets/eventScheduleUML.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;首先创建一个 队列模型类 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;，然后在 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 的子类内部创建队列。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;EventUnit&lt;/code&gt;  事件类，包含唯一标志符、执行方法、执行状态。&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;EventMark&lt;/code&gt;  队列节点类，包含事件集合、批次名称&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;  队列管理类&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleDelegate&lt;/code&gt; 队列回调事件&lt;/p&gt;
+
+&lt;p&gt;子类内部创建队列&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;- (void)createSchedule {
+    // 清空
+    [self clearAllEvents];
+    
+    //第一阶段
+    EventUnit *unit_1 = [EventUnit getEventWith:ProductDetailGetBasicInfo eventMethod:@&quot;ProductBasicInfo&quot;];
+
+    EventMark *mark_1 = [EventMark getEventMarkWithEvents:@[unit_1]];
+    mark_1.name = @&quot;第一阶段&quot;;
+    
+    [self push:mark_1];
+    
+    
+    //第二阶段
+    EventUnit *unit_2 = [EventUnit getEventWith:ProductDetailGetSaleInfo eventMethod:@&quot;ProductSaleInfo&quot;];
+    EventUnit *unit_4 = [EventUnit getEventWith:ProductDetailItemUniqueInfo eventMethod:@&quot;ItemUniqueInfo&quot;];
+
+    EventMark *mark_2 = [EventMark getEventMarkWithEvents:@[unit_2,unit_4]];
+    mark_2.name = @&quot;第二阶段&quot;;
+    
+    [self push:mark_2];
+    
+    // 第一个 milestone 完成
+    EventUnit *first = [EventUnit getEventWith:ProductDetailFirstStage eventMethod:@&quot;fistStageFinished&quot;];
+    
+    EventMark *firstMileStone = [EventMark getEventMarkWithEvents:@[first]];
+    firstMileStone.name = @&quot;firstMileStone&quot;;
+    
+    [self push:firstMileStone];
+    
+    //第三阶段
+    EventUnit *unit_8 = [EventUnit getEventWith:ProductDetailLogistics eventMethod:@&quot;LogisticsInfo&quot;];
+    EventUnit *unit_9 = [EventUnit getEventWith:ProductDetailFreightInfo eventMethod:@&quot;FreightInfo&quot;];
+
+    EventMark *mark_3 = [EventMark getEventMarkWithEvents:@[unit_8,unit_9]];
+    mark_3.name = @&quot;第三阶段&quot;;
+    
+    [self push:mark_3];
+    
+    // 第二个 milestone 完成
+    EventUnit *second = [EventUnit getEventWith:ProductDetailSecondStage eventMethod:@&quot;secondStageFinished&quot;];
+    
+    EventMark *secondMileStone = [EventMark getEventMarkWithEvents:@[second]];
+    secondMileStone.name = @&quot;secondMileStone&quot;;
+    
+    [self push:secondMileStone];
+    
+    //第四阶段
+    EventUnit *unit_10 = [EventUnit getEventWith:ProductDetailRecommend eventMethod:@&quot;RecommendInfo&quot;];
+    EventUnit *unit_13 = [EventUnit getEventWith:ProductDetailComments eventMethod:@&quot;CommentsInfo&quot;];
+
+    EventMark *mark_4 = [EventMark getEventMarkWithEvents:@[unit_10,unit_13]];
+    mark_4.name = @&quot;第四阶段&quot;;
+    
+    [self push:mark_4];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;// 开始执行
+- (void)start {
+    
+    EventMark *events = [self pop];
+    
+    if (events) {
+        
+        [self excuteEvents:events];
+        
+    } else {
+        // 所有事件执行完毕
+        _currentEvents = nil;
+        if ([self.delegate respondsToSelector:@selector(allEventsFinished)]) {
+            [self.delegate allEventsFinished];
+        }
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;// 执行事件
+- (void)excuteEvents:(EventMark *)events{
+    [self.lock lock];
+    self.currentEvents = events;
+    if ([self.delegate respondsToSelector:@selector(arriveOnEventSchedule:)]) {
+        [self.delegate arriveOnEventSchedule:events];
+    }
+    [self.lock unlock];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;事件方法执行, 这里根据字符串转方法，在子线程异步执行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;- (void)arriveOnEventSchedule:(EventMark *)events{
+    
+    [events.events enumerateObjectsUsingBlock:^(EventUnit * _Nonnull obj, BOOL * _Nonnull stop) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        
+            SEL selector = NSSelectorFromString(obj.eventMethod);
+            if ([self respondsToSelector:selector]) {
+                
+                IMP imp = [self methodForSelector:selector];
+                void (*func)(id, SEL) = (void *)imp;
+                func(self, selector);
+            }
+        });
+    }];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/EventScheduleManager.git&quot;&gt;Demo EventScheduleManager&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="iOS" />
+      
+
+      
+        <summary type="html">首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">iOS 关于 UIView 重绘的几个接口</title>
@@ -890,51 +1073,6 @@ typedef void(^wxShareCallback)(int resp);
 
       
         <summary type="html">  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">iOS APP 优化健壮性</title>
-      <link href="http://localhost:4000/app-optimize" rel="alternate" type="text/html" title="iOS APP 优化健壮性" />
-      <published>2019-06-11T02:00:00+08:00</published>
-      <updated>2019-06-11T02:00:00+08:00</updated>
-      <id>http://localhost:4000/app-optimize</id>
-      <content type="html" xml:base="http://localhost:4000/app-optimize">&lt;p&gt;unrecognized selector crash
-KVO crash
-NSNotification crash
-NSTimer crash
-Container crash（数组越界，插nil等）
-NSString crash （字符串操作的crash）
-Bad Access crash （野指针）
-UI not on Main Thread Crash (非主线程刷UI(机制待改善))&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;数据传输 图片传输 webp&lt;/li&gt;
-&lt;/ol&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>Miaocf</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="iOS" />
-      
-
-      
-        <summary type="html">unrecognized selector crash KVO crash NSNotification crash NSTimer crash Container crash（数组越界，插nil等） NSString crash （字符串操作的crash） Bad Access crash （野指针） UI not on Main Thread Crash (非主线程刷UI(机制待改善))</summary>
       
 
       

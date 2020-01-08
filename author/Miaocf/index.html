@@ -146,7 +146,7 @@
                 <div class="author-meta">
                     
                     <div class="author-stats">
-                        19 posts <span class="bull">&bull;</span>
+                        21 posts <span class="bull">&bull;</span>
                     </div>
                     
                         <a class="social-link social-link-wb" href="http://www.junziboxue.com" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.5 11.957c0 6.375-5.163 11.544-11.532 11.544C5.599 23.5.5 18.125.5 11.75.5 5.542 5.37.758 11.505.511l.5-.011C18.374.5 23.5 5.582 23.5 11.957zM11.505.511c-6 6.5-6 14.98 0 22.98m1-22.98c6 6.5 6 14.977 0 22.977M2 17.479h20.063m-19.657-12h19.062m-20.968 6h22.938" stroke="#000" stroke-linejoin="round" stroke-miterlimit="10" fill="none"/></svg>
@@ -172,6 +172,54 @@
             <!-- The tag below includes the markup for each post - partials/post-card.hbs -->
             
 
+
+    <article class="post-card author-template">
+        
+            <a class="post-card-image-link" href="/concurrent-events-queue">
+                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/concurrent-events-queue">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Ios</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">批量并发-事件管理队列</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/Miaocf/">Miaocf</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
 
     <article class="post-card author-template">
         
@@ -319,12 +367,12 @@
 
     <article class="post-card author-template">
         
-            <a class="post-card-image-link" href="/universal-link">
+            <a class="post-card-image-link" href="/frame-rate-monitor">
                 <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/universal-link">
+            <a class="post-card-content-link" href="/frame-rate-monitor">
                 <header class="post-card-header">
                     
                         
@@ -334,11 +382,14 @@
                         
                     
 
-                    <h2 class="post-card-title">iOS universal-link 通用链接配置</h2>
+                    <h2 class="post-card-title">iOS 屏幕卡顿检测与排查</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
+                        <p>
+  卡顿发生检测
+  卡顿原因排查
+（待完成）
 
 </p>
                     
@@ -367,12 +418,12 @@
 
     <article class="post-card author-template">
         
-            <a class="post-card-image-link" href="/frame-rate-monitor">
+            <a class="post-card-image-link" href="/universal-link">
                 <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/frame-rate-monitor">
+            <a class="post-card-content-link" href="/universal-link">
                 <header class="post-card-header">
                     
                         
@@ -382,14 +433,11 @@
                         
                     
 
-                    <h2 class="post-card-title">iOS 屏幕卡顿检测与排查</h2>
+                    <h2 class="post-card-title">iOS universal-link 通用链接配置</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>
-  卡顿发生检测
-  卡顿原因排查
-（待完成）
+                        <p>iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
 
 </p>
                     
@@ -660,54 +708,6 @@
 
     <article class="post-card author-template">
         
-            <a class="post-card-image-link" href="/software-engineer">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/software-engineer">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Something</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">如何看待软件工程师</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>在目前的互联网行业中, 从事代码 coding 职业的人,通常被称为程序员或者码农. 事实上他们还有另一个更 高大上 一点的名字: 软件工程师. 今天就一起深入的了解一下,这个职业都需要哪些基本能力.
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card author-template">
-        
             <a class="post-card-image-link" href="/time-range">
                 <div class="post-card-image" style="background-image: url(/assets/images/writing.jpg)"></div>
             </a>
@@ -776,6 +776,109 @@
                 <section class="post-card-excerpt">
                     
                         <p>网络封装
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/Miaocf/">Miaocf</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+    <article class="post-card author-template">
+        
+            <a class="post-card-image-link" href="/software-engineer">
+                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/software-engineer">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Something</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">如何看待软件工程师</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>在目前的互联网行业中, 从事代码 coding 职业的人,通常被称为程序员或者码农. 事实上他们还有另一个更 高大上 一点的名字: 软件工程师. 今天就一起深入的了解一下,这个职业都需要哪些基本能力.
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/Miaocf/">Miaocf</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+    <article class="post-card author-template">
+        
+            <a class="post-card-image-link" href="/app-optimize">
+                <div class="post-card-image" style="background-image: url(/assets/images/fables.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/app-optimize">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Ios</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">iOS APP 优化健壮性</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>unrecognized selector crash
+KVO crash
+NSNotification crash
+NSTimer crash
+Container crash（数组越界，插nil等）
+NSString crash （字符串操作的crash）
+Bad Access crash （野指针）
+UI not on Main Thread Crash (非主线程刷UI(机制待改善))
 
 </p>
                     
@@ -900,61 +1003,6 @@
 
     <article class="post-card author-template">
         
-            <a class="post-card-image-link" href="/app-optimize">
-                <div class="post-card-image" style="background-image: url(/assets/images/fables.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/app-optimize">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">iOS APP 优化健壮性</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>unrecognized selector crash
-KVO crash
-NSNotification crash
-NSTimer crash
-Container crash（数组越界，插nil等）
-NSString crash （字符串操作的crash）
-Bad Access crash （野指针）
-UI not on Main Thread Crash (非主线程刷UI(机制待改善))
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card author-template">
-        
             <a class="post-card-image-link" href="/haskell">
                 <div class="post-card-image" style="background-image: url(/assets/images/writing.jpg)"></div>
             </a>
@@ -1051,6 +1099,54 @@ UI not on Main Thread Crash (非主线程刷UI(机制待改善))
 
     <article class="post-card author-template">
         
+            <a class="post-card-image-link" href="/net-biography">
+                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/net-biography">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Ios</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">不期而遇-网络上的小贝壳</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/Miaocf/">Miaocf</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+    <article class="post-card author-template">
+        
             <a class="post-card-image-link" href="/to-do-list-origin">
                 <div class="post-card-image" style="background-image: url(/assets/images/advanced.jpg)"></div>
             </a>
@@ -1110,7 +1206,7 @@ UI not on Main Thread Crash (非主线程刷UI(机制待改善))
         <!-- The footer at the very bottom of the screen -->
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="http://localhost:4000/">Miaocf</a> &copy; 2019</section>
+                <section class="copyright"><a href="http://localhost:4000/">Miaocf</a> &copy; 2020</section>
                 <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
                     <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
                     <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>

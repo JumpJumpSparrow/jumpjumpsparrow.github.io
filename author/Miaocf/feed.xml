@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/author/Miaocf/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2019-11-14T17:03:32+08:00</updated>
+  <updated>2020-01-08T17:35:14+08:00</updated>
   <id>http://localhost:4000/author/Miaocf/feed.xml</id>
 
   
@@ -30,6 +30,189 @@
   
   
 
+  
+    <entry>
+      <title type="html">批量并发-事件管理队列</title>
+      <link href="http://localhost:4000/concurrent-events-queue" rel="alternate" type="text/html" title="批量并发-事件管理队列" />
+      <published>2019-12-18T07:00:00+08:00</published>
+      <updated>2019-12-18T07:00:00+08:00</updated>
+      <id>http://localhost:4000/concurrent-events-queue</id>
+      <content type="html" xml:base="http://localhost:4000/concurrent-events-queue">&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;h3 id=&quot;模型抽象&quot;&gt;模型抽象&lt;/h3&gt;
+
+&lt;p&gt;商品详情页需要的数据有：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;商品属性信息，包含商品ID、商品名、图册等等&lt;/li&gt;
+  &lt;li&gt;商品销售信息，包含价格、销售状态、优惠信息&lt;/li&gt;
+  &lt;li&gt;SKU/SPU 信息&lt;/li&gt;
+  &lt;li&gt;商品运费信息&lt;/li&gt;
+  &lt;li&gt;商品物流信息，最早可达时间信息&lt;/li&gt;
+  &lt;li&gt;评价列表信息&lt;/li&gt;
+  &lt;li&gt;推荐商品列表&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这里暂时列出这些&lt;/p&gt;
+
+&lt;p&gt;根据以上列表不难看出，商品属性、销售信息和SKU/SPU信息最为重要，运费、物流信息次之，评价、推荐信息优先级最低。&lt;/p&gt;
+
+&lt;p&gt;在这里，把所有事件分成多个批次，每个批次包含多个相互独立的事件，依次执行每个批次，
+当优先级高的批次执行完之后，再执行优先级低的批次，如此形成一个队列。
+因为执行队列保持顺序执行，依赖关系也被很好的隔离开来。
+&lt;img src=&quot;../assets/article_assets/envent-schedule.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;代码实现&quot;&gt;代码实现&lt;/h3&gt;
+
+&lt;p&gt;由于多个事件分为多个批次执行，而且批次之间需要保持顺序，所以这里使用单向链表构建事件队列。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/article_assets/eventScheduleUML.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;首先创建一个 队列模型类 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;，然后在 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 的子类内部创建队列。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;EventUnit&lt;/code&gt;  事件类，包含唯一标志符、执行方法、执行状态。&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;EventMark&lt;/code&gt;  队列节点类，包含事件集合、批次名称&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;  队列管理类&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleDelegate&lt;/code&gt; 队列回调事件&lt;/p&gt;
+
+&lt;p&gt;子类内部创建队列&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;- (void)createSchedule {
+    // 清空
+    [self clearAllEvents];
+    
+    //第一阶段
+    EventUnit *unit_1 = [EventUnit getEventWith:ProductDetailGetBasicInfo eventMethod:@&quot;ProductBasicInfo&quot;];
+
+    EventMark *mark_1 = [EventMark getEventMarkWithEvents:@[unit_1]];
+    mark_1.name = @&quot;第一阶段&quot;;
+    
+    [self push:mark_1];
+    
+    
+    //第二阶段
+    EventUnit *unit_2 = [EventUnit getEventWith:ProductDetailGetSaleInfo eventMethod:@&quot;ProductSaleInfo&quot;];
+    EventUnit *unit_4 = [EventUnit getEventWith:ProductDetailItemUniqueInfo eventMethod:@&quot;ItemUniqueInfo&quot;];
+
+    EventMark *mark_2 = [EventMark getEventMarkWithEvents:@[unit_2,unit_4]];
+    mark_2.name = @&quot;第二阶段&quot;;
+    
+    [self push:mark_2];
+    
+    // 第一个 milestone 完成
+    EventUnit *first = [EventUnit getEventWith:ProductDetailFirstStage eventMethod:@&quot;fistStageFinished&quot;];
+    
+    EventMark *firstMileStone = [EventMark getEventMarkWithEvents:@[first]];
+    firstMileStone.name = @&quot;firstMileStone&quot;;
+    
+    [self push:firstMileStone];
+    
+    //第三阶段
+    EventUnit *unit_8 = [EventUnit getEventWith:ProductDetailLogistics eventMethod:@&quot;LogisticsInfo&quot;];
+    EventUnit *unit_9 = [EventUnit getEventWith:ProductDetailFreightInfo eventMethod:@&quot;FreightInfo&quot;];
+
+    EventMark *mark_3 = [EventMark getEventMarkWithEvents:@[unit_8,unit_9]];
+    mark_3.name = @&quot;第三阶段&quot;;
+    
+    [self push:mark_3];
+    
+    // 第二个 milestone 完成
+    EventUnit *second = [EventUnit getEventWith:ProductDetailSecondStage eventMethod:@&quot;secondStageFinished&quot;];
+    
+    EventMark *secondMileStone = [EventMark getEventMarkWithEvents:@[second]];
+    secondMileStone.name = @&quot;secondMileStone&quot;;
+    
+    [self push:secondMileStone];
+    
+    //第四阶段
+    EventUnit *unit_10 = [EventUnit getEventWith:ProductDetailRecommend eventMethod:@&quot;RecommendInfo&quot;];
+    EventUnit *unit_13 = [EventUnit getEventWith:ProductDetailComments eventMethod:@&quot;CommentsInfo&quot;];
+
+    EventMark *mark_4 = [EventMark getEventMarkWithEvents:@[unit_10,unit_13]];
+    mark_4.name = @&quot;第四阶段&quot;;
+    
+    [self push:mark_4];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;// 开始执行
+- (void)start {
+    
+    EventMark *events = [self pop];
+    
+    if (events) {
+        
+        [self excuteEvents:events];
+        
+    } else {
+        // 所有事件执行完毕
+        _currentEvents = nil;
+        if ([self.delegate respondsToSelector:@selector(allEventsFinished)]) {
+            [self.delegate allEventsFinished];
+        }
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;// 执行事件
+- (void)excuteEvents:(EventMark *)events{
+    [self.lock lock];
+    self.currentEvents = events;
+    if ([self.delegate respondsToSelector:@selector(arriveOnEventSchedule:)]) {
+        [self.delegate arriveOnEventSchedule:events];
+    }
+    [self.lock unlock];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;事件方法执行, 这里根据字符串转方法，在子线程异步执行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;- (void)arriveOnEventSchedule:(EventMark *)events{
+    
+    [events.events enumerateObjectsUsingBlock:^(EventUnit * _Nonnull obj, BOOL * _Nonnull stop) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        
+            SEL selector = NSSelectorFromString(obj.eventMethod);
+            if ([self respondsToSelector:selector]) {
+                
+                IMP imp = [self methodForSelector:selector];
+                void (*func)(id, SEL) = (void *)imp;
+                func(self, selector);
+            }
+        });
+    }];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/EventScheduleManager.git&quot;&gt;Demo EventScheduleManager&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="iOS" />
+      
+
+      
+        <summary type="html">首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">关于自动驾驶伦理问题的思考</title>
@@ -215,6 +398,44 @@ When this message is received, the layer’s super layers are traversed until a 
     </entry>
   
     <entry>
+      <title type="html">iOS 屏幕卡顿检测与排查</title>
+      <link href="http://localhost:4000/frame-rate-monitor" rel="alternate" type="text/html" title="iOS 屏幕卡顿检测与排查" />
+      <published>2019-10-11T02:00:00+08:00</published>
+      <updated>2019-10-11T02:00:00+08:00</updated>
+      <id>http://localhost:4000/frame-rate-monitor</id>
+      <content type="html" xml:base="http://localhost:4000/frame-rate-monitor">&lt;ol&gt;
+  &lt;li&gt;卡顿发生检测&lt;/li&gt;
+  &lt;li&gt;卡顿原因排查
+（待完成）&lt;/li&gt;
+&lt;/ol&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="iOS" />
+      
+
+      
+        <summary type="html">卡顿发生检测 卡顿原因排查 （待完成）</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
       <title type="html">iOS universal-link 通用链接配置</title>
       <link href="http://localhost:4000/universal-link" rel="alternate" type="text/html" title="iOS universal-link 通用链接配置" />
       <published>2019-10-11T02:00:00+08:00</published>
@@ -248,44 +469,6 @@ When this message is received, the layer’s super layers are traversed until a 
 
       
         <summary type="html">iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">iOS 屏幕卡顿检测与排查</title>
-      <link href="http://localhost:4000/frame-rate-monitor" rel="alternate" type="text/html" title="iOS 屏幕卡顿检测与排查" />
-      <published>2019-10-11T02:00:00+08:00</published>
-      <updated>2019-10-11T02:00:00+08:00</updated>
-      <id>http://localhost:4000/frame-rate-monitor</id>
-      <content type="html" xml:base="http://localhost:4000/frame-rate-monitor">&lt;ol&gt;
-  &lt;li&gt;卡顿发生检测&lt;/li&gt;
-  &lt;li&gt;卡顿原因排查
-（待完成）&lt;/li&gt;
-&lt;/ol&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>Miaocf</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="iOS" />
-      
-
-      
-        <summary type="html">卡顿发生检测 卡顿原因排查 （待完成）</summary>
       
 
       
@@ -856,177 +1039,6 @@ subLayer.shadowRadius = 4;//阴影半径，默认3
 
       
         <summary type="html">iOS 圆角+阴影+离屏渲染问题</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">CocoaPods 私有库搭建</title>
-      <link href="http://localhost:4000/cocoapods-private" rel="alternate" type="text/html" title="CocoaPods 私有库搭建" />
-      <published>2019-08-16T16:01:00+08:00</published>
-      <updated>2019-08-16T16:01:00+08:00</updated>
-      <id>http://localhost:4000/cocoapods-private</id>
-      <content type="html" xml:base="http://localhost:4000/cocoapods-private">&lt;p&gt;在 iOS 开发过程中，经常会使用cocoapods管理三方库，如果自己的库不想公开，只方便自己公司的人用，该怎么办呢？这里介绍一下如何搭建一个私有的Pods库。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;CocoaPods的原理&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;创建私有库&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;cocoapods的原理&quot;&gt;CocoaPods的原理&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;第三方库会被编译成.a静态库供我们真正的工程使用。&lt;/strong&gt;&lt;br /&gt;
-CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的工程，该工程在Pods目录下。整个第三方库工程会生成一个名称为&lt;code class=&quot;highlighter-rouge&quot;&gt;libPods-xxx.a&lt;/code&gt;的静态库提供给主工程使用。对于资源文件，CocoaPods 提供了一个名为Pods-resources.sh的bash脚本，该脚本在每次项目编译的时候都会执行，将第三方库的各种资源文件复制到目标目录中。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;工程和第三方库所在的工程会由一个新生成的workspace管理&lt;/strong&gt;&lt;br /&gt;
-为了方便我们直观的管理工程和第三方库，CocoaPodsTest工程和Pods工程会被以workspace的形式组织和管理，也就是xxxx.xcworkspace文件。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;CocoaPods通过&lt;code class=&quot;highlighter-rouge&quot;&gt;Pods-Podtest.release.xcconfig&lt;/code&gt;的文件来在编译时设置所有的依赖和参数。&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;原来的工程设置已经被更改了，直接打开原来的工程文件去编译就会报错，使用新生成的workspace来进行项目管理。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;创建私有库&quot;&gt;创建私有库&lt;/h3&gt;
-
-&lt;p&gt;创建私有库的大体步骤为:&lt;/p&gt;
-
-&lt;h4 id=&quot;1-准备工作&quot;&gt;1. 准备工作&lt;/h4&gt;
-
-&lt;p&gt;创建两个私有远程仓库 Spec 和 Lib&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Spec仓库用来存储spec&lt;/li&gt;
-  &lt;li&gt;Lib用来存储项目工程文件&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;2-创建pod私有库的项目工程&quot;&gt;2. 创建pod私有库的项目工程&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;cd到合适目录下用命令行创建工程,执行 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod lib create Lib&lt;/code&gt; ,按提示输入需要的内容.&lt;/li&gt;
-  &lt;li&gt;修改podspec文件&lt;/li&gt;
-  &lt;li&gt;修改完成后,cd 到Lib目录下执行&lt;code class=&quot;highlighter-rouge&quot;&gt;pod lib lint&lt;/code&gt; &lt;br /&gt;
-podspec 文件保存了所有要对三方库的配置,包括要引用的依赖、模块划分、源文件、公共头文件等.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;3-将本地项目文件上传到远程私有库中&quot;&gt;3. 将本地项目文件上传到远程私有库中&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git remote add origin http://git.xxxx.cn/APP/ios/Lib.git
-$ git add .
-$ git commit -m &quot;Initial commit&quot;
-$ git push -u origin master
-//tag 值要和podspec中的version一致
-$ git tag 0.1.0
-//推送tag到服务器上
-$ git push --tags
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;这时查看远程仓库应该有自己的项目文件了&lt;/p&gt;
-
-&lt;h4 id=&quot;4-校验spec&quot;&gt;4. 校验spec&lt;/h4&gt;
-
-&lt;p&gt;执行 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod spec lint&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;5创建spec-repo&quot;&gt;5.创建spec repo&lt;/h4&gt;
-
-&lt;p&gt;进入文件夹&lt;code class=&quot;highlighter-rouge&quot;&gt;cd ~/.cocoapods/repos&lt;/code&gt; 可以查看本地&lt;code class=&quot;highlighter-rouge&quot;&gt;spec repo&lt;/code&gt;
-指定管理 lib repo 的 specs repo 的 url
-&lt;code class=&quot;highlighter-rouge&quot;&gt;pod repo add Lib http://git.xxxx.cn/APP/ios/Spec.git&lt;/code&gt;
-注意 此处地址是spec仓库地址
-推送 podspec 到 specs repo
-&lt;code class=&quot;highlighter-rouge&quot;&gt;pod repo push Lib Lib.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;6-验证&quot;&gt;6. 验证&lt;/h4&gt;
-&lt;p&gt;创建一个新的项目  编写podfile文件&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;source 'http://git.xxxx.cn/APP/ios/Spec.git'
-
-platform :ios, '9.0'
-
-target 'TestPods' do
-  use_frameworks!
-  pod 'Lib'
-
-end
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;cd项目中 执行pod install&lt;/p&gt;
-
-&lt;h4 id=&quot;7--更新spec文件&quot;&gt;7.  更新spec文件&lt;/h4&gt;
-&lt;p&gt;更新 podspec 文件后:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;将更新的podspec 文件更新到 git 库&lt;/li&gt;
-  &lt;li&gt;更新本地 repo 相关私有库的 podspec 文件,命令如下:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;zsspecs&lt;/code&gt; 是私有库的名称.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  pod repo update zsspecs
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;subspec&quot;&gt;subspec&lt;/h3&gt;
-&lt;p&gt;代表了一个库的其中一个模块的说明。
-subspec 支持嵌套&lt;/p&gt;
-
-&lt;h3 id=&quot;注意事项&quot;&gt;注意事项&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;pods 在安装的时候,遇到体积较大的文件会报&lt;code class=&quot;highlighter-rouge&quot;&gt;early EOF&lt;/code&gt;的错, 需要设置&lt;code class=&quot;highlighter-rouge&quot;&gt;postBuffer&lt;/code&gt;来解决这个问题&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ git config --global http.postBuffer 1073741824  
- $ git config --list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pod install&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;pod update&lt;/code&gt; 区别&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;pod update AFNetworking&lt;/code&gt; 单独更新某一个库.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;不更新 podspec&lt;br /&gt;
-CocoaPods 在执行pod install和pod update时，会默认先更新一次podspec索引。使用–no-repo-update参数可以禁止其做索引更新操作。如下所示:&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; pod install --no-repo-update
- pod update --no-repo-update
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使用私有的 pods&lt;br /&gt;
-通过直接指定某一个依赖的podspec，就可以使用内部的私有库。有利于使企业内部的公共项目支持 CocoaPods。示例：&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;pod 'MyCommon', :podspec =&amp;gt; 'https://suning.com/common/myCommon.podspec'&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;参考资料&lt;br /&gt;
-&lt;a href=&quot;https://guides.cocoapods.org/using/using-cocoapods.html&quot;&gt;cocoaPods文档&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.jianshu.com/p/3086df14ed08&quot;&gt;cocoaPods 原理&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/&quot;&gt;cocoaPods 管理&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;https://guides.cocoapods.org/syntax/podspec.html#subspec&quot;&gt;subspec&lt;/a&gt;&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>Miaocf</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="something" />
-      
-
-      
-        <summary type="html">在 iOS 开发过程中，经常会使用cocoapods管理三方库，如果自己的库不想公开，只方便自己公司的人用，该怎么办呢？这里介绍一下如何搭建一个私有的Pods库。</summary>
       
 
       

@@ -1,4 +1,153 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-14T17:03:32+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">One To Many Interface Instruction</title><link href="http://localhost:4000/one-to-many-interface-instruction" rel="alternate" type="text/html" title="One To Many Interface Instruction" /><published>2019-11-12T00:00:00+08:00</published><updated>2019-11-12T00:00:00+08:00</updated><id>http://localhost:4000/one-to-many-interface-instruction</id><content type="html" xml:base="http://localhost:4000/one-to-many-interface-instruction"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">What Do You Think About Difference</title><link href="http://localhost:4000/what-do-you-think-about-difference" rel="alternate" type="text/html" title="What Do You Think About Difference" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/what-do-you-think-about-difference</id><content type="html" xml:base="http://localhost:4000/what-do-you-think-about-difference">&lt;p&gt;如何看待 ‘不同’？&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-08T17:35:14+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">批量并发-事件管理队列</title><link href="http://localhost:4000/concurrent-events-queue" rel="alternate" type="text/html" title="批量并发-事件管理队列" /><published>2019-12-18T07:00:00+08:00</published><updated>2019-12-18T07:00:00+08:00</updated><id>http://localhost:4000/concurrent-events-queue</id><content type="html" xml:base="http://localhost:4000/concurrent-events-queue">&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;h3 id=&quot;模型抽象&quot;&gt;模型抽象&lt;/h3&gt;
+
+&lt;p&gt;商品详情页需要的数据有：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;商品属性信息，包含商品ID、商品名、图册等等&lt;/li&gt;
+  &lt;li&gt;商品销售信息，包含价格、销售状态、优惠信息&lt;/li&gt;
+  &lt;li&gt;SKU/SPU 信息&lt;/li&gt;
+  &lt;li&gt;商品运费信息&lt;/li&gt;
+  &lt;li&gt;商品物流信息，最早可达时间信息&lt;/li&gt;
+  &lt;li&gt;评价列表信息&lt;/li&gt;
+  &lt;li&gt;推荐商品列表&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这里暂时列出这些&lt;/p&gt;
+
+&lt;p&gt;根据以上列表不难看出，商品属性、销售信息和SKU/SPU信息最为重要，运费、物流信息次之，评价、推荐信息优先级最低。&lt;/p&gt;
+
+&lt;p&gt;在这里，把所有事件分成多个批次，每个批次包含多个相互独立的事件，依次执行每个批次，
+当优先级高的批次执行完之后，再执行优先级低的批次，如此形成一个队列。
+因为执行队列保持顺序执行，依赖关系也被很好的隔离开来。
+&lt;img src=&quot;../assets/article_assets/envent-schedule.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;代码实现&quot;&gt;代码实现&lt;/h3&gt;
+
+&lt;p&gt;由于多个事件分为多个批次执行，而且批次之间需要保持顺序，所以这里使用单向链表构建事件队列。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/article_assets/eventScheduleUML.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;首先创建一个 队列模型类 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;，然后在 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 的子类内部创建队列。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;EventUnit&lt;/code&gt;  事件类，包含唯一标志符、执行方法、执行状态。&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;EventMark&lt;/code&gt;  队列节点类，包含事件集合、批次名称&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;  队列管理类&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleDelegate&lt;/code&gt; 队列回调事件&lt;/p&gt;
+
+&lt;p&gt;子类内部创建队列&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;- (void)createSchedule {
+    // 清空
+    [self clearAllEvents];
+    
+    //第一阶段
+    EventUnit *unit_1 = [EventUnit getEventWith:ProductDetailGetBasicInfo eventMethod:@&quot;ProductBasicInfo&quot;];
+
+    EventMark *mark_1 = [EventMark getEventMarkWithEvents:@[unit_1]];
+    mark_1.name = @&quot;第一阶段&quot;;
+    
+    [self push:mark_1];
+    
+    
+    //第二阶段
+    EventUnit *unit_2 = [EventUnit getEventWith:ProductDetailGetSaleInfo eventMethod:@&quot;ProductSaleInfo&quot;];
+    EventUnit *unit_4 = [EventUnit getEventWith:ProductDetailItemUniqueInfo eventMethod:@&quot;ItemUniqueInfo&quot;];
+
+    EventMark *mark_2 = [EventMark getEventMarkWithEvents:@[unit_2,unit_4]];
+    mark_2.name = @&quot;第二阶段&quot;;
+    
+    [self push:mark_2];
+    
+    // 第一个 milestone 完成
+    EventUnit *first = [EventUnit getEventWith:ProductDetailFirstStage eventMethod:@&quot;fistStageFinished&quot;];
+    
+    EventMark *firstMileStone = [EventMark getEventMarkWithEvents:@[first]];
+    firstMileStone.name = @&quot;firstMileStone&quot;;
+    
+    [self push:firstMileStone];
+    
+    //第三阶段
+    EventUnit *unit_8 = [EventUnit getEventWith:ProductDetailLogistics eventMethod:@&quot;LogisticsInfo&quot;];
+    EventUnit *unit_9 = [EventUnit getEventWith:ProductDetailFreightInfo eventMethod:@&quot;FreightInfo&quot;];
+
+    EventMark *mark_3 = [EventMark getEventMarkWithEvents:@[unit_8,unit_9]];
+    mark_3.name = @&quot;第三阶段&quot;;
+    
+    [self push:mark_3];
+    
+    // 第二个 milestone 完成
+    EventUnit *second = [EventUnit getEventWith:ProductDetailSecondStage eventMethod:@&quot;secondStageFinished&quot;];
+    
+    EventMark *secondMileStone = [EventMark getEventMarkWithEvents:@[second]];
+    secondMileStone.name = @&quot;secondMileStone&quot;;
+    
+    [self push:secondMileStone];
+    
+    //第四阶段
+    EventUnit *unit_10 = [EventUnit getEventWith:ProductDetailRecommend eventMethod:@&quot;RecommendInfo&quot;];
+    EventUnit *unit_13 = [EventUnit getEventWith:ProductDetailComments eventMethod:@&quot;CommentsInfo&quot;];
+
+    EventMark *mark_4 = [EventMark getEventMarkWithEvents:@[unit_10,unit_13]];
+    mark_4.name = @&quot;第四阶段&quot;;
+    
+    [self push:mark_4];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;// 开始执行
+- (void)start {
+    
+    EventMark *events = [self pop];
+    
+    if (events) {
+        
+        [self excuteEvents:events];
+        
+    } else {
+        // 所有事件执行完毕
+        _currentEvents = nil;
+        if ([self.delegate respondsToSelector:@selector(allEventsFinished)]) {
+            [self.delegate allEventsFinished];
+        }
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;// 执行事件
+- (void)excuteEvents:(EventMark *)events{
+    [self.lock lock];
+    self.currentEvents = events;
+    if ([self.delegate respondsToSelector:@selector(arriveOnEventSchedule:)]) {
+        [self.delegate arriveOnEventSchedule:events];
+    }
+    [self.lock unlock];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;事件方法执行, 这里根据字符串转方法，在子线程异步执行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;- (void)arriveOnEventSchedule:(EventMark *)events{
+    
+    [events.events enumerateObjectsUsingBlock:^(EventUnit * _Nonnull obj, BOOL * _Nonnull stop) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        
+            SEL selector = NSSelectorFromString(obj.eventMethod);
+            if ([self respondsToSelector:selector]) {
+                
+                IMP imp = [self methodForSelector:selector];
+                void (*func)(id, SEL) = (void *)imp;
+                func(self, selector);
+            }
+        });
+    }];
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/EventScheduleManager.git&quot;&gt;Demo EventScheduleManager&lt;/a&gt;&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。</summary></entry><entry><title type="html">Hash Map</title><link href="http://localhost:4000/hash-map" rel="alternate" type="text/html" title="Hash Map" /><published>2019-12-18T00:00:00+08:00</published><updated>2019-12-18T00:00:00+08:00</updated><id>http://localhost:4000/hash-map</id><content type="html" xml:base="http://localhost:4000/hash-map"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">One To Many Interface Instruction</title><link href="http://localhost:4000/one-to-many-interface-instruction" rel="alternate" type="text/html" title="One To Many Interface Instruction" /><published>2019-11-12T00:00:00+08:00</published><updated>2019-11-12T00:00:00+08:00</updated><id>http://localhost:4000/one-to-many-interface-instruction</id><content type="html" xml:base="http://localhost:4000/one-to-many-interface-instruction"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">What Do You Think About Difference</title><link href="http://localhost:4000/what-do-you-think-about-difference" rel="alternate" type="text/html" title="What Do You Think About Difference" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/what-do-you-think-about-difference</id><content type="html" xml:base="http://localhost:4000/what-do-you-think-about-difference">&lt;p&gt;如何看待 ‘不同’？&lt;/p&gt;
 
 &lt;p&gt;什么是不同？&lt;/p&gt;
 
@@ -133,156 +282,4 @@ When this message is received, the layer’s super layers are traversed until a 
 2.流程
 3.配置项
 4.流程图
-（待完成）&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。</summary></entry><entry><title type="html">iOS 屏幕卡顿检测与排查</title><link href="http://localhost:4000/frame-rate-monitor" rel="alternate" type="text/html" title="iOS 屏幕卡顿检测与排查" /><published>2019-10-11T02:00:00+08:00</published><updated>2019-10-11T02:00:00+08:00</updated><id>http://localhost:4000/frame-rate-monitor</id><content type="html" xml:base="http://localhost:4000/frame-rate-monitor">&lt;ol&gt;
-  &lt;li&gt;卡顿发生检测&lt;/li&gt;
-  &lt;li&gt;卡顿原因排查
-（待完成）&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">卡顿发生检测 卡顿原因排查 （待完成）</summary></entry><entry><title type="html">Building Objective-C static libraries with categories</title><link href="http://localhost:4000/yykit-micro" rel="alternate" type="text/html" title="Building Objective-C static libraries with categories" /><published>2019-09-25T02:00:00+08:00</published><updated>2019-09-25T02:00:00+08:00</updated><id>http://localhost:4000/yykit-micro</id><content type="html" xml:base="http://localhost:4000/yykit-micro">&lt;blockquote&gt;
-  &lt;p&gt;Q:  How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;如何解决 在 runtime 环境中尝试调用静态库中分类的方法时，报 “selector not recognized” 异常？&lt;/p&gt;
-
-&lt;p&gt;  今天在浏览 YYKit 库时，一个宏定义引起了我的注意：&lt;code class=&quot;highlighter-rouge&quot;&gt;YYSYNTH_DUMMY_CLASS &lt;/code&gt;,从字面意思看是定义了一个不起任何作用的&lt;em&gt;哑&lt;/em&gt;类。相关描述如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;/**
- Add this macro before each category implementation, so we don't have to use
- -all_load or -force_load to load object files from static libraries that only
- contain categories and no classes.
- More info: http://developer.apple.com/library/mac/#qa/qa2006/qa1490.html .
- *******************************************************************************
- Example:
-     YYSYNTH_DUMMY_CLASS(NSString_YYAdd)
- */
-#ifndef YYSYNTH_DUMMY_CLASS
-#define YYSYNTH_DUMMY_CLASS(_name_) \
-@interface YYSYNTH_DUMMY_CLASS_ ## _name_ : NSObject @end \
-@implementation YYSYNTH_DUMMY_CLASS_ ## _name_ @end
-#endif
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;  根据 YYKit 作者的描述，在分类中加一个这样的宏定义可以避免一些复杂操作，具体原理作者并没有解释，只是给了一个苹果官方开发文档的连接。这个链接可能因为官方整理文档的原因，URL路径已经失效了。但是在官网搜索 URL 中的关键字找到了这篇&lt;a href=&quot;https://developer.apple.com/library/archive/qa/qa1490/_index.html&quot;&gt;资料&lt;/a&gt;。根据这篇资料在这里深入了解一下其中的原理和如何解决这类问题。&lt;/p&gt;
-
-&lt;p&gt;官方文档以一个问题开篇，就是上面提出的那个问题，哈哈。接下来官方文档就给出了问题的解决方法：&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;A: If you’re seeing a “selector not recognized” runtime exception when calling a category method that is implemented in a static library, you are hitting the link-time build issue described here, and need to add the -ObjC linker flag to your project, by following these steps:&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;ol&gt;
-    &lt;li&gt;In Xcode, choose View &amp;gt; Navigators &amp;gt; Show Project Navigator, or press ⌘1.&lt;/li&gt;
-    &lt;li&gt;Select your project under the PROJECT heading in the Project Navigator, then select the Build Settings tab.&lt;/li&gt;
-    &lt;li&gt;Scroll down to the Other Linker Flags build setting under the Linking collection, or type “Other Linker Flags” into the search bar.&lt;/li&gt;
-    &lt;li&gt;Set the value of the Other Linker Flags build setting to $(OTHER_LDFLAGS) -ObjC.&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;译：当你在运行时调用一个在静态库中实现的分类的方法时，遇到 “selector not recognized” 运行时异常，那么你就撞到了本篇文档中描述的所谓的 “the link-time build issue” 问题，同时你需要在你的工程中加上 &lt;code class=&quot;highlighter-rouge&quot;&gt;-ObjC linker flag&lt;/code&gt; 来解决这个问题。具体步骤：(在这里就不翻译了么么哒)。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Figure 1:&lt;/em&gt;  Modifying the Other Linker Flags build setting.    &lt;br /&gt;
-&lt;br /&gt;&lt;img src=&quot;../assets/article_assets/qa1490_other_linker_flags_xcode_5.png&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;h3 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;/h3&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;If adding the -ObjC flag isn’t fixing the problem, double check that a conflicting Target build setting is not overriding it, by following the above steps, but selecting the current target under “TARGETS” in step 2, instead of the project.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;解决问题&quot;&gt;解决问题&lt;/h3&gt;
-&lt;p&gt;  如果添加&lt;code class=&quot;highlighter-rouge&quot;&gt;-ObjC flag&lt;/code&gt;没能解决这个问题，检查一下确保之前的操作没有与 Target build setting 冲突而使其无效。按照上面的步骤，在第二步时选择 &lt;em&gt;“TARGETS”&lt;/em&gt;下的target，而不是选择 project。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;h3 id=&quot;other-causes-of-selector-not-recognized-exceptions&quot;&gt;Other Causes of selector not recognized Exceptions&lt;/h3&gt;
-  &lt;p&gt;The most common causes of a “selector not recognized” exception are:&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;h3 id=&quot;no-such-method&quot;&gt;No Such Method&lt;/h3&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The method really does not exist. Check your spelling. Check documentation to verify that the method exists on the version of the operating system your app is using.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;h3 id=&quot;memory-management&quot;&gt;Memory Management&lt;/h3&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Your app is trying to use an object after it has been deallocated, use the Zombies instrument to debug this kind of problem. You are seeing “selector not recognized” because the memory has been re-allocated as a different kind of object.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;导致selector-not-recognized-exceptions异常的其他原因&quot;&gt;导致&lt;code class=&quot;highlighter-rouge&quot;&gt;selector not recognized Exceptions&lt;/code&gt;异常的其他原因&lt;/h3&gt;
-&lt;p&gt;  导致&lt;code class=&quot;highlighter-rouge&quot;&gt;selector not recognized Exceptions&lt;/code&gt;异常的原因通常是：&lt;/p&gt;
-&lt;h4 id=&quot;方法不存在&quot;&gt;方法不存在&lt;/h4&gt;
-&lt;p&gt;  方法实际上是不存在的。检查你的拼写是否有误。查阅文档，确保你调用的方法在当前版本的操作系统内存在。&lt;/p&gt;
-&lt;h4 id=&quot;内存管理&quot;&gt;内存管理&lt;/h4&gt;
-&lt;p&gt;  在对象已释放后，你的应用又尝试去访问它，原先存放对象的内存已被重新分配给其他类的对象，所以当你再次访问原先的对象时，就会发生 “selector not recognized”异常。使用&lt;code class=&quot;highlighter-rouge&quot;&gt;Zombies instrument&lt;/code&gt;工具来debug这类问题。（这一段文档不通顺，稍作整理）&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;h2 id=&quot;what-causes-those-exceptions&quot;&gt;What causes those exceptions?&lt;/h2&gt;
-  &lt;p&gt;An impedance mismatch between UNIX static libraries and the dynamic nature of Objective-C can cause category methods in static libraries to not be linked into an app, resulting in “selector not recognized” exceptions when the methods aren’t found at runtime.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;导致这些异常的原因&quot;&gt;导致这些异常的原因&lt;/h2&gt;
-&lt;p&gt;由于 &lt;code class=&quot;highlighter-rouge&quot;&gt;UNIX static libraries&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;dynamic nature of Objective-C&lt;/code&gt;不是很搭的原因，导致静态库中分类的方法不会被链接到app中去，以至于在 runtime 动态调用时无法找到方法，结果发生 “selector not recognized”异常。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;h3 id=&quot;the-linker&quot;&gt;The Linker&lt;/h3&gt;
-  &lt;p&gt;When a C program is compiled, each “source file” is turned into an “object file” that contains executable functions and static data. The linker glues these object files together into a final executable. That executable is eventually bundled into an app by Xcode.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;链接器&quot;&gt;链接器&lt;/h3&gt;
-&lt;p&gt;当一个 C 程序被编译完成，所有”原文件”都被转换为”object file”，这些”object file”包含可执行方法和静态数据。链接器将这些”object file”粘合在一起，最终成为可执行文件。最终 Xcode 将这些可执行文件打包进APP中。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;When a source file uses something (like a function) defined in another file, then an undefined symbol is written into the object file, to “stand in” for the missing thing. The linker resolves these symbols by pulling in the object files that include definitions of undefined symbols when building the final executable.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;当一个原文件调用某些在其他文件中定义的方法或者数据时，那么一个&lt;code class=&quot;highlighter-rouge&quot;&gt;未经定义的符号&lt;/code&gt;就被写入了 “object file”,用以代替缺失的方法或数据。在组成最终可执行文件时，链接器从那些包含 “undefined symbols” 定义的 “object files” 中抽取定义来解析这些符号。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;For example, if main.c uses the function foo(), where foo is defined in another file, B.c, then the object file main.o will have an unresolved symbol for foo(), and B.o will include an implementation of foo(). At link time, B.o will be brought into the final executable, so that the code in main.o now references the implementation of foo() defined in B.o.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;举个例子，假如 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.c&lt;/code&gt; 调用方法 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo()&lt;/code&gt;,而 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt; 函数是在另一个文件 &lt;code class=&quot;highlighter-rouge&quot;&gt;B.c&lt;/code&gt; 中定义的，那么 &lt;code class=&quot;highlighter-rouge&quot;&gt;object file main.o&lt;/code&gt; 将会有一个未解析符号表示 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo()&lt;/code&gt;，同时 &lt;code class=&quot;highlighter-rouge&quot;&gt;B.o&lt;/code&gt; 将会包含 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo()&lt;/code&gt; 方法实现。在链接阶段，&lt;code class=&quot;highlighter-rouge&quot;&gt;B.o&lt;/code&gt; 将会被带入 最终执行文件，因此现在 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.o&lt;/code&gt; 中的代码就可以引用在 &lt;code class=&quot;highlighter-rouge&quot;&gt;B.o&lt;/code&gt; 中对 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo()&lt;/code&gt; 的实现。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A UNIX static library is just a collection of object files. Normally the linker only pulls in an object file from a static library if doing so would resolve some undefined symbol. Not pulling in all object files reduces the size of the final executable.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;UNIX static library&lt;/code&gt; 只是将 &lt;code class=&quot;highlighter-rouge&quot;&gt;object files&lt;/code&gt; 集合在一起。链接器通常只会从&lt;code class=&quot;highlighter-rouge&quot;&gt;static library&lt;/code&gt;中提取那些包含&lt;code class=&quot;highlighter-rouge&quot;&gt;undefined symbol&lt;/code&gt;解析的 object file，而不是把所有 &lt;code class=&quot;highlighter-rouge&quot;&gt;object files&lt;/code&gt; 都集成进来。这样可以减小最终可执行文件的体积。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;h3 id=&quot;objective-c&quot;&gt;Objective-C&lt;/h3&gt;
-  &lt;p&gt;The dynamic nature of Objective-C complicates things slightly. Because the code that implements a method is not determined until the method is actually called, Objective-C does not define linker symbols for methods. Linker symbols are only defined for classes.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;objective-c-1&quot;&gt;Objective-C&lt;/h3&gt;
-
-&lt;p&gt;O-C 的动态特性使这个过程略微复杂了一些。因为实现一个方法的代码直到这个方法被调用时才会被确定下来。Objective-C 并不为方法定义链接符号，链接符号只为 &lt;em&gt;类&lt;/em&gt; 进行定义。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;For example, if main.m includes the code [[FooClass alloc] initWithBar:nil]; then main.o will contain an undefined symbol for FooClass, but no linker symbols for the -initWithBar: method will be in main.o.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;比如： 假如 main.m 包含了这样的代码：&lt;code class=&quot;highlighter-rouge&quot;&gt;[[FooClass alloc] initWithBar:nil];&lt;/code&gt;,那么 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.o&lt;/code&gt; 将会包含一个未定义符号表示 &lt;code class=&quot;highlighter-rouge&quot;&gt;FooClass&lt;/code&gt;，但是在 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.o&lt;/code&gt; 文件中，并不生成链接符号去表示 &lt;code class=&quot;highlighter-rouge&quot;&gt;-initWithBar:&lt;/code&gt; 方法。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Since categories are a collection of methods, using a category’s method does not generate an undefined symbol. This means the linker does not know to load an object file defining the category, if the class itself is already defined. This causes the same “selector not recognized” runtime exception you would see for any unimplemented method.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;因为分类是一组方法的集合，假如一个类已经定义了，在其中使用分类的方法并不生成 &lt;code class=&quot;highlighter-rouge&quot;&gt;undefined symbol&lt;/code&gt;,这意味着链接器不知道需要去加载对应的 &lt;code class=&quot;highlighter-rouge&quot;&gt;object file&lt;/code&gt; 去定义分类。调用任何未实现的方法也一样会导致 “selector not recognized” 运行时异常。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;###The -ObjC Linker Flag
-Passing the -ObjC option to the linker causes it to load all members of static libraries that implement any Objective-C class or category. This will pickup any category method implementations. But it can make the resulting executable larger, and may pickup unnecessary objects. For this reason it is not on by default.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;the--objc-linker-flag&quot;&gt;The -ObjC Linker Flag&lt;/h3&gt;
-&lt;p&gt;指定 链接器的 &lt;code class=&quot;highlighter-rouge&quot;&gt;-ObjC&lt;/code&gt; 选项 可以使 链接器加载所有静态库总的成员，包括 &lt;code class=&quot;highlighter-rouge&quot;&gt;Objective-C&lt;/code&gt; 的类和分类。这将选入所有分类方法的实现。同时也使最最终的可执行文件体积更大，这也是为什么不作为默认选项。&lt;/p&gt;
-
-&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
-&lt;p&gt;YYKit 中的这个宏定义在 分类之前加了一个空类，这样&lt;code class=&quot;highlighter-rouge&quot;&gt;.m&lt;/code&gt;文件就包含了类，这样生成的 &lt;code class=&quot;highlighter-rouge&quot;&gt;.o&lt;/code&gt;文件就会被链接器打包进最终的可执行文件，从而避免了 “selector not recognized”异常的出现。&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">Q: How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?</summary></entry></feed>
+（待完成）&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。</summary></entry></feed>

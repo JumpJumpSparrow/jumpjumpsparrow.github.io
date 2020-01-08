@@ -8,6 +8,35 @@
     
       
       <item>
+        <title>批量并发-事件管理队列</title>
+        
+          <description>&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/concurrent-events-queue</link>
+        <guid isPermaLink="true">http://localhost:4000/concurrent-events-queue</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Hash Map</title>
+        
+          <description>
+</description>
+        
+        <pubDate>Wed, 18 Dec 2019 00:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/hash-map</link>
+        <guid isPermaLink="true">http://localhost:4000/hash-map</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>One To Many Interface Instruction</title>
         
           <description>
@@ -347,6 +376,21 @@ UI not on Main Thread Crash (非主线程刷UI(机制待改善))&lt;/p&gt;
         <link>
         http://localhost:4000/start</link>
         <guid isPermaLink="true">http://localhost:4000/start</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>不期而遇-网络上的小贝壳</title>
+        
+          <description>&lt;p&gt;在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 01 Jan 1970 08:01:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/net-biography</link>
+        <guid isPermaLink="true">http://localhost:4000/net-biography</guid>
       </item>
       
     
