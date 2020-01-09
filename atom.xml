@@ -23,6 +23,21 @@
     
       
       <item>
+        <title>解决 H5 页面在手机上布局异常的问题</title>
+        
+          <description>&lt;p&gt;目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/iOS-webviews-scales-page-to-fit</link>
+        <guid isPermaLink="true">http://localhost:4000/iOS-webviews-scales-page-to-fit</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Hash Map</title>
         
           <description>
@@ -76,24 +91,6 @@
         <link>
         http://localhost:4000/auto-pilot-ethics</link>
         <guid isPermaLink="true">http://localhost:4000/auto-pilot-ethics</guid>
-      </item>
-      
-    
-      
-      <item>
-        <title>Ios Webviews Scalespagetofit</title>
-        
-          <description>&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'UTF-8'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'viewport'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'format-detection'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'telephone=no'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-</description>
-        
-        <pubDate>Thu, 31 Oct 2019 00:00:00 +0800</pubDate>
-        <link>
-        http://localhost:4000/iOS-webviews-scalespagetofit</link>
-        <guid isPermaLink="true">http://localhost:4000/iOS-webviews-scalespagetofit</guid>
       </item>
       
     

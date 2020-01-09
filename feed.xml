@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-08T17:43:56+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">批量并发-事件管理队列</title><link href="http://localhost:4000/concurrent-events-queue" rel="alternate" type="text/html" title="批量并发-事件管理队列" /><published>2019-12-18T07:00:00+08:00</published><updated>2019-12-18T07:00:00+08:00</updated><id>http://localhost:4000/concurrent-events-queue</id><content type="html" xml:base="http://localhost:4000/concurrent-events-queue">&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-09T18:14:26+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">批量并发-事件管理队列</title><link href="http://localhost:4000/concurrent-events-queue" rel="alternate" type="text/html" title="批量并发-事件管理队列" /><published>2019-12-18T07:00:00+08:00</published><updated>2019-12-18T07:00:00+08:00</updated><id>http://localhost:4000/concurrent-events-queue</id><content type="html" xml:base="http://localhost:4000/concurrent-events-queue">&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
 
 &lt;h3 id=&quot;模型抽象&quot;&gt;模型抽象&lt;/h3&gt;
 
@@ -158,7 +158,64 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/EventScheduleManager.git&quot;&gt;Demo EventScheduleManager&lt;/a&gt;&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。</summary></entry><entry><title type="html">Hash Map</title><link href="http://localhost:4000/hash-map" rel="alternate" type="text/html" title="Hash Map" /><published>2019-12-18T00:00:00+08:00</published><updated>2019-12-18T00:00:00+08:00</updated><id>http://localhost:4000/hash-map</id><content type="html" xml:base="http://localhost:4000/hash-map"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">One To Many Interface Instruction</title><link href="http://localhost:4000/one-to-many-interface-instruction" rel="alternate" type="text/html" title="One To Many Interface Instruction" /><published>2019-11-12T00:00:00+08:00</published><updated>2019-11-12T00:00:00+08:00</updated><id>http://localhost:4000/one-to-many-interface-instruction</id><content type="html" xml:base="http://localhost:4000/one-to-many-interface-instruction"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">What Do You Think About Difference</title><link href="http://localhost:4000/what-do-you-think-about-difference" rel="alternate" type="text/html" title="What Do You Think About Difference" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/what-do-you-think-about-difference</id><content type="html" xml:base="http://localhost:4000/what-do-you-think-about-difference">&lt;p&gt;如何看待 ‘不同’？&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/EventScheduleManager.git&quot;&gt;Demo EventScheduleManager&lt;/a&gt;&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。</summary></entry><entry><title type="html">解决 H5 页面在手机上布局异常的问题</title><link href="http://localhost:4000/iOS-webviews-scales-page-to-fit" rel="alternate" type="text/html" title="解决 H5 页面在手机上布局异常的问题" /><published>2019-12-18T07:00:00+08:00</published><updated>2019-12-18T07:00:00+08:00</updated><id>http://localhost:4000/iOS-webviews-scales-page-to-fit</id><content type="html" xml:base="http://localhost:4000/iOS-webviews-scales-page-to-fit">&lt;p&gt;目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。&lt;/p&gt;
+
+&lt;p&gt;如图，图片显示不完整 ⤋
+&lt;br /&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_3.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;把 URL string 放到PC上展示如下：⤋&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_5.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;不难看出，这个详情页是把图片分割成多个部分，然后通过 CSS 布局拼接到一起的。&lt;/p&gt;
+
+&lt;p&gt;拉伸 PC 浏览器窗口，可以看到我们想要的布局效果：⤋
+&lt;br /&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_4.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;// html 中，图片宽度为 750 px，
+// 为了铺满屏幕，计算 initial-scale 初始缩放比例
+// html 中的尺寸为 750, 手机使用的不是物理像素，而是点；
+    
+CGFloat w = [[UIScreen mainScreen] bounds].size.width;
+CGFloat ratio = w/750.0;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'UTF-8'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'viewport'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'format-detection'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'telephone=no'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;因为商品详情页在 PC 上的宽度为750像素， 我们根据手机频幕的宽度，计算出 H5 页面的缩放比例。&lt;br /&gt;
+根据 H5 页面 头部 meta 信息，设置 &lt;code class=&quot;highlighter-rouge&quot;&gt;initial-scale&lt;/code&gt;初始缩放比例，通过注入 JS 调整初始缩放比例&lt;/p&gt;
+
+&lt;p&gt;加载页面之前，注入一段 JS 代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;CGFloat w = [[UIScreen mainScreen] bounds].size.width;
+CGFloat ratio = w/750.0;
+
+NSString *jScript = @&quot;var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width,initial-scale=ratio,minimum-scale=0.30, maximum-scale=3.0, user-scalable=0'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);&quot;;
+
+jScript = [jScript stringByReplacingOccurrencesOfString:@&quot;ratio&quot; withString:[NSString stringWithFormat:@&quot;%f&quot;,ratio]];
+
+WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+[wkUController addUserScript:wkUScript];
+
+WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
+wkWebConfig.userContentController = wkUController;
+
+wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebConfig];
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样，webview 跟据当前 屏幕大小，自适应缩放 H5页面的大小。&lt;/p&gt;
+
+&lt;p&gt;设置比例过小的效果图 ⤋
+&lt;br /&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_2.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;设置缩放比例正确的效果 ⤋&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_1.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。</summary></entry><entry><title type="html">Hash Map</title><link href="http://localhost:4000/hash-map" rel="alternate" type="text/html" title="Hash Map" /><published>2019-12-18T00:00:00+08:00</published><updated>2019-12-18T00:00:00+08:00</updated><id>http://localhost:4000/hash-map</id><content type="html" xml:base="http://localhost:4000/hash-map"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">One To Many Interface Instruction</title><link href="http://localhost:4000/one-to-many-interface-instruction" rel="alternate" type="text/html" title="One To Many Interface Instruction" /><published>2019-11-12T00:00:00+08:00</published><updated>2019-11-12T00:00:00+08:00</updated><id>http://localhost:4000/one-to-many-interface-instruction</id><content type="html" xml:base="http://localhost:4000/one-to-many-interface-instruction"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">What Do You Think About Difference</title><link href="http://localhost:4000/what-do-you-think-about-difference" rel="alternate" type="text/html" title="What Do You Think About Difference" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/what-do-you-think-about-difference</id><content type="html" xml:base="http://localhost:4000/what-do-you-think-about-difference">&lt;p&gt;如何看待 ‘不同’？&lt;/p&gt;
 
 &lt;p&gt;什么是不同？&lt;/p&gt;
 
@@ -218,42 +275,7 @@
 
 &lt;p&gt;有问题或想法可以联系我讨论，邮箱：&lt;code class=&quot;highlighter-rouge&quot;&gt;meowchunfat@hotmail.com&lt;/code&gt;。&lt;/p&gt;
 
-&lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。</summary></entry><entry><title type="html">Ios Webviews Scalespagetofit</title><link href="http://localhost:4000/iOS-webviews-scalespagetofit" rel="alternate" type="text/html" title="Ios Webviews Scalespagetofit" /><published>2019-10-31T00:00:00+08:00</published><updated>2019-10-31T00:00:00+08:00</updated><id>http://localhost:4000/iOS-webviews-scalespagetofit</id><content type="html" xml:base="http://localhost:4000/iOS-webviews-scalespagetofit">&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'UTF-8'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'viewport'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'format-detection'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'telephone=no'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;// html 中，图片宽度为 750 px，
-// 为了铺满屏幕，计算 initial-scale 初始缩放比例
-// html 中的尺寸为 750, 手机使用的不是物理像素，而是点；
-    
-CGFloat w = [[UIScreen mainScreen] bounds].size.width;
-CGFloat ratio = w/750.0;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或者直接在加载页面之前，注入一段 JS 代码：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;CGFloat w = [[UIScreen mainScreen] bounds].size.width;
-CGFloat ratio = w/750.0;
-
-NSString *jScript = @&quot;var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width,initial-scale=ratio,minimum-scale=0.30, maximum-scale=3.0, user-scalable=0'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);&quot;;
-
-jScript = [jScript stringByReplacingOccurrencesOfString:@&quot;ratio&quot; withString:[NSString stringWithFormat:@&quot;%f&quot;,ratio]];
-
-
-WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-WKUserContentController *wkUController = [[WKUserContentController alloc] init];
-[wkUController addUserScript:wkUScript];
-
-WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
-wkWebConfig.userContentController = wkUController;
-
-wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebConfig];
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这样，webview 跟据当前 屏幕大小，自适应缩放 H5页面的大小。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">&amp;lt;meta charset='UTF-8'&amp;gt; &amp;lt;meta name='viewport' content='width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0'&amp;gt; &amp;lt;meta name='format-detection' content='telephone=no'&amp;gt;</summary></entry><entry><title type="html">How Dose Technology Create Values</title><link href="http://localhost:4000/how-dose-technology-create-values" rel="alternate" type="text/html" title="How Dose Technology Create Values" /><published>2019-10-24T00:00:00+08:00</published><updated>2019-10-24T00:00:00+08:00</updated><id>http://localhost:4000/how-dose-technology-create-values</id><content type="html" xml:base="http://localhost:4000/how-dose-technology-create-values">&lt;p&gt;技术如何创造价值&lt;/p&gt;
+&lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。</summary></entry><entry><title type="html">How Dose Technology Create Values</title><link href="http://localhost:4000/how-dose-technology-create-values" rel="alternate" type="text/html" title="How Dose Technology Create Values" /><published>2019-10-24T00:00:00+08:00</published><updated>2019-10-24T00:00:00+08:00</updated><id>http://localhost:4000/how-dose-technology-create-values</id><content type="html" xml:base="http://localhost:4000/how-dose-technology-create-values">&lt;p&gt;技术如何创造价值&lt;/p&gt;
 
 &lt;p&gt;物质价值
 实物、数据&lt;/p&gt;

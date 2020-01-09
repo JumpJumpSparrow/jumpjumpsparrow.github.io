@@ -11,7 +11,7 @@
 
 
 
-    <title>iOS universal-link 通用链接配置</title>
+    <title>解决 H5 页面在手机上布局异常的问题</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -36,38 +36,24 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="Cloud in the sky, fish in the river" />
     <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="http://localhost:4000/universal-link" />
+    <link rel="canonical" href="http://localhost:4000/iOS-webviews-scales-page-to-fit" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Miaocf" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="iOS universal-link 通用链接配置" />
-    <meta property="og:description" content="iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
-
-1.概念
-2.流程
-3.配置项
-4.流程图
-（待完成）
-" />
-    <meta property="og:url" content="http://localhost:4000/universal-link" />
+    <meta property="og:title" content="解决 H5 页面在手机上布局异常的问题" />
+    <meta property="og:description" content="目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。 如图，图片显示不完整 ⤋ 把 URL string 放到PC上展示如下：⤋ 不难看出，这个详情页是把图片分割成多个部分，然后通过 CSS 布局拼接到一起的。 拉伸 PC 浏览器窗口，可以看到我们想要的布局效果：⤋ // html 中，图片宽度为 750 px， // 为了铺满屏幕，计算 initial-scale 初始缩放比例 // html 中的尺寸为 750, 手机使用的不是物理像素，而是点； CGFloat w = [[UIScreen mainScreen] bounds].size.width; CGFloat ratio = w/750.0; &lt;meta charset='UTF-8'&gt; &lt;meta name='viewport' content='width=device-width," />
+    <meta property="og:url" content="http://localhost:4000/iOS-webviews-scales-page-to-fit" />
     <meta property="og:image" content="http://localhost:4000/assets/images/xxx.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/false" />
     <meta property="article:author" content="https://www.facebook.com/false" />
-    <meta property="article:published_time" content="2019-10-11T02:00:00+08:00" />
-    <meta property="article:modified_time" content="2019-10-11T02:00:00+08:00" />
+    <meta property="article:published_time" content="2019-12-18T07:00:00+08:00" />
+    <meta property="article:modified_time" content="2019-12-18T07:00:00+08:00" />
     <meta property="article:tag" content="Ios" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="iOS universal-link 通用链接配置" />
-    <meta name="twitter:description" content="iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
-
-1.概念
-2.流程
-3.配置项
-4.流程图
-（待完成）
-" />
+    <meta name="twitter:title" content="解决 H5 页面在手机上布局异常的问题" />
+    <meta name="twitter:description" content="目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。 如图，图片显示不完整 ⤋ 把 URL string 放到PC上展示如下：⤋ 不难看出，这个详情页是把图片分割成多个部分，然后通过 CSS 布局拼接到一起的。 拉伸 PC 浏览器窗口，可以看到我们想要的布局效果：⤋ // html 中，图片宽度为 750 px， // 为了铺满屏幕，计算 initial-scale 初始缩放比例 // html 中的尺寸为 750, 手机使用的不是物理像素，而是点； CGFloat w = [[UIScreen mainScreen] bounds].size.width; CGFloat ratio = w/750.0; &lt;meta charset='UTF-8'&gt; &lt;meta name='viewport' content='width=device-width," />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/xxx.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -88,7 +74,7 @@
         "name": "Miaocf",
         "logo": "http://localhost:4000/assets/images/blog-icon.png"
     },
-    "url": "http://localhost:4000/universal-link",
+    "url": "http://localhost:4000/iOS-webviews-scales-page-to-fit",
     "image": {
         "@type": "ImageObject",
         "url": "http://localhost:4000/assets/images/xxx.jpg",
@@ -97,16 +83,9 @@
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:4000/universal-link"
+        "@id": "http://localhost:4000/iOS-webviews-scales-page-to-fit"
     },
-    "description": "iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
-
-1.概念
-2.流程
-3.配置项
-4.流程图
-（待完成）
-"
+    "description": "目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。 如图，图片显示不完整 ⤋ 把 URL string 放到PC上展示如下：⤋ 不难看出，这个详情页是把图片分割成多个部分，然后通过 CSS 布局拼接到一起的。 拉伸 PC 浏览器窗口，可以看到我们想要的布局效果：⤋ // html 中，图片宽度为 750 px， // 为了铺满屏幕，计算 initial-scale 初始缩放比例 // html 中的尺寸为 750, 手机使用的不是物理像素，而是点； CGFloat w = [[UIScreen mainScreen] bounds].size.width; CGFloat ratio = w/750.0; &lt;meta charset='UTF-8'&gt; &lt;meta name='viewport' content='width=device-width,"
 }
     </script>
 
@@ -119,7 +98,7 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="iOS universal-link 通用链接配置" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="解决 H5 页面在手机上布局异常的问题" href="/feed.xml" />
 
 
 </head>
@@ -173,7 +152,7 @@ into the {body} of the default.hbs template -->
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime="11 October 2019">11 October 2019</time>
+                    <time class="post-full-meta-date" datetime="18 December 2019">18 December 2019</time>
                     
                         <span class="date-divider">/</span>
                         
@@ -183,7 +162,7 @@ into the {body} of the default.hbs template -->
                         
                     
                 </section>
-                <h1 class="post-full-title">iOS universal-link 通用链接配置</h1>
+                <h1 class="post-full-title">解决 H5 页面在手机上布局异常的问题</h1>
             </header>
 
             
@@ -193,13 +172,64 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。</p>
+                    <p>目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。</p>
 
-<p>1.概念
-2.流程
-3.配置项
-4.流程图
-（待完成）</p>
+<p>如图，图片显示不完整 ⤋
+<br /><img src="../assets/images/iOS-webview-auto-scale/image_3.png" width="200" /><br /></p>
+
+<p>把 URL string 放到PC上展示如下：⤋</p>
+
+<p><br /><img src="../assets/images/iOS-webview-auto-scale/image_5.png" width="200" /><br /></p>
+
+<p>不难看出，这个详情页是把图片分割成多个部分，然后通过 CSS 布局拼接到一起的。</p>
+
+<p>拉伸 PC 浏览器窗口，可以看到我们想要的布局效果：⤋
+<br /><img src="../assets/images/iOS-webview-auto-scale/image_4.png" width="200" /><br /></p>
+
+<pre><code class="language-objective-c">// html 中，图片宽度为 750 px，
+// 为了铺满屏幕，计算 initial-scale 初始缩放比例
+// html 中的尺寸为 750, 手机使用的不是物理像素，而是点；
+    
+CGFloat w = [[UIScreen mainScreen] bounds].size.width;
+CGFloat ratio = w/750.0;
+</code></pre>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">'UTF-8'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">'viewport'</span> <span class="na">content=</span><span class="s">'width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0'</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">'format-detection'</span> <span class="na">content=</span><span class="s">'telephone=no'</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>因为商品详情页在 PC 上的宽度为750像素， 我们根据手机频幕的宽度，计算出 H5 页面的缩放比例。<br />
+根据 H5 页面 头部 meta 信息，设置 <code class="highlighter-rouge">initial-scale</code>初始缩放比例，通过注入 JS 调整初始缩放比例</p>
+
+<p>加载页面之前，注入一段 JS 代码：</p>
+
+<pre><code class="language-objective-c">CGFloat w = [[UIScreen mainScreen] bounds].size.width;
+CGFloat ratio = w/750.0;
+
+NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width,initial-scale=ratio,minimum-scale=0.30, maximum-scale=3.0, user-scalable=0'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+
+jScript = [jScript stringByReplacingOccurrencesOfString:@"ratio" withString:[NSString stringWithFormat:@"%f",ratio]];
+
+WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+[wkUController addUserScript:wkUScript];
+
+WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
+wkWebConfig.userContentController = wkUController;
+
+wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebConfig];
+</code></pre>
+
+<p>这样，webview 跟据当前 屏幕大小，自适应缩放 H5页面的大小。</p>
+
+<p>设置比例过小的效果图 ⤋
+<br /><img src="../assets/images/iOS-webview-auto-scale/image_2.png" width="200" /><br /></p>
+
+<p>设置缩放比例正确的效果 ⤋</p>
+
+<p><img src="../assets/images/iOS-webview-auto-scale/image_1.png" width="200" /><br /></p>
+
+<p><a href="https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit">参考链接</a></p>
 
                 </div>
             </section>
@@ -294,11 +324,6 @@ gitment.render('gitmentContainer');
                                 
                                   
                                     
-                                        
-                                        
-                                            <li><a href="/iOS-webviews-scales-page-to-fit">解决 H5 页面在手机上布局异常的问题</a></li>
-                                        
-                                    
                                   
                                 
                                   
@@ -324,10 +349,15 @@ gitment.render('gitmentContainer');
                                     
                                         
                                         
+                                            <li><a href="/emoji-filter">iOS Emoji 过滤</a></li>
+                                        
                                     
                                   
                                 
                                   
+                                    
+                                        
+                                        
                                     
                                   
                                 
@@ -422,12 +452,12 @@ gitment.render('gitmentContainer');
 
     <article class="post-card post-template">
         
-            <a class="post-card-image-link" href="/emoji-filter">
+            <a class="post-card-image-link" href="/concurrent-events-queue">
                 <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/emoji-filter">
+            <a class="post-card-content-link" href="/concurrent-events-queue">
                 <header class="post-card-header">
                     
                         
@@ -437,7 +467,7 @@ gitment.render('gitmentContainer');
                         
                     
 
-                    <h2 class="post-card-title">iOS Emoji 过滤</h2>
+                    <h2 class="post-card-title">批量并发-事件管理队列</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -472,24 +502,14 @@ gitment.render('gitmentContainer');
             
                 
 
-    <article class="post-card post-template">
-        
-            <a class="post-card-image-link" href="/frame-rate-monitor">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
+    <article class="post-card  no-image">
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/frame-rate-monitor">
+            <a class="post-card-content-link" href="/hash-map">
                 <header class="post-card-header">
                     
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
 
-                    <h2 class="post-card-title">iOS 屏幕卡顿检测与排查</h2>
+                    <h2 class="post-card-title">Hash Map</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -499,13 +519,6 @@ gitment.render('gitmentContainer');
             </a>
             <footer class="post-card-meta">
                 
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
                     
                 
                 <span class="reading-time">
@@ -535,18 +548,18 @@ gitment.render('gitmentContainer');
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">iOS universal-link 通用链接配置</div>
+    <div class="floating-header-title">解决 H5 页面在手机上布局异常的问题</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=iOS+universal-link+%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5%E9%85%8D%E7%BD%AE&amp;url=universal-link"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E8%A7%A3%E5%86%B3+H5+%E9%A1%B5%E9%9D%A2%E5%9C%A8%E6%89%8B%E6%9C%BA%E4%B8%8A%E5%B8%83%E5%B1%80%E5%BC%82%E5%B8%B8%E7%9A%84%E9%97%AE%E9%A2%98&amp;url=iOS-webviews-scales-page-to-fit"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=universal-link"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=iOS-webviews-scales-page-to-fit"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
