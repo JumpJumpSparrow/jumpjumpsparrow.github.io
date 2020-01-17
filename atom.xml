@@ -328,14 +328,7 @@
       <item>
         <title>iOS APP 优化健壮性</title>
         
-          <description>&lt;p&gt;unrecognized selector crash
-KVO crash
-NSNotification crash
-NSTimer crash
-Container crash（数组越界，插nil等）
-NSString crash （字符串操作的crash）
-Bad Access crash （野指针）
-UI not on Main Thread Crash (非主线程刷UI(机制待改善))&lt;/p&gt;
+          <description>&lt;h3 id=&quot;1加强-app-健壮性&quot;&gt;1.加强 APP 健壮性&lt;/h3&gt;
 
 </description>
         
