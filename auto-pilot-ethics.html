@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="iOS 开发，会 1.5 点web前端，Java web入门开发者">
+    <meta name="keywords"  content="CF Max, CF Blog, iOS,Java web,博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="关于自动驾驶伦理问题的思考 - cunfa的博客 | CF Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。
+">
+    
+    <meta property="article:published_time" content="2019-11-08T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Miaocf">
+    
+    
+    <meta property="article:tag" content="something">
+    
+    
+    <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
+    <meta property="og:url" content="http://localhost:4000/auto-pilot-ethics">
+    <meta property="og:site_name" content="cunfa的博客 | CF Blog">
+    
+    <title>关于自动驾驶伦理问题的思考 - cunfa的博客 | CF Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/auto-pilot-ethics">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CF Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=something" title="something">something</a>
+                        
+                    </div>
+                    <h1>关于自动驾驶伦理问题的思考</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Miaocf on November 8, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。</p>
+
+<p>  目前市场上已经出现了可以自动驾驶的汽车，比如特斯拉、百度的阿波龙。 其中自动驾驶应用较为激进的当属特斯拉无疑。近几年 (2016-2018) 特斯拉的几起事故，可能与自动驾驶技术尚未完全成熟有关。而百度已获得全国首批T4道路测试牌照，自动驾达到L4级别的<a href="http://apollo.auto/minibus/index_cn.html">阿波龙</a>已经于2018年7月4日正式量产下线，已经在多地开始展开试用。</p>
+
+<p><img src="/assets/images/autopilot/apollo.jpg" style="zoom:70%;" /></p>
+
+<p>（图为阿波龙自动驾驶汽车）</p>
+
+<p>  随着人工智能 AI (<code class="highlighter-rouge">Artificial Intelligence</code>) 的事件处理能力和数据分析精度变得更强更高，自动驾驶技术也开始进入了实用阶段。当然，实现自动驾驶除了 AI 必不可少以外，还需要<code class="highlighter-rouge">计算机视觉</code>、<code class="highlighter-rouge">高精度地图</code>、<code class="highlighter-rouge">5G高速通信技术</code>、<code class="highlighter-rouge">激光雷达</code>等环境感知技术。可以预见到不久的将来，自动驾驶功能将会成为汽车的标配功能，<code class="highlighter-rouge">AI</code> 也继 <code class="highlighter-rouge">水</code>、<code class="highlighter-rouge">电</code>、<code class="highlighter-rouge">网络</code>之后，势必成为生活中必不可少的基础元素，潜入到生活的方方面面。</p>
+
+<p>  然而 AI 作为自动驾驶的主要决策单元，代替驾驶员做出决策，控制车辆在道路上行走，这将带来一系列的社会伦理问题和法律问题。在这里列出一些自动驾驶在不久的将来可能会遇到的问题，与大家一起讨论、思考。</p>
+
+<h4 id="问题1">问题1</h4>
+
+<p>自动驾驶汽车行驶过程中，遇突发事故，选择避让可能危及行人生命安全，不避让可能会导致乘客伤亡，AI 该如何决策？</p>
+
+<p><img src="/assets/images/autopilot/user-innocent-accident.png" style="zoom:70%;" /></p>
+
+<p>这里有三个问题需要回答：</p>
+
+<ol>
+  <li><strong><em>用户</em></strong>和<strong><em>行人</em></strong>都是无辜者，AI 有了干预的机会后，突来的意外应该降临到谁身上？</li>
+  <li>自动驾驶汽车作为一款产品，AI 是优先保护用户的安全？还是优先保护行人的安全？</li>
+  <li>遇到以上场景，自动驾驶是否需要<strong><em>乘客</em></strong>做出决策？或者说乘客的决定和AI的决定哪个有效？（自动驾驶里弱化了 司机 的角色，司机更多是 可以干预驾驶的乘客）</li>
+</ol>
+
+<h4 id="问题2">问题2</h4>
+
+<p>一辆火车失控，即将撞向铁路上的五个人，这时 AI 可以控制扳手让火车转向，撞向另外一条轨道上的一个人。是将伤亡将到最小，还是让事故继续发生？</p>
+
+<p><img src="/assets/images/autopilot/which-one-to-choose.png" style="zoom:70%;" /></p>
+
+<p>人性、道德、法律，到底是谁做出了最终抉择？</p>
+
+<p>  这其实是美国哈佛大学政治哲学教授迈克尔·桑德尔，在公开课中设想的场景，用以描述行为选择的道德困境。在这里只是把人改为了 AI。在这里，不管 AI 如何处理，其最终决的选择实际来自于人，或者来自于人已经定制好的算法，AI 通过算法计算，忠实地执行了这个决定。</p>
+
+<p>  人可以为自己的决策和行为负责，那么AI的决策和行为谁来负责呢？</p>
+
+<p>  我认为这应该是社会群体层的共识问题，社会群体中的每个个体需要事先知晓 并接受 AI 的决策策略，在事故发生后， 所有人必须为算法的执行结果负责，因为这个是整个社会群体已经认可的选择。</p>
+
+<p>  当然 在现实中很难发生这种特殊情况，特别案例还需要根据实际情况具体分析，这里只是纯为讨论而假设的场景。</p>
+
+<p>自动驾驶不光光是 技术上的问题，法律和相关规范 是自动驾驶可以正常运行的必要条件。</p>
+
+<p>期待自动驾驶早点普及使用，在那之前，希望相关法律和规范已经落地执行。</p>
+
+<p>还有，没事不要到马路上溜达。</p>
+
+<h3 id="end">end</h3>
+
+<p>  写文章很有难度啊，写不下去了先在这里吐个槽，提升写作能力太有必要了。清楚明白地表达观点，并且让读者轻易的捕捉到你要表达的意思 ，让文章读起来感觉顺畅，同时保持整体有结构和层次，这些都不是那么容易的兼顾的到。想要提升写作能力，一番磨练必不可少啊。</p>
+
+<p>有问题或想法可以联系我讨论，邮箱：<code class="highlighter-rouge">meowchunfat@hotmail.com</code>。</p>
+
+<p>声明：本篇为个人原创，允许转载，转载请注明出处。</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/how-dose-technology-create-values" data-toggle="tooltip" data-placement="top" title="技术是如何产生价值的？">
+                        Previous<br>
+                        <span>技术是如何产生价值的？</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/what-do-you-think-about-difference" data-toggle="tooltip" data-placement="top" title="What Do You Think About Difference">
+                        Next<br>
+                        <span>What Do You Think About Difference</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                <div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+    owner: 'JumpJumpSparrow',
+    repo: 'My_blog',
+    oauth: {
+        client_id: '0854e10375734c52272e',
+        client_secret: 'e382403bb47cfe33179603e5df7a4c9576ede295',
+    },
+});
+gitment.render('gitmentContainer');
+</script>
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0019" 
+                    href="/archive/?tag=something"
+                    title="something"
+                    rel="7">something</a>
+        
+                <a data-sort="0013" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="13">iOS
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FOOTPRINTS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://www.v2ex.com">V2EX</a></li>
+  
+  <li><a href="http://www.ruanyifeng.com">ruanyifeng</a></li>
+  
+  <li><a href="https://flutter.dev">flutter</a></li>
+  
+  <li><a href="https://www.cnblogs.com">cnblogs</a></li>
+  
+  <li><a href="https://github.com">github</a></li>
+  
+  <li><a href="https://angular.cn">angular</a></li>
+  
+  <li><a href="https://tour.go-zh.org/">go</a></li>
+  
+  <li><a href="https://www.rust-lang.org">rust-lang</a></li>
+  
+  <li><a href="https://haskellbook.com">haskellbook</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; CF Blog 2020
+                    <br>
+                    Powered by <a href="http://junziboxue.com">Mcf Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=JumpJumpSparrow&repo=JumpJumpSparrow.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Add Baidu Analytics  -->
+<!-- Baidu Analytics Tracking code -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?189baef3a30b22e9e158be16b3016a58";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

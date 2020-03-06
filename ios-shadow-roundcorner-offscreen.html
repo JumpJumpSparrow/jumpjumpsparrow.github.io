@@ -11,16 +11,26 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="cunfa的博客 | CF Blog">
+    <meta property="og:title" content="iOS 圆角+阴影+离屏渲染问题 - cunfa的博客 | CF Blog">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="既然要去那里，出发吧">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="iOS 圆角+阴影+离屏渲染问题
+">
+    
+    <meta property="article:published_time" content="2019-09-16T18:00:00Z">
+    
+    
+    <meta property="article:author" content="Miaocf">
+    
+    
+    <meta property="article:tag" content="iOS">
+    
     
     <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
-    <meta property="og:url" content="http://localhost:4000/page3/">
+    <meta property="og:url" content="http://localhost:4000/ios-shadow-roundcorner-offscreen">
     <meta property="og:site_name" content="cunfa的博客 | CF Blog">
     
-    <title>cunfa的博客 | CF Blog</title>
+    <title>iOS 圆角+阴影+离屏渲染问题 - cunfa的博客 | CF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/page3/">
+    <link rel="canonical" href="http://localhost:4000/ios-shadow-roundcorner-offscreen">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -167,58 +177,95 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header" >
 
-
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>CF Blog</h1>
-          <span class="subheading">既然要去那里，出发吧</span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=iOS" title="iOS">iOS</a>
+                        
+                    </div>
+                    <h1>iOS 圆角+阴影+离屏渲染问题</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Miaocf on September 16, 2019</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-        
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			
-<div class="post-preview">
-    <a href="/zfb-wx-payment">
-        <h2 class="post-title">
-            支付宝支付 微信支付SDK接口不统一？ 盘他！
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。
 
-   首先我们来看支付宝支付SDK的API是怎么设计的：
 
-1
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>iOS 圆角+阴影+离屏渲染问题</p>
+
+<p>在近一期开发需求中，有个控件需要同时添加圆角和阴影效果。本以为是个非常简单的需求，但开发过程并不十分美丽。今天就整理一下控件添加圆角和阴影一些需要注意的地方。</p>
+
+<p>为什么给一个控件同时添加 阴影和圆角这么困难呢？一句话解释就是：</p>
+<blockquote>
+  <p>Because shadow is an effect done outside the View, and that masksToBounds set to YES will tell the UIView not to draw everything that is outside itself.</p>
+</blockquote>
+
+<p>简单来说就是：阴影效果是展示在 View 外的，而切圆角要求不显示 View 外部的内容。显然，圆角和阴影要同时显示本身就是矛盾的。</p>
+
+<p>就单个操作来说，给控件加圆角或者阴影的时候，如果操作不当，因为离屏渲染的问题，会导致比较严重的性能问题。尤其在流式布局如：UITableView、UICollectionView 上，如果添加多个带有阴影或圆角的子视图，性能损耗非常明显。</p>
+
+<p>一种折中方案：直接让美工把图片切成圆角进行显示，这是效率最高的一种方案。<br />
+虽然图片的解析和展示会占用一部分内存，但是这是典型的用空间换取时间的情况，在优化时间有限的情况下，让美工做图是个不错的选择。</p>
+
+<p>UIView、UILabel、UIImageView、UITextView 出现离屏渲染的条件存在略微差异，我们分开一一介绍。</p>
+
+<h3 id="优化">优化</h3>
+<p>在离屏渲染无法避免的时候，那么退而求其次，让离屏渲染的代价尽量小。一些优化措施可以尽可能的避免性能损耗过大。</p>
+
+<p>先说两个实现方案，然后针对离屏渲染问题进行优化：</p>
+
+<p>方案1: 在 view 上显示圆角效果，再在底部插一个阴影的layer。
+    ``` 
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(50, 100, 100, 100)];
+    bgView.backgroundColor = [UIColor brownColor];</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -230,179 +277,122 @@
 10
 11
 12
-/**
- *  支付接口
- *
- *  @para...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 11, 2019
-    </p>
-</div>
-<hr>
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre>bgView.layer.cornerRadius = 20.0f;
+bgView.layer.masksToBounds = YES;
 
-<div class="post-preview">
-    <a href="/app-optimize">
-        <h2 class="post-title">
-            iOS APP 优化健壮性
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                1.加强 APP 健壮性
+[self.view addSubview:bgView];
 
-unrecognized selector crash
-KVO crash
-NSNotification crash
-NSTimer crash
-Container crash（数组越界，插nil等）
-NSString crash （字符串操作的crash）
-Bad Access crash （野指针）
-UI not on Main Thread Crash (非...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 11, 2019
-    </p>
-</div>
-<hr>
+CALayer *subLayer=[CALayer layer];
+CGRect fixframe = bgView.frame;
+subLayer.frame= fixframe;
+subLayer.cornerRadius=20;
+subLayer.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.8].CGColor;
+subLayer.masksToBounds=NO;
+subLayer.shadowColor = [UIColor blackColor].CGColor;//shadowColor阴影颜色
+subLayer.shadowOffset = CGSizeMake(3,2);//shadowOffset阴影偏移,x向右偏移3，y向下偏移2，默认(0, -3),这个跟shadowRadius配合使用
+subLayer.shadowOpacity = 0.8;//阴影透明度，默认0
+subLayer.shadowRadius = 4;//阴影半径，默认3
+[self.view.layer insertSublayer:subLayer below:bgView.layer];
+```
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="post-preview">
-    <a href="/haskell">
-        <h2 class="post-title">
-            Haskell 函数式编程
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                Haskell 与 Java、C++不同，它是纯函数式的编程语言，说到函数式编程，函数式与面向对象编程究竟有哪些不同？在这里将会介绍一下函数式编程的特点和起源。
+<p>方案2: 不设置 layer.masksToBounds 。</p>
 
+<p><code class="highlighter-rouge">UIView *v=[[UIView alloc]initWithFrame:CGRectMake(200, 100, 100, 100)];
+    v.backgroundColor=[UIColor brownColor];
+    //v.layer.masksToBounds=YES;不设置 
+    v.layer.cornerRadius=20;
+    v.layer.shadowColor=[UIColor blackColor].CGColor;
+    v.layer.shadowOffset=CGSizeMake(5, 5);
+    v.layer.shadowOpacity=0.5;
+    v.layer.shadowRadius=5;
+    [self.view addSubview:v];
+</code></p>
 
+<p>实际上，让一个控件既实现shadowPath</p>
 
-编程范式：
-在介绍 Haskell 之前，说一说编程范式，编程范式可简单划为两类：
+<p>下面的情况或操作会引发离屏渲染：</p>
 
-  命令式编程 (Imperative programming)
-  声明式编程(Declarative programming)
-
-
-
- ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 10, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/start">
-        <h2 class="post-title">
-            Blog Initialized
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                Hey! Welcome to Miaocf’s blog, it’s great to have you :)
-
-接触到个人品牌的概念后，就一直考虑着搭建一个 blog，今天算是 Personal Brand 第一天吧。
-
-在人生的旅途中需要明白几点:
-
-  人随着年龄的增长，对事物的见知也在增长，心智和价值观也随之渐渐塑造成型。
-  在30岁之前，是一直处在学习的阶段，这个阶段主要是吸收...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 1, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/net-biography">
-        <h2 class="post-title">
-            不期而遇-网络上的小贝壳
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下
-
-How To Be Successful
-
-
-  一份无关紧要的工作是一个危险的陷阱，很多人都会掉进去。
-  想让别人帮你，最好的办法就是你先帮他们，或者去做一些有趣的事。
-  致富靠的是权益，而不是工资。
-链接
-
-
-我对中国科技行业的看法
-
-顺便说一句，这就是为什么我认为北京的互联网公司如此努力的一个原因。...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on January 1, 1970
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/to-do-list-origin">
-        <h2 class="post-title">
-            TODO_LIST
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈
-
-为了表示这里是博客起源，特意把保存这篇博客的源文件 ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on January 1, 1970
-    </p>
-</div>
-<hr>
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    <li class="previous">
-        <a href="/page2">&larr; Newer Posts</a>
-    </li>
-    
-    
+<ul>
+  <li>为图层设置遮罩（layer.mask）</li>
+  <li>为图层设置阴影（layer.shadow *）。</li>
+  <li>为图层设置layer.shouldRasterize=true</li>
+  <li>文本（任何种类，包括UILabel，CATextLayer，Core Text等）。</li>
+  <li>将图层的layer.masksToBounds / view.clipsToBounds属性设置为true</li>
+  <li>将图层layer.allowsGroupOpacity属性设置为YES和layer.opacity小于1.0</li>
+  <li>具有layer.cornerRadius，layer.edgeAntialiasingMask，layer.allowsEdgeAntialiasing的图层</li>
+  <li>使用CGContext在drawRect :方法中绘制大部分情况下会导致离屏渲染，甚至仅仅是一个空的实现。</li>
 </ul>
 
+<p>优化方案1：使用贝塞尔曲线UIBezierPath和Core Graphics框架画出一个圆角</p>
 
-    		</div>
+<p>优化方案2：使用CAShapeLayer和UIBezierPath设置圆角</p>
+
+<p>使用代码手动生成圆角Image设置到要显示的View上，利用UIBezierPath（CoreGraphics框架）画出来圆角图片</p>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/cocoapods-private" data-toggle="tooltip" data-placement="top" title="CocoaPods 私有库搭建">
+                        Previous<br>
+                        <span>CocoaPods 私有库搭建</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/script-configure" data-toggle="tooltip" data-placement="top" title="使用 shell 脚本配置iOS工程生成多个APP">
+                        Next<br>
+                        <span>使用 shell 脚本配置iOS工程生成多个APP</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                <div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+    owner: 'JumpJumpSparrow',
+    repo: 'My_blog',
+    oauth: {
+        client_id: '0854e10375734c52272e',
+        client_secret: 'e382403bb47cfe33179603e5df7a4c9576ede295',
+    },
+});
+gitment.render('gitmentContainer');
+</script>
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
 
 
 <section>
+    
+        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="/archive/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -424,35 +414,6 @@ How To Be Successful
     </div>
 </section>
 
-
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="/about/">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="http://localhost:4000/img/avatar-cf-ny.jpg" />
-    
-    
-    <p>Your time is limited<br>勤学如春起之苗，不见其增，日有所长</p>
-    
-    <!-- SNS Link -->
-    
-
-
-<ul class="list-inline">
-
-
-  
-  
-  
-  
-  
-  
-  
-</ul>
-  </div>
-</section>
 
                 <!-- Friends Blog -->
                 
@@ -480,10 +441,48 @@ How To Be Successful
   
 </ul>
 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
 
 

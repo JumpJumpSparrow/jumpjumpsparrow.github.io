@@ -11,16 +11,26 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Offline - cunfa的博客 | CF Blog">
+    <meta property="og:title" content="iOS Emoji 过滤 - cunfa的博客 | CF Blog">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="阅读过的页面可以在离线时访问哦 ;)">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。
+">
+    
+    <meta property="article:published_time" content="2019-10-13T01:00:00Z">
+    
+    
+    <meta property="article:author" content="Miaocf">
+    
+    
+    <meta property="article:tag" content="iOS">
+    
     
     <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
-    <meta property="og:url" content="http://localhost:4000/offline.html">
+    <meta property="og:url" content="http://localhost:4000/emoji-filter">
     <meta property="og:site_name" content="cunfa的博客 | CF Blog">
     
-    <title>Offline - cunfa的博客 | CF Blog</title>
+    <title>iOS Emoji 过滤 - cunfa的博客 | CF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/offline.html">
+    <link rel="canonical" href="http://localhost:4000/emoji-filter">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -167,33 +177,221 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header" >
 
-
-<header class="intro-header" style="background-image: url('/img/404-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>Offline</h1>
-          <span class="subheading">阅读过的页面可以在离线时访问哦 ;)</span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=iOS" title="iOS">iOS</a>
+                        
+                    </div>
+                    <h1>iOS Emoji 过滤</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Miaocf on October 13, 2019</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。</p>
+
+<h3 id="什么是-emoji-">什么是 emoji ？</h3>
+<p>  emoji 最早是由日本人<em>栗田穰崇</em> (Shigetaka Kurita)创作的。emoji 是一些图形符号，例如：😊👏🚗🌞。和普通文字符号不同，emoji 通过一些图案来表达一些辨识度较高的场景或者含义，使阅读体验更好。在此可以查找各种 emoji <a href="https://emojipedia.org">emojipedia</a></p>
+
+<p>(未完待续)d</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/universal-link" data-toggle="tooltip" data-placement="top" title="iOS universal-link 通用链接配置">
+                        Previous<br>
+                        <span>iOS universal-link 通用链接配置</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/UIView-drawing-cycle" data-toggle="tooltip" data-placement="top" title="iOS 关于 UIView 重绘的几个接口">
+                        Next<br>
+                        <span>iOS 关于 UIView 重绘的几个接口</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                <div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
-	document.body.classList.add('page-fullscreen');
+var gitment = new Gitment({
+    owner: 'JumpJumpSparrow',
+    repo: 'My_blog',
+    oauth: {
+        client_id: '0854e10375734c52272e',
+        client_secret: 'e382403bb47cfe33179603e5df7a4c9576ede295',
+    },
+});
+gitment.render('gitmentContainer');
 </script>
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0019" 
+                    href="/archive/?tag=something"
+                    title="something"
+                    rel="7">something</a>
+        
+                <a data-sort="0013" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="13">iOS
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FOOTPRINTS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://www.v2ex.com">V2EX</a></li>
+  
+  <li><a href="http://www.ruanyifeng.com">ruanyifeng</a></li>
+  
+  <li><a href="https://flutter.dev">flutter</a></li>
+  
+  <li><a href="https://www.cnblogs.com">cnblogs</a></li>
+  
+  <li><a href="https://github.com">github</a></li>
+  
+  <li><a href="https://angular.cn">angular</a></li>
+  
+  <li><a href="https://tour.go-zh.org/">go</a></li>
+  
+  <li><a href="https://www.rust-lang.org">rust-lang</a></li>
+  
+  <li><a href="https://haskellbook.com">haskellbook</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
