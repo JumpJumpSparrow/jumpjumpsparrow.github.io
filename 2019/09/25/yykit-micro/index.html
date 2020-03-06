@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="iOS 开发，会 1.5 点web前端，Java web入门开发者">
+    <meta name="keywords"  content="CF Max, CF Blog, iOS,Java web,博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Building Objective-C static libraries with categories - cunfa的博客 | CF Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  Q:  How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?
+
+">
+    
+    <meta property="article:published_time" content="2019-09-25T02:00:00Z">
+    
+    
+    <meta property="article:author" content="Miaocf">
+    
+    
+    <meta property="article:tag" content="iOS">
+    
+    
+    <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
+    <meta property="og:url" content="http://localhost:4000/2019/09/25/yykit-micro/">
+    <meta property="og:site_name" content="cunfa的博客 | CF Blog">
+    
+    <title>Building Objective-C static libraries with categories - cunfa的博客 | CF Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2019/09/25/yykit-micro/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CF Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=iOS" title="iOS">iOS</a>
+                        
+                    </div>
+                    <h1>Building Objective-C static libraries with categories</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Miaocf on September 25, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<blockquote>
+  <p>Q:  How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?</p>
+</blockquote>
+
+<p>如何解决 在 runtime 环境中尝试调用静态库中分类的方法时，报 “selector not recognized” 异常？</p>
+
+<p>  今天在浏览 YYKit 库时，一个宏定义引起了我的注意：<code class="highlighter-rouge">YYSYNTH_DUMMY_CLASS </code>,从字面意思看是定义了一个不起任何作用的<em>哑</em>类。相关描述如下：</p>
+
+<pre><code class="language-Objective-C">/**
+ Add this macro before each category implementation, so we don't have to use
+ -all_load or -force_load to load object files from static libraries that only
+ contain categories and no classes.
+ More info: http://developer.apple.com/library/mac/#qa/qa2006/qa1490.html .
+ *******************************************************************************
+ Example:
+     YYSYNTH_DUMMY_CLASS(NSString_YYAdd)
+ */
+#ifndef YYSYNTH_DUMMY_CLASS
+#define YYSYNTH_DUMMY_CLASS(_name_) \
+@interface YYSYNTH_DUMMY_CLASS_ ## _name_ : NSObject @end \
+@implementation YYSYNTH_DUMMY_CLASS_ ## _name_ @end
+#endif
+</code></pre>
+
+<p>  根据 YYKit 作者的描述，在分类中加一个这样的宏定义可以避免一些复杂操作，具体原理作者并没有解释，只是给了一个苹果官方开发文档的连接。这个链接可能因为官方整理文档的原因，URL路径已经失效了。但是在官网搜索 URL 中的关键字找到了这篇<a href="https://developer.apple.com/library/archive/qa/qa1490/_index.html">资料</a>。根据这篇资料在这里深入了解一下其中的原理和如何解决这类问题。</p>
+
+<p>官方文档以一个问题开篇，就是上面提出的那个问题，哈哈。接下来官方文档就给出了问题的解决方法：</p>
+<blockquote>
+  <p>A: If you’re seeing a “selector not recognized” runtime exception when calling a category method that is implemented in a static library, you are hitting the link-time build issue described here, and need to add the -ObjC linker flag to your project, by following these steps:</p>
+</blockquote>
+
+<blockquote>
+  <ol>
+    <li>In Xcode, choose View &gt; Navigators &gt; Show Project Navigator, or press ⌘1.</li>
+    <li>Select your project under the PROJECT heading in the Project Navigator, then select the Build Settings tab.</li>
+    <li>Scroll down to the Other Linker Flags build setting under the Linking collection, or type “Other Linker Flags” into the search bar.</li>
+    <li>Set the value of the Other Linker Flags build setting to $(OTHER_LDFLAGS) -ObjC.</li>
+  </ol>
+</blockquote>
+
+<p>译：当你在运行时调用一个在静态库中实现的分类的方法时，遇到 “selector not recognized” 运行时异常，那么你就撞到了本篇文档中描述的所谓的 “the link-time build issue” 问题，同时你需要在你的工程中加上 <code class="highlighter-rouge">-ObjC linker flag</code> 来解决这个问题。具体步骤：(在这里就不翻译了么么哒)。</p>
+
+<p><em>Figure 1:</em>  Modifying the Other Linker Flags build setting.    <br />
+<br /><img src="/assets/article_assets/qa1490_other_linker_flags_xcode_5.png" /><br /></p>
+
+<blockquote>
+  <h3 id="troubleshooting">Troubleshooting</h3>
+</blockquote>
+
+<blockquote>
+  <p>If adding the -ObjC flag isn’t fixing the problem, double check that a conflicting Target build setting is not overriding it, by following the above steps, but selecting the current target under “TARGETS” in step 2, instead of the project.</p>
+</blockquote>
+
+<h3 id="解决问题">解决问题</h3>
+<p>  如果添加<code class="highlighter-rouge">-ObjC flag</code>没能解决这个问题，检查一下确保之前的操作没有与 Target build setting 冲突而使其无效。按照上面的步骤，在第二步时选择 <em>“TARGETS”</em>下的target，而不是选择 project。</p>
+
+<blockquote>
+  <h3 id="other-causes-of-selector-not-recognized-exceptions">Other Causes of selector not recognized Exceptions</h3>
+  <p>The most common causes of a “selector not recognized” exception are:</p>
+</blockquote>
+
+<blockquote>
+  <h3 id="no-such-method">No Such Method</h3>
+</blockquote>
+
+<blockquote>
+  <p>The method really does not exist. Check your spelling. Check documentation to verify that the method exists on the version of the operating system your app is using.</p>
+</blockquote>
+
+<blockquote>
+  <h3 id="memory-management">Memory Management</h3>
+</blockquote>
+
+<blockquote>
+  <p>Your app is trying to use an object after it has been deallocated, use the Zombies instrument to debug this kind of problem. You are seeing “selector not recognized” because the memory has been re-allocated as a different kind of object.</p>
+</blockquote>
+
+<h3 id="导致selector-not-recognized-exceptions异常的其他原因">导致<code class="highlighter-rouge">selector not recognized Exceptions</code>异常的其他原因</h3>
+<p>  导致<code class="highlighter-rouge">selector not recognized Exceptions</code>异常的原因通常是：</p>
+<h4 id="方法不存在">方法不存在</h4>
+<p>  方法实际上是不存在的。检查你的拼写是否有误。查阅文档，确保你调用的方法在当前版本的操作系统内存在。</p>
+<h4 id="内存管理">内存管理</h4>
+<p>  在对象已释放后，你的应用又尝试去访问它，原先存放对象的内存已被重新分配给其他类的对象，所以当你再次访问原先的对象时，就会发生 “selector not recognized”异常。使用<code class="highlighter-rouge">Zombies instrument</code>工具来debug这类问题。（这一段文档不通顺，稍作整理）</p>
+
+<blockquote>
+  <h2 id="what-causes-those-exceptions">What causes those exceptions?</h2>
+  <p>An impedance mismatch between UNIX static libraries and the dynamic nature of Objective-C can cause category methods in static libraries to not be linked into an app, resulting in “selector not recognized” exceptions when the methods aren’t found at runtime.</p>
+</blockquote>
+
+<h2 id="导致这些异常的原因">导致这些异常的原因</h2>
+<p>由于 <code class="highlighter-rouge">UNIX static libraries</code> 和 <code class="highlighter-rouge">dynamic nature of Objective-C</code>不是很搭的原因，导致静态库中分类的方法不会被链接到app中去，以至于在 runtime 动态调用时无法找到方法，结果发生 “selector not recognized”异常。</p>
+
+<blockquote>
+  <h3 id="the-linker">The Linker</h3>
+  <p>When a C program is compiled, each “source file” is turned into an “object file” that contains executable functions and static data. The linker glues these object files together into a final executable. That executable is eventually bundled into an app by Xcode.</p>
+</blockquote>
+
+<h3 id="链接器">链接器</h3>
+<p>当一个 C 程序被编译完成，所有”原文件”都被转换为”object file”，这些”object file”包含可执行方法和静态数据。链接器将这些”object file”粘合在一起，最终成为可执行文件。最终 Xcode 将这些可执行文件打包进APP中。</p>
+
+<blockquote>
+  <p>When a source file uses something (like a function) defined in another file, then an undefined symbol is written into the object file, to “stand in” for the missing thing. The linker resolves these symbols by pulling in the object files that include definitions of undefined symbols when building the final executable.</p>
+</blockquote>
+
+<p>当一个原文件调用某些在其他文件中定义的方法或者数据时，那么一个<code class="highlighter-rouge">未经定义的符号</code>就被写入了 “object file”,用以代替缺失的方法或数据。在组成最终可执行文件时，链接器从那些包含 “undefined symbols” 定义的 “object files” 中抽取定义来解析这些符号。</p>
+
+<blockquote>
+  <p>For example, if main.c uses the function foo(), where foo is defined in another file, B.c, then the object file main.o will have an unresolved symbol for foo(), and B.o will include an implementation of foo(). At link time, B.o will be brought into the final executable, so that the code in main.o now references the implementation of foo() defined in B.o.</p>
+</blockquote>
+
+<p>举个例子，假如 <code class="highlighter-rouge">main.c</code> 调用方法 <code class="highlighter-rouge">foo()</code>,而 <code class="highlighter-rouge">foo</code> 函数是在另一个文件 <code class="highlighter-rouge">B.c</code> 中定义的，那么 <code class="highlighter-rouge">object file main.o</code> 将会有一个未解析符号表示 <code class="highlighter-rouge">foo()</code>，同时 <code class="highlighter-rouge">B.o</code> 将会包含 <code class="highlighter-rouge">foo()</code> 方法实现。在链接阶段，<code class="highlighter-rouge">B.o</code> 将会被带入 最终执行文件，因此现在 <code class="highlighter-rouge">main.o</code> 中的代码就可以引用在 <code class="highlighter-rouge">B.o</code> 中对 <code class="highlighter-rouge">foo()</code> 的实现。</p>
+
+<blockquote>
+  <p>A UNIX static library is just a collection of object files. Normally the linker only pulls in an object file from a static library if doing so would resolve some undefined symbol. Not pulling in all object files reduces the size of the final executable.</p>
+</blockquote>
+
+<p>一个 <code class="highlighter-rouge">UNIX static library</code> 只是将 <code class="highlighter-rouge">object files</code> 集合在一起。链接器通常只会从<code class="highlighter-rouge">static library</code>中提取那些包含<code class="highlighter-rouge">undefined symbol</code>解析的 object file，而不是把所有 <code class="highlighter-rouge">object files</code> 都集成进来。这样可以减小最终可执行文件的体积。</p>
+
+<blockquote>
+  <h3 id="objective-c">Objective-C</h3>
+  <p>The dynamic nature of Objective-C complicates things slightly. Because the code that implements a method is not determined until the method is actually called, Objective-C does not define linker symbols for methods. Linker symbols are only defined for classes.</p>
+</blockquote>
+
+<h3 id="objective-c-1">Objective-C</h3>
+
+<p>O-C 的动态特性使这个过程略微复杂了一些。因为实现一个方法的代码直到这个方法被调用时才会被确定下来。Objective-C 并不为方法定义链接符号，链接符号只为 <em>类</em> 进行定义。</p>
+
+<blockquote>
+  <p>For example, if main.m includes the code [[FooClass alloc] initWithBar:nil]; then main.o will contain an undefined symbol for FooClass, but no linker symbols for the -initWithBar: method will be in main.o.</p>
+</blockquote>
+
+<p>比如： 假如 main.m 包含了这样的代码：<code class="highlighter-rouge">[[FooClass alloc] initWithBar:nil];</code>,那么 <code class="highlighter-rouge">main.o</code> 将会包含一个未定义符号表示 <code class="highlighter-rouge">FooClass</code>，但是在 <code class="highlighter-rouge">main.o</code> 文件中，并不生成链接符号去表示 <code class="highlighter-rouge">-initWithBar:</code> 方法。</p>
+
+<blockquote>
+  <p>Since categories are a collection of methods, using a category’s method does not generate an undefined symbol. This means the linker does not know to load an object file defining the category, if the class itself is already defined. This causes the same “selector not recognized” runtime exception you would see for any unimplemented method.</p>
+</blockquote>
+
+<p>因为分类是一组方法的集合，假如一个类已经定义了，在其中使用分类的方法并不生成 <code class="highlighter-rouge">undefined symbol</code>,这意味着链接器不知道需要去加载对应的 <code class="highlighter-rouge">object file</code> 去定义分类。调用任何未实现的方法也一样会导致 “selector not recognized” 运行时异常。</p>
+
+<blockquote>
+  <p>###The -ObjC Linker Flag
+Passing the -ObjC option to the linker causes it to load all members of static libraries that implement any Objective-C class or category. This will pickup any category method implementations. But it can make the resulting executable larger, and may pickup unnecessary objects. For this reason it is not on by default.</p>
+</blockquote>
+
+<h3 id="the--objc-linker-flag">The -ObjC Linker Flag</h3>
+<p>指定 链接器的 <code class="highlighter-rouge">-ObjC</code> 选项 可以使 链接器加载所有静态库总的成员，包括 <code class="highlighter-rouge">Objective-C</code> 的类和分类。这将选入所有分类方法的实现。同时也使最最终的可执行文件体积更大，这也是为什么不作为默认选项。</p>
+
+<h2 id="总结">总结</h2>
+<p>YYKit 中的这个宏定义在 分类之前加了一个空类，这样<code class="highlighter-rouge">.m</code>文件就包含了类，这样生成的 <code class="highlighter-rouge">.o</code>文件就会被链接器打包进最终的可执行文件，从而避免了 “selector not recognized”异常的出现。</p>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/09/23/textfield-height-auto-adjust/" data-toggle="tooltip" data-placement="top" title="UITextField 随键盘高度自适应">
+                        Previous<br>
+                        <span>UITextField 随键盘高度自适应</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/10/11/frame-rate-monitor/" data-toggle="tooltip" data-placement="top" title="iOS 屏幕卡顿检测与排查">
+                        Next<br>
+                        <span>iOS 屏幕卡顿检测与排查</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0019" 
+                    href="/archive/?tag=something"
+                    title="something"
+                    rel="7">something</a>
+        
+                <a data-sort="0013" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="13">iOS
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FOOTPRINTS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://www.v2ex.com">V2EX</a></li>
+  
+  <li><a href="http://www.ruanyifeng.com">ruanyifeng</a></li>
+  
+  <li><a href="https://flutter.dev">flutter</a></li>
+  
+  <li><a href="https://www.cnblogs.com">cnblogs</a></li>
+  
+  <li><a href="https://github.com">github</a></li>
+  
+  <li><a href="https://angular.cn">angular</a></li>
+  
+  <li><a href="https://tour.go-zh.org/">go</a></li>
+  
+  <li><a href="https://www.rust-lang.org">rust-lang</a></li>
+  
+  <li><a href="https://haskellbook.com">haskellbook</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+    owner: 'JumpJumpSparrow',
+    repo: 'My_blog',
+    oauth: {
+        client_id: '0854e10375734c52272e',
+        client_secret: 'e382403bb47cfe33179603e5df7a4c9576ede295',
+    },
+});
+gitment.render('gitmentContainer');
+</script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; CF Blog 2020
+                    <br>
+                    Powered by <a href="http://junziboxue.com">Mcf Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=JumpJumpSparrow&repo=JumpJumpSparrow.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Add Baidu Analytics  -->
+<!-- Baidu Analytics Tracking code -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?189baef3a30b22e9e158be16b3016a58";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="iOS 开发，会 1.5 点web前端，Java web入门开发者">
+    <meta name="keywords"  content="CF Max, CF Blog, iOS,Java web,博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Haskell 函数式编程 - cunfa的博客 | CF Blog">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="Haskell 与 Java、C++不同，它是纯函数式的编程语言，说到函数式编程，函数式与面向对象编程究竟有哪些不同？在这里将会介绍一下函数式编程的特点和起源。
+">
+    
+    <meta property="article:published_time" content="2019-06-10T18:00:00Z">
+    
+    
+    <meta property="article:author" content="Miaocf">
+    
+    
+    <meta property="article:tag" content="functional">
+    
+    
+    <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
+    <meta property="og:url" content="http://localhost:4000/2019/06/10/haskell/">
+    <meta property="og:site_name" content="cunfa的博客 | CF Blog">
+    
+    <title>Haskell 函数式编程 - cunfa的博客 | CF Blog</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/2019/06/10/haskell/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CF Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive/">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=functional" title="functional">functional</a>
+                        
+                    </div>
+                    <h1>Haskell 函数式编程</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Miaocf on June 10, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>Haskell 与 Java、C++不同，它是纯函数式的编程语言，说到函数式编程，函数式与面向对象编程究竟有哪些不同？在这里将会介绍一下函数式编程的特点和起源。</p>
+
+<p><img src="/assets/images/defineHaskell.png" alt="" /></p>
+
+<h3 id="编程范式">编程范式：</h3>
+<p>在介绍 Haskell 之前，说一说编程范式，编程范式可简单划为两类：</p>
+<ul>
+  <li>命令式编程 (Imperative programming)</li>
+  <li>声明式编程(Declarative programming)</li>
+</ul>
+
+<ol>
+  <li>命令式编程 （Imperative programming）<br />
+将程序写成一条条指令，计算机依次执行得到最终结果，这种编写程序的方式叫做 命令式编程。
+通常包含三种基本语句：
+    <ul>
+      <li>运算语句</li>
+      <li>循环语句</li>
+      <li>流程控制语句</li>
+    </ul>
+  </li>
+</ol>
+
+<p><em>结构化命令式</em>  -&gt; 面向对象编程（Object-oriented programming，OOP）
+一种软件设计思想，OOP达到了软件工程的三个主要目标：重用性、灵活性和扩展性。OOP=对象+类+继承+多态+消息，其中核心概念是类和对象。</p>
+
+<ol>
+  <li>声明式编程（Declarative programming）</li>
+</ol>
+
+<p>声明式编程的发源
+  声明式编程发轫于人工智能的研究，主要包括函数式编程（functional programming，简称FP）和逻辑式编程（logic programming，简称LP）。
+其中，函数式编程将计算描述为数学函数的求值，而逻辑式编程通过提供一系列事实和规则来推导或论证结论。
+声明式编程是人脑思维方式的抽象，即利用数理逻辑或既定规范对已知条件进行推理或运算。声明式描述目标的性质，让计算机明白目标，而非流程。</p>
+
+<h4 id="声明式与命令式编程理念和风格">声明式与命令式编程理念和风格</h4>
+
+<ul>
+  <li>命令式编程是行动导向（Action-Oriented）的，因而算法是显性而目标是隐性的；</li>
+  <li>声明式编程是目标驱动（Goal-Driven）的，因而目标是显性而算法是隐性的。</li>
+</ul>
+
+<p>常见的命令式编程语言有：C、C++、Objecti-C、Java、PHP 等等，其中有些也可以支持 声明式编程。
+常见的声明式编程语言有：SQL、HTML、Haskell、Lisp、Prolog。</p>
+
+<h3 id="什么是-haskell">什么是 Haskell</h3>
+
+<p>Haskell 与其他语言不同，是一门纯粹函数式编程语言 (purely functional programming language)</p>
+
+<p>在纯粹函数式编程语言中，不是像命令式语言那样命令电脑「要做什么」，而是通过用函数来描述出问题「是什么」，
+如「阶乘是指从1到某个数的乘积」，「一个串列中数字的和」是指把第一个数字跟剩余数字的和相加。
+用声明函数是什么的形式来写程序。另外，变量 (variable) 一旦被指定，就不可以更改了，
+已经说了 a 就是 5，就不能再另说 a 是别的什么数。</p>
+
+<h4 id="haskell-的特点">Haskell 的特点</h4>
+<ol>
+  <li>Haskell 是惰性 (lazy) 的。也就是说若非特殊指明，函数在真正需要结果以前不会被求值.</li>
+  <li>Haskell 是静态类型 (statically typed) 的。当你编译程序时，编译器需要明确哪个是数字，哪个是字符串。</li>
+</ol>
+
+<p>纯度</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre>函数带有副作用指的是，函数的行为受系统的全局状态所影响。
+
+举个命令式语言的例子：假设有某个函数，它读取并返回某个全局变量，如果程序中的其他代码可以修改这个全局变量的话，
+那么这个函数的返回值就取决于这个全局变量在某一时刻的值。我们说这个函数带有副作用，尽管它并不亲自修改全局变量。
+
+副作用本质上是函数的一种不可见的（invisible）输入或输出。
+Haskell 的函数在默认情况下都是无副作用的：函数的结果只取决于显式传入的参数。
+我们将带副作用的函数称为'不纯（impure）函数'，而将不带副作用的函数称为'纯（pure）函数'。
+ 
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h3 id="安装运行-haskell-脚本">安装运行 Haskell 脚本：</h3>
+
+<ol>
+  <li>到 ‘www.haskell.org’ 官网按照提示安装编译器 GHC，</li>
+  <li>GHC 可以解释运行 HasKell 脚本，也可以编译。它还提供一个’交互模式’ 加载 Haskell 脚本，然后调用脚本里的函数</li>
+  <li>新建脚本文件，以’.hs’结尾， 打开控制台输入 ghci，进入交互模式。</li>
+  <li>运行 ‘:l xxx.hs’ 加载脚本，如果更新文件需 运行 ‘:r xxx.hs’</li>
+</ol>
+
+<h3 id="haskell-函数式表达">Haskell 函数式表达</h3>
+
+<h4 id="haskell-中的-list">Haskell 中的 List</h4>
+
+<p>List 是一种单类型的数据结构，可以用来存储多个类型相同的元素。List 中的 List 可以是不同长度，但必须得是相同的类型.</p>
+
+<p>字符串是一组字符的 List，<code class="highlighter-rouge">"Hello"</code> 是 <code class="highlighter-rouge">['h','e','l','l','o']</code> 的语法糖。可以使用处理 List 的函数来对字符串进行操作。 将两个 List 合并，可以通过 <code class="highlighter-rouge">++</code> 运算符实现。
+  <code class="highlighter-rouge">:</code> 运算符可以连接一个元素到一个 List之中，而 <code class="highlighter-rouge">++</code> 运算符则是连接两个 List。若要使用 <code class="highlighter-rouge">++</code> 运算符连接单个元素到一个 List 之中，就用方括号把它括起使之成为单个元素的 List。<code class="highlighter-rouge">[1,2,3]</code> 实际上是 <code class="highlighter-rouge">1:2:3:[]</code> 的语法糖。<code class="highlighter-rouge">[]</code> 表示一个空 List,若要从前端插入 3，它就成了<code class="highlighter-rouge">[3]</code>, 再插入 2，它就成了<code class="highlighter-rouge">[2,3]</code>，以此类推。</p>
+
+<p>一些函数： <br />
+<code class="highlighter-rouge">head</code> 返回一个 List 的头部，也就是 List 的首个元素。<br />
+<code class="highlighter-rouge">tail</code> 返回一个 List 的尾部，也就是 List 除去头部之后的部分。<br />
+<code class="highlighter-rouge">last</code> 返回一个 List 的最后一个元素。<br />
+<code class="highlighter-rouge">init</code> 返回一个 List 除去最后一个元素的部分。<br />
+<code class="highlighter-rouge">reverse</code> 将一个 List 反转:<br />
+<code class="highlighter-rouge">take</code> 返回一个 List 的前几个元素</p>
+
+<h4 id="list-comprehension-列表推导式">List Comprehension 列表推导式</h4>
+
+<p>前十个偶数的 set comprehension 可以表示为<code class="highlighter-rouge">S = {2⋅𝓍 |𝓍 ∈ ℕ,𝓍 ≤ 10 }</code>，竖线左端的部分是输出函数，x 是变量，N 是输入集合，从既有的集合中按照规则产生一个新集合。
+在 Haskell 下，我们可以通过类似 take 10 [2,4..] 的代码来实现。但若是把简单的乘 2 改成更复杂的函数操作该怎么办呢？
+用 <code class="highlighter-rouge">list comprehension</code>，它与 <code class="highlighter-rouge">set comprehension</code> 十分的相似，用它取前十个偶数轻而易举。这个 <code class="highlighter-rouge">list comprehension</code> 可以表示为：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>ghci&gt; [x*2 | x &lt;- [1..10]]
+[2,4,6,8,10,12,14,16,18,20]
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="tuple-元组">Tuple 元组</h4>
+
+<ol>
+  <li>Tuple 中的项由括号括起，并由逗号隔开。</li>
+  <li>要求对需要组合的数据的数目非常的明确。</li>
+  <li>它的类型取决于其中项的数目与其各自的类型。</li>
+</ol>
+
+<p>考虑一个同时应用到 List 和 Tuple 的问题：如何取得所有三边长度皆为整数且小于等于 10，周长为 24 的直角三角形？</p>
+
+<ol>
+  <li>把所有三遍长度小于等于 10 的三角形都列出来。
+从三个 List 中取值，并且通过输出函数将其组合为一个三元组</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>let triangles = [ (a,b,c) | c &lt;- [1..10], b &lt;- [1..10], a &lt;- [1..10] ]
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>注意： 三角形 3 条边的关系，<code class="highlighter-rouge">a + b  &gt; c</code></p>
+
+<ol>
+  <li>添加一个限制条件，令其必须为直角三角形。同时也考虑上 b 边要短于斜边，a 边要短于 b 边情况：
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>let rightTriangles = [ (a,b,c) | c &lt;- [1..10], b &lt;- [1..c], a &lt;- [1..b], a^2 + b^2 == c^2]
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>修改函数，告诉它只要周长为 24 的三角形
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>let rightTriangles' = [ (a,b,c) | c &lt;- [1..10], b &lt;- [1..c], a &lt;- [1..b], a^2 + b^2 == c^2, a+b+c == 24]
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p>调用 函数 <code class="highlighter-rouge">rightTriangles</code></p>
+  </li>
+</ol>
+
+<p><em>函数式编程语言的一般思路：先取一个初始的集合并将其变形，运行过滤条件，最终取得正确的结果</em></p>
+
+<h3 id="lambda">lambda</h3>
+
+<h3 id="monads">Monads</h3>
+
+<h3 id="函数的合成与柯里化">函数的合成与柯里化</h3>
+
+<p>如果一个值要经过多个函数，才能变成另外一个值，就可以把所有中间步骤合并成一个函数，这叫做”函数的合成”（compose）。</p>
+
+<p><code class="highlighter-rouge">f(x)</code>和<code class="highlighter-rouge">g(x)</code>合成为<code class="highlighter-rouge">f(g(x))</code>，有一个隐藏的前提，就是<code class="highlighter-rouge">f</code>和<code class="highlighter-rouge">g</code>都只能接受一个参数。如果可以接受多个参数，比如<code class="highlighter-rouge">f(x, y)</code>和<code class="highlighter-rouge">g(a, b, c)</code>，函数合成就非常麻烦。
+这时就需要函数柯里化了。所谓”柯里化”，就是把一个多参数的函数，转化为单参数函数。</p>
+
+<p>有了柯里化以后，我们就能做到，所有函数只接受一个参数。</p>
+
+<p><em>参考资料</em></p>
+
+<p><a href="http://www.nowamagic.net/academy/detail/1220525">声明式编程范式初探</a><br />
+<a href="https://learnyoua.haskell.sg">Haskell 趣学指南</a><br />
+<a href="https://www.haskell.org">Haskell官网</a><br />
+<a href="http://cnhaskell.com/index.html">real world Haskell</a>  <br />
+<a href="http://www.ruanyifeng.com/blog/2017/02/fp-tutorial.html">函数式编程入门教程</a></p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/06/01/start/" data-toggle="tooltip" data-placement="top" title="Blog Initialized">
+                        Previous<br>
+                        <span>Blog Initialized</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/06/11/app-optimize/" data-toggle="tooltip" data-placement="top" title="iOS APP 优化健壮性">
+                        Next<br>
+                        <span>iOS APP 优化健壮性</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0019" 
+                    href="/archive/?tag=something"
+                    title="something"
+                    rel="7">something</a>
+        
+                <a data-sort="0013" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="13">iOS
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FOOTPRINTS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://www.v2ex.com">V2EX</a></li>
+  
+  <li><a href="http://www.ruanyifeng.com">ruanyifeng</a></li>
+  
+  <li><a href="https://flutter.dev">flutter</a></li>
+  
+  <li><a href="https://www.cnblogs.com">cnblogs</a></li>
+  
+  <li><a href="https://github.com">github</a></li>
+  
+  <li><a href="https://angular.cn">angular</a></li>
+  
+  <li><a href="https://tour.go-zh.org/">go</a></li>
+  
+  <li><a href="https://www.rust-lang.org">rust-lang</a></li>
+  
+  <li><a href="https://haskellbook.com">haskellbook</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+<div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+    owner: 'JumpJumpSparrow',
+    repo: 'My_blog',
+    oauth: {
+        client_id: '0854e10375734c52272e',
+        client_secret: 'e382403bb47cfe33179603e5df7a4c9576ede295',
+    },
+});
+gitment.render('gitmentContainer');
+</script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; CF Blog 2020
+                    <br>
+                    Powered by <a href="http://junziboxue.com">Mcf Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=JumpJumpSparrow&repo=JumpJumpSparrow.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+
+
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Add Baidu Analytics  -->
+<!-- Baidu Analytics Tracking code -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?189baef3a30b22e9e158be16b3016a58";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
