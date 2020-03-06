@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> - Articles</title>
+    <description>Cloud in the sky, fish in the river</description>
+    <link>
+    http://localhost:4000</link>
+    
+      
+      <item>
+        <title>批量并发-事件管理队列</title>
+        
+          <description>&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/concurrent-events-queue</link>
+        <guid isPermaLink="true">http://localhost:4000/concurrent-events-queue</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>解决 H5 页面在手机上布局异常的问题</title>
+        
+          <description>&lt;p&gt;目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/iOS-webviews-scales-page-to-fit</link>
+        <guid isPermaLink="true">http://localhost:4000/iOS-webviews-scales-page-to-fit</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Hash Map</title>
+        
+          <description>
+</description>
+        
+        <pubDate>Wed, 18 Dec 2019 00:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/hash-map</link>
+        <guid isPermaLink="true">http://localhost:4000/hash-map</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>One To Many Interface Instruction</title>
+        
+          <description>
+</description>
+        
+        <pubDate>Tue, 12 Nov 2019 00:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/one-to-many-interface-instruction</link>
+        <guid isPermaLink="true">http://localhost:4000/one-to-many-interface-instruction</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>What Do You Think About Difference</title>
+        
+          <description>&lt;p&gt;如何看待 ‘不同’？&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 10 Nov 2019 00:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/what-do-you-think-about-difference</link>
+        <guid isPermaLink="true">http://localhost:4000/what-do-you-think-about-difference</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>关于自动驾驶伦理问题的思考</title>
+        
+          <description>&lt;p&gt;  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 08 Nov 2019 00:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/auto-pilot-ethics</link>
+        <guid isPermaLink="true">http://localhost:4000/auto-pilot-ethics</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>How Dose Technology Create Values</title>
+        
+          <description>&lt;p&gt;技术如何创造价值&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 24 Oct 2019 00:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/how-dose-technology-create-values</link>
+        <guid isPermaLink="true">http://localhost:4000/how-dose-technology-create-values</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>iOS 关于 UIView 重绘的几个接口</title>
+        
+          <description>&lt;p&gt;在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 18 Oct 2019 00:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/UIView-drawing-cycle</link>
+        <guid isPermaLink="true">http://localhost:4000/UIView-drawing-cycle</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>iOS Emoji 过滤</title>
+        
+          <description>&lt;p&gt;  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sun, 13 Oct 2019 01:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/emoji-filter</link>
+        <guid isPermaLink="true">http://localhost:4000/emoji-filter</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>iOS universal-link 通用链接配置</title>
+        
+          <description>&lt;p&gt;iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 11 Oct 2019 02:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/universal-link</link>
+        <guid isPermaLink="true">http://localhost:4000/universal-link</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>iOS 屏幕卡顿检测与排查</title>
+        
+          <description>&lt;ol&gt;
+  &lt;li&gt;卡顿发生检测&lt;/li&gt;
+  &lt;li&gt;卡顿原因排查
+（待完成）&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        
+        <pubDate>Fri, 11 Oct 2019 02:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/frame-rate-monitor</link>
+        <guid isPermaLink="true">http://localhost:4000/frame-rate-monitor</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Building Objective-C static libraries with categories</title>
+        
+          <description>&lt;blockquote&gt;
+  &lt;p&gt;Q:  How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        
+        <pubDate>Wed, 25 Sep 2019 02:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/yykit-micro</link>
+        <guid isPermaLink="true">http://localhost:4000/yykit-micro</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>UITextField 随键盘高度自适应</title>
+        
+          <description>&lt;p&gt;  在开发APP过程中，不免会遇到页面需要多个 UITextField 的需求，那么问题来了：当输入框过多时，弹起键盘会遮盖住输入框，或者需要依次点击输入框才能输入。用户的输入体验非常差。为解决这个问题，我们让输入框跟随键盘自动调整高度，并且点击回车键自动跳转到下一个输入框进行输入。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 23 Sep 2019 22:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/textfield-height-auto-adjust</link>
+        <guid isPermaLink="true">http://localhost:4000/textfield-height-auto-adjust</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>使用 shell 脚本配置iOS工程生成多个APP</title>
+        
+          <description>&lt;p&gt;  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 20 Sep 2019 07:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/script-configure</link>
+        <guid isPermaLink="true">http://localhost:4000/script-configure</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>iOS 圆角+阴影+离屏渲染问题</title>
+        
+          <description>&lt;p&gt;iOS 圆角+阴影+离屏渲染问题&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 16 Sep 2019 18:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/ios-shadow-roundcorner-offscreen</link>
+        <guid isPermaLink="true">http://localhost:4000/ios-shadow-roundcorner-offscreen</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>CocoaPods 私有库搭建</title>
+        
+          <description>&lt;p&gt;在 iOS 开发过程中，经常会使用cocoapods管理三方库，如果自己的库不想公开，只方便自己公司的人用，该怎么办呢？这里介绍一下如何搭建一个私有的Pods库。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 16 Aug 2019 16:01:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/cocoapods-private</link>
+        <guid isPermaLink="true">http://localhost:4000/cocoapods-private</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>如何看待软件工程师</title>
+        
+          <description>&lt;p&gt;在目前的互联网行业中, 从事代码 coding 职业的人,通常被称为程序员或者码农. 事实上他们还有另一个更 &lt;em&gt;高大上&lt;/em&gt; 一点的名字: &lt;code class=&quot;highlighter-rouge&quot;&gt;软件工程师&lt;/code&gt;. 今天就一起深入的了解一下,这个职业都需要哪些基本能力.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 01 Jul 2019 10:53:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/software-engineer</link>
+        <guid isPermaLink="true">http://localhost:4000/software-engineer</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Time Range 如何影响你的人生</title>
+        
+          <description>&lt;p&gt;时间尺度对人生的影响&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 01 Jul 2019 10:53:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/time-range</link>
+        <guid isPermaLink="true">http://localhost:4000/time-range</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>iOS 网络封装</title>
+        
+          <description>&lt;p&gt;网络封装&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 01 Jul 2019 10:53:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/network-encapsulation</link>
+        <guid isPermaLink="true">http://localhost:4000/network-encapsulation</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Blog 搭建与部署</title>
+        
+          <description>&lt;p&gt;  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 11 Jun 2019 02:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/blog</link>
+        <guid isPermaLink="true">http://localhost:4000/blog</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>支付宝支付 微信支付SDK接口不统一？ 盘他！</title>
+        
+          <description>&lt;p&gt;  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 11 Jun 2019 02:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/zfb-wx-payment</link>
+        <guid isPermaLink="true">http://localhost:4000/zfb-wx-payment</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>iOS APP 优化健壮性</title>
+        
+          <description>&lt;h3 id=&quot;1加强-app-健壮性&quot;&gt;1.加强 APP 健壮性&lt;/h3&gt;
+
+</description>
+        
+        <pubDate>Tue, 11 Jun 2019 02:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/app-optimize</link>
+        <guid isPermaLink="true">http://localhost:4000/app-optimize</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Haskell 函数式编程</title>
+        
+          <description>&lt;p&gt;Haskell 与 Java、C++不同，它是纯函数式的编程语言，说到函数式编程，函数式与面向对象编程究竟有哪些不同？在这里将会介绍一下函数式编程的特点和起源。&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 10 Jun 2019 18:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/haskell</link>
+        <guid isPermaLink="true">http://localhost:4000/haskell</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Blog Initialized</title>
+        
+          <description>&lt;p&gt;Hey! Welcome to Miaocf’s blog, it’s great to have you :)&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 01 Jun 2019 18:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/start</link>
+        <guid isPermaLink="true">http://localhost:4000/start</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>不期而遇-网络上的小贝壳</title>
+        
+          <description>&lt;p&gt;在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 01 Jan 1970 08:01:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/net-biography</link>
+        <guid isPermaLink="true">http://localhost:4000/net-biography</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>TODO_LIST</title>
+        
+          <description>&lt;p&gt;因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 01 Jan 1970 08:00:00 +0800</pubDate>
+        <link>
+        http://localhost:4000/to-do-list-origin</link>
+        <guid isPermaLink="true">http://localhost:4000/to-do-list-origin</guid>
+      </item>
+      
+    
+  </channel>
+</rss>
