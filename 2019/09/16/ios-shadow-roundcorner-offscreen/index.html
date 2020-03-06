@@ -360,6 +360,20 @@ subLayer.shadowRadius = 4;//阴影半径，默认3
 
                 
 
+                <div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+    owner: 'JumpJumpSparrow',
+    repo: 'My_blog',
+    oauth: {
+        client_id: '0854e10375734c52272e',
+        client_secret: 'e382403bb47cfe33179603e5df7a4c9576ede295',
+    },
+});
+gitment.render('gitmentContainer');
+</script>
                 
             </div>  
 
@@ -434,21 +448,6 @@ subLayer.shadowRadius = 4;//阴影半径，默认3
 
 <!-- add support for mathjax by voleking-->
 
-
-<div id="gitmentContainer"></div>
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-var gitment = new Gitment({
-    owner: 'JumpJumpSparrow',
-    repo: 'My_blog',
-    oauth: {
-        client_id: '0854e10375734c52272e',
-        client_secret: 'e382403bb47cfe33179603e5df7a4c9576ede295',
-    },
-});
-gitment.render('gitmentContainer');
-</script>
 
 
 <!-- async load function -->
