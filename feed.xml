@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-06T16:19:13+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">批量并发-事件管理队列</title><link href="http://localhost:4000/concurrent-events-queue" rel="alternate" type="text/html" title="批量并发-事件管理队列" /><published>2019-12-18T07:00:00+08:00</published><updated>2019-12-18T07:00:00+08:00</updated><id>http://localhost:4000/concurrent-events-queue</id><content type="html" xml:base="http://localhost:4000/concurrent-events-queue">&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CF Blog</title>
+    <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Fri, 06 Mar 2020 16:32:32 +0800</pubDate>
+    <lastBuildDate>Fri, 06 Mar 2020 16:32:32 +0800</lastBuildDate>
+    <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>批量并发-事件管理队列</title>
+        <description>&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
 
 &lt;h3 id=&quot;模型抽象&quot;&gt;模型抽象&lt;/h3&gt;
 
@@ -21,13 +34,13 @@
 &lt;p&gt;在这里，把所有事件分成多个批次，每个批次包含多个相互独立的事件，依次执行每个批次，
 当优先级高的批次执行完之后，再执行优先级低的批次，如此形成一个队列。
 因为执行队列保持顺序执行，依赖关系也被很好的隔离开来。
-&lt;img src=&quot;../assets/article_assets/envent-schedule.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/assets/article_assets/envent-schedule.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;代码实现&quot;&gt;代码实现&lt;/h3&gt;
 
 &lt;p&gt;由于多个事件分为多个批次执行，而且批次之间需要保持顺序，所以这里使用单向链表构建事件队列。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/article_assets/eventScheduleUML.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/article_assets/eventScheduleUML.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;首先创建一个 队列模型类 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;，然后在 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 的子类内部创建队列。&lt;/p&gt;
 
@@ -130,13 +143,19 @@
 
 &lt;p&gt;在管理事件队列处，生成队列实例，创建队列，开启队列执行。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    self.scheduleManager = [[ProductDetailSchedule alloc] init];  
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    self.scheduleManager = [[ProductDetailSchedule alloc] init];  
     self.scheduleManager.delegate = self;  
     // 创建队列
     [self.scheduleManager createSchedule];  
     [self.scheduleManager start];
     
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;事件方法执行, 这里根据字符串转方法，在子线程异步执行&lt;/p&gt;
 
@@ -158,19 +177,32 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/EventScheduleManager.git&quot;&gt;Demo EventScheduleManager&lt;/a&gt;&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。</summary></entry><entry><title type="html">解决 H5 页面在手机上布局异常的问题</title><link href="http://localhost:4000/iOS-webviews-scales-page-to-fit" rel="alternate" type="text/html" title="解决 H5 页面在手机上布局异常的问题" /><published>2019-12-18T07:00:00+08:00</published><updated>2019-12-18T07:00:00+08:00</updated><id>http://localhost:4000/iOS-webviews-scales-page-to-fit</id><content type="html" xml:base="http://localhost:4000/iOS-webviews-scales-page-to-fit">&lt;p&gt;目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/EventScheduleManager.git&quot;&gt;Demo EventScheduleManager&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
+        <link>http://localhost:4000/concurrent-events-queue</link>
+        <guid isPermaLink="true">http://localhost:4000/concurrent-events-queue</guid>
+        
+        <category>iOS</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>解决 H5 页面在手机上布局异常的问题</title>
+        <description>&lt;p&gt;目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。&lt;/p&gt;
 
 &lt;p&gt;如图，图片显示不完整 ⤋
-&lt;br /&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_3.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;br /&gt;&lt;img src=&quot;/assets/images/iOS-webview-auto-scale/image_3.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;把 URL string 放到PC上展示如下：⤋&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_5.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;img src=&quot;/assets/images/iOS-webview-auto-scale/image_5.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;不难看出，这个详情页是把图片分割成多个部分，然后通过 CSS 布局拼接到一起的。&lt;/p&gt;
 
 &lt;p&gt;拉伸 PC 浏览器窗口，可以看到我们想要的布局效果：⤋
-&lt;br /&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_4.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;br /&gt;&lt;img src=&quot;/assets/images/iOS-webview-auto-scale/image_4.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;// html 中，图片宽度为 750 px，
 // 为了铺满屏幕，计算 initial-scale 初始缩放比例
@@ -179,10 +211,13 @@
 CGFloat w = [[UIScreen mainScreen] bounds].size.width;
 CGFloat ratio = w/750.0;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'UTF-8'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'UTF-8'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'viewport'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'format-detection'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'telephone=no'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;因为商品详情页在 PC 上的宽度为750像素， 我们根据手机频幕的宽度，计算出 H5 页面的缩放比例。&lt;br /&gt;
 根据 H5 页面 头部 meta 信息，设置 &lt;code class=&quot;highlighter-rouge&quot;&gt;initial-scale&lt;/code&gt;初始缩放比例，通过注入 JS 调整初始缩放比例&lt;/p&gt;
@@ -209,23 +244,70 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 &lt;p&gt;这样，webview 跟据当前 屏幕大小，自适应缩放 H5页面的大小。&lt;/p&gt;
 
 &lt;p&gt;设置比例过小的效果图 ⤋
-&lt;br /&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_2.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;br /&gt;&lt;img src=&quot;/assets/images/iOS-webview-auto-scale/image_2.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;设置缩放比例正确的效果 ⤋&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_1.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/iOS-webview-auto-scale/image_1.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。</summary></entry><entry><title type="html">Hash Map</title><link href="http://localhost:4000/hash-map" rel="alternate" type="text/html" title="Hash Map" /><published>2019-12-18T00:00:00+08:00</published><updated>2019-12-18T00:00:00+08:00</updated><id>http://localhost:4000/hash-map</id><content type="html" xml:base="http://localhost:4000/hash-map">&lt;p&gt;jj&lt;/p&gt;</content><author><name></name></author><summary type="html">jj</summary></entry><entry><title type="html">One To Many Interface Instruction</title><link href="http://localhost:4000/one-to-many-interface-instruction" rel="alternate" type="text/html" title="One To Many Interface Instruction" /><published>2019-11-12T00:00:00+08:00</published><updated>2019-11-12T00:00:00+08:00</updated><id>http://localhost:4000/one-to-many-interface-instruction</id><content type="html" xml:base="http://localhost:4000/one-to-many-interface-instruction"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">What Do You Think About Difference</title><link href="http://localhost:4000/what-do-you-think-about-difference" rel="alternate" type="text/html" title="What Do You Think About Difference" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/what-do-you-think-about-difference</id><content type="html" xml:base="http://localhost:4000/what-do-you-think-about-difference">&lt;p&gt;如何看待 ‘不同’？&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
+        <link>http://localhost:4000/iOS-webviews-scales-page-to-fit</link>
+        <guid isPermaLink="true">http://localhost:4000/iOS-webviews-scales-page-to-fit</guid>
+        
+        <category>iOS</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Hash Map</title>
+        <description>&lt;p&gt;jj&lt;/p&gt;
+</description>
+        <pubDate>Wed, 18 Dec 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/hash-map</link>
+        <guid isPermaLink="true">http://localhost:4000/hash-map</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>One To Many Interface Instruction</title>
+        <description>
+</description>
+        <pubDate>Tue, 12 Nov 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/one-to-many-interface-instruction</link>
+        <guid isPermaLink="true">http://localhost:4000/one-to-many-interface-instruction</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>What Do You Think About Difference</title>
+        <description>&lt;p&gt;如何看待 ‘不同’？&lt;/p&gt;
 
 &lt;p&gt;什么是不同？&lt;/p&gt;
 
 &lt;p&gt;不同带来的优势？&lt;/p&gt;
 
-&lt;p&gt;什么是优势？&lt;/p&gt;</content><author><name></name></author><summary type="html">如何看待 ‘不同’？</summary></entry><entry><title type="html">关于自动驾驶伦理问题的思考</title><link href="http://localhost:4000/auto-pilot-ethics" rel="alternate" type="text/html" title="关于自动驾驶伦理问题的思考" /><published>2019-11-08T00:00:00+08:00</published><updated>2019-11-08T00:00:00+08:00</updated><id>http://localhost:4000/auto-pilot-ethics</id><content type="html" xml:base="http://localhost:4000/auto-pilot-ethics">&lt;p&gt;  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。&lt;/p&gt;
+&lt;p&gt;什么是优势？&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 10 Nov 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/what-do-you-think-about-difference</link>
+        <guid isPermaLink="true">http://localhost:4000/what-do-you-think-about-difference</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>关于自动驾驶伦理问题的思考</title>
+        <description>&lt;p&gt;  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。&lt;/p&gt;
 
 &lt;p&gt;  目前市场上已经出现了可以自动驾驶的汽车，比如特斯拉、百度的阿波龙。 其中自动驾驶应用较为激进的当属特斯拉无疑。近几年 (2016-2018) 特斯拉的几起事故，可能与自动驾驶技术尚未完全成熟有关。而百度已获得全国首批T4道路测试牌照，自动驾达到L4级别的&lt;a href=&quot;http://apollo.auto/minibus/index_cn.html&quot;&gt;阿波龙&lt;/a&gt;已经于2018年7月4日正式量产下线，已经在多地开始展开试用。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/autopilot/apollo.jpg&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/autopilot/apollo.jpg&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;（图为阿波龙自动驾驶汽车）&lt;/p&gt;
 
@@ -237,7 +319,7 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 &lt;p&gt;自动驾驶汽车行驶过程中，遇突发事故，选择避让可能危及行人生命安全，不避让可能会导致乘客伤亡，AI 该如何决策？&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/autopilot/user-innocent-accident.png&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/autopilot/user-innocent-accident.png&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;这里有三个问题需要回答：&lt;/p&gt;
 
@@ -251,7 +333,7 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 &lt;p&gt;一辆火车失控，即将撞向铁路上的五个人，这时 AI 可以控制扳手让火车转向，撞向另外一条轨道上的一个人。是将伤亡将到最小，还是让事故继续发生？&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/autopilot/which-one-to-choose.png&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/autopilot/which-one-to-choose.png&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;人性、道德、法律，到底是谁做出了最终抉择？&lt;/p&gt;
 
@@ -275,7 +357,20 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 &lt;p&gt;有问题或想法可以联系我讨论，邮箱：&lt;code class=&quot;highlighter-rouge&quot;&gt;meowchunfat@hotmail.com&lt;/code&gt;。&lt;/p&gt;
 
-&lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。</summary></entry><entry><title type="html">技术是如何产生价值的？</title><link href="http://localhost:4000/how-dose-technology-create-values" rel="alternate" type="text/html" title="技术是如何产生价值的？" /><published>2019-10-25T00:00:00+08:00</published><updated>2019-10-25T00:00:00+08:00</updated><id>http://localhost:4000/how-dose-technology-create-values</id><content type="html" xml:base="http://localhost:4000/how-dose-technology-create-values">&lt;p&gt;什么是技术？ 技术就是将理论付诸实践的方法论。&lt;/p&gt;
+&lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;
+</description>
+        <pubDate>Fri, 08 Nov 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/auto-pilot-ethics</link>
+        <guid isPermaLink="true">http://localhost:4000/auto-pilot-ethics</guid>
+        
+        <category>something</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>技术是如何产生价值的？</title>
+        <description>&lt;p&gt;什么是技术？ 技术就是将理论付诸实践的方法论。&lt;/p&gt;
 
 &lt;p&gt;什么是理论？
 什么是设计？&lt;/p&gt;
@@ -289,7 +384,20 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 &lt;p&gt;虚拟价值
 服务
-感受&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="thoughts" /><summary type="html">什么是技术？ 技术就是将理论付诸实践的方法论。</summary></entry><entry><title type="html">iOS 关于 UIView 重绘的几个接口</title><link href="http://localhost:4000/UIView-drawing-cycle" rel="alternate" type="text/html" title="iOS 关于 UIView 重绘的几个接口" /><published>2019-10-18T00:00:00+08:00</published><updated>2019-10-18T00:00:00+08:00</updated><id>http://localhost:4000/UIView-drawing-cycle</id><content type="html" xml:base="http://localhost:4000/UIView-drawing-cycle">&lt;p&gt;在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。&lt;/p&gt;
+感受&lt;/p&gt;
+</description>
+        <pubDate>Fri, 25 Oct 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/how-dose-technology-create-values</link>
+        <guid isPermaLink="true">http://localhost:4000/how-dose-technology-create-values</guid>
+        
+        <category>thoughts</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>iOS 关于 UIView 重绘的几个接口</title>
+        <description>&lt;p&gt;在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。&lt;/p&gt;
 
 &lt;h3 id=&quot;setneedslayout&quot;&gt;setNeedsLayout&lt;/h3&gt;
 &lt;p&gt;Invalidates the current layout of the receiver and triggers a layout update during the next update cycle.&lt;br /&gt;
@@ -311,12 +419,38 @@ Call this method on your application’s main thread when you want to adjust the
 &lt;h3 id=&quot;setneedsdisplay&quot;&gt;setNeedsDisplay&lt;/h3&gt;
 
 &lt;p&gt;Recalculate the receiver’s layout, if required.&lt;br /&gt;
-When this message is received, the layer’s super layers are traversed until a ancestor layer is found that does not require layout. Then layout is performed on the entire layer-tree beneath that ancestor.&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。</summary></entry><entry><title type="html">iOS Emoji 过滤</title><link href="http://localhost:4000/emoji-filter" rel="alternate" type="text/html" title="iOS Emoji 过滤" /><published>2019-10-13T01:00:00+08:00</published><updated>2019-10-13T01:00:00+08:00</updated><id>http://localhost:4000/emoji-filter</id><content type="html" xml:base="http://localhost:4000/emoji-filter">&lt;p&gt;  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。&lt;/p&gt;
+When this message is received, the layer’s super layers are traversed until a ancestor layer is found that does not require layout. Then layout is performed on the entire layer-tree beneath that ancestor.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 18 Oct 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/UIView-drawing-cycle</link>
+        <guid isPermaLink="true">http://localhost:4000/UIView-drawing-cycle</guid>
+        
+        <category>iOS</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>iOS Emoji 过滤</title>
+        <description>&lt;p&gt;  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。&lt;/p&gt;
 
 &lt;h3 id=&quot;什么是-emoji-&quot;&gt;什么是 emoji ？&lt;/h3&gt;
 &lt;p&gt;  emoji 最早是由日本人&lt;em&gt;栗田穰崇&lt;/em&gt; (Shigetaka Kurita)创作的。emoji 是一些图形符号，例如：😊👏🚗🌞。和普通文字符号不同，emoji 通过一些图案来表达一些辨识度较高的场景或者含义，使阅读体验更好。在此可以查找各种 emoji &lt;a href=&quot;https://emojipedia.org&quot;&gt;emojipedia&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;(未完待续)d&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。</summary></entry><entry><title type="html">iOS universal-link 通用链接配置</title><link href="http://localhost:4000/universal-link" rel="alternate" type="text/html" title="iOS universal-link 通用链接配置" /><published>2019-10-11T02:00:00+08:00</published><updated>2019-10-11T02:00:00+08:00</updated><id>http://localhost:4000/universal-link</id><content type="html" xml:base="http://localhost:4000/universal-link">&lt;p&gt;iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。&lt;/p&gt;
+&lt;p&gt;(未完待续)d&lt;/p&gt;
+</description>
+        <pubDate>Sun, 13 Oct 2019 01:00:00 +0800</pubDate>
+        <link>http://localhost:4000/emoji-filter</link>
+        <guid isPermaLink="true">http://localhost:4000/emoji-filter</guid>
+        
+        <category>iOS</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>iOS universal-link 通用链接配置</title>
+        <description>&lt;p&gt;iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。&lt;/p&gt;
 
 &lt;p&gt;1.概念&lt;/p&gt;
 
@@ -326,4 +460,16 @@ https://developer.apple.com/library/archive/documentation/General/Conceptual/App
 &lt;p&gt;2.流程&lt;br /&gt;
 3.配置项&lt;br /&gt;
 4.流程图&lt;br /&gt;
-（待完成）&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。</summary></entry></feed>
+（待完成）&lt;/p&gt;
+</description>
+        <pubDate>Fri, 11 Oct 2019 02:00:00 +0800</pubDate>
+        <link>http://localhost:4000/universal-link</link>
+        <guid isPermaLink="true">http://localhost:4000/universal-link</guid>
+        
+        <category>iOS</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
