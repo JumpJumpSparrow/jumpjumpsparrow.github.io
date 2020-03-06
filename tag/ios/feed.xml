@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/tag/ios/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2020-01-17T14:01:56+08:00</updated>
+  <updated>2020-03-06T15:45:34+08:00</updated>
   <id>http://localhost:4000/tag/ios/feed.xml</id>
 
   
@@ -419,10 +419,14 @@ When this message is received, the layer’s super layers are traversed until a 
       <id>http://localhost:4000/universal-link</id>
       <content type="html" xml:base="http://localhost:4000/universal-link">&lt;p&gt;iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。&lt;/p&gt;
 
-&lt;p&gt;1.概念
-2.流程
-3.配置项
-4.流程图
+&lt;p&gt;1.概念&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://weixin.qq.com/apple-app-site-association&lt;/code&gt;
+https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW1&lt;/p&gt;
+
+&lt;p&gt;2.流程&lt;br /&gt;
+3.配置项&lt;br /&gt;
+4.流程图&lt;br /&gt;
 （待完成）&lt;/p&gt;</content>
 
       

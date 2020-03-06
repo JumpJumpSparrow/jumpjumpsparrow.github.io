@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-17T14:01:56+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">批量并发-事件管理队列</title><link href="http://localhost:4000/concurrent-events-queue" rel="alternate" type="text/html" title="批量并发-事件管理队列" /><published>2019-12-18T07:00:00+08:00</published><updated>2019-12-18T07:00:00+08:00</updated><id>http://localhost:4000/concurrent-events-queue</id><content type="html" xml:base="http://localhost:4000/concurrent-events-queue">&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-06T15:45:34+08:00</updated><id>http://localhost:4000/</id><title type="html">Miaocf</title><subtitle>Cloud in the sky, fish in the river</subtitle><entry><title type="html">批量并发-事件管理队列</title><link href="http://localhost:4000/concurrent-events-queue" rel="alternate" type="text/html" title="批量并发-事件管理队列" /><published>2019-12-18T07:00:00+08:00</published><updated>2019-12-18T07:00:00+08:00</updated><id>http://localhost:4000/concurrent-events-queue</id><content type="html" xml:base="http://localhost:4000/concurrent-events-queue">&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
 
 &lt;h3 id=&quot;模型抽象&quot;&gt;模型抽象&lt;/h3&gt;
 
@@ -215,7 +215,7 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 &lt;p&gt;&lt;img src=&quot;../assets/images/iOS-webview-auto-scale/image_1.png&quot; width=&quot;200&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。</summary></entry><entry><title type="html">Hash Map</title><link href="http://localhost:4000/hash-map" rel="alternate" type="text/html" title="Hash Map" /><published>2019-12-18T00:00:00+08:00</published><updated>2019-12-18T00:00:00+08:00</updated><id>http://localhost:4000/hash-map</id><content type="html" xml:base="http://localhost:4000/hash-map"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">One To Many Interface Instruction</title><link href="http://localhost:4000/one-to-many-interface-instruction" rel="alternate" type="text/html" title="One To Many Interface Instruction" /><published>2019-11-12T00:00:00+08:00</published><updated>2019-11-12T00:00:00+08:00</updated><id>http://localhost:4000/one-to-many-interface-instruction</id><content type="html" xml:base="http://localhost:4000/one-to-many-interface-instruction"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">What Do You Think About Difference</title><link href="http://localhost:4000/what-do-you-think-about-difference" rel="alternate" type="text/html" title="What Do You Think About Difference" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/what-do-you-think-about-difference</id><content type="html" xml:base="http://localhost:4000/what-do-you-think-about-difference">&lt;p&gt;如何看待 ‘不同’？&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。</summary></entry><entry><title type="html">Hash Map</title><link href="http://localhost:4000/hash-map" rel="alternate" type="text/html" title="Hash Map" /><published>2019-12-18T00:00:00+08:00</published><updated>2019-12-18T00:00:00+08:00</updated><id>http://localhost:4000/hash-map</id><content type="html" xml:base="http://localhost:4000/hash-map">&lt;p&gt;jj&lt;/p&gt;</content><author><name></name></author><summary type="html">jj</summary></entry><entry><title type="html">One To Many Interface Instruction</title><link href="http://localhost:4000/one-to-many-interface-instruction" rel="alternate" type="text/html" title="One To Many Interface Instruction" /><published>2019-11-12T00:00:00+08:00</published><updated>2019-11-12T00:00:00+08:00</updated><id>http://localhost:4000/one-to-many-interface-instruction</id><content type="html" xml:base="http://localhost:4000/one-to-many-interface-instruction"></content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">What Do You Think About Difference</title><link href="http://localhost:4000/what-do-you-think-about-difference" rel="alternate" type="text/html" title="What Do You Think About Difference" /><published>2019-11-10T00:00:00+08:00</published><updated>2019-11-10T00:00:00+08:00</updated><id>http://localhost:4000/what-do-you-think-about-difference</id><content type="html" xml:base="http://localhost:4000/what-do-you-think-about-difference">&lt;p&gt;如何看待 ‘不同’？&lt;/p&gt;
 
 &lt;p&gt;什么是不同？&lt;/p&gt;
 
@@ -275,14 +275,21 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 &lt;p&gt;有问题或想法可以联系我讨论，邮箱：&lt;code class=&quot;highlighter-rouge&quot;&gt;meowchunfat@hotmail.com&lt;/code&gt;。&lt;/p&gt;
 
-&lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。</summary></entry><entry><title type="html">How Dose Technology Create Values</title><link href="http://localhost:4000/how-dose-technology-create-values" rel="alternate" type="text/html" title="How Dose Technology Create Values" /><published>2019-10-24T00:00:00+08:00</published><updated>2019-10-24T00:00:00+08:00</updated><id>http://localhost:4000/how-dose-technology-create-values</id><content type="html" xml:base="http://localhost:4000/how-dose-technology-create-values">&lt;p&gt;技术如何创造价值&lt;/p&gt;
+&lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="something" /><summary type="html">  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。</summary></entry><entry><title type="html">技术是如何产生价值的？</title><link href="http://localhost:4000/how-dose-technology-create-values" rel="alternate" type="text/html" title="技术是如何产生价值的？" /><published>2019-10-25T00:00:00+08:00</published><updated>2019-10-25T00:00:00+08:00</updated><id>http://localhost:4000/how-dose-technology-create-values</id><content type="html" xml:base="http://localhost:4000/how-dose-technology-create-values">&lt;p&gt;什么是技术？ 技术就是将理论付诸实践的方法论。&lt;/p&gt;
+
+&lt;p&gt;什么是理论？
+什么是设计？&lt;/p&gt;
+
+&lt;p&gt;首先，从哲学角度讲，物质结构决定物质功能。&lt;/p&gt;
+
+&lt;p&gt;技术如何创造价值&lt;/p&gt;
 
 &lt;p&gt;物质价值
 实物、数据&lt;/p&gt;
 
 &lt;p&gt;虚拟价值
 服务
-感受&lt;/p&gt;</content><author><name></name></author><summary type="html">技术如何创造价值</summary></entry><entry><title type="html">iOS 关于 UIView 重绘的几个接口</title><link href="http://localhost:4000/UIView-drawing-cycle" rel="alternate" type="text/html" title="iOS 关于 UIView 重绘的几个接口" /><published>2019-10-18T00:00:00+08:00</published><updated>2019-10-18T00:00:00+08:00</updated><id>http://localhost:4000/UIView-drawing-cycle</id><content type="html" xml:base="http://localhost:4000/UIView-drawing-cycle">&lt;p&gt;在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。&lt;/p&gt;
+感受&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="thoughts" /><summary type="html">什么是技术？ 技术就是将理论付诸实践的方法论。</summary></entry><entry><title type="html">iOS 关于 UIView 重绘的几个接口</title><link href="http://localhost:4000/UIView-drawing-cycle" rel="alternate" type="text/html" title="iOS 关于 UIView 重绘的几个接口" /><published>2019-10-18T00:00:00+08:00</published><updated>2019-10-18T00:00:00+08:00</updated><id>http://localhost:4000/UIView-drawing-cycle</id><content type="html" xml:base="http://localhost:4000/UIView-drawing-cycle">&lt;p&gt;在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。&lt;/p&gt;
 
 &lt;h3 id=&quot;setneedslayout&quot;&gt;setNeedsLayout&lt;/h3&gt;
 &lt;p&gt;Invalidates the current layout of the receiver and triggers a layout update during the next update cycle.&lt;br /&gt;
@@ -311,8 +318,12 @@ When this message is received, the layer’s super layers are traversed until a 
 
 &lt;p&gt;(未完待续)d&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。</summary></entry><entry><title type="html">iOS universal-link 通用链接配置</title><link href="http://localhost:4000/universal-link" rel="alternate" type="text/html" title="iOS universal-link 通用链接配置" /><published>2019-10-11T02:00:00+08:00</published><updated>2019-10-11T02:00:00+08:00</updated><id>http://localhost:4000/universal-link</id><content type="html" xml:base="http://localhost:4000/universal-link">&lt;p&gt;iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。&lt;/p&gt;
 
-&lt;p&gt;1.概念
-2.流程
-3.配置项
-4.流程图
+&lt;p&gt;1.概念&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://weixin.qq.com/apple-app-site-association&lt;/code&gt;
+https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html#//apple_ref/doc/uid/TP40016308-CH12-SW1&lt;/p&gt;
+
+&lt;p&gt;2.流程&lt;br /&gt;
+3.配置项&lt;br /&gt;
+4.流程图&lt;br /&gt;
 （待完成）&lt;/p&gt;</content><author><name>Miaocf</name></author><category term="iOS" /><summary type="html">iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。</summary></entry></feed>
