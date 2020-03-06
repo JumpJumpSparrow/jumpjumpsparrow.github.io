@@ -1,1416 +1,654 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-
-    <!-- Document Settings -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- Base Meta -->
-    <!-- dynamically fixing the title for tag/author pages -->
-
-
-
-    <title>Miaocf</title>
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Styles'n'Scripts -->
-    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
-    <!-- highlight.js -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-    <style>.hljs { background: none; }</style>
-
-    <!--[if IE]>
-        <style>
-            p, ol, ul{
-                width: 100%;
-            }
-            blockquote{
-                width: 100%;
-            }
-        </style>
-    <![endif]-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="iOS 开发，会 1.5 点web前端，Java web入门开发者">
+    <meta name="keywords"  content="CF Max, CF Blog, iOS,Java web,博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计">
+    <meta name="theme-color" content="#000000">
     
-    <!-- This tag outputs SEO meta+structured data and other important settings -->
-    <meta name="description" content="Cloud in the sky, fish in the river" />
-    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="http://localhost:4000/" />
-    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Cunfa的博客 | CF Blog">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="既然要去那里，出发吧">
+    
+    <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
+    <meta property="og:url" content="http://localhost:4000/">
+    <meta property="og:site_name" content="Cunfa的博客 | CF Blog">
+    
+    <title>Cunfa的博客 | CF Blog</title>
 
-     <!--title below is coming from _includes/dynamic_title-->
-    <meta property="og:site_name" content="Miaocf" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Miaocf" />
-    <meta property="og:description" content="Cloud in the sky, fish in the river" />
-    <meta property="og:url" content="http://localhost:4000/" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
-    <meta property="article:publisher" content="https://www.facebook.com/false" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Miaocf" />
-    <meta name="twitter:description" content="Cloud in the sky, fish in the river" />
-    <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
-    <meta name="twitter:label1" content="Written by" />
-    <meta name="twitter:data1" content="Miaocf" />
-    <meta name="twitter:site" content="@false" />
-    <meta name="twitter:creator" content="@false" />
-    <meta property="og:image:width" content="2000" />
-    <meta property="og:image:height" content="666" />
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
 
-    <script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Website",
-    "publisher": {
-        "@type": "Organization",
-        "name": "Miaocf",
-        "logo": "http://localhost:4000/assets/images/blog-icon.png"
-    },
-    "url": "http://localhost:4000/",
-    "image": {
-        "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/blog-cover.jpg",
-        "width": 2000,
-        "height": 666
-    },
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "http://localhost:4000/"
-    },
-    "description": "Cloud in the sky, fish in the river"
-}
-    </script>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="http://localhost:4000/">
 
-    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
-    <script type="text/javascript">
-    ghost.init({
-    	clientId: "ghost-frontend",
-    	clientSecret: "f84a07a72b17"
-    });
-    </script> -->
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="Miaocf" href="/feed.xml" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
 </head>
-<body class="home-template">
 
-    <div class="site-wrapper">
-        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
-        <!-- < default -->
-<!-- The tag above means: insert everything in this file
-into the {body} of the default.hbs template -->
 
-<!-- The big featured header, it uses blog cover image as a BG if available -->
-<header class="site-header outer " style="background-image:  url(/assets/images/blog-cover.jpg) ">
-    <div class="inner">
-        <div class="site-header-content">
-            <h1 class="site-title">
-                
-                    <img class="site-logo" src="/assets/images/blog-icon.png" alt="Miaocf"/>
-                
-            </h1>
-            <h2 class="site-description">Cloud in the sky, fish in the river</h2>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">CF Blog</a>
         </div>
-        <nav class="site-nav">
-    <div class="site-nav-left">
-        
-        
-            <ul class="nav" role="menu">
-    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
-    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
-    <li class="nav-getting-started" role="menuitem"><a href="/tag/getting-started/">Getting Started</a></li>
-    <li class="nav-try-ghost" role="menuitem"><a href="https://ghost.org">Try Ghost</a></li>
-</ul>
 
-        
-    </div>
-    <div class="site-nav-right">
-        <div class="social-links">
-            
-            
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/archive">Archive</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </ul>
+            </div>
         </div>
-        
+        <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container -->
 </nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
 
+    var __HuxNav__ = {
+        close: function(){
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        },
+        open: function(){
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+
+    // Bind Event
+    $toggle.addEventListener('click', function(e){
+        if ($navbar.className.indexOf('in') > 0) {
+            __HuxNav__.close()
+        }else{
+            __HuxNav__.open()
+        }
+    })
+
+    /**
+     * Since Fastclick is used to delegate 'touchstart' globally
+     * to hack 300ms delay in iOS by performing a fake 'click',
+     * Using 'e.stopPropagation' to stop 'touchstart' event from 
+     * $toggle/$collapse will break global delegation.
+     * 
+     * Instead, we use a 'e.target' filter to prevent handler
+     * added to document close HuxNav.  
+     *
+     * Also, we use 'click' instead of 'touchstart' as compromise
+     */
+    document.addEventListener('click', function(e){
+        if(e.target == $toggle) return;
+        if(e.target.className == 'icon-bar') return;
+        __HuxNav__.close();
+    })
+</script>
+
+
+    <!-- Page Header -->
+
+
+
+
+
+
+
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="site-heading">
+        
+          <h1>CF Blog</h1>
+          <span class="subheading">既然要去那里，出发吧</span>
+        </div>
+      </div>
     </div>
+  </div>
 </header>
 
-<!-- The main content area -->
-<main id="site-main" class="site-main outer" role="main">
-    <div class="inner">
 
-        <div class="post-feed">
-            <!-- The tag below includes the markup for each post - partials/post-card.hbs -->
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- PostList Container -->
+    		<div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                postlist-container
+            ">
+    			
+<div class="post-preview">
+    <a href="/hash-map">
+        <h2 class="post-title">
+            Hash Map 实现原理
+        </h2>
+        
+        <div class="post-content-preview">
             
-
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/concurrent-events-queue">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/concurrent-events-queue">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">批量并发-事件管理队列</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
+                　　Hash,一般翻译做“ 散列” ，也有直接音译为“ 哈希” 的，就是把任意长度的输入（又叫做预映射， pre-image ），通过散列算法，变换成固定长度的输出，该输出就是散列值。这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不 同的输入可能会散列成相同的输出，而不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。
+H...
+            
         </div>
-    </article>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on December 18, 2019
+    </p>
+</div>
+<hr>
 
-    <article class="post-card home-template">
+<div class="post-preview">
+    <a href="/concurrent-events-queue">
+        <h2 class="post-title">
+            批量并发-事件管理队列
+        </h2>
         
-            <a class="post-card-image-link" href="/iOS-webviews-scales-page-to-fit">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/iOS-webviews-scales-page-to-fit">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
+        <div class="post-content-preview">
+            
+                首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 dispatch_group 的接口设计，写了一个批量事件管理队列的工具 EventScheduleManager 。
 
-                    <h2 class="post-card-title">解决 H5 页面在手机上布局异常的问题</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。
+模型抽象
 
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
+商品详情页需要的数据有：
+...
+            
         </div>
-    </article>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on December 18, 2019
+    </p>
+</div>
+<hr>
 
-    <article class="post-card home-template no-image">
+<div class="post-preview">
+    <a href="/scales-pagesize-to-fit">
+        <h2 class="post-title">
+            解决 H5 页面在手机上布局异常的问题
+        </h2>
         
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/hash-map">
-                <header class="post-card-header">
-                    
+        <div class="post-content-preview">
+            
+                目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。
 
-                    <h2 class="post-card-title">Hash Map</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
+如图，图片显示不完整 ⤋
+
+
+把 URL string 放到PC上展示如下：⤋
+
+
+
+不难看出，这个详情页是把图片分割成多个部分，然后通过 CSS 布局拼接到一起的。
+
+拉伸 PC 浏...
+            
         </div>
-    </article>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on December 18, 2019
+    </p>
+</div>
+<hr>
 
-    <article class="post-card home-template no-image">
+<div class="post-preview">
+    <a href="/one-to-many-interface">
+        <h2 class="post-title">
+            One To Many Interface
+        </h2>
         
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/one-to-many-interface-instruction">
-                <header class="post-card-header">
-                    
+        <div class="post-content-preview">
+            
+                
 
-                    <h2 class="post-card-title">One To Many Interface Instruction</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
+            
         </div>
-    </article>
+    </a>
+    <p class="post-meta">
+        Posted by CF Blog on November 12, 2019
+    </p>
+</div>
+<hr>
 
-    <article class="post-card home-template no-image">
+<div class="post-preview">
+    <a href="/difference-and-tought">
+        <h2 class="post-title">
+            Difference And Tought
+        </h2>
         
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/what-do-you-think-about-difference">
-                <header class="post-card-header">
-                    
+        <div class="post-content-preview">
+            
+                如何看待 ‘不同’？
 
-                    <h2 class="post-card-title">What Do You Think About Difference</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>如何看待 ‘不同’？
+什么是不同？
 
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
+不同带来的优势？
+
+什么是优势？
+
+
+            
         </div>
-    </article>
+    </a>
+    <p class="post-meta">
+        Posted by CF Blog on November 10, 2019
+    </p>
+</div>
+<hr>
 
-    <article class="post-card home-template">
+<div class="post-preview">
+    <a href="/auto-pilot-ethics">
+        <h2 class="post-title">
+            关于自动驾驶伦理问题的思考
+        </h2>
         
-            <a class="post-card-image-link" href="/auto-pilot-ethics">
-                <div class="post-card-image" style="background-image: url(/assets/images/autopilot/Tesla.jpeg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/auto-pilot-ethics">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Something</span>
-                            
-                        
-                    
+        <div class="post-content-preview">
+            
+                  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。
 
-                    <h2 class="post-card-title">关于自动驾驶伦理问题的思考</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
+  目前市场上已经出现了可以自动驾驶的汽车，比如特斯拉、百度的阿波龙。 其中自动驾驶应用较为激进的当属特斯拉无疑。近几年 (2016-2018) 特斯拉的几起事故，可能与自动驾驶技术尚未完全成熟有关。而百度已获得全国首批T4道路测试牌照，自动驾达到L4级别的阿波龙已经于2018年7月4日正式量产下线，已经在多...
+            
         </div>
-    </article>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on November 8, 2019
+    </p>
+</div>
+<hr>
 
-    <article class="post-card home-template">
+<div class="post-preview">
+    <a href="/technology-and-values">
+        <h2 class="post-title">
+            技术是如何产生价值的？
+        </h2>
         
-            <a class="post-card-image-link" href="/how-dose-technology-create-values">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/how-dose-technology-create-values">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Thoughts</span>
-                            
-                        
-                    
+        <div class="post-content-preview">
+            
+                什么是技术？ 技术就是将理论付诸实践的方法论。
 
-                    <h2 class="post-card-title">技术是如何产生价值的？</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>什么是技术？ 技术就是将理论付诸实践的方法论。
+什么是理论？
+什么是设计？
 
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
+首先，从哲学角度讲，物质结构决定物质功能。
+
+技术如何创造价值
+
+物质价值
+实物、数据
+
+虚拟价值
+服务
+感受
+
+            
         </div>
-    </article>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on October 25, 2019
+    </p>
+</div>
+<hr>
 
-    <article class="post-card home-template">
+<div class="post-preview">
+    <a href="/UIView-drawing-cycle">
+        <h2 class="post-title">
+            iOS 关于 UIView 重绘的几个接口
+        </h2>
         
-            <a class="post-card-image-link" href="/UIView-drawing-cycle">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/UIView-drawing-cycle">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
+        <div class="post-content-preview">
+            
+                在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。
 
-                    <h2 class="post-card-title">iOS 关于 UIView 重绘的几个接口</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>在更新数据时，往往伴随着更新 UI 布局。如何触发系统去刷新 UI 绘制呢？以下方法你需要了解一下。
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
+setNeedsLayout
+Invalidates the current layout of the receiver and triggers a layout update during the next update cycle.
+Call this method on your...
+            
         </div>
-    </article>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on October 18, 2019
+    </p>
+</div>
+<hr>
 
-    <article class="post-card home-template">
+<div class="post-preview">
+    <a href="/emoji-filter">
+        <h2 class="post-title">
+            iOS Emoji 过滤
+        </h2>
         
-            <a class="post-card-image-link" href="/emoji-filter">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/emoji-filter">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
+        <div class="post-content-preview">
+            
+                  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。
 
-                    <h2 class="post-card-title">iOS Emoji 过滤</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
+什么是 emoji ？
+  emoji 最早是由日本人栗田穰崇 (Shigetaka Kurita)创作的。emoji 是一些图形符号，例如：😊👏🚗🌞。和普通文字符号不同，emoji 通过一些图案来表达一些辨识度较高的场景或者含义，使阅读体验更好。在此可...
+            
         </div>
-    </article>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on October 13, 2019
+    </p>
+</div>
+<hr>
 
-    <article class="post-card home-template">
+<div class="post-preview">
+    <a href="/universal-link">
+        <h2 class="post-title">
+            iOS universal-link 通用链接配置
+        </h2>
         
-            <a class="post-card-image-link" href="/universal-link">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/universal-link">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
+        <div class="post-content-preview">
+            
+                iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
 
-                    <h2 class="post-card-title">iOS universal-link 通用链接配置</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
+1.概念
 
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
+https://weixin.qq.com/apple-app-site-association
+https://developer.apple.com/library/archive/documentation/Gen...
+            
         </div>
-    </article>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on October 11, 2019
+    </p>
+</div>
+<hr>
 
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/frame-rate-monitor">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/frame-rate-monitor">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
 
-                    <h2 class="post-card-title">iOS 屏幕卡顿检测与排查</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>
-  卡顿发生检测
-  卡顿原因排查
-（待完成）
+<!-- Pager -->
 
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
+<ul class="pager">
+    
+    
+    <li class="next">
+        <a href="/page2">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+
+    		</div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
                 
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
 
-    <article class="post-card home-template">
+
+<section>
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
         
-            <a class="post-card-image-link" href="/yykit-micro">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
         
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/yykit-micro">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">Building Objective-C static libraries with categories</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>
-  Q:  How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?
-
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      4 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
         
-            <a class="post-card-image-link" href="/textfield-height-auto-adjust">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
+        </a>
         
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/textfield-height-auto-adjust">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">UITextField 随键盘高度自适应</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>  在开发APP过程中，不免会遇到页面需要多个 UITextField 的需求，那么问题来了：当输入框过多时，弹起键盘会遮盖住输入框，或者需要依次点击输入框才能输入。用户的输入体验非常差。为解决这个问题，我们让输入框跟随键盘自动调整高度，并且点击回车键自动跳转到下一个输入框进行输入。
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
         
-            <a class="post-card-image-link" href="/script-configure">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
+                <a data-sort="0019" 
+                    href="/archive/?tag=something"
+                    title="something"
+                    rel="7">something</a>
         
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/script-configure">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">使用 shell 脚本配置iOS工程生成多个APP</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/ios-shadow-roundcorner-offscreen">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/ios-shadow-roundcorner-offscreen">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">iOS 圆角+阴影+离屏渲染问题</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>iOS 圆角+阴影+离屏渲染问题
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/cocoapods-private">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/cocoapods-private">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Something</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">CocoaPods 私有库搭建</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>在 iOS 开发过程中，经常会使用cocoapods管理三方库，如果自己的库不想公开，只方便自己公司的人用，该怎么办呢？这里介绍一下如何搭建一个私有的Pods库。
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/software-engineer">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/software-engineer">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Something</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">如何看待软件工程师</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>在目前的互联网行业中, 从事代码 coding 职业的人,通常被称为程序员或者码农. 事实上他们还有另一个更 高大上 一点的名字: 软件工程师. 今天就一起深入的了解一下,这个职业都需要哪些基本能力.
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/time-range">
-                <div class="post-card-image" style="background-image: url(/assets/images/writing.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/time-range">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Something</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">Time Range 如何影响你的人生</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>时间尺度对人生的影响
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/network-encapsulation">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/network-encapsulation">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Something</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">iOS 网络封装</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>网络封装
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/blog">
-                <div class="post-card-image" style="background-image: url(/assets/images/design.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/blog">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Something</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">Blog 搭建与部署</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/zfb-wx-payment">
-                <div class="post-card-image" style="background-image: url(/assets/images/car.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/zfb-wx-payment">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">支付宝支付 微信支付SDK接口不统一？ 盘他！</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/app-optimize">
-                <div class="post-card-image" style="background-image: url(/assets/images/fables.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/app-optimize">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">iOS APP 优化健壮性</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>1.加强 APP 健壮性
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/haskell">
-                <div class="post-card-image" style="background-image: url(/assets/images/writing.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/haskell">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Functional</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">Haskell 函数式编程</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>Haskell 与 Java、C++不同，它是纯函数式的编程语言，说到函数式编程，函数式与面向对象编程究竟有哪些不同？在这里将会介绍一下函数式编程的特点和起源。
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/start">
-                <div class="post-card-image" style="background-image: url(/assets/images/car.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/start">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Getting started</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">Blog Initialized</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>Hey! Welcome to Miaocf’s blog, it’s great to have you :)
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/net-biography">
-                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/net-biography">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Ios</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">不期而遇-网络上的小贝壳</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-    <article class="post-card home-template">
-        
-            <a class="post-card-image-link" href="/to-do-list-origin">
-                <div class="post-card-image" style="background-image: url(/assets/images/advanced.jpg)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/to-do-list-origin">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Something</span>
-                            
-                        
-                    
-
-                    <h2 class="post-card-title">TODO_LIST</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈
-
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/Miaocf/">Miaocf</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      1 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
-
-
-        </div>
-
+                <a data-sort="0012" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="14">iOS
     </div>
-</main>
+</section>
 
 
-        <!-- Previous/next page links - displayed on every page -->
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+  <hr>
+  <h5><a href="/about/">ABOUT ME</a></h5>
+  <div class="short-about">
+    
+    <img src="http://localhost:4000/img/avatar-cf-ny.jpg" />
+    
+    
+    <p>Your time is limited<br>勤学如春起之苗，不见其增，日有所长</p>
+    
+    <!-- SNS Link -->
+    
+
+
+<ul class="list-inline">
+
+
+  
+  
+  
+  
+  
+  
+  
+</ul>
+  </div>
+</section>
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FOOTPRINTS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://www.v2ex.com">V2EX</a></li>
+  
+  <li><a href="http://www.ruanyifeng.com">ruanyifeng</a></li>
+  
+  <li><a href="https://flutter.dev">flutter</a></li>
+  
+  <li><a href="https://www.cnblogs.com">cnblogs</a></li>
+  
+  <li><a href="https://github.com">github</a></li>
+  
+  <li><a href="https://angular.cn">angular</a></li>
+  
+  <li><a href="https://tour.go-zh.org/">go</a></li>
+  
+  <li><a href="https://www.rust-lang.org">rust-lang</a></li>
+  
+  <li><a href="https://haskellbook.com">haskellbook</a></li>
+  
+</ul>
+
+    		</div>
         
+	</div>
+</div>
 
-        <!-- The footer at the very bottom of the screen -->
-        <footer class="site-footer outer">
-            <div class="site-footer-content inner">
-                <section class="copyright"><a href="http://localhost:4000/">Miaocf</a> &copy; 2020</section>
-                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
-                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
-                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
-                <nav class="site-footer-nav">
-                    <a href="/">Latest Posts</a>
-                    
-                    
-                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
-                </nav>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <!-- SNS Link -->
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; CF Blog 2020
+                    <br>
+                    Powered by <a href="http://junziboxue.com">Mcf Blog</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=JumpJumpSparrow&repo=JumpJumpSparrow.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
             </div>
-        </footer>
-
+        </div>
     </div>
+</footer>
 
-    <!-- The big email subscribe modal content -->
-    
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
 
-    <!-- highlight.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
-    <script>$(document).ready(function() {
-      $('pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
-    });</script>
+<!-- Bootstrap Core JavaScript -->
+<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
+<script src="/js/bootstrap.min.js "></script>
 
-    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
-    <script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous">
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script src="/js/snackbar.js "></script>
+<script src="/js/sw-registration.js "></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
     </script>
-    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
-    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
 
 
-    <!-- Paginator increased to "infinit" in _config.yml -->
-    <!-- if paginator.posts  -->
-    <!-- <script>
-        var maxPages = parseInt('1');
-    </script>
-    <script src="/assets/js/infinitescroll.js"></script> -->
-    <!-- /endif -->
-
-    
 
 
-    <!-- Add Baidu Analytics  -->
-    <!-- Baidu Analytics Tracking code -->
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Add Baidu Analytics  -->
+<!-- Baidu Analytics Tracking code -->
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -1423,11 +661,20 @@ var _hmt = _hmt || [];
 
 
 
-    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
-    
 
-    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
-    <!-- ghost_foot -->
+<!-- Side Catalog -->
+
+
+
+<!-- Multi-Lingual -->
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>
+
 </html>
