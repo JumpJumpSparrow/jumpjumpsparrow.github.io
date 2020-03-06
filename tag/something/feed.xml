@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<feed xmlns="http://www.w3.org/2005/Atom" >
+  <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
+  <link href="http://localhost:4000/tag/something/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" />
+  <updated>2020-03-06T17:16:40+08:00</updated>
+  <id>http://localhost:4000/tag/something/feed.xml</id>
+
+  
+  
+  
+
+  
+    <title type="html">Miaocf | </title>
+  
+
+  
+    <subtitle>Cloud in the sky, fish in the river</subtitle>
+  
+
+  
+
+  
+    
+      
+    
+  
+
+  
+  
+
+  
+    <entry>
+      <title type="html">关于自动驾驶伦理问题的思考</title>
+      <link href="http://localhost:4000/auto-pilot-ethics" rel="alternate" type="text/html" title="关于自动驾驶伦理问题的思考" />
+      <published>2019-11-08T00:00:00+08:00</published>
+      <updated>2019-11-08T00:00:00+08:00</updated>
+      <id>http://localhost:4000/auto-pilot-ethics</id>
+      <content type="html" xml:base="http://localhost:4000/auto-pilot-ethics">&lt;p&gt;  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。&lt;/p&gt;
+
+&lt;p&gt;  目前市场上已经出现了可以自动驾驶的汽车，比如特斯拉、百度的阿波龙。 其中自动驾驶应用较为激进的当属特斯拉无疑。近几年 (2016-2018) 特斯拉的几起事故，可能与自动驾驶技术尚未完全成熟有关。而百度已获得全国首批T4道路测试牌照，自动驾达到L4级别的&lt;a href=&quot;http://apollo.auto/minibus/index_cn.html&quot;&gt;阿波龙&lt;/a&gt;已经于2018年7月4日正式量产下线，已经在多地开始展开试用。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/autopilot/apollo.jpg&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（图为阿波龙自动驾驶汽车）&lt;/p&gt;
+
+&lt;p&gt;  随着人工智能 AI (&lt;code class=&quot;highlighter-rouge&quot;&gt;Artificial Intelligence&lt;/code&gt;) 的事件处理能力和数据分析精度变得更强更高，自动驾驶技术也开始进入了实用阶段。当然，实现自动驾驶除了 AI 必不可少以外，还需要&lt;code class=&quot;highlighter-rouge&quot;&gt;计算机视觉&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;高精度地图&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;5G高速通信技术&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;激光雷达&lt;/code&gt;等环境感知技术。可以预见到不久的将来，自动驾驶功能将会成为汽车的标配功能，&lt;code class=&quot;highlighter-rouge&quot;&gt;AI&lt;/code&gt; 也继 &lt;code class=&quot;highlighter-rouge&quot;&gt;水&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;电&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;网络&lt;/code&gt;之后，势必成为生活中必不可少的基础元素，潜入到生活的方方面面。&lt;/p&gt;
+
+&lt;p&gt;  然而 AI 作为自动驾驶的主要决策单元，代替驾驶员做出决策，控制车辆在道路上行走，这将带来一系列的社会伦理问题和法律问题。在这里列出一些自动驾驶在不久的将来可能会遇到的问题，与大家一起讨论、思考。&lt;/p&gt;
+
+&lt;h4 id=&quot;问题1&quot;&gt;问题1&lt;/h4&gt;
+
+&lt;p&gt;自动驾驶汽车行驶过程中，遇突发事故，选择避让可能危及行人生命安全，不避让可能会导致乘客伤亡，AI 该如何决策？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/autopilot/user-innocent-accident.png&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里有三个问题需要回答：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;&lt;em&gt;用户&lt;/em&gt;&lt;/strong&gt;和&lt;strong&gt;&lt;em&gt;行人&lt;/em&gt;&lt;/strong&gt;都是无辜者，AI 有了干预的机会后，突来的意外应该降临到谁身上？&lt;/li&gt;
+  &lt;li&gt;自动驾驶汽车作为一款产品，AI 是优先保护用户的安全？还是优先保护行人的安全？&lt;/li&gt;
+  &lt;li&gt;遇到以上场景，自动驾驶是否需要&lt;strong&gt;&lt;em&gt;乘客&lt;/em&gt;&lt;/strong&gt;做出决策？或者说乘客的决定和AI的决定哪个有效？（自动驾驶里弱化了 司机 的角色，司机更多是 可以干预驾驶的乘客）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;问题2&quot;&gt;问题2&lt;/h4&gt;
+
+&lt;p&gt;一辆火车失控，即将撞向铁路上的五个人，这时 AI 可以控制扳手让火车转向，撞向另外一条轨道上的一个人。是将伤亡将到最小，还是让事故继续发生？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/autopilot/which-one-to-choose.png&quot; style=&quot;zoom:70%;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;人性、道德、法律，到底是谁做出了最终抉择？&lt;/p&gt;
+
+&lt;p&gt;  这其实是美国哈佛大学政治哲学教授迈克尔·桑德尔，在公开课中设想的场景，用以描述行为选择的道德困境。在这里只是把人改为了 AI。在这里，不管 AI 如何处理，其最终决的选择实际来自于人，或者来自于人已经定制好的算法，AI 通过算法计算，忠实地执行了这个决定。&lt;/p&gt;
+
+&lt;p&gt;  人可以为自己的决策和行为负责，那么AI的决策和行为谁来负责呢？&lt;/p&gt;
+
+&lt;p&gt;  我认为这应该是社会群体层的共识问题，社会群体中的每个个体需要事先知晓 并接受 AI 的决策策略，在事故发生后， 所有人必须为算法的执行结果负责，因为这个是整个社会群体已经认可的选择。&lt;/p&gt;
+
+&lt;p&gt;  当然 在现实中很难发生这种特殊情况，特别案例还需要根据实际情况具体分析，这里只是纯为讨论而假设的场景。&lt;/p&gt;
+
+&lt;p&gt;自动驾驶不光光是 技术上的问题，法律和相关规范 是自动驾驶可以正常运行的必要条件。&lt;/p&gt;
+
+&lt;p&gt;期待自动驾驶早点普及使用，在那之前，希望相关法律和规范已经落地执行。&lt;/p&gt;
+
+&lt;p&gt;还有，没事不要到马路上溜达。&lt;/p&gt;
+
+&lt;h3 id=&quot;end&quot;&gt;end&lt;/h3&gt;
+
+&lt;p&gt;  写文章很有难度啊，写不下去了先在这里吐个槽，提升写作能力太有必要了。清楚明白地表达观点，并且让读者轻易的捕捉到你要表达的意思 ，让文章读起来感觉顺畅，同时保持整体有结构和层次，这些都不是那么容易的兼顾的到。想要提升写作能力，一番磨练必不可少啊。&lt;/p&gt;
+
+&lt;p&gt;有问题或想法可以联系我讨论，邮箱：&lt;code class=&quot;highlighter-rouge&quot;&gt;meowchunfat@hotmail.com&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="something" />
+      
+
+      
+        <summary type="html">  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">CocoaPods 私有库搭建</title>
+      <link href="http://localhost:4000/cocoapods-private" rel="alternate" type="text/html" title="CocoaPods 私有库搭建" />
+      <published>2019-08-16T16:01:00+08:00</published>
+      <updated>2019-08-16T16:01:00+08:00</updated>
+      <id>http://localhost:4000/cocoapods-private</id>
+      <content type="html" xml:base="http://localhost:4000/cocoapods-private">&lt;p&gt;在 iOS 开发过程中，经常会使用cocoapods管理三方库，如果自己的库不想公开，只方便自己公司的人用，该怎么办呢？这里介绍一下如何搭建一个私有的Pods库。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;CocoaPods的原理&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;创建私有库&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cocoapods的原理&quot;&gt;CocoaPods的原理&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;第三方库会被编译成.a静态库供我们真正的工程使用。&lt;/strong&gt;&lt;br /&gt;
+CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的工程，该工程在Pods目录下。整个第三方库工程会生成一个名称为&lt;code class=&quot;highlighter-rouge&quot;&gt;libPods-xxx.a&lt;/code&gt;的静态库提供给主工程使用。对于资源文件，CocoaPods 提供了一个名为Pods-resources.sh的bash脚本，该脚本在每次项目编译的时候都会执行，将第三方库的各种资源文件复制到目标目录中。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;工程和第三方库所在的工程会由一个新生成的workspace管理&lt;/strong&gt;&lt;br /&gt;
+为了方便我们直观的管理工程和第三方库，CocoaPodsTest工程和Pods工程会被以workspace的形式组织和管理，也就是xxxx.xcworkspace文件。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CocoaPods通过&lt;code class=&quot;highlighter-rouge&quot;&gt;Pods-Podtest.release.xcconfig&lt;/code&gt;的文件来在编译时设置所有的依赖和参数。&lt;/strong&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;原来的工程设置已经被更改了，直接打开原来的工程文件去编译就会报错，使用新生成的workspace来进行项目管理。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;创建私有库&quot;&gt;创建私有库&lt;/h3&gt;
+
+&lt;p&gt;创建私有库的大体步骤为:&lt;/p&gt;
+
+&lt;h4 id=&quot;1-准备工作&quot;&gt;1. 准备工作&lt;/h4&gt;
+
+&lt;p&gt;创建两个私有远程仓库 Spec 和 Lib&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Spec仓库用来存储spec&lt;/li&gt;
+  &lt;li&gt;Lib用来存储项目工程文件&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;2-创建pod私有库的项目工程&quot;&gt;2. 创建pod私有库的项目工程&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;cd到合适目录下用命令行创建工程,执行 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod lib create Lib&lt;/code&gt; ,按提示输入需要的内容.&lt;/li&gt;
+  &lt;li&gt;修改podspec文件&lt;/li&gt;
+  &lt;li&gt;修改完成后,cd 到Lib目录下执行&lt;code class=&quot;highlighter-rouge&quot;&gt;pod lib lint&lt;/code&gt; &lt;br /&gt;
+podspec 文件保存了所有要对三方库的配置,包括要引用的依赖、模块划分、源文件、公共头文件等.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;3-将本地项目文件上传到远程私有库中&quot;&gt;3. 将本地项目文件上传到远程私有库中&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git remote add origin http://git.xxxx.cn/APP/ios/Lib.git
+$ git add .
+$ git commit -m &quot;Initial commit&quot;
+$ git push -u origin master
+//tag 值要和podspec中的version一致
+$ git tag 0.1.0
+//推送tag到服务器上
+$ git push --tags
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这时查看远程仓库应该有自己的项目文件了&lt;/p&gt;
+
+&lt;h4 id=&quot;4-校验spec&quot;&gt;4. 校验spec&lt;/h4&gt;
+
+&lt;p&gt;执行 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod spec lint&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;5创建spec-repo&quot;&gt;5.创建spec repo&lt;/h4&gt;
+
+&lt;p&gt;进入文件夹&lt;code class=&quot;highlighter-rouge&quot;&gt;cd ~/.cocoapods/repos&lt;/code&gt; 可以查看本地&lt;code class=&quot;highlighter-rouge&quot;&gt;spec repo&lt;/code&gt;
+指定管理 lib repo 的 specs repo 的 url
+&lt;code class=&quot;highlighter-rouge&quot;&gt;pod repo add Lib http://git.xxxx.cn/APP/ios/Spec.git&lt;/code&gt;
+注意 此处地址是spec仓库地址
+推送 podspec 到 specs repo
+&lt;code class=&quot;highlighter-rouge&quot;&gt;pod repo push Lib Lib.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;6-验证&quot;&gt;6. 验证&lt;/h4&gt;
+&lt;p&gt;创建一个新的项目  编写podfile文件&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;source 'http://git.xxxx.cn/APP/ios/Spec.git'
+
+platform :ios, '9.0'
+
+target 'TestPods' do
+  use_frameworks!
+  pod 'Lib'
+
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;cd项目中 执行pod install&lt;/p&gt;
+
+&lt;h4 id=&quot;7--更新spec文件&quot;&gt;7.  更新spec文件&lt;/h4&gt;
+&lt;p&gt;更新 podspec 文件后:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;将更新的podspec 文件更新到 git 库&lt;/li&gt;
+  &lt;li&gt;更新本地 repo 相关私有库的 podspec 文件,命令如下:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;zsspecs&lt;/code&gt; 是私有库的名称.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  pod repo update zsspecs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;subspec&quot;&gt;subspec&lt;/h3&gt;
+&lt;p&gt;代表了一个库的其中一个模块的说明。
+subspec 支持嵌套&lt;/p&gt;
+
+&lt;h3 id=&quot;注意事项&quot;&gt;注意事项&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;pods 在安装的时候,遇到体积较大的文件会报&lt;code class=&quot;highlighter-rouge&quot;&gt;early EOF&lt;/code&gt;的错, 需要设置&lt;code class=&quot;highlighter-rouge&quot;&gt;postBuffer&lt;/code&gt;来解决这个问题&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ git config --global http.postBuffer 1073741824  
+ $ git config --list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pod install&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;pod update&lt;/code&gt; 区别&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;pod update AFNetworking&lt;/code&gt; 单独更新某一个库.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;不更新 podspec&lt;br /&gt;
+CocoaPods 在执行pod install和pod update时，会默认先更新一次podspec索引。使用–no-repo-update参数可以禁止其做索引更新操作。如下所示:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; pod install --no-repo-update
+ pod update --no-repo-update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用私有的 pods&lt;br /&gt;
+通过直接指定某一个依赖的podspec，就可以使用内部的私有库。有利于使企业内部的公共项目支持 CocoaPods。示例：&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;pod 'MyCommon', :podspec =&amp;gt; 'https://suning.com/common/myCommon.podspec'&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;参考资料&lt;br /&gt;
+&lt;a href=&quot;https://guides.cocoapods.org/using/using-cocoapods.html&quot;&gt;cocoaPods文档&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.jianshu.com/p/3086df14ed08&quot;&gt;cocoaPods 原理&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/&quot;&gt;cocoaPods 管理&lt;/a&gt; &lt;br /&gt;
+&lt;a href=&quot;https://guides.cocoapods.org/syntax/podspec.html#subspec&quot;&gt;subspec&lt;/a&gt;&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="something" />
+      
+
+      
+        <summary type="html">在 iOS 开发过程中，经常会使用cocoapods管理三方库，如果自己的库不想公开，只方便自己公司的人用，该怎么办呢？这里介绍一下如何搭建一个私有的Pods库。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">如何看待软件工程师</title>
+      <link href="http://localhost:4000/software-engineer" rel="alternate" type="text/html" title="如何看待软件工程师" />
+      <published>2019-07-01T10:53:00+08:00</published>
+      <updated>2019-07-01T10:53:00+08:00</updated>
+      <id>http://localhost:4000/software-engineer</id>
+      <content type="html" xml:base="http://localhost:4000/software-engineer">&lt;p&gt;在目前的互联网行业中, 从事代码 coding 职业的人,通常被称为程序员或者码农. 事实上他们还有另一个更 &lt;em&gt;高大上&lt;/em&gt; 一点的名字: &lt;code class=&quot;highlighter-rouge&quot;&gt;软件工程师&lt;/code&gt;. 今天就一起深入的了解一下,这个职业都需要哪些基本能力.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;长时间996屹立不倒
+往往一个需求或者工程为了赶工期,需要长时间的加班加点,或者解决一个紧急问题需要连夜解决,在这种时候,没有一个健壮的身体是扛不住的.身体是革命的本钱, 一个好的身体更是做软件开发最重要的本钱. 程序员加班猝死的新闻屡见报端,可见软件开发是需要一个健康的体魄的.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;熟悉业务流程
+世界上的程序员有两种: 一种是给程序员写程序的程序员, 另一种是给非程序员写程序的程序员. 第二种程序员大多是针对企业或用户需求编写代码的程序员. 这种程序员需要对业务流程有着清晰的理解&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;实现业务功能, 
+交互设计 
+操作流程, 
+逻辑 ,&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="something" />
+      
+
+      
+        <summary type="html">在目前的互联网行业中, 从事代码 coding 职业的人,通常被称为程序员或者码农. 事实上他们还有另一个更 高大上 一点的名字: 软件工程师. 今天就一起深入的了解一下,这个职业都需要哪些基本能力.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Time Range 如何影响你的人生</title>
+      <link href="http://localhost:4000/time-range" rel="alternate" type="text/html" title="Time Range 如何影响你的人生" />
+      <published>2019-07-01T10:53:00+08:00</published>
+      <updated>2019-07-01T10:53:00+08:00</updated>
+      <id>http://localhost:4000/time-range</id>
+      <content type="html" xml:base="http://localhost:4000/time-range">&lt;p&gt;时间尺度对人生的影响&lt;/p&gt;
+
+&lt;p&gt;hour
+day
+week
+month
+year
+half-decade
+decade
+two-decade
+three-decade&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="something" />
+      
+
+      
+        <summary type="html">时间尺度对人生的影响</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">iOS 网络封装</title>
+      <link href="http://localhost:4000/network-encapsulation" rel="alternate" type="text/html" title="iOS 网络封装" />
+      <published>2019-07-01T10:53:00+08:00</published>
+      <updated>2019-07-01T10:53:00+08:00</updated>
+      <id>http://localhost:4000/network-encapsulation</id>
+      <content type="html" xml:base="http://localhost:4000/network-encapsulation">&lt;p&gt;网络封装&lt;/p&gt;
+
+&lt;p&gt;request:&lt;/p&gt;
+
+&lt;p&gt;useragent&lt;/p&gt;
+
+&lt;p&gt;cookies&lt;/p&gt;
+
+&lt;p&gt;response:
+errorcode&lt;/p&gt;
+
+&lt;p&gt;302 301条转&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="something" />
+      
+
+      
+        <summary type="html">网络封装</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">Blog 搭建与部署</title>
+      <link href="http://localhost:4000/blog" rel="alternate" type="text/html" title="Blog 搭建与部署" />
+      <published>2019-06-11T02:00:00+08:00</published>
+      <updated>2019-06-11T02:00:00+08:00</updated>
+      <id>http://localhost:4000/blog</id>
+      <content type="html" xml:base="http://localhost:4000/blog">&lt;p&gt;  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。&lt;/p&gt;
+
+&lt;p&gt;  在搭建自己的博客网站时，我希望只专注于组织内容，页面生成、部署等其他不关键的工作尽量简单。现在已经有了比较好的方案可以满足以上需求。在这里介绍如何花费较少的精力去搭建一个静态页面的个人博客。在这里只说一下大概过程，具体细节 search the web，你会得到你想要的一切。&lt;/p&gt;
+
+&lt;h3 id=&quot;1-博客静态网站工具&quot;&gt;1. 博客静态网站工具&lt;/h3&gt;
+
+&lt;p&gt;   这里我们用 Markdown 格式去写一些博客，使用 &lt;a href=&quot;https://www.jekyll.com.cn/docs&quot;&gt;Jekyll&lt;/a&gt;、&lt;a href=&quot;https://hexo.io/zh-cn/&quot;&gt;Hexo&lt;/a&gt; 等转换工具，将纯文本文件转换为 HTML 页面。Jekyll、Hexo 两者的主要区别在于，Jekyll 需要 Ruby 环境，而 Hexo 只需要 NodeJS 运行环境。
+   两者各有大量的主题可供选择，那么问题来了，究竟选择 Jekyll 还是 Hexo ？这里建议选择有你喜欢的主题的那个。因为我在搭博客的时候最先接触 Jekyll，所以在这里介绍一下 Jekyll 的配置方法。&lt;/p&gt;
+
+&lt;p&gt;具体环境安装参考官方文档。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-模版配置&quot;&gt;2. 模版配置&lt;/h3&gt;
+
+&lt;p&gt;  下载完模版后，需要修改 _config.yml 配置文件，里面包含了关于博客站点的大部分配置。
+如果你具备一些前端技能，可以自定义模版里的一些样式。模版的目录结构可参考&lt;a href=&quot;https://www.jekyll.com.cn/docs/structure/&quot;&gt;官方文档&lt;/a&gt;，文档中详细地介绍了每个文件的具体功能。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-生成静态页面&quot;&gt;3. 生成静态页面&lt;/h3&gt;
+
+&lt;p&gt;  在编辑博客时，保存操作会触发编译动作，将你的博客文本渲染成 Html 页面，在浏览器刷新即可看到最新的博客内容。在 Jekyll 转换完所有的文件之后，将默认在 &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; 下放置生成的站点文件。你也可以在 _config.yml 中添加配置 &lt;code class=&quot;highlighter-rouge&quot;&gt;destination: ../Blog_source/&lt;/code&gt; 设置相对路径，这样生成的站点文件就会存放在你设置的路径下，方便用 git 工具管理。&lt;/p&gt;
+
+&lt;h3 id=&quot;4-github-设置&quot;&gt;4. GitHub 设置&lt;/h3&gt;
+
+&lt;p&gt;  在这里，你需要创建一个 &lt;a href=&quot;https://pages.github.com&quot;&gt;github page&lt;/a&gt; repository，具体操作见文档。这个就是就是用来存放你站点文件的 repo。创建完毕之后，需要在 config.yml 文件中添加 github 相关的配置，配置项如下。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#gitment
+owner: XXX
+repo: XXX
+branch: master
+client_id: xxxxxxx
+client_secret: xxxxxx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;5-绑定域名&quot;&gt;5. 绑定域名&lt;/h3&gt;
+
+&lt;p&gt;  首先你需要掏点银子买个自己的域名（摊手）,这里都是固定的操作没啥好说的，具体细节可以参考&lt;a href=&quot;https://cloud.tencent.com/developer/article/1421879&quot;&gt;这位施主&lt;/a&gt;文章。&lt;/p&gt;
+
+&lt;p&gt;  当然你也可以不绑定域名，省下一笔银子来顿烧烤，但是作为一个独立 bloger ，自己的域名还是要有的，不然没有 bigger。&lt;/p&gt;
+
+&lt;h3 id=&quot;6-添加评论和统计功能&quot;&gt;6. 添加评论和统计功能&lt;/h3&gt;
+
+&lt;p&gt;  这个就需要你了解一点点前端的技能了，我们现说评论：评论有很多平台在做，比如“多说”，“畅言”，“友言”，“新浪云跟贴”，但大多都不太靠谱，关的关、封的封。这里 使用&lt;a href=&quot;https://imsun.net/posts/gitment-introduction/&quot;&gt;Gitment&lt;/a&gt;来实现博客的评论功能，具体细节可参考大神的文章。&lt;/p&gt;
+
+&lt;p&gt;  关于统计，这个看你自己需不需要加。我这里加的是&lt;a href=&quot;https://tongji.baidu.com/web/welcome/login&quot;&gt;百度统计&lt;/a&gt;,官方有较详细的接入文档。可以查看博客的浏览人数和页面UV、PV。&lt;/p&gt;
+
+&lt;h3 id=&quot;总结&quot;&gt;总结&lt;/h3&gt;
+&lt;p&gt;使用 GitHub page 存放博客，充当免费服务器的角色，Jekyll 将文本解析成 html 页面，这样博客一经建成，就无须维护，只需要专心写内容就可以了。&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="something" />
+      
+
+      
+        <summary type="html">  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">TODO_LIST</title>
+      <link href="http://localhost:4000/to-do-list-origin" rel="alternate" type="text/html" title="TODO_LIST" />
+      <published>1970-01-01T08:00:00+08:00</published>
+      <updated>1970-01-01T08:00:00+08:00</updated>
+      <id>http://localhost:4000/to-do-list-origin</id>
+      <content type="html" xml:base="http://localhost:4000/to-do-list-origin">&lt;p&gt;因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈&lt;/p&gt;
+
+&lt;p&gt;为了表示这里是博客起源，特意把保存这篇博客的源文件 命名为 &lt;code class=&quot;highlighter-rouge&quot;&gt;1970-01-01-to-do-list-origin.md&lt;/code&gt;，懂计算机的朋应该会明白，哈哈。为了避免误会，这里记录这个文件的实际生成日期是&lt;code class=&quot;highlighter-rouge&quot;&gt;date: 2019-11-12 19:40:00&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;电商 APP 总结&lt;/p&gt;
+
+&lt;h3 id=&quot;路由&quot;&gt;路由&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;使用 JSON 格式的数据 映射 app 结构。（或者创建 对象），每个节点保存展现方式，页面参数等信息&lt;/li&gt;
+  &lt;li&gt;页面跳转就是展现其中的节点&lt;/li&gt;
+  &lt;li&gt;APP 任意状态下，只是处在一条路径中的节点上，&lt;/li&gt;
+  &lt;li&gt;节点可嵌套，即子节点与父节点类型相同&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;静态路由，手动配置路由表
+&lt;a href=&quot;https://angular.cn/guide/router&quot;&gt;angular&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;路由规则，有些页面是单向的，或者是当前节点不可访问的，需要定制路由规则&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;创建路径，Path&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;回调&quot;&gt;回调&lt;/h3&gt;
+&lt;p&gt;Global Anchor ，全局事件回调，可一对多，并且保证线程安全。同时实现内存管理内存&lt;/p&gt;
+
+&lt;h3 id=&quot;接口设计&quot;&gt;接口设计&lt;/h3&gt;
+&lt;p&gt;1.创建 静态路由表
+2.路由节点模型 ，包含 类信息、接口信息、&lt;/p&gt;
+
+&lt;p&gt;3.字符串路径 -&amp;gt;节点路径转换 map 映射&lt;/p&gt;
+
+&lt;p&gt;4.加载路径 跳转&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>Miaocf</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="something" />
+      
+
+      
+        <summary type="html">因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈</summary>
+      
+
+      
+      
+    </entry>
+  
+</feed>
