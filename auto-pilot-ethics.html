@@ -1,247 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="iOS 开发，会 1.5 点web前端，Java web入门开发者">
-    <meta name="keywords"  content="CF Max, CF Blog, iOS,Java web,博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计">
-    <meta name="theme-color" content="#000000">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="关于自动驾驶伦理问题的思考 - Cunfa的博客 | CF Blog">
-    
-    <meta property="og:type" content="article">
-    <meta property="og:description" content="  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。
-">
-    
-    <meta property="article:published_time" content="2019-11-08T00:00:00Z">
-    
-    
-    <meta property="article:author" content="Miaocf">
-    
-    
-    <meta property="article:tag" content="something">
-    
-    
-    <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
-    <meta property="og:url" content="http://localhost:4000/auto-pilot-ethics">
-    <meta property="og:site_name" content="Cunfa的博客 | CF Blog">
-    
-    <title>关于自动驾驶伦理问题的思考 - Cunfa的博客 | CF Blog</title>
 
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="/pwa/manifest.json">
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/auto-pilot-ethics">
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <title>关于自动驾驶伦理问题的思考</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
     <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Cloud in the sky, fish in the river" />
+    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://localhost:4000/auto-pilot-ethics" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
 
-    <!-- ga & ba script hoook -->
-    <script></script>
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Miaocf" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="关于自动驾驶伦理问题的思考" />
+    <meta property="og:description" content="  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。   目前市场上已经出现了可以自动驾驶的汽车，比如特斯拉、百度的阿波龙。 其中自动驾驶应用较为激进的当属特斯拉无疑。近几年 (2016-2018) 特斯拉的几起事故，可能与自动驾驶技术尚未完全成熟有关。而百度已获得全国首批T4道路测试牌照，自动驾达到L4级别的阿波龙已经于2018年7月4日正式量产下线，已经在多地开始展开试用。 （图为阿波龙自动驾驶汽车）   随着人工智能 AI (Artificial Intelligence) 的事件处理能力和数据分析精度变得更强更高，自动驾驶技术也开始进入了实用阶段。当然，实现自动驾驶除了 AI 必不可少以外，还需要计算机视觉、高精度地图、5G高速通信技术、激光雷达等环境感知技术。可以预见到不久的将来，自动驾驶功能将会成为汽车的标配功能，AI 也继 水、电、网络之后，势必成为生活中必不可少的基础元素，潜入到生活的方方面面。   然而 AI 作为自动驾驶的主要决策单元，代替驾驶员做出决策，控制车辆在道路上行走，这将带来一系列的社会伦理问题和法律问题。在这里列出一些自动驾驶在不久的将来可能会遇到的问题，与大家一起讨论、思考。 问题1 自动驾驶汽车行驶过程中，遇突发事故，选择避让可能危及行人生命安全，不避让可能会导致乘客伤亡，AI 该如何决策？ 这里有三个问题需要回答： 用户和行人都是无辜者，AI 有了干预的机会后，突来的意外应该降临到谁身上？ 自动驾驶汽车作为一款产品，AI 是优先保护用户的安全？还是优先保护行人的安全？ 遇到以上场景，自动驾驶是否需要乘客做出决策？或者说乘客的决定和AI的决定哪个有效？（自动驾驶里弱化了 司机 的角色，司机更多是 可以干预驾驶的乘客） 问题2 一辆火车失控，即将撞向铁路上的五个人，这时 AI 可以控制扳手让火车转向，撞向另外一条轨道上的一个人。是将伤亡将到最小，还是让事故继续发生？ 人性、道德、法律，到底是谁做出了最终抉择？   这其实是美国哈佛大学政治哲学教授迈克尔·桑德尔，在公开课中设想的场景，用以描述行为选择的道德困境。在这里只是把人改为了 AI。在这里，不管 AI 如何处理，其最终决的选择实际来自于人，或者来自于人已经定制好的算法，AI 通过算法计算，忠实地执行了这个决定。   人可以为自己的决策和行为负责，那么AI的决策和行为谁来负责呢？   我认为这应该是社会群体层的共识问题，社会群体中的每个个体需要事先知晓 并接受 AI 的决策策略，在事故发生后， 所有人必须为算法的执行结果负责，因为这个是整个社会群体已经认可的选择。   当然 在现实中很难发生这种特殊情况，特别案例还需要根据实际情况具体分析，这里只是纯为讨论而假设的场景。 自动驾驶不光光是 技术上的问题，法律和相关规范" />
+    <meta property="og:url" content="http://localhost:4000/auto-pilot-ethics" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/autopilot/Tesla.jpeg" />
+    <meta property="article:publisher" content="https://www.facebook.com/false" />
+    <meta property="article:author" content="https://www.facebook.com/false" />
+    <meta property="article:published_time" content="2019-11-08T00:00:00+08:00" />
+    <meta property="article:modified_time" content="2019-11-08T00:00:00+08:00" />
+    <meta property="article:tag" content="Something" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="关于自动驾驶伦理问题的思考" />
+    <meta name="twitter:description" content="  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。   目前市场上已经出现了可以自动驾驶的汽车，比如特斯拉、百度的阿波龙。 其中自动驾驶应用较为激进的当属特斯拉无疑。近几年 (2016-2018) 特斯拉的几起事故，可能与自动驾驶技术尚未完全成熟有关。而百度已获得全国首批T4道路测试牌照，自动驾达到L4级别的阿波龙已经于2018年7月4日正式量产下线，已经在多地开始展开试用。 （图为阿波龙自动驾驶汽车）   随着人工智能 AI (Artificial Intelligence) 的事件处理能力和数据分析精度变得更强更高，自动驾驶技术也开始进入了实用阶段。当然，实现自动驾驶除了 AI 必不可少以外，还需要计算机视觉、高精度地图、5G高速通信技术、激光雷达等环境感知技术。可以预见到不久的将来，自动驾驶功能将会成为汽车的标配功能，AI 也继 水、电、网络之后，势必成为生活中必不可少的基础元素，潜入到生活的方方面面。   然而 AI 作为自动驾驶的主要决策单元，代替驾驶员做出决策，控制车辆在道路上行走，这将带来一系列的社会伦理问题和法律问题。在这里列出一些自动驾驶在不久的将来可能会遇到的问题，与大家一起讨论、思考。 问题1 自动驾驶汽车行驶过程中，遇突发事故，选择避让可能危及行人生命安全，不避让可能会导致乘客伤亡，AI 该如何决策？ 这里有三个问题需要回答： 用户和行人都是无辜者，AI 有了干预的机会后，突来的意外应该降临到谁身上？ 自动驾驶汽车作为一款产品，AI 是优先保护用户的安全？还是优先保护行人的安全？ 遇到以上场景，自动驾驶是否需要乘客做出决策？或者说乘客的决定和AI的决定哪个有效？（自动驾驶里弱化了 司机 的角色，司机更多是 可以干预驾驶的乘客） 问题2 一辆火车失控，即将撞向铁路上的五个人，这时 AI 可以控制扳手让火车转向，撞向另外一条轨道上的一个人。是将伤亡将到最小，还是让事故继续发生？ 人性、道德、法律，到底是谁做出了最终抉择？   这其实是美国哈佛大学政治哲学教授迈克尔·桑德尔，在公开课中设想的场景，用以描述行为选择的道德困境。在这里只是把人改为了 AI。在这里，不管 AI 如何处理，其最终决的选择实际来自于人，或者来自于人已经定制好的算法，AI 通过算法计算，忠实地执行了这个决定。   人可以为自己的决策和行为负责，那么AI的决策和行为谁来负责呢？   我认为这应该是社会群体层的共识问题，社会群体中的每个个体需要事先知晓 并接受 AI 的决策策略，在事故发生后， 所有人必须为算法的执行结果负责，因为这个是整个社会群体已经认可的选择。   当然 在现实中很难发生这种特殊情况，特别案例还需要根据实际情况具体分析，这里只是纯为讨论而假设的场景。 自动驾驶不光光是 技术上的问题，法律和相关规范" />
+    <meta name="twitter:url" content="http://localhost:4000/" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/autopilot/Tesla.jpeg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Miaocf" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Something" />
+    <meta name="twitter:site" content="@false" />
+    <meta name="twitter:creator" content="@false" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Miaocf",
+        "logo": "http://localhost:4000/assets/images/blog-icon.png"
+    },
+    "url": "http://localhost:4000/auto-pilot-ethics",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:4000/assets/images/autopilot/Tesla.jpeg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:4000/auto-pilot-ethics"
+    },
+    "description": "  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。   目前市场上已经出现了可以自动驾驶的汽车，比如特斯拉、百度的阿波龙。 其中自动驾驶应用较为激进的当属特斯拉无疑。近几年 (2016-2018) 特斯拉的几起事故，可能与自动驾驶技术尚未完全成熟有关。而百度已获得全国首批T4道路测试牌照，自动驾达到L4级别的阿波龙已经于2018年7月4日正式量产下线，已经在多地开始展开试用。 （图为阿波龙自动驾驶汽车）   随着人工智能 AI (Artificial Intelligence) 的事件处理能力和数据分析精度变得更强更高，自动驾驶技术也开始进入了实用阶段。当然，实现自动驾驶除了 AI 必不可少以外，还需要计算机视觉、高精度地图、5G高速通信技术、激光雷达等环境感知技术。可以预见到不久的将来，自动驾驶功能将会成为汽车的标配功能，AI 也继 水、电、网络之后，势必成为生活中必不可少的基础元素，潜入到生活的方方面面。   然而 AI 作为自动驾驶的主要决策单元，代替驾驶员做出决策，控制车辆在道路上行走，这将带来一系列的社会伦理问题和法律问题。在这里列出一些自动驾驶在不久的将来可能会遇到的问题，与大家一起讨论、思考。 问题1 自动驾驶汽车行驶过程中，遇突发事故，选择避让可能危及行人生命安全，不避让可能会导致乘客伤亡，AI 该如何决策？ 这里有三个问题需要回答： 用户和行人都是无辜者，AI 有了干预的机会后，突来的意外应该降临到谁身上？ 自动驾驶汽车作为一款产品，AI 是优先保护用户的安全？还是优先保护行人的安全？ 遇到以上场景，自动驾驶是否需要乘客做出决策？或者说乘客的决定和AI的决定哪个有效？（自动驾驶里弱化了 司机 的角色，司机更多是 可以干预驾驶的乘客） 问题2 一辆火车失控，即将撞向铁路上的五个人，这时 AI 可以控制扳手让火车转向，撞向另外一条轨道上的一个人。是将伤亡将到最小，还是让事故继续发生？ 人性、道德、法律，到底是谁做出了最终抉择？   这其实是美国哈佛大学政治哲学教授迈克尔·桑德尔，在公开课中设想的场景，用以描述行为选择的道德困境。在这里只是把人改为了 AI。在这里，不管 AI 如何处理，其最终决的选择实际来自于人，或者来自于人已经定制好的算法，AI 通过算法计算，忠实地执行了这个决定。   人可以为自己的决策和行为负责，那么AI的决策和行为谁来负责呢？   我认为这应该是社会群体层的共识问题，社会群体中的每个个体需要事先知晓 并接受 AI 的决策策略，在事故发生后， 所有人必须为算法的执行结果负责，因为这个是整个社会群体已经认可的选择。   当然 在现实中很难发生这种特殊情况，特别案例还需要根据实际情况具体分析，这里只是纯为讨论而假设的场景。 自动驾驶不光光是 技术上的问题，法律和相关规范"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="关于自动驾驶伦理问题的思考" href="/feed.xml" />
+
+
 </head>
+<body class="post-template">
 
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
 
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
 
-    <!-- Navigation -->
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.png" alt="Miaocf" /></a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
+    <li class="nav-getting-started" role="menuitem"><a href="/tag/getting-started/">Getting Started</a></li>
+    <li class="nav-try-ghost" role="menuitem"><a href="https://ghost.org">Try Ghost</a></li>
+</ul>
 
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">CF Blog</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="/about">About</a>
-                    </li>
-                    
-                    
-                    
-                    <li>
-                        <a href="/archive">Archive</a>
-                    </li>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
+        
     </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    var __HuxNav__ = {
-        close: function(){
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        },
-        open: function(){
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-
-    // Bind Event
-    $toggle.addEventListener('click', function(e){
-        if ($navbar.className.indexOf('in') > 0) {
-            __HuxNav__.close()
-        }else{
-            __HuxNav__.open()
-        }
-    })
-
-    /**
-     * Since Fastclick is used to delegate 'touchstart' globally
-     * to hack 300ms delay in iOS by performing a fake 'click',
-     * Using 'e.stopPropagation' to stop 'touchstart' event from 
-     * $toggle/$collapse will break global delegation.
-     * 
-     * Instead, we use a 'e.target' filter to prevent handler
-     * added to document close HuxNav.  
-     *
-     * Also, we use 'click' instead of 'touchstart' as compromise
-     */
-    document.addEventListener('click', function(e){
-        if(e.target == $toggle) return;
-        if(e.target.className == 'icon-bar') return;
-        __HuxNav__.close();
-    })
-</script>
-
-
-    <!-- Image to hack wechat -->
-<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
-
-<!-- Post Header -->
-
-
-
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/img/home-bg.jpg');
-        background: ;
-    }
-
-    
-</style>
-
-<header class="intro-header" >
-
-    <div class="header-mask"></div>
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                        <a class="tag" href="/archive/?tag=something" title="something">something</a>
-                        
-                    </div>
-                    <h1>关于自动驾驶伦理问题的思考</h1>
-                    
-                    <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Miaocf on November 8, 2019</span>
-                </div>
-            </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+            
         </div>
+        
+    </div>
+</nav>
+
     </div>
 </header>
 
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
 
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
 
+        <article class="post-full post tag-something ">
 
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime=" 8 November 2019"> 8 November 2019</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/something/'>SOMETHING</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">关于自动驾驶伦理问题的思考</h1>
+            </header>
 
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/autopilot/Tesla.jpeg)">
+            </figure>
+            
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <!-- Multi-Lingual -->
-                
-
-				<p>  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。</p>
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>  在这里主要讨论自动驾驶技术的实际应用中，可能遇到的社会伦理问题以及相关思考。</p>
 
 <p>  目前市场上已经出现了可以自动驾驶的汽车，比如特斯拉、百度的阿波龙。 其中自动驾驶应用较为激进的当属特斯拉无疑。近几年 (2016-2018) 特斯拉的几起事故，可能与自动驾驶技术尚未完全成熟有关。而百度已获得全国首批T4道路测试牌照，自动驾达到L4级别的<a href="http://apollo.auto/minibus/index_cn.html">阿波龙</a>已经于2018年7月4日正式量产下线，已经在多地开始展开试用。</p>
 
-<p><img src="/assets/images/autopilot/apollo.jpg" style="zoom:70%;" /></p>
+<p><img src="../assets/images/autopilot/apollo.jpg" style="zoom:70%;" /></p>
 
 <p>（图为阿波龙自动驾驶汽车）</p>
 
@@ -253,7 +188,7 @@
 
 <p>自动驾驶汽车行驶过程中，遇突发事故，选择避让可能危及行人生命安全，不避让可能会导致乘客伤亡，AI 该如何决策？</p>
 
-<p><img src="/assets/images/autopilot/user-innocent-accident.png" style="zoom:70%;" /></p>
+<p><img src="../assets/images/autopilot/user-innocent-accident.png" style="zoom:70%;" /></p>
 
 <p>这里有三个问题需要回答：</p>
 
@@ -267,7 +202,7 @@
 
 <p>一辆火车失控，即将撞向铁路上的五个人，这时 AI 可以控制扳手让火车转向，撞向另外一条轨道上的一个人。是将伤亡将到最小，还是让事故继续发生？</p>
 
-<p><img src="/assets/images/autopilot/which-one-to-choose.png" style="zoom:70%;" /></p>
+<p><img src="../assets/images/autopilot/which-one-to-choose.png" style="zoom:70%;" /></p>
 
 <p>人性、道德、法律，到底是谁做出了最终抉择？</p>
 
@@ -293,31 +228,41 @@
 
 <p>声明：本篇为个人原创，允许转载，转载请注明出处。</p>
 
+                </div>
+            </section>
 
-                <hr style="visibility: hidden;">
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/technology-and-values" data-toggle="tooltip" data-placement="top" title="技术是如何产生价值的？">
-                        Previous<br>
-                        <span>技术是如何产生价值的？</span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/difference-and-tought" data-toggle="tooltip" data-placement="top" title="Difference And Tought">
-                        Next<br>
-                        <span>Difference And Tought</span>
-                        </a>
-                    </li>
-                    
-                </ul>
-                <hr style="visibility: hidden;">
+            <!-- Email subscribe form at the bottom of the page -->
+            <!--   -->
+            
 
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
                 
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/Miaocf">Miaocf</a></h4>
+                                
+                                    <p>优秀和极致是两回事</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/Miaocf">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
 
-                <div id="gitmentContainer"></div>
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            <div id="gitmentContainer"></div>
 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
@@ -331,215 +276,330 @@ var gitment = new Gitment({
 });
 gitment.render('gitmentContainer');
 </script>
+
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
                 
-            </div>  
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Miaocf &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/something/">Something</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/cocoapods-private">CocoaPods 私有库搭建</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/software-engineer">如何看待软件工程师</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/time-range">Time Range 如何影响你的人生</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/something/">
+                                
+                                    See all 6 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
 
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
                 
 
+    <article class="post-card  no-image">
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/what-do-you-think-about-difference">
+                <header class="post-card-header">
+                    
 
-<section>
-    
-        <hr class="hidden-sm hidden-xs">
-    
-    <h5><a href="/archive/">FEATURED TAGS</a></h5>
-    <div class="tags">
+                    <h2 class="post-card-title">What Do You Think About Difference</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
         
+            <a class="post-card-image-link" href="/how-dose-technology-create-values">
+                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
+            </a>
         
-        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/how-dose-technology-create-values">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Thoughts</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">技术是如何产生价值的？</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/Miaocf/">Miaocf</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://localhost:4000/">
+            
+                <img src="/assets/images/favicon.png" alt="Miaocf icon" />
+            
+            <span>Miaocf</span>
         </a>
-        
-        
-                <a data-sort="0019" 
-                    href="/archive/?tag=something"
-                    title="something"
-                    rel="7">something</a>
-        
-                <a data-sort="0012" 
-                    href="/archive/?tag=iOS"
-                    title="iOS"
-                    rel="14">iOS
     </div>
-</section>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">关于自动驾驶伦理问题的思考</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E5%85%B3%E4%BA%8E%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6%E4%BC%A6%E7%90%86%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83&amp;url=auto-pilot-ethics"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=auto-pilot-ethics"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
-                <!-- Friends Blog -->
-                
-<hr>
-<h5>FOOTPRINTS</h5>
-<ul class="list-inline">
-  
-  <li><a href="https://www.v2ex.com">V2EX</a></li>
-  
-  <li><a href="http://www.ruanyifeng.com">ruanyifeng</a></li>
-  
-  <li><a href="https://flutter.dev">flutter</a></li>
-  
-  <li><a href="https://www.cnblogs.com">cnblogs</a></li>
-  
-  <li><a href="https://github.com">github</a></li>
-  
-  <li><a href="https://angular.cn">angular</a></li>
-  
-  <li><a href="https://tour.go-zh.org/">go</a></li>
-  
-  <li><a href="https://www.rust-lang.org">rust-lang</a></li>
-  
-  <li><a href="https://haskellbook.com">haskellbook</a></li>
-  
-</ul>
-
-            </div>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
         </div>
-    </div>
-</article>
-
-<!-- add support for mathjax by voleking-->
+    </progress>
+</div>
 
 
+<!-- /post -->
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'right',
-          // icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
 
 
+        <!-- Previous/next page links - displayed on every page -->
+        
 
-    <!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <!-- SNS Link -->
-                
-
-
-<ul class="list-inline text-center">
-
-
-  
-  
-  
-  
-  
-  
-  
-</ul>
-
-                <p class="copyright text-muted">
-                    Copyright &copy; CF Blog 2020
-                    <br>
-                    Powered by <a href="http://junziboxue.com">Mcf Blog</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=JumpJumpSparrow&repo=JumpJumpSparrow.github.io&type=star&count=true" >
-                    </iframe>
-                </p>
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="http://localhost:4000/">Miaocf</a> &copy; 2020</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
             </div>
-        </div>
+        </footer>
+
     </div>
-</footer>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+    <!-- The big email subscribe modal content -->
+    
 
-<!-- Bootstrap Core JavaScript -->
-<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
-<script src="/js/bootstrap.min.js "></script>
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
 
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
-
-<!-- Service Worker -->
-
-<script src="/js/snackbar.js "></script>
-<script src="/js/sw-registration.js "></script>
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
     </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
 
 
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
 
 
-
-<!--fastClick.js -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-<!-- Add Baidu Analytics  -->
-<!-- Baidu Analytics Tracking code -->
+    <!-- Add Baidu Analytics  -->
+    <!-- Baidu Analytics Tracking code -->
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -552,20 +612,76 @@ var _hmt = _hmt || [];
 
 
 
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
 
-<!-- Side Catalog -->
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
 
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
 
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
 
-<!-- Multi-Lingual -->
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
 
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
 
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
 
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
 
-<!-- Image to hack wechat -->
-<img src="/img/icon_wechat.png" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
 
 </body>
-
 </html>

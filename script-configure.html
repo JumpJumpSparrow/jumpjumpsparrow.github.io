@@ -1,243 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="description" content="iOS 开发，会 1.5 点web前端，Java web入门开发者">
-    <meta name="keywords"  content="CF Max, CF Blog, iOS,Java web,博客, 个人网站, 互联网, Web, JavaScript, 前端, 设计">
-    <meta name="theme-color" content="#000000">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="使用 shell 脚本配置iOS工程生成多个APP - Cunfa的博客 | CF Blog">
-    
-    <meta property="og:type" content="article">
-    <meta property="og:description" content="  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。
-">
-    
-    <meta property="article:published_time" content="2019-09-20T07:00:00Z">
-    
-    
-    <meta property="article:author" content="Miaocf">
-    
-    
-    <meta property="article:tag" content="iOS">
-    
-    
-    <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
-    <meta property="og:url" content="http://localhost:4000/script-configure">
-    <meta property="og:site_name" content="Cunfa的博客 | CF Blog">
-    
-    <title>使用 shell 脚本配置iOS工程生成多个APP - Cunfa的博客 | CF Blog</title>
 
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="/pwa/manifest.json">
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="/img/favicon.ico">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/script-configure">
-
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
-
-    <!-- Custom Fonts -->
-    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
-    <!-- Hux change font-awesome CDN to qiniu -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <title>使用 shell 脚本配置iOS工程生成多个APP</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
     <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="Cloud in the sky, fish in the river" />
+    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://localhost:4000/script-configure" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
 
-    <!-- ga & ba script hoook -->
-    <script></script>
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Miaocf" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="使用 shell 脚本配置iOS工程生成多个APP" />
+    <meta property="og:description" content="  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。 1. 需求分析 在配置工程中我们需要事先知道有哪些配置项： APP 启动图、图标等资源文件。 APP 名称、版本号、bundleID。 APP 相关的微信 APPKey、scheme。 网络环境、部分代码替换。 provisioning profile 修改 分析以上需要配置的项，我们可以发现这些配置项可以分为三类，分别是： 资源文件替换 plist 字段修改 部分代码替换 接下来介绍如何实现满足以上需求的Shell脚本。 2. 脚本设计&amp;实现 2.1 创建脚本   首先创建一个shell脚本文件，在命令行工具中输入touch xxx.sh就可以创建shell脚本文件,在这里将shell脚本命名为：projectDeploy.sh。   运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:sh projectDeploy.sh命令就可以运行脚本了。 2.2 脚本传参 我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种： while getopts ":e:s:" opt do case $opt in e) environment=$OPTARG;; s) supplier=$OPTARG;; ?) echo "请输入正确的参数" exit 1;;" />
+    <meta property="og:url" content="http://localhost:4000/script-configure" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/xxx.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/false" />
+    <meta property="article:author" content="https://www.facebook.com/false" />
+    <meta property="article:published_time" content="2019-09-20T07:00:00+08:00" />
+    <meta property="article:modified_time" content="2019-09-20T07:00:00+08:00" />
+    <meta property="article:tag" content="Ios" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="使用 shell 脚本配置iOS工程生成多个APP" />
+    <meta name="twitter:description" content="  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。 1. 需求分析 在配置工程中我们需要事先知道有哪些配置项： APP 启动图、图标等资源文件。 APP 名称、版本号、bundleID。 APP 相关的微信 APPKey、scheme。 网络环境、部分代码替换。 provisioning profile 修改 分析以上需要配置的项，我们可以发现这些配置项可以分为三类，分别是： 资源文件替换 plist 字段修改 部分代码替换 接下来介绍如何实现满足以上需求的Shell脚本。 2. 脚本设计&amp;实现 2.1 创建脚本   首先创建一个shell脚本文件，在命令行工具中输入touch xxx.sh就可以创建shell脚本文件,在这里将shell脚本命名为：projectDeploy.sh。   运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:sh projectDeploy.sh命令就可以运行脚本了。 2.2 脚本传参 我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种： while getopts ":e:s:" opt do case $opt in e) environment=$OPTARG;; s) supplier=$OPTARG;; ?) echo "请输入正确的参数" exit 1;;" />
+    <meta name="twitter:url" content="http://localhost:4000/" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/xxx.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Miaocf" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Ios" />
+    <meta name="twitter:site" content="@false" />
+    <meta name="twitter:creator" content="@false" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Miaocf",
+        "logo": "http://localhost:4000/assets/images/blog-icon.png"
+    },
+    "url": "http://localhost:4000/script-configure",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:4000/assets/images/xxx.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:4000/script-configure"
+    },
+    "description": "  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。 1. 需求分析 在配置工程中我们需要事先知道有哪些配置项： APP 启动图、图标等资源文件。 APP 名称、版本号、bundleID。 APP 相关的微信 APPKey、scheme。 网络环境、部分代码替换。 provisioning profile 修改 分析以上需要配置的项，我们可以发现这些配置项可以分为三类，分别是： 资源文件替换 plist 字段修改 部分代码替换 接下来介绍如何实现满足以上需求的Shell脚本。 2. 脚本设计&amp;实现 2.1 创建脚本   首先创建一个shell脚本文件，在命令行工具中输入touch xxx.sh就可以创建shell脚本文件,在这里将shell脚本命名为：projectDeploy.sh。   运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:sh projectDeploy.sh命令就可以运行脚本了。 2.2 脚本传参 我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种： while getopts ":e:s:" opt do case $opt in e) environment=$OPTARG;; s) supplier=$OPTARG;; ?) echo "请输入正确的参数" exit 1;;"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="使用 shell 脚本配置iOS工程生成多个APP" href="/feed.xml" />
+
+
 </head>
+<body class="post-template">
 
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
 
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="">
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
 
-    <!-- Navigation -->
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/blog-icon.png" alt="Miaocf" /></a>
+            
+        
+        
+            <ul class="nav" role="menu">
+    <li class="nav-home" role="menuitem"><a href="/">Home</a></li>
+    <li class="nav-about" role="menuitem"><a href="/about/">About</a></li>
+    <li class="nav-getting-started" role="menuitem"><a href="/tag/getting-started/">Getting Started</a></li>
+    <li class="nav-try-ghost" role="menuitem"><a href="https://ghost.org">Try Ghost</a></li>
+</ul>
 
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">CF Blog</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="/about">About</a>
-                    </li>
-                    
-                    
-                    
-                    <li>
-                        <a href="/archive">Archive</a>
-                    </li>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                </ul>
-            </div>
-        </div>
-        <!-- /.navbar-collapse -->
+        
     </div>
-    <!-- /.container -->
-</nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
-
-    var __HuxNav__ = {
-        close: function(){
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        },
-        open: function(){
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-
-    // Bind Event
-    $toggle.addEventListener('click', function(e){
-        if ($navbar.className.indexOf('in') > 0) {
-            __HuxNav__.close()
-        }else{
-            __HuxNav__.open()
-        }
-    })
-
-    /**
-     * Since Fastclick is used to delegate 'touchstart' globally
-     * to hack 300ms delay in iOS by performing a fake 'click',
-     * Using 'e.stopPropagation' to stop 'touchstart' event from 
-     * $toggle/$collapse will break global delegation.
-     * 
-     * Instead, we use a 'e.target' filter to prevent handler
-     * added to document close HuxNav.  
-     *
-     * Also, we use 'click' instead of 'touchstart' as compromise
-     */
-    document.addEventListener('click', function(e){
-        if(e.target == $toggle) return;
-        if(e.target.className == 'icon-bar') return;
-        __HuxNav__.close();
-    })
-</script>
-
-
-    <!-- Image to hack wechat -->
-<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
-
-<!-- Post Header -->
-
-
-
-<style type="text/css">
-    header.intro-header{
-        position: relative;
-        background-image: url('/img/home-bg.jpg');
-        background: ;
-    }
-
-    
-</style>
-
-<header class="intro-header" >
-
-    <div class="header-mask"></div>
-    
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                        <a class="tag" href="/archive/?tag=iOS" title="iOS">iOS</a>
-                        
-                    </div>
-                    <h1>使用 shell 脚本配置iOS工程生成多个APP</h1>
-                    
-                    <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Miaocf on September 20, 2019</span>
-                </div>
-            </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+            
         </div>
+        
+    </div>
+</nav>
+
     </div>
 </header>
 
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
 
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
 
+        <article class="post-full post tag-iOS ">
 
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="20 September 2019">20 September 2019</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/ios/'>IOS</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">使用 shell 脚本配置iOS工程生成多个APP</h1>
+            </header>
 
+            
+            <figure class="post-full-image" style="background-image: url(/assets/images/xxx.jpg)">
+            </figure>
+            
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <!-- Multi-Lingual -->
-                
-
-				<p>  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。</p>
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。</p>
 
 <h3 id="1-需求分析">1. 需求分析</h3>
 
@@ -270,23 +205,7 @@
 <h4 id="22-脚本传参">2.2 脚本传参</h4>
 <p>我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="rouge-code"><pre>while getopts ":e:s:" opt
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>while getopts ":e:s:" opt
 
 do
     case $opt in
@@ -302,7 +221,7 @@ do
     esac
 done
 
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p>这里定义了两个全局变量 <code class="highlighter-rouge">environment</code> 和 <code class="highlighter-rouge">supplier</code>，当调用脚本时，输入命令 <code class="highlighter-rouge">sh projectDeploy.sh -e prd -s xxx</code><br />
 这种传参的好处是，指定了具体变量对应的值，不必保持参数的顺序。</p>
@@ -325,21 +244,17 @@ done
 
 <p>具体命令为：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>/usr/libexec/PlistBuddy -c "set CFBundleIdentifier com.xxx.xxx" ${project_infoplist_path}  
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/libexec/PlistBuddy -c "set CFBundleIdentifier com.xxx.xxx" ${project_infoplist_path}  
 /usr/libexec/PlistBuddy -c "set CFBundleShortVersionString ${appVersion}" ${project_infoplist_path}
 /usr/libexec/PlistBuddy -c "set CFBundleDisplayName xxx" ${project_infoplist_path}
-</pre></td></tr></tbody></table></code></pre></div></div>
+</code></pre></div></div>
 
 <p><em>scheme 值修改</em></p>
 
 <p>  因为 scheme 的数据结构为 数组元素可能是字典，字典key对应的value可能是数组，因此需要事先知道要修改的值的数据结构和位置，在使用 plist 工具时指定字典对应的key，数组对应的下标：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>/usr/libexec/PlistBuddy -c "set CFBundleURLTypes:0:CFBundleURLSchemes:0 xxx.xxx.xxx" ${project_infoplist_path}
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/libexec/PlistBuddy -c "set CFBundleURLTypes:0:CFBundleURLSchemes:0 xxx.xxx.xxx" ${project_infoplist_path}
+</code></pre></div></div>
 
 <p>  以上命令的意思是取 <code class="highlighter-rouge">CFBundleURLTypes</code> 数组下的第一个元素 X，再取 X 下 <code class="highlighter-rouge">CFBundleURLSchemes</code> 数组下的第一个元素 Y，并更新Y的值为<code class="highlighter-rouge">xxx.xxx.xxx</code>。</p>
 
@@ -350,9 +265,8 @@ done
 <p>  假如需要修改代码里的部分字符，或批量修改某个变量名称，这里就用到了 <code class="highlighter-rouge">sed</code> 命令.
 这里讲一个 <code class="highlighter-rouge">sed </code>命令的用法，如果有其他特殊需求，可查询sed 命令的其他用法：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>sed -i '' 's/^\#define XXX_XX_URL.*$/\#define XXX_XX_URL  @\"www.junziboxue.com\"/g' ${configureFile}
-</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -i '' 's/^\#define XXX_XX_URL.*$/\#define XXX_XX_URL  @\"www.junziboxue.com\"/g' ${configureFile}
+</code></pre></div></div>
 
 <p>  这个命令的意思是，匹配所有 <code class="highlighter-rouge">#define XXX_XX_URL</code> 宏，然后替换为 <code class="highlighter-rouge">#define XXX_XX_URL  @"www.junziboxue.com"</code>，这里是整行替换。shell 命令里需要对一些特殊字符进行转义，在这里需要注意。</p>
 
@@ -368,31 +282,41 @@ done
 
 <p><a href="https://github.com/JumpJumpSparrow/deploy_project_with_shell_script.git">script_demo</a></p>
 
+                </div>
+            </section>
 
-                <hr style="visibility: hidden;">
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/shadow-roundcorner" data-toggle="tooltip" data-placement="top" title="iOS 圆角+阴影+离屏渲染问题">
-                        Previous<br>
-                        <span>iOS 圆角+阴影+离屏渲染问题</span>
-                        </a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/textfield-auto-adjust" data-toggle="tooltip" data-placement="top" title="UITextField 随键盘高度自适应">
-                        Next<br>
-                        <span>UITextField 随键盘高度自适应</span>
-                        </a>
-                    </li>
-                    
-                </ul>
-                <hr style="visibility: hidden;">
+            <!-- Email subscribe form at the bottom of the page -->
+            <!--   -->
+            
 
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
                 
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/Miaocf">Miaocf</a></h4>
+                                
+                                    <p>优秀和极致是两回事</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/Miaocf">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
 
-                <div id="gitmentContainer"></div>
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            <div id="gitmentContainer"></div>
 <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
 <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
@@ -406,215 +330,377 @@ var gitment = new Gitment({
 });
 gitment.render('gitmentContainer');
 </script>
+
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
                 
-            </div>  
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Miaocf &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/ios/">Ios</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/concurrent-events-queue">批量并发-事件管理队列</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/iOS-webviews-scales-page-to-fit">解决 H5 页面在手机上布局异常的问题</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/UIView-drawing-cycle">iOS 关于 UIView 重绘的几个接口</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/ios/">
+                                
+                                    See all 12 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
 
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
                 
 
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/textfield-height-auto-adjust">
+                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/textfield-height-auto-adjust">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Ios</span>
+                            
+                        
+                    
 
-<section>
-    
-        <hr class="hidden-sm hidden-xs">
-    
-    <h5><a href="/archive/">FEATURED TAGS</a></h5>
-    <div class="tags">
+                    <h2 class="post-card-title">UITextField 随键盘高度自适应</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/Miaocf/">Miaocf</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
         
+            <a class="post-card-image-link" href="/ios-shadow-roundcorner-offscreen">
+                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
+            </a>
         
-        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/ios-shadow-roundcorner-offscreen">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Ios</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">iOS 圆角+阴影+离屏渲染问题</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="Miaocf" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/Miaocf/">Miaocf</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://localhost:4000/">
+            
+                <img src="/assets/images/favicon.png" alt="Miaocf icon" />
+            
+            <span>Miaocf</span>
         </a>
-        
-        
-                <a data-sort="0019" 
-                    href="/archive/?tag=something"
-                    title="something"
-                    rel="7">something</a>
-        
-                <a data-sort="0012" 
-                    href="/archive/?tag=iOS"
-                    title="iOS"
-                    rel="14">iOS
     </div>
-</section>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">使用 shell 脚本配置iOS工程生成多个APP</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E4%BD%BF%E7%94%A8+shell+%E8%84%9A%E6%9C%AC%E9%85%8D%E7%BD%AEiOS%E5%B7%A5%E7%A8%8B%E7%94%9F%E6%88%90%E5%A4%9A%E4%B8%AAAPP&amp;url=script-configure"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=script-configure"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
-                <!-- Friends Blog -->
-                
-<hr>
-<h5>FOOTPRINTS</h5>
-<ul class="list-inline">
-  
-  <li><a href="https://www.v2ex.com">V2EX</a></li>
-  
-  <li><a href="http://www.ruanyifeng.com">ruanyifeng</a></li>
-  
-  <li><a href="https://flutter.dev">flutter</a></li>
-  
-  <li><a href="https://www.cnblogs.com">cnblogs</a></li>
-  
-  <li><a href="https://github.com">github</a></li>
-  
-  <li><a href="https://angular.cn">angular</a></li>
-  
-  <li><a href="https://tour.go-zh.org/">go</a></li>
-  
-  <li><a href="https://www.rust-lang.org">rust-lang</a></li>
-  
-  <li><a href="https://haskellbook.com">haskellbook</a></li>
-  
-</ul>
-
-            </div>
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
         </div>
-    </div>
-</article>
-
-<!-- add support for mathjax by voleking-->
+    </progress>
+</div>
 
 
+<!-- /post -->
 
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
-        anchors.options = {
-          visible: 'hover',
-          placement: 'right',
-          // icon: '#'
-        };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })
-</script>
-<style>
-    /* place left on bigger screen */
-    @media all and (min-width: 800px) {
-        .anchorjs-link{
-            position: absolute;
-            left: -0.75em;
-            font-size: 1.1em;
-            margin-top : -0.1em;
-        }
-    }
-</style>
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
 
 
+        <!-- Previous/next page links - displayed on every page -->
+        
 
-    <!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <!-- SNS Link -->
-                
-
-
-<ul class="list-inline text-center">
-
-
-  
-  
-  
-  
-  
-  
-  
-</ul>
-
-                <p class="copyright text-muted">
-                    Copyright &copy; CF Blog 2020
-                    <br>
-                    Powered by <a href="http://junziboxue.com">Mcf Blog</a> |
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="100px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=JumpJumpSparrow&repo=JumpJumpSparrow.github.io&type=star&count=true" >
-                    </iframe>
-                </p>
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="http://localhost:4000/">Miaocf</a> &copy; 2020</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
             </div>
-        </div>
+        </footer>
+
     </div>
-</footer>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+    <!-- The big email subscribe modal content -->
+    
 
-<!-- Bootstrap Core JavaScript -->
-<!-- Currently, only navbar scroll-down effect at desktop still depends on this -->
-<script src="/js/bootstrap.min.js "></script>
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
 
-<!-- Custom Theme JavaScript -->
-<script src="/js/hux-blog.min.js "></script>
-
-<!-- Service Worker -->
-
-<script src="/js/snackbar.js "></script>
-<script src="/js/sw-registration.js "></script>
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!--
-     Because of the native support for backtick-style fenced code blocks
-     right within the Markdown is landed in Github Pages,
-     From V1.6, There is no need for Highlight.js,
-     so Huxblog drops it officially.
-
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
-     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers
--->
-<!--
-    <script>
-        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
-            hljs.initHighlightingOnLoad();
-        })
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
     </script>
-    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
--->
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
 
 
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
 
 
-
-<!--fastClick.js -->
-<script>
-    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-<!-- Add Baidu Analytics  -->
-<!-- Baidu Analytics Tracking code -->
+    <!-- Add Baidu Analytics  -->
+    <!-- Baidu Analytics Tracking code -->
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -627,20 +713,76 @@ var _hmt = _hmt || [];
 
 
 
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
 
-<!-- Side Catalog -->
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
 
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
 
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
 
-<!-- Multi-Lingual -->
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
 
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
 
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
 
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
 
-<!-- Image to hack wechat -->
-<img src="/img/icon_wechat.png" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
 
 </body>
-
 </html>

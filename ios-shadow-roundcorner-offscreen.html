@@ -11,7 +11,7 @@
 
 
 
-    <title>不期而遇-网络上的小贝壳</title>
+    <title>iOS 圆角+阴影+离屏渲染问题</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -36,84 +36,24 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="Cloud in the sky, fish in the river" />
     <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="http://localhost:4000/net-biography" />
+    <link rel="canonical" href="http://localhost:4000/ios-shadow-roundcorner-offscreen" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="Miaocf" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="不期而遇-网络上的小贝壳" />
-    <meta property="og:description" content="在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下
-
-How To Be Successful
-
-
-  一份无关紧要的工作是一个危险的陷阱，很多人都会掉进去。
-  想让别人帮你，最好的办法就是你先帮他们，或者去做一些有趣的事。
-  致富靠的是权益，而不是工资。
-链接
-
-
-我对中国科技行业的看法
-
-顺便说一句，这就是为什么我认为北京的互联网公司如此努力的一个原因。因为这些公司没有拥有任何真正的超出对手的知识产权，因此成功的唯一途径就是残酷的争分夺秒的市场竞争，让竞争对手失去市场。
-
-中国确实拥有活跃的消费者互联网，但这不意味着中国处于世界领先的技术地位，我们应该放弃这种观念。玩线上游戏、在线购物、食品外卖的大量人口，并不能使一个国家成为技术或科学领导者。
-
-技术是一种实践性的产品，必须不断实践，才能使知识保持在当前水平。日本的伊势神宫，每20年就要拆毁原来的宫殿，在旁边的土地重新造一遍，就是为了让后代人不会失去建造宫殿的知识。
-
-原文-英
-译文
-
-2019，中国互联网让人失望的一年
-
-2019-8月底在朋友圈刷屏的换脸App——ZAO被很快证明可能存在信息安全的风险，而主打一张照片视频换脸除了在开始引发尝试的新奇之外，并非一个普通网民高频的痛点，炫酷并不代表真实需求，于是很快就归于沉寂；
-
-瀑布屏、90Hz刷新率、四摄、超级快充、1亿像素…..手机厂商真的已经足够努力了，但行业整体遭遇的瓶颈没有哪一家厂商能单枪匹马突破…….血拼DXOMark的评分无疑折射了整个行业并没有找到新的增长点和新的故事
-
-2019-12-31 09:50
-虎嗅
-" />
-    <meta property="og:url" content="http://localhost:4000/net-biography" />
+    <meta property="og:title" content="iOS 圆角+阴影+离屏渲染问题" />
+    <meta property="og:description" content="iOS 圆角+阴影+离屏渲染问题 在近一期开发需求中，有个控件需要同时添加圆角和阴影效果。本以为是个非常简单的需求，但开发过程并不十分美丽。今天就整理一下控件添加圆角和阴影一些需要注意的地方。 为什么给一个控件同时添加 阴影和圆角这么困难呢？一句话解释就是： Because shadow is an effect done outside the View, and that masksToBounds set to YES will tell the UIView not to draw everything that is outside itself. 简单来说就是：阴影效果是展示在 View 外的，而切圆角要求不显示 View 外部的内容。显然，圆角和阴影要同时显示本身就是矛盾的。 就单个操作来说，给控件加圆角或者阴影的时候，如果操作不当，因为离屏渲染的问题，会导致比较严重的性能问题。尤其在流式布局如：UITableView、UICollectionView 上，如果添加多个带有阴影或圆角的子视图，性能损耗非常明显。 一种折中方案：直接让美工把图片切成圆角进行显示，这是效率最高的一种方案。 虽然图片的解析和展示会占用一部分内存，但是这是典型的用空间换取时间的情况，在优化时间有限的情况下，让美工做图是个不错的选择。 UIView、UILabel、UIImageView、UITextView 出现离屏渲染的条件存在略微差异，我们分开一一介绍。 优化 在离屏渲染无法避免的时候，那么退而求其次，让离屏渲染的代价尽量小。一些优化措施可以尽可能的避免性能损耗过大。 先说两个实现方案，然后针对离屏渲染问题进行优化： 方案1: 在 view 上显示圆角效果，再在底部插一个阴影的layer。" />
+    <meta property="og:url" content="http://localhost:4000/ios-shadow-roundcorner-offscreen" />
     <meta property="og:image" content="http://localhost:4000/assets/images/xxx.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/false" />
     <meta property="article:author" content="https://www.facebook.com/false" />
-    <meta property="article:published_time" content="1970-01-01T08:01:00+08:00" />
-    <meta property="article:modified_time" content="1970-01-01T08:01:00+08:00" />
+    <meta property="article:published_time" content="2019-09-16T18:00:00+08:00" />
+    <meta property="article:modified_time" content="2019-09-16T18:00:00+08:00" />
     <meta property="article:tag" content="Ios" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="不期而遇-网络上的小贝壳" />
-    <meta name="twitter:description" content="在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下
-
-How To Be Successful
-
-
-  一份无关紧要的工作是一个危险的陷阱，很多人都会掉进去。
-  想让别人帮你，最好的办法就是你先帮他们，或者去做一些有趣的事。
-  致富靠的是权益，而不是工资。
-链接
-
-
-我对中国科技行业的看法
-
-顺便说一句，这就是为什么我认为北京的互联网公司如此努力的一个原因。因为这些公司没有拥有任何真正的超出对手的知识产权，因此成功的唯一途径就是残酷的争分夺秒的市场竞争，让竞争对手失去市场。
-
-中国确实拥有活跃的消费者互联网，但这不意味着中国处于世界领先的技术地位，我们应该放弃这种观念。玩线上游戏、在线购物、食品外卖的大量人口，并不能使一个国家成为技术或科学领导者。
-
-技术是一种实践性的产品，必须不断实践，才能使知识保持在当前水平。日本的伊势神宫，每20年就要拆毁原来的宫殿，在旁边的土地重新造一遍，就是为了让后代人不会失去建造宫殿的知识。
-
-原文-英
-译文
-
-2019，中国互联网让人失望的一年
-
-2019-8月底在朋友圈刷屏的换脸App——ZAO被很快证明可能存在信息安全的风险，而主打一张照片视频换脸除了在开始引发尝试的新奇之外，并非一个普通网民高频的痛点，炫酷并不代表真实需求，于是很快就归于沉寂；
-
-瀑布屏、90Hz刷新率、四摄、超级快充、1亿像素…..手机厂商真的已经足够努力了，但行业整体遭遇的瓶颈没有哪一家厂商能单枪匹马突破…….血拼DXOMark的评分无疑折射了整个行业并没有找到新的增长点和新的故事
-
-2019-12-31 09:50
-虎嗅
-" />
+    <meta name="twitter:title" content="iOS 圆角+阴影+离屏渲染问题" />
+    <meta name="twitter:description" content="iOS 圆角+阴影+离屏渲染问题 在近一期开发需求中，有个控件需要同时添加圆角和阴影效果。本以为是个非常简单的需求，但开发过程并不十分美丽。今天就整理一下控件添加圆角和阴影一些需要注意的地方。 为什么给一个控件同时添加 阴影和圆角这么困难呢？一句话解释就是： Because shadow is an effect done outside the View, and that masksToBounds set to YES will tell the UIView not to draw everything that is outside itself. 简单来说就是：阴影效果是展示在 View 外的，而切圆角要求不显示 View 外部的内容。显然，圆角和阴影要同时显示本身就是矛盾的。 就单个操作来说，给控件加圆角或者阴影的时候，如果操作不当，因为离屏渲染的问题，会导致比较严重的性能问题。尤其在流式布局如：UITableView、UICollectionView 上，如果添加多个带有阴影或圆角的子视图，性能损耗非常明显。 一种折中方案：直接让美工把图片切成圆角进行显示，这是效率最高的一种方案。 虽然图片的解析和展示会占用一部分内存，但是这是典型的用空间换取时间的情况，在优化时间有限的情况下，让美工做图是个不错的选择。 UIView、UILabel、UIImageView、UITextView 出现离屏渲染的条件存在略微差异，我们分开一一介绍。 优化 在离屏渲染无法避免的时候，那么退而求其次，让离屏渲染的代价尽量小。一些优化措施可以尽可能的避免性能损耗过大。 先说两个实现方案，然后针对离屏渲染问题进行优化： 方案1: 在 view 上显示圆角效果，再在底部插一个阴影的layer。" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/xxx.jpg" />
     <meta name="twitter:label1" content="Written by" />
@@ -134,7 +74,7 @@ How To Be Successful
         "name": "Miaocf",
         "logo": "http://localhost:4000/assets/images/blog-icon.png"
     },
-    "url": "http://localhost:4000/net-biography",
+    "url": "http://localhost:4000/ios-shadow-roundcorner-offscreen",
     "image": {
         "@type": "ImageObject",
         "url": "http://localhost:4000/assets/images/xxx.jpg",
@@ -143,39 +83,9 @@ How To Be Successful
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:4000/net-biography"
+        "@id": "http://localhost:4000/ios-shadow-roundcorner-offscreen"
     },
-    "description": "在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下
-
-How To Be Successful
-
-
-  一份无关紧要的工作是一个危险的陷阱，很多人都会掉进去。
-  想让别人帮你，最好的办法就是你先帮他们，或者去做一些有趣的事。
-  致富靠的是权益，而不是工资。
-链接
-
-
-我对中国科技行业的看法
-
-顺便说一句，这就是为什么我认为北京的互联网公司如此努力的一个原因。因为这些公司没有拥有任何真正的超出对手的知识产权，因此成功的唯一途径就是残酷的争分夺秒的市场竞争，让竞争对手失去市场。
-
-中国确实拥有活跃的消费者互联网，但这不意味着中国处于世界领先的技术地位，我们应该放弃这种观念。玩线上游戏、在线购物、食品外卖的大量人口，并不能使一个国家成为技术或科学领导者。
-
-技术是一种实践性的产品，必须不断实践，才能使知识保持在当前水平。日本的伊势神宫，每20年就要拆毁原来的宫殿，在旁边的土地重新造一遍，就是为了让后代人不会失去建造宫殿的知识。
-
-原文-英
-译文
-
-2019，中国互联网让人失望的一年
-
-2019-8月底在朋友圈刷屏的换脸App——ZAO被很快证明可能存在信息安全的风险，而主打一张照片视频换脸除了在开始引发尝试的新奇之外，并非一个普通网民高频的痛点，炫酷并不代表真实需求，于是很快就归于沉寂；
-
-瀑布屏、90Hz刷新率、四摄、超级快充、1亿像素…..手机厂商真的已经足够努力了，但行业整体遭遇的瓶颈没有哪一家厂商能单枪匹马突破…….血拼DXOMark的评分无疑折射了整个行业并没有找到新的增长点和新的故事
-
-2019-12-31 09:50
-虎嗅
-"
+    "description": "iOS 圆角+阴影+离屏渲染问题 在近一期开发需求中，有个控件需要同时添加圆角和阴影效果。本以为是个非常简单的需求，但开发过程并不十分美丽。今天就整理一下控件添加圆角和阴影一些需要注意的地方。 为什么给一个控件同时添加 阴影和圆角这么困难呢？一句话解释就是： Because shadow is an effect done outside the View, and that masksToBounds set to YES will tell the UIView not to draw everything that is outside itself. 简单来说就是：阴影效果是展示在 View 外的，而切圆角要求不显示 View 外部的内容。显然，圆角和阴影要同时显示本身就是矛盾的。 就单个操作来说，给控件加圆角或者阴影的时候，如果操作不当，因为离屏渲染的问题，会导致比较严重的性能问题。尤其在流式布局如：UITableView、UICollectionView 上，如果添加多个带有阴影或圆角的子视图，性能损耗非常明显。 一种折中方案：直接让美工把图片切成圆角进行显示，这是效率最高的一种方案。 虽然图片的解析和展示会占用一部分内存，但是这是典型的用空间换取时间的情况，在优化时间有限的情况下，让美工做图是个不错的选择。 UIView、UILabel、UIImageView、UITextView 出现离屏渲染的条件存在略微差异，我们分开一一介绍。 优化 在离屏渲染无法避免的时候，那么退而求其次，让离屏渲染的代价尽量小。一些优化措施可以尽可能的避免性能损耗过大。 先说两个实现方案，然后针对离屏渲染问题进行优化： 方案1: 在 view 上显示圆角效果，再在底部插一个阴影的layer。"
 }
     </script>
 
@@ -188,7 +98,7 @@ How To Be Successful
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="不期而遇-网络上的小贝壳" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="iOS 圆角+阴影+离屏渲染问题" href="/feed.xml" />
 
 
 </head>
@@ -238,11 +148,11 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full post tag-iOS ">
+        <article class="post-full post iOS ">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime=" 1 January 1970"> 1 January 1970</time>
+                    <time class="post-full-meta-date" datetime="16 September 2019">16 September 2019</time>
                     
                         <span class="date-divider">/</span>
                         
@@ -252,7 +162,7 @@ into the {body} of the default.hbs template -->
                         
                     
                 </section>
-                <h1 class="post-full-title">不期而遇-网络上的小贝壳</h1>
+                <h1 class="post-full-title">iOS 圆角+阴影+离屏渲染问题</h1>
             </header>
 
             
@@ -262,36 +172,87 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下</p>
+                    <p>iOS 圆角+阴影+离屏渲染问题</p>
 
-<h3 id="how-to-be-successful">How To Be Successful</h3>
+<p>在近一期开发需求中，有个控件需要同时添加圆角和阴影效果。本以为是个非常简单的需求，但开发过程并不十分美丽。今天就整理一下控件添加圆角和阴影一些需要注意的地方。</p>
 
-<ol>
-  <li>一份无关紧要的工作是一个危险的陷阱，很多人都会掉进去。</li>
-  <li>想让别人帮你，最好的办法就是你先帮他们，或者去做一些有趣的事。</li>
-  <li>致富靠的是权益，而不是工资。<br />
-<a href="https://threadreaderapp.com/thread/1214274038933020672.html">链接</a></li>
-</ol>
+<p>为什么给一个控件同时添加 阴影和圆角这么困难呢？一句话解释就是：</p>
+<blockquote>
+  <p>Because shadow is an effect done outside the View, and that masksToBounds set to YES will tell the UIView not to draw everything that is outside itself.</p>
+</blockquote>
 
-<h3 id="我对中国科技行业的看法">我对中国科技行业的看法</h3>
+<p>简单来说就是：阴影效果是展示在 View 外的，而切圆角要求不显示 View 外部的内容。显然，圆角和阴影要同时显示本身就是矛盾的。</p>
 
-<p>顺便说一句，这就是为什么我认为北京的互联网公司如此努力的一个原因。因为这些公司没有拥有任何真正的超出对手的知识产权，因此成功的唯一途径就是残酷的争分夺秒的市场竞争，让竞争对手失去市场。</p>
+<p>就单个操作来说，给控件加圆角或者阴影的时候，如果操作不当，因为离屏渲染的问题，会导致比较严重的性能问题。尤其在流式布局如：UITableView、UICollectionView 上，如果添加多个带有阴影或圆角的子视图，性能损耗非常明显。</p>
 
-<p>中国确实拥有活跃的消费者互联网，但这不意味着中国处于世界领先的技术地位，我们应该放弃这种观念。玩线上游戏、在线购物、食品外卖的大量人口，并不能使一个国家成为技术或科学领导者。</p>
+<p>一种折中方案：直接让美工把图片切成圆角进行显示，这是效率最高的一种方案。<br />
+虽然图片的解析和展示会占用一部分内存，但是这是典型的用空间换取时间的情况，在优化时间有限的情况下，让美工做图是个不错的选择。</p>
 
-<p>技术是一种实践性的产品，必须不断实践，才能使知识保持在当前水平。日本的伊势神宫，每20年就要拆毁原来的宫殿，在旁边的土地重新造一遍，就是为了让后代人不会失去建造宫殿的知识。</p>
+<p>UIView、UILabel、UIImageView、UITextView 出现离屏渲染的条件存在略微差异，我们分开一一介绍。</p>
 
-<p><a href="https://danwang.co/2019-letter/">原文-英</a>
-<a href="http://www.ruanyifeng.com/blog/2020/01/china-technology-review.html">译文</a></p>
+<h3 id="优化">优化</h3>
+<p>在离屏渲染无法避免的时候，那么退而求其次，让离屏渲染的代价尽量小。一些优化措施可以尽可能的避免性能损耗过大。</p>
 
-<h3 id="2019中国互联网让人失望的一年">2019，中国互联网让人失望的一年</h3>
+<p>先说两个实现方案，然后针对离屏渲染问题进行优化：</p>
 
-<p>2019-8月底在朋友圈刷屏的换脸App——ZAO被很快证明可能存在信息安全的风险，而主打一张照片视频换脸除了在开始引发尝试的新奇之外，并非一个普通网民高频的痛点，<strong>炫酷并不代表真实需求</strong>，于是很快就归于沉寂；</p>
+<p>方案1: 在 view 上显示圆角效果，再在底部插一个阴影的layer。
+    ``` 
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(50, 100, 100, 100)];
+    bgView.backgroundColor = [UIColor brownColor];</p>
 
-<p>瀑布屏、90Hz刷新率、四摄、超级快充、1亿像素…..手机厂商真的已经足够努力了，但行业整体遭遇的瓶颈没有哪一家厂商能单枪匹马突破…….血拼DXOMark的评分无疑折射了整个行业并没有找到新的增长点和新的故事</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bgView.layer.cornerRadius = 20.0f;
+bgView.layer.masksToBounds = YES;
 
-<p>2019-12-31 09:50
-<a href="https://www.huxiu.com/article/333792.html">虎嗅</a></p>
+[self.view addSubview:bgView];
+
+CALayer *subLayer=[CALayer layer];
+CGRect fixframe = bgView.frame;
+subLayer.frame= fixframe;
+subLayer.cornerRadius=20;
+subLayer.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.8].CGColor;
+subLayer.masksToBounds=NO;
+subLayer.shadowColor = [UIColor blackColor].CGColor;//shadowColor阴影颜色
+subLayer.shadowOffset = CGSizeMake(3,2);//shadowOffset阴影偏移,x向右偏移3，y向下偏移2，默认(0, -3),这个跟shadowRadius配合使用
+subLayer.shadowOpacity = 0.8;//阴影透明度，默认0
+subLayer.shadowRadius = 4;//阴影半径，默认3
+[self.view.layer insertSublayer:subLayer below:bgView.layer];
+```
+</code></pre></div></div>
+
+<p>方案2: 不设置 layer.masksToBounds 。</p>
+
+<p><code class="highlighter-rouge">UIView *v=[[UIView alloc]initWithFrame:CGRectMake(200, 100, 100, 100)];
+    v.backgroundColor=[UIColor brownColor];
+    //v.layer.masksToBounds=YES;不设置 
+    v.layer.cornerRadius=20;
+    v.layer.shadowColor=[UIColor blackColor].CGColor;
+    v.layer.shadowOffset=CGSizeMake(5, 5);
+    v.layer.shadowOpacity=0.5;
+    v.layer.shadowRadius=5;
+    [self.view addSubview:v];
+</code></p>
+
+<p>实际上，让一个控件既实现shadowPath</p>
+
+<p>下面的情况或操作会引发离屏渲染：</p>
+
+<ul>
+  <li>为图层设置遮罩（layer.mask）</li>
+  <li>为图层设置阴影（layer.shadow *）。</li>
+  <li>为图层设置layer.shouldRasterize=true</li>
+  <li>文本（任何种类，包括UILabel，CATextLayer，Core Text等）。</li>
+  <li>将图层的layer.masksToBounds / view.clipsToBounds属性设置为true</li>
+  <li>将图层layer.allowsGroupOpacity属性设置为YES和layer.opacity小于1.0</li>
+  <li>具有layer.cornerRadius，layer.edgeAntialiasingMask，layer.allowsEdgeAntialiasing的图层</li>
+  <li>使用CGContext在drawRect :方法中绘制大部分情况下会导致离屏渲染，甚至仅仅是一个空的实现。</li>
+</ul>
+
+<p>优化方案1：使用贝塞尔曲线UIBezierPath和Core Graphics框架画出一个圆角</p>
+
+<p>优化方案2：使用CAShapeLayer和UIBezierPath设置圆角</p>
+
+<p>使用代码手动生成圆角Image设置到要显示的View上，利用UIBezierPath（CoreGraphics框架）画出来圆角图片</p>
+
 
                 </div>
             </section>
@@ -456,9 +417,6 @@ gitment.render('gitmentContainer');
                                 
                                   
                                     
-                                        
-                                        
-                                    
                                   
                                 
                                   
@@ -490,6 +448,9 @@ gitment.render('gitmentContainer');
                                   
                                 
                                   
+                                    
+                                        
+                                        
                                     
                                   
                                 
@@ -514,22 +475,22 @@ gitment.render('gitmentContainer');
 
     <article class="post-card post-template">
         
-            <a class="post-card-image-link" href="/start">
-                <div class="post-card-image" style="background-image: url(/assets/images/car.jpg)"></div>
+            <a class="post-card-image-link" href="/script-configure">
+                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/start">
+            <a class="post-card-content-link" href="/script-configure">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Getting started</span>
+                                <span class="post-card-tags">Ios</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">Blog Initialized</h2>
+                    <h2 class="post-card-title">使用 shell 脚本配置iOS工程生成多个APP</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -566,12 +527,12 @@ gitment.render('gitmentContainer');
 
     <article class="post-card post-template">
         
-            <a class="post-card-image-link" href="/to-do-list-origin">
-                <div class="post-card-image" style="background-image: url(/assets/images/advanced.jpg)"></div>
+            <a class="post-card-image-link" href="/cocoapods-private">
+                <div class="post-card-image" style="background-image: url(/assets/images/xxx.jpg)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/to-do-list-origin">
+            <a class="post-card-content-link" href="/cocoapods-private">
                 <header class="post-card-header">
                     
                         
@@ -581,7 +542,7 @@ gitment.render('gitmentContainer');
                         
                     
 
-                    <h2 class="post-card-title">TODO_LIST</h2>
+                    <h2 class="post-card-title">CocoaPods 私有库搭建</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -627,18 +588,18 @@ gitment.render('gitmentContainer');
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">不期而遇-网络上的小贝壳</div>
+    <div class="floating-header-title">iOS 圆角+阴影+离屏渲染问题</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%E4%B8%8D%E6%9C%9F%E8%80%8C%E9%81%87-%E7%BD%91%E7%BB%9C%E4%B8%8A%E7%9A%84%E5%B0%8F%E8%B4%9D%E5%A3%B3&amp;url=net-biography"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=iOS+%E5%9C%86%E8%A7%92%2B%E9%98%B4%E5%BD%B1%2B%E7%A6%BB%E5%B1%8F%E6%B8%B2%E6%9F%93%E9%97%AE%E9%A2%98&amp;url=ios-shadow-roundcorner-offscreen"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=net-biography"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=ios-shadow-roundcorner-offscreen"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 
