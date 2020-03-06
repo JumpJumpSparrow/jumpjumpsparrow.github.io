@@ -11,16 +11,30 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="cunfa的博客 | CF Blog">
+    <meta property="og:title" content="iOS 屏幕卡顿检测与排查 - cunfa的博客 | CF Blog">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="既然要去那里，出发吧">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  卡顿发生检测
+  卡顿原因排查
+（待完成）
+
+">
+    
+    <meta property="article:published_time" content="2019-10-11T02:00:00Z">
+    
+    
+    <meta property="article:author" content="Miaocf">
+    
+    
+    <meta property="article:tag" content="iOS">
+    
     
     <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
-    <meta property="og:url" content="http://localhost:4000/page3/">
+    <meta property="og:url" content="http://localhost:4000/2019/10/11/frame-rate-monitor/">
     <meta property="og:site_name" content="cunfa的博客 | CF Blog">
     
-    <title>cunfa的博客 | CF Blog</title>
+    <title>iOS 屏幕卡顿检测与排查 - cunfa的博客 | CF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +43,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/page3/">
+    <link rel="canonical" href="http://localhost:4000/2019/10/11/frame-rate-monitor/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -167,242 +181,129 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header" >
 
-
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>CF Blog</h1>
-          <span class="subheading">既然要去那里，出发吧</span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=iOS" title="iOS">iOS</a>
+                        
+                    </div>
+                    <h1>iOS 屏幕卡顿检测与排查</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Miaocf on October 11, 2019</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<ol>
+  <li>卡顿发生检测</li>
+  <li>卡顿原因排查
+（待完成）</li>
+</ol>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/09/25/yykit-micro/" data-toggle="tooltip" data-placement="top" title="Building Objective-C static libraries with categories">
+                        Previous<br>
+                        <span>Building Objective-C static libraries with categories</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/10/11/universal-link/" data-toggle="tooltip" data-placement="top" title="iOS universal-link 通用链接配置">
+                        Next<br>
+                        <span>iOS universal-link 通用链接配置</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                <div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+    owner: 'JumpJumpSparrow',
+    repo: 'My_blog',
+    oauth: {
+        client_id: '0854e10375734c52272e',
+        client_secret: 'e382403bb47cfe33179603e5df7a4c9576ede295',
+    },
+});
+gitment.render('gitmentContainer');
+</script>
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
         
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			
-<div class="post-preview">
-    <a href="/2019/06/11/zfb-wx-payment/">
-        <h2 class="post-title">
-            支付宝支付 微信支付SDK接口不统一？ 盘他！
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。
-
-   首先我们来看支付宝支付SDK的API是怎么设计的：
-
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-/**
- *  支付接口
- *
- *  @para...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 11, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2019/06/11/app-optimize/">
-        <h2 class="post-title">
-            iOS APP 优化健壮性
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                1.加强 APP 健壮性
-
-unrecognized selector crash
-KVO crash
-NSNotification crash
-NSTimer crash
-Container crash（数组越界，插nil等）
-NSString crash （字符串操作的crash）
-Bad Access crash （野指针）
-UI not on Main Thread Crash (非...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 11, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2019/06/10/haskell/">
-        <h2 class="post-title">
-            Haskell 函数式编程
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                Haskell 与 Java、C++不同，它是纯函数式的编程语言，说到函数式编程，函数式与面向对象编程究竟有哪些不同？在这里将会介绍一下函数式编程的特点和起源。
-
-
-
-编程范式：
-在介绍 Haskell 之前，说一说编程范式，编程范式可简单划为两类：
-
-  命令式编程 (Imperative programming)
-  声明式编程(Declarative programming)
-
-
-
- ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 10, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/2019/06/01/start/">
-        <h2 class="post-title">
-            Blog Initialized
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                Hey! Welcome to Miaocf’s blog, it’s great to have you :)
-
-接触到个人品牌的概念后，就一直考虑着搭建一个 blog，今天算是 Personal Brand 第一天吧。
-
-在人生的旅途中需要明白几点:
-
-  人随着年龄的增长，对事物的见知也在增长，心智和价值观也随之渐渐塑造成型。
-  在30岁之前，是一直处在学习的阶段，这个阶段主要是吸收...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 1, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/1970/01/01/net-biography/">
-        <h2 class="post-title">
-            不期而遇-网络上的小贝壳
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下
-
-How To Be Successful
-
-
-  一份无关紧要的工作是一个危险的陷阱，很多人都会掉进去。
-  想让别人帮你，最好的办法就是你先帮他们，或者去做一些有趣的事。
-  致富靠的是权益，而不是工资。
-链接
-
-
-我对中国科技行业的看法
-
-顺便说一句，这就是为什么我认为北京的互联网公司如此努力的一个原因。...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on January 1, 1970
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/1970/01/01/to-do-list-origin/">
-        <h2 class="post-title">
-            TODO_LIST
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈
-
-为了表示这里是博客起源，特意把保存这篇博客的源文件 ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on January 1, 1970
-    </p>
-</div>
-<hr>
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    <li class="previous">
-        <a href="/page2">&larr; Newer Posts</a>
-    </li>
-    
-    
-</ul>
-
-
-    		</div>
     <!-- Sidebar Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
 
 
 <section>
+    
+        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="/archive/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -424,35 +325,6 @@ How To Be Successful
     </div>
 </section>
 
-
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="/about/">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="img/avatar-cf-ny.jpg" />
-    
-    
-    <p>Your time is limited<br>勤学如春起之苗，不见其增，日有所长</p>
-    
-    <!-- SNS Link -->
-    
-
-
-<ul class="list-inline">
-
-
-  
-  
-  
-  
-  
-  
-  
-</ul>
-  </div>
-</section>
 
                 <!-- Friends Blog -->
                 
@@ -480,10 +352,48 @@ How To Be Successful
   
 </ul>
 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
 
 
