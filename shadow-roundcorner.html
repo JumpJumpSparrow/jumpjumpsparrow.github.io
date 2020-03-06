@@ -11,13 +11,13 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="解决 H5 页面在手机上布局异常的问题 - cunfa的博客 | CF Blog">
+    <meta property="og:title" content="iOS 圆角+阴影+离屏渲染问题 - cunfa的博客 | CF Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。
+    <meta property="og:description" content="iOS 圆角+阴影+离屏渲染问题
 ">
     
-    <meta property="article:published_time" content="2019-12-18T07:00:00Z">
+    <meta property="article:published_time" content="2019-09-16T18:00:00Z">
     
     
     <meta property="article:author" content="Miaocf">
@@ -27,10 +27,10 @@
     
     
     <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
-    <meta property="og:url" content="http://localhost:4000/iOS-webviews-scales-page-to-fit">
+    <meta property="og:url" content="http://localhost:4000/shadow-roundcorner">
     <meta property="og:site_name" content="cunfa的博客 | CF Blog">
     
-    <title>解决 H5 页面在手机上布局异常的问题 - cunfa的博客 | CF Blog</title>
+    <title>iOS 圆角+阴影+离屏渲染问题 - cunfa的博客 | CF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/iOS-webviews-scales-page-to-fit">
+    <link rel="canonical" href="http://localhost:4000/shadow-roundcorner">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -208,10 +208,10 @@
                         <a class="tag" href="/archive/?tag=iOS" title="iOS">iOS</a>
                         
                     </div>
-                    <h1>解决 H5 页面在手机上布局异常的问题</h1>
+                    <h1>iOS 圆角+阴影+离屏渲染问题</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Miaocf on December 18, 2019</span>
+                    <span class="meta">Posted by Miaocf on September 16, 2019</span>
                 </div>
             </div>
         </div>
@@ -237,84 +237,121 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>目前在做一款电商 APP，在商品详情页中，使用 webview 呈现 H5 内容来展现商品的图文详情。测试反馈说 H5 内容呈现样式发生异常，经研究是手机尺寸与PC尺寸存在差异，CSS 无法完全适配导致的。</p>
+				<p>iOS 圆角+阴影+离屏渲染问题</p>
 
-<p>如图，图片显示不完整 ⤋
-<br /><img src="/assets/images/iOS-webview-auto-scale/image_3.png" width="200" /><br /></p>
+<p>在近一期开发需求中，有个控件需要同时添加圆角和阴影效果。本以为是个非常简单的需求，但开发过程并不十分美丽。今天就整理一下控件添加圆角和阴影一些需要注意的地方。</p>
 
-<p>把 URL string 放到PC上展示如下：⤋</p>
+<p>为什么给一个控件同时添加 阴影和圆角这么困难呢？一句话解释就是：</p>
+<blockquote>
+  <p>Because shadow is an effect done outside the View, and that masksToBounds set to YES will tell the UIView not to draw everything that is outside itself.</p>
+</blockquote>
 
-<p><br /><img src="/assets/images/iOS-webview-auto-scale/image_5.png" width="200" /><br /></p>
+<p>简单来说就是：阴影效果是展示在 View 外的，而切圆角要求不显示 View 外部的内容。显然，圆角和阴影要同时显示本身就是矛盾的。</p>
 
-<p>不难看出，这个详情页是把图片分割成多个部分，然后通过 CSS 布局拼接到一起的。</p>
+<p>就单个操作来说，给控件加圆角或者阴影的时候，如果操作不当，因为离屏渲染的问题，会导致比较严重的性能问题。尤其在流式布局如：UITableView、UICollectionView 上，如果添加多个带有阴影或圆角的子视图，性能损耗非常明显。</p>
 
-<p>拉伸 PC 浏览器窗口，可以看到我们想要的布局效果：⤋
-<br /><img src="/assets/images/iOS-webview-auto-scale/image_4.png" width="200" /><br /></p>
+<p>一种折中方案：直接让美工把图片切成圆角进行显示，这是效率最高的一种方案。<br />
+虽然图片的解析和展示会占用一部分内存，但是这是典型的用空间换取时间的情况，在优化时间有限的情况下，让美工做图是个不错的选择。</p>
 
-<pre><code class="language-objective-c">// html 中，图片宽度为 750 px，
-// 为了铺满屏幕，计算 initial-scale 初始缩放比例
-// html 中的尺寸为 750, 手机使用的不是物理像素，而是点；
-    
-CGFloat w = [[UIScreen mainScreen] bounds].size.width;
-CGFloat ratio = w/750.0;
-</code></pre>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<p>UIView、UILabel、UIImageView、UITextView 出现离屏渲染的条件存在略微差异，我们分开一一介绍。</p>
+
+<h3 id="优化">优化</h3>
+<p>在离屏渲染无法避免的时候，那么退而求其次，让离屏渲染的代价尽量小。一些优化措施可以尽可能的避免性能损耗过大。</p>
+
+<p>先说两个实现方案，然后针对离屏渲染问题进行优化：</p>
+
+<p>方案1: 在 view 上显示圆角效果，再在底部插一个阴影的layer。
+    ``` 
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(50, 100, 100, 100)];
+    bgView.backgroundColor = [UIColor brownColor];</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-</pre></td><td class="rouge-code"><pre><span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">'UTF-8'</span><span class="nt">&gt;</span>
-<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">'viewport'</span> <span class="na">content=</span><span class="s">'width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0'</span><span class="nt">&gt;</span>
-<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">'format-detection'</span> <span class="na">content=</span><span class="s">'telephone=no'</span><span class="nt">&gt;</span>
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre>bgView.layer.cornerRadius = 20.0f;
+bgView.layer.masksToBounds = YES;
+
+[self.view addSubview:bgView];
+
+CALayer *subLayer=[CALayer layer];
+CGRect fixframe = bgView.frame;
+subLayer.frame= fixframe;
+subLayer.cornerRadius=20;
+subLayer.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.8].CGColor;
+subLayer.masksToBounds=NO;
+subLayer.shadowColor = [UIColor blackColor].CGColor;//shadowColor阴影颜色
+subLayer.shadowOffset = CGSizeMake(3,2);//shadowOffset阴影偏移,x向右偏移3，y向下偏移2，默认(0, -3),这个跟shadowRadius配合使用
+subLayer.shadowOpacity = 0.8;//阴影透明度，默认0
+subLayer.shadowRadius = 4;//阴影半径，默认3
+[self.view.layer insertSublayer:subLayer below:bgView.layer];
+```
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p>因为商品详情页在 PC 上的宽度为750像素， 我们根据手机频幕的宽度，计算出 H5 页面的缩放比例。<br />
-根据 H5 页面 头部 meta 信息，设置 <code class="highlighter-rouge">initial-scale</code>初始缩放比例，通过注入 JS 调整初始缩放比例</p>
+<p>方案2: 不设置 layer.masksToBounds 。</p>
 
-<p>加载页面之前，注入一段 JS 代码：</p>
+<p><code class="highlighter-rouge">UIView *v=[[UIView alloc]initWithFrame:CGRectMake(200, 100, 100, 100)];
+    v.backgroundColor=[UIColor brownColor];
+    //v.layer.masksToBounds=YES;不设置 
+    v.layer.cornerRadius=20;
+    v.layer.shadowColor=[UIColor blackColor].CGColor;
+    v.layer.shadowOffset=CGSizeMake(5, 5);
+    v.layer.shadowOpacity=0.5;
+    v.layer.shadowRadius=5;
+    [self.view addSubview:v];
+</code></p>
 
-<pre><code class="language-objective-c">CGFloat w = [[UIScreen mainScreen] bounds].size.width;
-CGFloat ratio = w/750.0;
+<p>实际上，让一个控件既实现shadowPath</p>
 
-NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width,initial-scale=ratio,minimum-scale=0.30, maximum-scale=3.0, user-scalable=0'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+<p>下面的情况或操作会引发离屏渲染：</p>
 
-jScript = [jScript stringByReplacingOccurrencesOfString:@"ratio" withString:[NSString stringWithFormat:@"%f",ratio]];
+<ul>
+  <li>为图层设置遮罩（layer.mask）</li>
+  <li>为图层设置阴影（layer.shadow *）。</li>
+  <li>为图层设置layer.shouldRasterize=true</li>
+  <li>文本（任何种类，包括UILabel，CATextLayer，Core Text等）。</li>
+  <li>将图层的layer.masksToBounds / view.clipsToBounds属性设置为true</li>
+  <li>将图层layer.allowsGroupOpacity属性设置为YES和layer.opacity小于1.0</li>
+  <li>具有layer.cornerRadius，layer.edgeAntialiasingMask，layer.allowsEdgeAntialiasing的图层</li>
+  <li>使用CGContext在drawRect :方法中绘制大部分情况下会导致离屏渲染，甚至仅仅是一个空的实现。</li>
+</ul>
 
-WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
-WKUserContentController *wkUController = [[WKUserContentController alloc] init];
-[wkUController addUserScript:wkUScript];
+<p>优化方案1：使用贝塞尔曲线UIBezierPath和Core Graphics框架画出一个圆角</p>
 
-WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
-wkWebConfig.userContentController = wkUController;
+<p>优化方案2：使用CAShapeLayer和UIBezierPath设置圆角</p>
 
-wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebConfig];
-</code></pre>
+<p>使用代码手动生成圆角Image设置到要显示的View上，利用UIBezierPath（CoreGraphics框架）画出来圆角图片</p>
 
-<p>这样，webview 跟据当前 屏幕大小，自适应缩放 H5页面的大小。</p>
-
-<p>设置比例过小的效果图 ⤋
-<br /><img src="/assets/images/iOS-webview-auto-scale/image_2.png" width="200" /><br /></p>
-
-<p>设置缩放比例正确的效果 ⤋</p>
-
-<p><img src="/assets/images/iOS-webview-auto-scale/image_1.png" width="200" /><br /></p>
-
-<p><a href="https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit">参考链接</a></p>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/hash-map" data-toggle="tooltip" data-placement="top" title="Hash Map">
+                        <a href="/cocoapods-private" data-toggle="tooltip" data-placement="top" title="CocoaPods 私有库搭建">
                         Previous<br>
-                        <span>Hash Map</span>
+                        <span>CocoaPods 私有库搭建</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/concurrent-events-queue" data-toggle="tooltip" data-placement="top" title="批量并发-事件管理队列">
+                        <a href="/script-configure" data-toggle="tooltip" data-placement="top" title="使用 shell 脚本配置iOS工程生成多个APP">
                         Next<br>
-                        <span>批量并发-事件管理队列</span>
+                        <span>使用 shell 脚本配置iOS工程生成多个APP</span>
                         </a>
                     </li>
                     
