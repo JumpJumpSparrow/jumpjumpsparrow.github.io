@@ -257,7 +257,9 @@
 
 <p>  在编辑博客时，保存操作会触发编译动作，将你的博客文本渲染成 Html 页面，在浏览器刷新即可看到最新的博客内容。在 Jekyll 转换完所有的文件之后，将默认在 <code class="highlighter-rouge">_site</code> 下放置生成的站点文件。你也可以在 _config.yml 中添加配置 <code class="highlighter-rouge">destination: /Blog_source/</code> 设置相对路径，这样生成的站点文件就会存放在你设置的路径下，方便用 git 工具管理。</p>
 
-<p>将生成的静态文件部署到 <code class="highlighter-rouge">github page</code>时，使用 <code class="highlighter-rouge">bundle exec jekyll build</code>编命令译，将 <code class="highlighter-rouge">localhost:4000</code>替换为你制定的域名， 得到的文件才是生产环境的页面。</p>
+<p>将生成的静态文件部署到 <code class="highlighter-rouge">github page</code>时，使用 <code class="highlighter-rouge">bundle exec jekyll build</code>编命令译，将 <code class="highlighter-rouge">localhost:4000</code>替换为你制定的域名， 得到的文件才是生产环境的页面。<br />
+<br />
+在 <code class="highlighter-rouge">_config.yml</code> 文件中， <code class="highlighter-rouge">permalink: /:title</code> 可以控制文章链接显示格式，这个字段也可以有其他配置，如<code class="highlighter-rouge">permalink: pretty</code></p>
 
 <h3 id="4-github-设置">4. GitHub 设置</h3>
 
