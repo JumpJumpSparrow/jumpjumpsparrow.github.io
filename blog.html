@@ -11,16 +11,26 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Cunfa的博客 | CF Blog">
+    <meta property="og:title" content="Blog 搭建与部署 - Cunfa的博客 | CF Blog">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="既然要去那里，出发吧">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。
+">
+    
+    <meta property="article:published_time" content="2019-06-11T02:00:00Z">
+    
+    
+    <meta property="article:author" content="Miaocf">
+    
+    
+    <meta property="article:tag" content="something">
+    
     
     <meta property="og:image" content="http://junziboxue.comimg/avatar-cf-ny.jpg">
-    <meta property="og:url" content="http://junziboxue.com/page3/">
+    <meta property="og:url" content="http://junziboxue.com/blog">
     <meta property="og:site_name" content="Cunfa的博客 | CF Blog">
     
-    <title>Cunfa的博客 | CF Blog</title>
+    <title>Blog 搭建与部署 - Cunfa的博客 | CF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://junziboxue.com/page3/">
+    <link rel="canonical" href="http://junziboxue.com/blog">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -167,242 +177,177 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header" >
 
-
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>CF Blog</h1>
-          <span class="subheading">既然要去那里，出发吧</span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=something" title="something">something</a>
+                        
+                    </div>
+                    <h1>Blog 搭建与部署</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Miaocf on June 11, 2019</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-        
 
-<!-- USE SIDEBAR -->
-    <!-- PostList Container -->
-    		<div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                postlist-container
-            ">
-    			
-<div class="post-preview">
-    <a href="/zfb-wx-payment">
-        <h2 class="post-title">
-            支付宝支付 微信支付SDK接口不统一？ 盘他！
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。
 
-   首先我们来看支付宝支付SDK的API是怎么设计的：
 
-1
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>  将纯文本转换为静态博客网站，并将博客部署到 GitHubPage，绑定自有域名方便大家访问。</p>
+
+<p>  在搭建自己的博客网站时，我希望只专注于组织内容，页面生成、部署等其他不关键的工作尽量简单。现在已经有了比较好的方案可以满足以上需求。在这里介绍如何花费较少的精力去搭建一个静态页面的个人博客。在这里只说一下大概过程，具体细节 search the web，你会得到你想要的一切。</p>
+
+<h3 id="1-博客静态网站工具">1. 博客静态网站工具</h3>
+
+<p>   这里我们用 Markdown 格式去写一些博客，使用 <a href="https://www.jekyll.com.cn/docs">Jekyll</a>、<a href="https://hexo.io/zh-cn/">Hexo</a> 等转换工具，将纯文本文件转换为 HTML 页面。Jekyll、Hexo 两者的主要区别在于，Jekyll 需要 Ruby 环境，而 Hexo 只需要 NodeJS 运行环境。
+   两者各有大量的主题可供选择，那么问题来了，究竟选择 Jekyll 还是 Hexo ？这里建议选择有你喜欢的主题的那个。因为我在搭博客的时候最先接触 Jekyll，所以在这里介绍一下 Jekyll 的配置方法。</p>
+
+<p>具体环境安装参考官方文档。</p>
+
+<h3 id="2-模版配置">2. 模版配置</h3>
+
+<p>  下载完模版后，需要修改 _config.yml 配置文件，里面包含了关于博客站点的大部分配置。
+如果你具备一些前端技能，可以自定义模版里的一些样式。模版的目录结构可参考<a href="https://www.jekyll.com.cn/docs/structure/">官方文档</a>，文档中详细地介绍了每个文件的具体功能。</p>
+
+<h3 id="3-生成静态页面">3. 生成静态页面</h3>
+
+<p>  在编辑博客时，保存操作会触发编译动作，将你的博客文本渲染成 Html 页面，在浏览器刷新即可看到最新的博客内容。在 Jekyll 转换完所有的文件之后，将默认在 <code class="highlighter-rouge">_site</code> 下放置生成的站点文件。你也可以在 _config.yml 中添加配置 <code class="highlighter-rouge">destination: /Blog_source/</code> 设置相对路径，这样生成的站点文件就会存放在你设置的路径下，方便用 git 工具管理。</p>
+
+<h3 id="4-github-设置">4. GitHub 设置</h3>
+
+<p>  在这里，你需要创建一个 <a href="https://pages.github.com">github page</a> repository，具体操作见文档。这个就是就是用来存放你站点文件的 repo。创建完毕之后，需要在 config.yml 文件中添加 github 相关的配置，配置项如下。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
-7
-8
-9
-10
-11
-12
-/**
- *  支付接口
- *
- *  @para...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 11, 2019
-    </p>
-</div>
-<hr>
+</pre></td><td class="rouge-code"><pre>#gitment
+owner: XXX
+repo: XXX
+branch: master
+client_id: xxxxxxx
+client_secret: xxxxxx
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="post-preview">
-    <a href="/app-optimize">
-        <h2 class="post-title">
-            iOS APP 优化健壮性
-        </h2>
+<h3 id="5-绑定域名">5. 绑定域名</h3>
+
+<p>  首先你需要掏点银子买个自己的域名（摊手）,这里都是固定的操作没啥好说的，具体细节可以参考<a href="https://cloud.tencent.com/developer/article/1421879">这位施主</a>文章。</p>
+
+<p>  当然你也可以不绑定域名，省下一笔银子来顿烧烤，但是作为一个独立 bloger ，自己的域名还是要有的，不然没有 bigger。</p>
+
+<h3 id="6-添加评论和统计功能">6. 添加评论和统计功能</h3>
+
+<p>  这个就需要你了解一点点前端的技能了，我们现说评论：评论有很多平台在做，比如“多说”，“畅言”，“友言”，“新浪云跟贴”，但大多都不太靠谱，关的关、封的封。这里 使用<a href="https://imsun.net/posts/gitment-introduction/">Gitment</a>来实现博客的评论功能，具体细节可参考大神的文章。</p>
+
+<p>  关于统计，这个看你自己需不需要加。我这里加的是<a href="https://tongji.baidu.com/web/welcome/login">百度统计</a>,官方有较详细的接入文档。可以查看博客的浏览人数和页面UV、PV。</p>
+
+<h3 id="总结">总结</h3>
+<p>使用 GitHub page 存放博客，充当免费服务器的角色，Jekyll 将文本解析成 html 页面，这样博客一经建成，就无须维护，只需要专心写内容就可以了。</p>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/zfb-wx-payment" data-toggle="tooltip" data-placement="top" title="支付宝支付 微信支付SDK接口不统一？ 盘他！">
+                        Previous<br>
+                        <span>支付宝支付 微信支付SDK接口不统一？ 盘他！</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/network-encapsulation" data-toggle="tooltip" data-placement="top" title="iOS 网络封装">
+                        Next<br>
+                        <span>iOS 网络封装</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                <!-- <div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+    owner: 'JumpJumpSparrow',
+    repo: 'My_blog',
+    oauth: {
+        client_id: '0854e10375734c52272e',
+        client_secret: 'e382403bb47cfe33179603e5df7a4c9576ede295',
+    },
+});
+gitment.render('gitmentContainer');
+</script> -->
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
         
-        <div class="post-content-preview">
-            
-                1.加强 APP 健壮性
 
-unrecognized selector crash
-KVO crash
-NSNotification crash
-NSTimer crash
-Container crash（数组越界，插nil等）
-NSString crash （字符串操作的crash）
-Bad Access crash （野指针）
-UI not on Main Thread Crash (非...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 11, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/haskell">
-        <h2 class="post-title">
-            Haskell 函数式编程
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                Haskell 与 Java、C++不同，它是纯函数式的编程语言，说到函数式编程，函数式与面向对象编程究竟有哪些不同？在这里将会介绍一下函数式编程的特点和起源。
-
-
-
-编程范式：
-在介绍 Haskell 之前，说一说编程范式，编程范式可简单划为两类：
-
-  命令式编程 (Imperative programming)
-  声明式编程(Declarative programming)
-
-
-
- ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 10, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/start">
-        <h2 class="post-title">
-            Blog Initialized
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                Hey! Welcome to Miaocf’s blog, it’s great to have you :)
-
-接触到个人品牌的概念后，就一直考虑着搭建一个 blog，今天算是 Personal Brand 第一天吧。
-
-在人生的旅途中需要明白几点:
-
-  人随着年龄的增长，对事物的见知也在增长，心智和价值观也随之渐渐塑造成型。
-  在30岁之前，是一直处在学习的阶段，这个阶段主要是吸收...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on June 1, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/net-biography">
-        <h2 class="post-title">
-            不期而遇-网络上的小贝壳
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下
-
-How To Be Successful
-
-
-  一份无关紧要的工作是一个危险的陷阱，很多人都会掉进去。
-  想让别人帮你，最好的办法就是你先帮他们，或者去做一些有趣的事。
-  致富靠的是权益，而不是工资。
-链接
-
-
-我对中国科技行业的看法
-
-顺便说一句，这就是为什么我认为北京的互联网公司如此努力的一个原因。...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on January 1, 1970
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/to-do-list-origin">
-        <h2 class="post-title">
-            TODO_LIST
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈
-
-为了表示这里是博客起源，特意把保存这篇博客的源文件 ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on January 1, 1970
-    </p>
-</div>
-<hr>
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    <li class="previous">
-        <a href="/page2">&larr; Newer Posts</a>
-    </li>
-    
-    
-</ul>
-
-
-    		</div>
     <!-- Sidebar Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
 
 
 <section>
+    
+        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="/archive/">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -424,35 +369,6 @@ How To Be Successful
     </div>
 </section>
 
-
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="/about/">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="http://junziboxue.com/img/avatar-cf-ny.jpg" />
-    
-    
-    <p>Your time is limited<br>勤学如春起之苗，不见其增，日有所长</p>
-    
-    <!-- SNS Link -->
-    
-
-
-<ul class="list-inline">
-
-
-  
-  
-  
-  
-  
-  
-  
-</ul>
-  </div>
-</section>
 
                 <!-- Friends Blog -->
                 
@@ -480,10 +396,48 @@ How To Be Successful
   
 </ul>
 
-    		</div>
-        
-	</div>
-</div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
 
 
