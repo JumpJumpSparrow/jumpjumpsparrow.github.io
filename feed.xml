@@ -3,10 +3,10 @@
   <channel>
     <title>CF Blog</title>
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 07 Mar 2020 10:23:14 +0800</pubDate>
-    <lastBuildDate>Sat, 07 Mar 2020 10:23:14 +0800</lastBuildDate>
+    <link>https://www.junziboxue.com/</link>
+    <atom:link href="https://www.junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sat, 07 Mar 2020 10:53:28 +0800</pubDate>
+    <lastBuildDate>Sat, 07 Mar 2020 10:53:28 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -36,8 +36,8 @@ char* value = “hello”; int key = (((((((27* (int)’h’+27)* (int)’e’) 
 &lt;p&gt;java 中hashmap的解决办法就是采用的链地址法&lt;/p&gt;
 </description>
         <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/12/18/hash-map/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/12/18/hash-map/</guid>
+        <link>https://www.junziboxue.com/2019/12/18/hash-map/</link>
+        <guid isPermaLink="true">https://www.junziboxue.com/2019/12/18/hash-map/</guid>
         
         <category>iOS</category>
         
@@ -215,8 +215,8 @@ char* value = “hello”; int key = (((((((27* (int)’h’+27)* (int)’e’) 
 &lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/EventScheduleManager.git&quot;&gt;Demo EventScheduleManager&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/12/18/concurrent-events-queue/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/12/18/concurrent-events-queue/</guid>
+        <link>https://www.junziboxue.com/2019/12/18/concurrent-events-queue/</link>
+        <guid isPermaLink="true">https://www.junziboxue.com/2019/12/18/concurrent-events-queue/</guid>
         
         <category>iOS</category>
         
@@ -288,8 +288,8 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 &lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/12/18/scales-pagesize-to-fit/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/12/18/scales-pagesize-to-fit/</guid>
+        <link>https://www.junziboxue.com/2019/12/18/scales-pagesize-to-fit/</link>
+        <guid isPermaLink="true">https://www.junziboxue.com/2019/12/18/scales-pagesize-to-fit/</guid>
         
         <category>iOS</category>
         
@@ -301,8 +301,8 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
         <description>
 </description>
         <pubDate>Tue, 12 Nov 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/11/12/one-to-many-interface/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/11/12/one-to-many-interface/</guid>
+        <link>https://www.junziboxue.com/2019/11/12/one-to-many-interface/</link>
+        <guid isPermaLink="true">https://www.junziboxue.com/2019/11/12/one-to-many-interface/</guid>
         
         
       </item>
@@ -319,8 +319,8 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 </description>
         <pubDate>Sun, 10 Nov 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/11/10/difference-and-tought/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/11/10/difference-and-tought/</guid>
+        <link>https://www.junziboxue.com/2019/11/10/difference-and-tought/</link>
+        <guid isPermaLink="true">https://www.junziboxue.com/2019/11/10/difference-and-tought/</guid>
         
         
       </item>
@@ -384,8 +384,8 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 &lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;
 </description>
         <pubDate>Fri, 08 Nov 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/11/08/auto-pilot-ethics/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/11/08/auto-pilot-ethics/</guid>
+        <link>https://www.junziboxue.com/2019/11/08/auto-pilot-ethics/</link>
+        <guid isPermaLink="true">https://www.junziboxue.com/2019/11/08/auto-pilot-ethics/</guid>
         
         <category>something</category>
         
@@ -411,8 +411,8 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 感受&lt;/p&gt;
 </description>
         <pubDate>Fri, 25 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/10/25/technology-and-values/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/10/25/technology-and-values/</guid>
+        <link>https://www.junziboxue.com/2019/10/25/technology-and-values/</link>
+        <guid isPermaLink="true">https://www.junziboxue.com/2019/10/25/technology-and-values/</guid>
         
         <category>thoughts</category>
         
@@ -446,8 +446,8 @@ Call this method on your application’s main thread when you want to adjust the
 When this message is received, the layer’s super layers are traversed until a ancestor layer is found that does not require layout. Then layout is performed on the entire layer-tree beneath that ancestor.&lt;/p&gt;
 </description>
         <pubDate>Fri, 18 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/10/18/UIView-drawing-cycle/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/10/18/UIView-drawing-cycle/</guid>
+        <link>https://www.junziboxue.com/2019/10/18/UIView-drawing-cycle/</link>
+        <guid isPermaLink="true">https://www.junziboxue.com/2019/10/18/UIView-drawing-cycle/</guid>
         
         <category>iOS</category>
         
@@ -464,8 +464,8 @@ When this message is received, the layer’s super layers are traversed until a 
 &lt;p&gt;(未完待续)d&lt;/p&gt;
 </description>
         <pubDate>Sun, 13 Oct 2019 01:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/10/13/emoji-filter/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/10/13/emoji-filter/</guid>
+        <link>https://www.junziboxue.com/2019/10/13/emoji-filter/</link>
+        <guid isPermaLink="true">https://www.junziboxue.com/2019/10/13/emoji-filter/</guid>
         
         <category>iOS</category>
         
@@ -487,8 +487,8 @@ https://developer.apple.com/library/archive/documentation/General/Conceptual/App
 （待完成）&lt;/p&gt;
 </description>
         <pubDate>Fri, 11 Oct 2019 02:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/10/11/universal-link/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/10/11/universal-link/</guid>
+        <link>https://www.junziboxue.com/2019/10/11/universal-link/</link>
+        <guid isPermaLink="true">https://www.junziboxue.com/2019/10/11/universal-link/</guid>
         
         <category>iOS</category>
         
