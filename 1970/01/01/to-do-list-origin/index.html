@@ -11,16 +11,26 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Offline - Cunfa的博客 | CF Blog">
+    <meta property="og:title" content="TODO_LIST - Cunfa的博客 | CF Blog">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description" content="阅读过的页面可以在离线时访问哦 ;)">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈
+">
+    
+    <meta property="article:published_time" content="1970-01-01T08:00:00Z">
+    
+    
+    <meta property="article:author" content="Miaocf">
+    
+    
+    <meta property="article:tag" content="something">
+    
     
     <meta property="og:image" content="http://localhost:4000img/avatar-cf-ny.jpg">
-    <meta property="og:url" content="http://localhost:4000/offline.html">
+    <meta property="og:url" content="http://localhost:4000/1970/01/01/to-do-list-origin/">
     <meta property="og:site_name" content="Cunfa的博客 | CF Blog">
     
-    <title>Offline - Cunfa的博客 | CF Blog</title>
+    <title>TODO_LIST - Cunfa的博客 | CF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -29,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/offline.html">
+    <link rel="canonical" href="http://localhost:4000/1970/01/01/to-do-list-origin/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -167,33 +177,241 @@
 </script>
 
 
-    <!-- Page Header -->
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/home-bg.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
 
 
 
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/home-bg.jpg');
+        background: ;
+    }
 
+    
+</style>
 
+<header class="intro-header" >
 
-
-<header class="intro-header" style="background-image: url('/img/404-bg.jpg')">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>Offline</h1>
-          <span class="subheading">阅读过的页面可以在离线时访问哦 ;)</span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=something" title="something">something</a>
+                        
+                    </div>
+                    <h1>TODO_LIST</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Miaocf on January 1, 1970</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <!-- Multi-Lingual -->
+                
+
+				<p>因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈</p>
+
+<p>为了表示这里是博客起源，特意把保存这篇博客的源文件 命名为 <code class="highlighter-rouge">1970-01-01-to-do-list-origin.md</code>，懂计算机的朋应该会明白，哈哈。为了避免误会，这里记录这个文件的实际生成日期是<code class="highlighter-rouge">date: 2019-11-12 19:40:00</code>.</p>
+
+<p>电商 APP 总结</p>
+
+<h3 id="路由">路由</h3>
+
+<ol>
+  <li>使用 JSON 格式的数据 映射 app 结构。（或者创建 对象），每个节点保存展现方式，页面参数等信息</li>
+  <li>页面跳转就是展现其中的节点</li>
+  <li>APP 任意状态下，只是处在一条路径中的节点上，</li>
+  <li>节点可嵌套，即子节点与父节点类型相同</li>
+  <li>
+    <p>静态路由，手动配置路由表
+<a href="https://angular.cn/guide/router">angular</a></p>
+  </li>
+  <li>
+    <p>路由规则，有些页面是单向的，或者是当前节点不可访问的，需要定制路由规则</p>
+  </li>
+  <li>创建路径，Path</li>
+</ol>
+
+<h3 id="回调">回调</h3>
+<p>Global Anchor ，全局事件回调，可一对多，并且保证线程安全。同时实现内存管理内存</p>
+
+<h3 id="接口设计">接口设计</h3>
+<p>1.创建 静态路由表
+2.路由节点模型 ，包含 类信息、接口信息、</p>
+
+<p>3.字符串路径 -&gt;节点路径转换 map 映射</p>
+
+<p>4.加载路径 跳转</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/1970/01/01/net-biography/" data-toggle="tooltip" data-placement="top" title="不期而遇-网络上的小贝壳">
+                        Next<br>
+                        <span>不期而遇-网络上的小贝壳</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+                
+
+                <!-- <div id="gitmentContainer"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 <script>
-	document.body.classList.add('page-fullscreen');
+var gitment = new Gitment({
+    owner: 'JumpJumpSparrow',
+    repo: 'My_blog',
+    oauth: {
+        client_id: '0854e10375734c52272e',
+        client_secret: 'e382403bb47cfe33179603e5df7a4c9576ede295',
+    },
+});
+gitment.render('gitmentContainer');
+</script> -->
+                
+            </div>  
+
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="/archive/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        </a>
+        
+        
+                <a data-sort="0019" 
+                    href="/archive/?tag=something"
+                    title="something"
+                    rel="7">something</a>
+        
+                <a data-sort="0012" 
+                    href="/archive/?tag=iOS"
+                    title="iOS"
+                    rel="14">iOS
+    </div>
+</section>
+
+
+                <!-- Friends Blog -->
+                
+<hr>
+<h5>FOOTPRINTS</h5>
+<ul class="list-inline">
+  
+  <li><a href="https://www.v2ex.com">V2EX</a></li>
+  
+  <li><a href="http://www.ruanyifeng.com">ruanyifeng</a></li>
+  
+  <li><a href="https://flutter.dev">flutter</a></li>
+  
+  <li><a href="https://www.cnblogs.com">cnblogs</a></li>
+  
+  <li><a href="https://github.com">github</a></li>
+  
+  <li><a href="https://angular.cn">angular</a></li>
+  
+  <li><a href="https://tour.go-zh.org/">go</a></li>
+  
+  <li><a href="https://www.rust-lang.org">rust-lang</a></li>
+  
+  <li><a href="https://haskellbook.com">haskellbook</a></li>
+  
+</ul>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- add support for mathjax by voleking-->
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
 </script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->
