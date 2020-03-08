@@ -83,6 +83,36 @@
                     </li>
                     
                     
+                    <li>
+                        <a href="/WIP-Blogs/2019-07-01-time-range">Time Range 如何影响你的人生</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/WIP-Blogs/2019-10-10-frame-rate-monitor">iOS 屏幕卡顿检测与排查</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/WIP-Blogs/2019-10-11-universal-link">iOS universal-link 通用链接配置</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/WIP-Blogs/2019-10-24-technology-and-values">技术是如何产生价值的？</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/WIP-Blogs/2019-12-18-hash-map">深入了解 HashTable</a>
+                    </li>
+                    
+                    
+                    
                     
                     
                     <li>
@@ -94,8 +124,6 @@
                     <li>
                         <a href="/archive">Archive</a>
                     </li>
-                    
-                    
                     
                     
                     
@@ -207,162 +235,6 @@
             ">
     			
 <div class="post-preview">
-    <a href="/frame-rate-monitor">
-        <h2 class="post-title">
-            iOS 屏幕卡顿检测与排查
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                
-  卡顿发生检测
-  卡顿原因排查
-（待完成）
-
-
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on October 11, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/yykit-micro">
-        <h2 class="post-title">
-            Building Objective-C static libraries with categories
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                
-  Q:  How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?
-
-
-如何解决 在 runtime 环境中尝试调用静态库中分类的方法时，报 “selector not recognized” 异常？
-
-  今天在...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on September 25, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/textfield-auto-adjust">
-        <h2 class="post-title">
-            UITextField 随键盘高度自适应
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                  在开发APP过程中，不免会遇到页面需要多个 UITextField 的需求，那么问题来了：当输入框过多时，弹起键盘会遮盖住输入框，或者需要依次点击输入框才能输入。用户的输入体验非常差。为解决这个问题，我们让输入框跟随键盘自动调整高度，并且点击回车键自动跳转到下一个输入框进行输入。
-
-具体效果如图：
-
-
-
-需求分析：
-  简单分析一下：
-
-
-  点击输入框时，输入框随着键盘弹起，自动调整高...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on September 23, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/script-configure">
-        <h2 class="post-title">
-            使用 shell 脚本配置iOS工程生成多个APP
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。
-
-1. 需求分析
-
-在配置工程中我们需要事先知道有哪些配置项：
-
-
-  APP 启动图、图标等资源文件。
-  APP 名称、版本号、bundleID。
-  APP 相关的微...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on September 20, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/shadow-roundcorner">
-        <h2 class="post-title">
-            iOS 圆角+阴影+离屏渲染问题
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                iOS 圆角+阴影+离屏渲染问题
-
-在近一期开发需求中，有个控件需要同时添加圆角和阴影效果。本以为是个非常简单的需求，但开发过程并不十分美丽。今天就整理一下控件添加圆角和阴影一些需要注意的地方。
-
-为什么给一个控件同时添加 阴影和圆角这么困难呢？一句话解释就是：
-
-  Because shadow is an effect done outside the View, and that ma...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on September 16, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/cocoapods-private">
-        <h2 class="post-title">
-            CocoaPods 私有库搭建
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                在 iOS 开发过程中，经常会使用cocoapods管理三方库，如果自己的库不想公开，只方便自己公司的人用，该怎么办呢？这里介绍一下如何搭建一个私有的Pods库。
-
-
-  CocoaPods的原理
-  创建私有库
-
-
-CocoaPods的原理
-
-
-  
-    第三方库会被编译成.a静态库供我们真正的工程使用。
-CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的工...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on August 16, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
     <a href="/software-engineer">
         <h2 class="post-title">
             如何看待软件工程师
@@ -376,35 +248,6 @@ CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的�
   
     长时间996屹立不倒
 往往一个需求或者工程为了赶工期,需要长时间的加班加点,或者解决一个紧急问题需要连夜解决,在这种时候,没有一个健壮的身体是扛不住的.身体是革命的本钱, 一...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on July 1, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/time-range">
-        <h2 class="post-title">
-            Time Range 如何影响你的人生
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                时间尺度对人生的影响
-
-hour
-day
-week
-month
-year
-half-decade
-decade
-two-decade
-three-decade
-
             
         </div>
     </a>
@@ -466,6 +309,176 @@ errorcode
 </div>
 <hr>
 
+<div class="post-preview">
+    <a href="/zfb-wx-payment">
+        <h2 class="post-title">
+            支付宝支付 微信支付SDK接口不统一？ 盘他！
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                  开发过支付宝、微信支付的同学都知道，微信的支付 API 设计感觉是 Java 开发工程师写的，远不如支付宝 SDK 的接口设计用起来顺手。在这里，统一封装微信支付和支付宝支付的API，使两种支付方式对外提供一致的调用接口。
+
+   首先我们来看支付宝支付SDK的API是怎么设计的：
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+/**
+ *  支付接口
+ *
+ *  @para...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on June 11, 2019
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/app-optimize">
+        <h2 class="post-title">
+            iOS APP 优化健壮性
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                1.加强 APP 健壮性
+
+unrecognized selector crash
+KVO crash
+NSNotification crash
+NSTimer crash
+Container crash（数组越界，插nil等）
+NSString crash （字符串操作的crash）
+Bad Access crash （野指针）
+UI not on Main Thread Crash (非...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on June 11, 2019
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/haskell">
+        <h2 class="post-title">
+            Haskell 函数式编程
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                Haskell 与 Java、C++不同，它是纯函数式的编程语言，说到函数式编程，函数式与面向对象编程究竟有哪些不同？在这里将会介绍一下函数式编程的特点和起源。
+
+
+
+编程范式：
+在介绍 Haskell 之前，说一说编程范式，编程范式可简单划为两类：
+
+  命令式编程 (Imperative programming)
+  声明式编程(Declarative programming)
+
+
+
+ ...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on June 10, 2019
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/start">
+        <h2 class="post-title">
+            Blog Initialized
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                Hey! Welcome to Miaocf’s blog, it’s great to have you :)
+
+接触到个人品牌的概念后，就一直考虑着搭建一个 blog，今天算是 Personal Brand 第一天吧。
+
+在人生的旅途中需要明白几点:
+
+  人随着年龄的增长，对事物的见知也在增长，心智和价值观也随之渐渐塑造成型。
+  在30岁之前，是一直处在学习的阶段，这个阶段主要是吸收...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on June 1, 2019
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/net-biography">
+        <h2 class="post-title">
+            不期而遇-网络上的小贝壳
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                在网络上不时会遇到包含真知灼见的文章或句子，在这里摘抄下来，供自己时不时重温一下
+
+How To Be Successful
+
+
+  一份无关紧要的工作是一个危险的陷阱，很多人都会掉进去。
+  想让别人帮你，最好的办法就是你先帮他们，或者去做一些有趣的事。
+  致富靠的是权益，而不是工资。
+链接
+
+
+我对中国科技行业的看法
+
+顺便说一句，这就是为什么我认为北京的互联网公司如此努力的一个原因。...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on January 1, 1970
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/to-do-list-origin">
+        <h2 class="post-title">
+            TODO_LIST
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈
+
+为了表示这里是博客起源，特意把保存这篇博客的源文件 ...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on January 1, 1970
+    </p>
+</div>
+<hr>
+
 
 <!-- Pager -->
 
@@ -475,10 +488,6 @@ errorcode
         <a href="/">&larr; Newer Posts</a>
     </li>
     
-    
-    <li class="next">
-        <a href="/page3">Older Posts &rarr;</a>
-    </li>
     
 </ul>
 
@@ -506,15 +515,15 @@ errorcode
         </a>
         
         
-                <a data-sort="0019" 
+                <a data-sort="0013" 
                     href="/archive/?tag=something"
                     title="something"
-                    rel="7">something</a>
+                    rel="6">something</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0008" 
                     href="/archive/?tag=iOS"
                     title="iOS"
-                    rel="14">iOS
+                    rel="11">iOS
     </div>
 </section>
 

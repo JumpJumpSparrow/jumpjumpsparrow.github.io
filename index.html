@@ -83,6 +83,36 @@
                     </li>
                     
                     
+                    <li>
+                        <a href="/WIP-Blogs/2019-07-01-time-range">Time Range 如何影响你的人生</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/WIP-Blogs/2019-10-10-frame-rate-monitor">iOS 屏幕卡顿检测与排查</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/WIP-Blogs/2019-10-11-universal-link">iOS universal-link 通用链接配置</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/WIP-Blogs/2019-10-24-technology-and-values">技术是如何产生价值的？</a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="/WIP-Blogs/2019-12-18-hash-map">深入了解 HashTable</a>
+                    </li>
+                    
+                    
+                    
                     
                     
                     <li>
@@ -94,8 +124,6 @@
                     <li>
                         <a href="/archive">Archive</a>
                     </li>
-                    
-                    
                     
                     
                     
@@ -207,25 +235,6 @@
             ">
     			
 <div class="post-preview">
-    <a href="/hash-map">
-        <h2 class="post-title">
-            Hash Map 实现原理
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                　　Hash,一般翻译做“ 散列” ，也有直接音译为“ 哈希” 的，就是把任意长度的输入（又叫做预映射， pre-image ），通过散列算法，变换成固定长度的输出，该输出就是散列值。这种转换是一种压缩映射，也就是，散列值的空间通常远小于输入的空间，不 同的输入可能会散列成相同的输出，而不可能从散列值来唯一的确定输入值。简单的说就是一种将任意长度的消息压缩到某一固定长度的消息摘要的函数。
-H...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on December 18, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
     <a href="/concurrent-events-queue">
         <h2 class="post-title">
             批量并发-事件管理队列
@@ -278,51 +287,6 @@ H...
 <hr>
 
 <div class="post-preview">
-    <a href="/one-to-many-interface">
-        <h2 class="post-title">
-            One To Many Interface
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                
-
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CF Blog on November 12, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/difference-and-tought">
-        <h2 class="post-title">
-            Difference And Tought
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                如何看待 ‘不同’？
-
-什么是不同？
-
-不同带来的优势？
-
-什么是优势？
-
-
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by CF Blog on November 10, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
     <a href="/auto-pilot-ethics">
         <h2 class="post-title">
             关于自动驾驶伦理问题的思考
@@ -338,39 +302,6 @@ H...
     </a>
     <p class="post-meta">
         Posted by Miaocf on November 8, 2019
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="/technology-and-values">
-        <h2 class="post-title">
-            技术是如何产生价值的？
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                什么是技术？ 技术就是将理论付诸实践的方法论。
-
-什么是理论？
-什么是设计？
-
-首先，从哲学角度讲，物质结构决定物质功能。
-
-技术如何创造价值
-
-物质价值
-实物、数据
-
-虚拟价值
-服务
-感受
-
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on October 25, 2019
     </p>
 </div>
 <hr>
@@ -419,24 +350,134 @@ Call this method on your...
 <hr>
 
 <div class="post-preview">
-    <a href="/universal-link">
+    <a href="/yykit-micro">
         <h2 class="post-title">
-            iOS universal-link 通用链接配置
+            Building Objective-C static libraries with categories
         </h2>
         
         <div class="post-content-preview">
             
-                iOS 通过 universal-link 唤起 APP 的难点在于：这是个纯配置的工作，需要配置服务端和APP端，还要在开发者账号中进行配置，并无特殊技巧。
+                
+  Q:  How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?
 
-1.概念
 
-https://weixin.qq.com/apple-app-site-association
-https://developer.apple.com/library/archive/documentation/Gen...
+如何解决 在 runtime 环境中尝试调用静态库中分类的方法时，报 “selector not recognized” 异常？
+
+  今天在...
             
         </div>
     </a>
     <p class="post-meta">
-        Posted by Miaocf on October 11, 2019
+        Posted by Miaocf on September 25, 2019
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/textfield-auto-adjust">
+        <h2 class="post-title">
+            UITextField 随键盘高度自适应
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                  在开发APP过程中，不免会遇到页面需要多个 UITextField 的需求，那么问题来了：当输入框过多时，弹起键盘会遮盖住输入框，或者需要依次点击输入框才能输入。用户的输入体验非常差。为解决这个问题，我们让输入框跟随键盘自动调整高度，并且点击回车键自动跳转到下一个输入框进行输入。
+
+具体效果如图：
+
+
+
+需求分析：
+  简单分析一下：
+
+
+  点击输入框时，输入框随着键盘弹起，自动调整高...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on September 23, 2019
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/script-configure">
+        <h2 class="post-title">
+            使用 shell 脚本配置iOS工程生成多个APP
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。
+
+1. 需求分析
+
+在配置工程中我们需要事先知道有哪些配置项：
+
+
+  APP 启动图、图标等资源文件。
+  APP 名称、版本号、bundleID。
+  APP 相关的微...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on September 20, 2019
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/shadow-roundcorner">
+        <h2 class="post-title">
+            iOS 圆角+阴影+离屏渲染问题
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                iOS 圆角+阴影+离屏渲染问题
+
+在近一期开发需求中，有个控件需要同时添加圆角和阴影效果。本以为是个非常简单的需求，但开发过程并不十分美丽。今天就整理一下控件添加圆角和阴影一些需要注意的地方。
+
+为什么给一个控件同时添加 阴影和圆角这么困难呢？一句话解释就是：
+
+  Because shadow is an effect done outside the View, and that ma...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on September 16, 2019
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="/cocoapods-private">
+        <h2 class="post-title">
+            CocoaPods 私有库搭建
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                在 iOS 开发过程中，经常会使用cocoapods管理三方库，如果自己的库不想公开，只方便自己公司的人用，该怎么办呢？这里介绍一下如何搭建一个私有的Pods库。
+
+
+  CocoaPods的原理
+  创建私有库
+
+
+CocoaPods的原理
+
+
+  
+    第三方库会被编译成.a静态库供我们真正的工程使用。
+CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的工...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on August 16, 2019
     </p>
 </div>
 <hr>
@@ -477,15 +518,15 @@ https://developer.apple.com/library/archive/documentation/Gen...
         </a>
         
         
-                <a data-sort="0019" 
+                <a data-sort="0013" 
                     href="/archive/?tag=something"
                     title="something"
-                    rel="7">something</a>
+                    rel="6">something</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0008" 
                     href="/archive/?tag=iOS"
                     title="iOS"
-                    rel="14">iOS
+                    rel="11">iOS
     </div>
 </section>
 
