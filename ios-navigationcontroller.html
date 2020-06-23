@@ -11,26 +11,27 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="TODO_LIST - Cunfa的博客 | CF Blog">
+    <meta property="og:title" content="UINavigationController 之栈管理 - Cunfa的博客 | CF Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈
+    <meta property="og:description" content="1.遇到一个需求
+使用UINavigationController push进入多个页面后，不再显示部分页面，直接返回到指定的页面。
 ">
     
-    <meta property="article:published_time" content="1970-01-01T08:00:00Z">
+    <meta property="article:published_time" content="2020-06-22T18:30:00Z">
     
     
     <meta property="article:author" content="Miaocf">
     
     
-    <meta property="article:tag" content="something">
+    <meta property="article:tag" content="iOS">
     
     
     <meta property="og:image" content="http://junziboxue.comimg/avatar-cf-ny.jpg">
-    <meta property="og:url" content="http://junziboxue.com/to-do-list-origin">
+    <meta property="og:url" content="http://junziboxue.com/ios-navigationcontroller">
     <meta property="og:site_name" content="Cunfa的博客 | CF Blog">
     
-    <title>TODO_LIST - Cunfa的博客 | CF Blog</title>
+    <title>UINavigationController 之栈管理 - Cunfa的博客 | CF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -39,7 +40,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://junziboxue.com/to-do-list-origin">
+    <link rel="canonical" href="http://junziboxue.com/ios-navigationcontroller">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -203,13 +204,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=something" title="something">something</a>
+                        <a class="tag" href="/archive/?tag=iOS" title="iOS">iOS</a>
                         
                     </div>
-                    <h1>TODO_LIST</h1>
+                    <h1>UINavigationController 之栈管理</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Miaocf on January 1, 1970</span>
+                    <span class="meta">Posted by Miaocf on June 22, 2020</span>
                 </div>
             </div>
         </div>
@@ -235,39 +236,68 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>因为不定时会有 idea 从我的大脑里冒出来，并以此写一篇博客，但这些 idea 往往只有一些简单的思考，一时难以写成完整的博客，时间一长，博客列表里就有不少未完成的博客，严重影响了博客的整体观感。于是决定，有了新的想法或者主题 先记录在此，等完善后再发表出去。这里就是博客的孵化巢或者备忘录吧，但愿这里不会积累太多无用的 idea，哈哈</p>
+				<h3 id="1遇到一个需求">1.遇到一个需求</h3>
+<p>使用<code class="highlighter-rouge">UINavigationController </code>push进入多个页面后，不再显示部分页面，直接返回到指定的页面。</p>
 
-<p>为了表示这里是博客起源，特意把保存这篇博客的源文件 命名为 <code class="highlighter-rouge">1970-01-01-to-do-list-origin.md</code>，懂计算机的朋应该会明白，哈哈。为了避免误会，这里记录这个文件的实际生成日期是<code class="highlighter-rouge">date: 2019-11-12 19:40:00</code>.</p>
+<p>根据描述，第一个想到的方案就是:</p>
 
-<p>电商 APP 总结</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> [self.navigationController popToViewController:toVC animated:YES];
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>通过遍历<code class="highlighter-rouge">UINavigationController</code>的<code class="highlighter-rouge">viewControllers</code>找到要跳转的页面，直接pop过去。</p>
 
-<h3 id="路由">路由</h3>
+<p>遇到的问题就是，iOS 触发返回页面有两种交互方式：</p>
 
 <ol>
-  <li>使用 JSON 格式的数据 映射 app 结构。（或者创建 对象），每个节点保存展现方式，页面参数等信息</li>
-  <li>页面跳转就是展现其中的节点</li>
-  <li>APP 任意状态下，只是处在一条路径中的节点上，</li>
-  <li>节点可嵌套，即子节点与父节点类型相同</li>
-  <li>
-    <p>静态路由，手动配置路由表
-<a href="https://angular.cn/guide/router">angular</a></p>
-  </li>
-  <li>
-    <p>路由规则，有些页面是单向的，或者是当前节点不可访问的，需要定制路由规则</p>
-  </li>
-  <li>创建路径，Path</li>
+  <li>点击左上角的返回按钮</li>
+  <li>使用手势，在屏幕边缘从左往右滑动</li>
 </ol>
 
-<h3 id="回调">回调</h3>
-<p>Global Anchor ，全局事件回调，可一对多，并且保证线程安全。同时实现内存管理内存</p>
+<p>要想使用<code class="highlighter-rouge">pop</code>的API，就需要拦截边缘滑动的交互事件，重写<code class="highlighter-rouge">UINavigationController</code>的手势，（有的朋友说可以屏蔽右滑手势…）<br />
+由于不想改动 <code class="highlighter-rouge">UINavigationController</code>的手势事件，遂有了下一个方案。</p>
 
-<h3 id="接口设计">接口设计</h3>
-<p>1.创建 静态路由表
-2.路由节点模型 ，包含 类信息、接口信息、</p>
+<h3 id="2uinavigationcontroller实现原理">2.<code class="highlighter-rouge">UINavigationController</code>实现原理</h3>
+<p>在iOS开发过程中，<code class="highlighter-rouge">UINavigationController </code>是常用的容器类Controller，<code class="highlighter-rouge">UINavigationController </code>交互方式如下图，</p>
 
-<p>3.字符串路径 -&gt;节点路径转换 map 映射</p>
+<p><img src="../assets/images/UINavigationController/navigation-interface.png" alt="" /></p>
 
-<p>4.加载路径 跳转</p>
+<p>根据官方文档说明，<code class="highlighter-rouge">UINavigationController</code>通过管理一个栈结构来管理各个页面，实现页面的层级跳转。 将<code class="highlighter-rouge">UIViewController</code>依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。</p>
+
+<p><img src="../assets/images/UINavigationController/objects-managed-by-navi.jpeg" alt="" /></p>
+
+<h3 id="3解决方案">3.解决方案</h3>
+<p>于是想到，通过修改<code class="highlighter-rouge">UINavigationController</code>的<strong><em>栈结构</em></strong>来影响页面的跳转。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>    NSMutableArray *vcStack = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    if (vcStack.count &gt; 2 &amp;&amp; vcStack.count &gt; index) {
+        //将 元素直接从 数组中 移除
+        [vcStack removeObjectAtIndex:index];
+        self.navigationController.viewControllers = vcStack;
+    }
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>这样，在进入新的页面时，将不再显示的页面从栈中移除掉，便可实现跨页面的跳转。</p>
+
+<p>需要注意的是：</p>
+
+<ol>
+  <li>当把一个<code class="highlighter-rouge">UIViewController</code>的实例push进栈后，该实例的<code class="highlighter-rouge">parentViewController</code>就是<code class="highlighter-rouge">UINavigationController</code></li>
+  <li>调用<code class="highlighter-rouge">UIViewController</code>的<code class="highlighter-rouge">- (void)removeFromParentViewController</code>方法，会将该实例从栈中移除，但会发生异常，具体表现为点击返回，<code class="highlighter-rouge">navigationBar</code> 有动画，但不会有页面跳转</li>
+  <li>注意内存的引用，如果要移除的<code class="highlighter-rouge">UIViewController </code>在其他地方存在引用，将不会释放内存，发生内存泄露。</li>
+</ol>
+
+<p>附：UI结构图</p>
+
+<p><img src="../assets/images/UINavigationController/views-of-navi.png" alt="" /></p>
+
+<p>参考资料：<br />
+<a href="https://developer.apple.com/documentation/uikit/uinavigationcontroller?language=objc">UINavigationController</a></p>
+
 
                 <div>
     <h3>
@@ -284,13 +314,13 @@
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/net-biography" data-toggle="tooltip" data-placement="top" title="不期而遇-网络上的小贝壳">
-                        Next<br>
-                        <span>不期而遇-网络上的小贝壳</span>
+                    <li class="previous">
+                        <a href="/concurrent-events-queue" data-toggle="tooltip" data-placement="top" title="批量并发-事件管理队列">
+                        Previous<br>
+                        <span>批量并发-事件管理队列</span>
                         </a>
                     </li>
+                    
                     
                 </ul>
                 <hr style="visibility: hidden;">

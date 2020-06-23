@@ -5,9 +5,83 @@
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
     <link>http://junziboxue.com/</link>
     <atom:link href="http://junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 18 Mar 2020 14:13:55 +0800</pubDate>
-    <lastBuildDate>Wed, 18 Mar 2020 14:13:55 +0800</lastBuildDate>
+    <pubDate>Tue, 23 Jun 2020 12:36:27 +0800</pubDate>
+    <lastBuildDate>Tue, 23 Jun 2020 12:36:27 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>UINavigationController 之栈管理</title>
+        <description>&lt;h3 id=&quot;1遇到一个需求&quot;&gt;1.遇到一个需求&lt;/h3&gt;
+&lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;push进入多个页面后，不再显示部分页面，直接返回到指定的页面。&lt;/p&gt;
+
+&lt;p&gt;根据描述，第一个想到的方案就是:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; [self.navigationController popToViewController:toVC animated:YES];
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;通过遍历&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;viewControllers&lt;/code&gt;找到要跳转的页面，直接pop过去。&lt;/p&gt;
+
+&lt;p&gt;遇到的问题就是，iOS 触发返回页面有两种交互方式：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;点击左上角的返回按钮&lt;/li&gt;
+  &lt;li&gt;使用手势，在屏幕边缘从左往右滑动&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;要想使用&lt;code class=&quot;highlighter-rouge&quot;&gt;pop&lt;/code&gt;的API，就需要拦截边缘滑动的交互事件，重写&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的手势，（有的朋友说可以屏蔽右滑手势…）&lt;br /&gt;
+由于不想改动 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的手势事件，遂有了下一个方案。&lt;/p&gt;
+
+&lt;h3 id=&quot;2uinavigationcontroller实现原理&quot;&gt;2.&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;实现原理&lt;/h3&gt;
+&lt;p&gt;在iOS开发过程中，&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;是常用的容器类Controller，&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;交互方式如下图，&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/UINavigationController/navigation-interface.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;根据官方文档说明，&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;通过管理一个栈结构来管理各个页面，实现页面的层级跳转。 将&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/UINavigationController/objects-managed-by-navi.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3解决方案&quot;&gt;3.解决方案&lt;/h3&gt;
+&lt;p&gt;于是想到，通过修改&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的&lt;strong&gt;&lt;em&gt;栈结构&lt;/em&gt;&lt;/strong&gt;来影响页面的跳转。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    NSMutableArray *vcStack = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    if (vcStack.count &amp;gt; 2 &amp;amp;&amp;amp; vcStack.count &amp;gt; index) {
+        //将 元素直接从 数组中 移除
+        [vcStack removeObjectAtIndex:index];
+        self.navigationController.viewControllers = vcStack;
+    }
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这样，在进入新的页面时，将不再显示的页面从栈中移除掉，便可实现跨页面的跳转。&lt;/p&gt;
+
+&lt;p&gt;需要注意的是：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;当把一个&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;的实例push进栈后，该实例的&lt;code class=&quot;highlighter-rouge&quot;&gt;parentViewController&lt;/code&gt;就是&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;调用&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;- (void)removeFromParentViewController&lt;/code&gt;方法，会将该实例从栈中移除，但会发生异常，具体表现为点击返回，&lt;code class=&quot;highlighter-rouge&quot;&gt;navigationBar&lt;/code&gt; 有动画，但不会有页面跳转&lt;/li&gt;
+  &lt;li&gt;注意内存的引用，如果要移除的&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController &lt;/code&gt;在其他地方存在引用，将不会释放内存，发生内存泄露。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;附：UI结构图&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/UINavigationController/views-of-navi.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;参考资料：&lt;br /&gt;
+&lt;a href=&quot;https://developer.apple.com/documentation/uikit/uinavigationcontroller?language=objc&quot;&gt;UINavigationController&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 22 Jun 2020 18:30:00 +0800</pubDate>
+        <link>http://junziboxue.com/ios-navigationcontroller</link>
+        <guid isPermaLink="true">http://junziboxue.com/ios-navigationcontroller</guid>
+        
+        <category>iOS</category>
+        
+        
+      </item>
     
       <item>
         <title>批量并发-事件管理队列</title>
@@ -958,179 +1032,6 @@ subLayer.shadowRadius = 4;//阴影半径，默认3
         <guid isPermaLink="true">http://junziboxue.com/shadow-roundcorner</guid>
         
         <category>iOS</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>CocoaPods 私有库搭建</title>
-        <description>&lt;p&gt;在 iOS 开发过程中，经常会使用cocoapods管理三方库，如果自己的库不想公开，只方便自己公司的人用，该怎么办呢？这里介绍一下如何搭建一个私有的Pods库。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;CocoaPods的原理&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;创建私有库&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;cocoapods的原理&quot;&gt;CocoaPods的原理&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;第三方库会被编译成.a静态库供我们真正的工程使用。&lt;/strong&gt;&lt;br /&gt;
-CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的工程，该工程在Pods目录下。整个第三方库工程会生成一个名称为&lt;code class=&quot;highlighter-rouge&quot;&gt;libPods-xxx.a&lt;/code&gt;的静态库提供给主工程使用。对于资源文件，CocoaPods 提供了一个名为Pods-resources.sh的bash脚本，该脚本在每次项目编译的时候都会执行，将第三方库的各种资源文件复制到目标目录中。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;工程和第三方库所在的工程会由一个新生成的workspace管理&lt;/strong&gt;&lt;br /&gt;
-为了方便我们直观的管理工程和第三方库，CocoaPodsTest工程和Pods工程会被以workspace的形式组织和管理，也就是xxxx.xcworkspace文件。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;CocoaPods通过&lt;code class=&quot;highlighter-rouge&quot;&gt;Pods-Podtest.release.xcconfig&lt;/code&gt;的文件来在编译时设置所有的依赖和参数。&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;原来的工程设置已经被更改了，直接打开原来的工程文件去编译就会报错，使用新生成的workspace来进行项目管理。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;创建私有库&quot;&gt;创建私有库&lt;/h3&gt;
-
-&lt;p&gt;创建私有库的大体步骤为:&lt;/p&gt;
-
-&lt;h4 id=&quot;1-准备工作&quot;&gt;1. 准备工作&lt;/h4&gt;
-
-&lt;p&gt;创建两个私有远程仓库 Spec 和 Lib&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Spec仓库用来存储spec&lt;/li&gt;
-  &lt;li&gt;Lib用来存储项目工程文件&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;2-创建pod私有库的项目工程&quot;&gt;2. 创建pod私有库的项目工程&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;cd到合适目录下用命令行创建工程,执行 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod lib create Lib&lt;/code&gt; ,按提示输入需要的内容.&lt;/li&gt;
-  &lt;li&gt;修改podspec文件&lt;/li&gt;
-  &lt;li&gt;修改完成后,cd 到Lib目录下执行&lt;code class=&quot;highlighter-rouge&quot;&gt;pod lib lint&lt;/code&gt; &lt;br /&gt;
-podspec 文件保存了所有要对三方库的配置,包括要引用的依赖、模块划分、源文件、公共头文件等.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;3-将本地项目文件上传到远程私有库中&quot;&gt;3. 将本地项目文件上传到远程私有库中&lt;/h4&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;$ git remote add origin http://git.xxxx.cn/APP/ios/Lib.git
-$ git add .
-$ git commit -m &quot;Initial commit&quot;
-$ git push -u origin master
-//tag 值要和podspec中的version一致
-$ git tag 0.1.0
-//推送tag到服务器上
-$ git push --tags
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;这时查看远程仓库应该有自己的项目文件了&lt;/p&gt;
-
-&lt;h4 id=&quot;4-校验spec&quot;&gt;4. 校验spec&lt;/h4&gt;
-
-&lt;p&gt;执行 &lt;code class=&quot;highlighter-rouge&quot;&gt;pod spec lint&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;5创建spec-repo&quot;&gt;5.创建spec repo&lt;/h4&gt;
-
-&lt;p&gt;进入文件夹&lt;code class=&quot;highlighter-rouge&quot;&gt;cd ~/.cocoapods/repos&lt;/code&gt; 可以查看本地&lt;code class=&quot;highlighter-rouge&quot;&gt;spec repo&lt;/code&gt;
-指定管理 lib repo 的 specs repo 的 url
-&lt;code class=&quot;highlighter-rouge&quot;&gt;pod repo add Lib http://git.xxxx.cn/APP/ios/Spec.git&lt;/code&gt;
-注意 此处地址是spec仓库地址
-推送 podspec 到 specs repo
-&lt;code class=&quot;highlighter-rouge&quot;&gt;pod repo push Lib Lib.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git&lt;/code&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;6-验证&quot;&gt;6. 验证&lt;/h4&gt;
-&lt;p&gt;创建一个新的项目  编写podfile文件&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;source 'http://git.xxxx.cn/APP/ios/Spec.git'
-
-platform :ios, '9.0'
-
-target 'TestPods' do
-  use_frameworks!
-  pod 'Lib'
-
-end
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;cd项目中 执行pod install&lt;/p&gt;
-
-&lt;h4 id=&quot;7--更新spec文件&quot;&gt;7.  更新spec文件&lt;/h4&gt;
-&lt;p&gt;更新 podspec 文件后:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;将更新的podspec 文件更新到 git 库&lt;/li&gt;
-  &lt;li&gt;更新本地 repo 相关私有库的 podspec 文件,命令如下:
-&lt;code class=&quot;highlighter-rouge&quot;&gt;zsspecs&lt;/code&gt; 是私有库的名称.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  pod repo update zsspecs
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;subspec&quot;&gt;subspec&lt;/h3&gt;
-&lt;p&gt;代表了一个库的其中一个模块的说明。
-subspec 支持嵌套&lt;/p&gt;
-
-&lt;h3 id=&quot;注意事项&quot;&gt;注意事项&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;pods 在安装的时候,遇到体积较大的文件会报&lt;code class=&quot;highlighter-rouge&quot;&gt;early EOF&lt;/code&gt;的错, 需要设置&lt;code class=&quot;highlighter-rouge&quot;&gt;postBuffer&lt;/code&gt;来解决这个问题&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; $ git config --global http.postBuffer 1073741824  
- $ git config --list
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pod install&lt;/code&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;pod update&lt;/code&gt; 区别&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;pod update AFNetworking&lt;/code&gt; 单独更新某一个库.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;不更新 podspec&lt;br /&gt;
-CocoaPods 在执行pod install和pod update时，会默认先更新一次podspec索引。使用–no-repo-update参数可以禁止其做索引更新操作。如下所示:&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; pod install --no-repo-update
- pod update --no-repo-update
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使用私有的 pods&lt;br /&gt;
-通过直接指定某一个依赖的podspec，就可以使用内部的私有库。有利于使企业内部的公共项目支持 CocoaPods。示例：&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;pod 'MyCommon', :podspec =&amp;gt; 'https://suning.com/common/myCommon.podspec'&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;参考资料&lt;br /&gt;
-&lt;a href=&quot;https://guides.cocoapods.org/using/using-cocoapods.html&quot;&gt;cocoaPods文档&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.jianshu.com/p/3086df14ed08&quot;&gt;cocoaPods 原理&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;http://blog.devtang.com/2014/05/25/use-cocoapod-to-manage-ios-lib-dependency/&quot;&gt;cocoaPods 管理&lt;/a&gt; &lt;br /&gt;
-&lt;a href=&quot;https://guides.cocoapods.org/syntax/podspec.html#subspec&quot;&gt;subspec&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 16 Aug 2019 16:01:00 +0800</pubDate>
-        <link>http://junziboxue.com/cocoapods-private</link>
-        <guid isPermaLink="true">http://junziboxue.com/cocoapods-private</guid>
-        
-        <category>something</category>
         
         
       </item>

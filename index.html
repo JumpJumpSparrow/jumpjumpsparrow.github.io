@@ -205,6 +205,32 @@
             ">
     			
 <div class="post-preview">
+    <a href="/ios-navigationcontroller">
+        <h2 class="post-title">
+            UINavigationController 之栈管理
+        </h2>
+        
+        <div class="post-content-preview">
+            
+                1.遇到一个需求
+使用UINavigationController push进入多个页面后，不再显示部分页面，直接返回到指定的页面。
+
+根据描述，第一个想到的方案就是:
+
+1
+ [self.navigationController popToViewController:toVC animated:YES];
+
+通过遍历UINavigationController的viewControlle...
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Miaocf on June 22, 2020
+    </p>
+</div>
+<hr>
+
+<div class="post-preview">
     <a href="/concurrent-events-queue">
         <h2 class="post-title">
             批量并发-事件管理队列
@@ -422,36 +448,6 @@ Call this method on your...
 </div>
 <hr>
 
-<div class="post-preview">
-    <a href="/cocoapods-private">
-        <h2 class="post-title">
-            CocoaPods 私有库搭建
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                在 iOS 开发过程中，经常会使用cocoapods管理三方库，如果自己的库不想公开，只方便自己公司的人用，该怎么办呢？这里介绍一下如何搭建一个私有的Pods库。
-
-
-  CocoaPods的原理
-  创建私有库
-
-
-CocoaPods的原理
-
-
-  
-    第三方库会被编译成.a静态库供我们真正的工程使用。
-CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的工...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Miaocf on August 16, 2019
-    </p>
-</div>
-<hr>
-
 
 <!-- Pager -->
 
@@ -488,7 +484,7 @@ CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的�
         </a>
         
         
-                <a data-sort="0013" 
+                <a data-sort="0014" 
                     href="/archive/?tag=something"
                     title="something"
                     rel="6">something</a>
@@ -496,7 +492,7 @@ CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的�
                 <a data-sort="0008" 
                     href="/archive/?tag=iOS"
                     title="iOS"
-                    rel="11">iOS
+                    rel="12">iOS
     </div>
 </section>
 
