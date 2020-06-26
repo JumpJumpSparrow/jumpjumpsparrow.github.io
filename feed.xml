@@ -5,12 +5,12 @@
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
     <link>http://junziboxue.com/</link>
     <atom:link href="http://junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 23 Jun 2020 12:50:28 +0800</pubDate>
-    <lastBuildDate>Tue, 23 Jun 2020 12:50:28 +0800</lastBuildDate>
+    <pubDate>Fri, 26 Jun 2020 11:08:07 +0800</pubDate>
+    <lastBuildDate>Fri, 26 Jun 2020 11:08:07 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
-        <title>UINavigationController 之栈管理</title>
+        <title>深入了解 UINavigationController 的子控制器栈</title>
         <description>&lt;h3 id=&quot;1遇到一个需求&quot;&gt;1.遇到一个需求&lt;/h3&gt;
 &lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;push进入多个页面后，不再显示部分页面，直接返回到指定的页面。&lt;/p&gt;
 
@@ -36,12 +36,12 @@
 
 &lt;p&gt;&lt;img src=&quot;../assets/images/UINavigationController/navigation-interface.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;根据官方文档说明，&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;通过管理一个栈结构来管理各个页面，实现页面的层级跳转。 将&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。&lt;/p&gt;
+&lt;p&gt;根据官方文档说明，&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;通过管理一个用数组实现的栈结构来管理&lt;code class=&quot;highlighter-rouge&quot;&gt;childControllers &lt;/code&gt;。 将&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../assets/images/UINavigationController/objects-managed-by-navi.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;3解决方案&quot;&gt;3.解决方案&lt;/h3&gt;
-&lt;p&gt;于是想到，通过修改&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的&lt;strong&gt;&lt;em&gt;栈结构&lt;/em&gt;&lt;/strong&gt;来影响页面的跳转。&lt;/p&gt;
+&lt;p&gt;于是想到，通过修改&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;&lt;strong&gt;&lt;em&gt;栈内元素&lt;/em&gt;&lt;/strong&gt;来控制页面的跳转。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2

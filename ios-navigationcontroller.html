@@ -11,7 +11,7 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="UINavigationController 之栈管理 - Cunfa的博客 | CF Blog">
+    <meta property="og:title" content="深入了解 UINavigationController 的子控制器栈 - Cunfa的博客 | CF Blog">
     
     <meta property="og:type" content="article">
     <meta property="og:description" content="1.遇到一个需求
@@ -31,7 +31,7 @@
     <meta property="og:url" content="http://junziboxue.com/ios-navigationcontroller">
     <meta property="og:site_name" content="Cunfa的博客 | CF Blog">
     
-    <title>UINavigationController 之栈管理 - Cunfa的博客 | CF Blog</title>
+    <title>深入了解 UINavigationController 的子控制器栈 - Cunfa的博客 | CF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -207,7 +207,7 @@
                         <a class="tag" href="/archive/?tag=iOS" title="iOS">iOS</a>
                         
                     </div>
-                    <h1>UINavigationController 之栈管理</h1>
+                    <h1>深入了解 UINavigationController 的子控制器栈</h1>
                     
                     <h2 class="subheading"></h2>
                     <span class="meta">Posted by Miaocf on June 22, 2020</span>
@@ -261,12 +261,12 @@
 
 <p><img src="../assets/images/UINavigationController/navigation-interface.png" alt="" /></p>
 
-<p>根据官方文档说明，<code class="highlighter-rouge">UINavigationController</code>通过管理一个栈结构来管理各个页面，实现页面的层级跳转。 将<code class="highlighter-rouge">UIViewController</code>依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。</p>
+<p>根据官方文档说明，<code class="highlighter-rouge">UINavigationController</code>通过管理一个用数组实现的栈结构来管理<code class="highlighter-rouge">childControllers </code>。 将<code class="highlighter-rouge">UIViewController</code>依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。</p>
 
 <p><img src="../assets/images/UINavigationController/objects-managed-by-navi.jpeg" alt="" /></p>
 
 <h3 id="3解决方案">3.解决方案</h3>
-<p>于是想到，通过修改<code class="highlighter-rouge">UINavigationController</code>的<strong><em>栈结构</em></strong>来影响页面的跳转。</p>
+<p>于是想到，通过修改<code class="highlighter-rouge">UINavigationController</code><strong><em>栈内元素</em></strong>来控制页面的跳转。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
