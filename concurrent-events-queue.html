@@ -114,6 +114,8 @@
                     
                     
                     
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -235,7 +237,7 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 <code class="highlighter-rouge">dispatch_group</code> 的接口设计，写了一个批量事件管理队列的工具 <code class="highlighter-rouge">EventScheduleManager</code> 。</p>
+				<p>首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 <code class="language-plaintext highlighter-rouge">dispatch_group</code> 的接口设计，写了一个批量事件管理队列的工具 <code class="language-plaintext highlighter-rouge">EventScheduleManager</code> 。</p>
 
 <h3 id="模型抽象">模型抽象</h3>
 
@@ -266,14 +268,14 @@
 
 <p><img src="/assets/article_assets/eventScheduleUML.png" alt="" /></p>
 
-<p>首先创建一个 队列模型类 <code class="highlighter-rouge">EventScheduleManager</code>，然后在 <code class="highlighter-rouge">EventScheduleManager</code> 的子类内部创建队列。</p>
+<p>首先创建一个 队列模型类 <code class="language-plaintext highlighter-rouge">EventScheduleManager</code>，然后在 <code class="language-plaintext highlighter-rouge">EventScheduleManager</code> 的子类内部创建队列。</p>
 
-<p><code class="highlighter-rouge">EventUnit</code>  事件类，包含唯一标志符、执行方法、执行状态。<br />
-<code class="highlighter-rouge">EventMark</code>  队列节点类，包含事件集合、批次名称<br />
-<code class="highlighter-rouge">EventScheduleManager</code>  队列管理类<br />
-<code class="highlighter-rouge">EventScheduleDelegate</code> 队列回调事件</p>
+<p><code class="language-plaintext highlighter-rouge">EventUnit</code>  事件类，包含唯一标志符、执行方法、执行状态。<br />
+<code class="language-plaintext highlighter-rouge">EventMark</code>  队列节点类，包含事件集合、批次名称<br />
+<code class="language-plaintext highlighter-rouge">EventScheduleManager</code>  队列管理类<br />
+<code class="language-plaintext highlighter-rouge">EventScheduleDelegate</code> 队列回调事件</p>
 
-<p>创建子类继承<code class="highlighter-rouge">EventScheduleManager</code>，在子类内部创建队列：</p>
+<p>创建子类继承<code class="language-plaintext highlighter-rouge">EventScheduleManager</code>，在子类内部创建队列：</p>
 
 <pre><code class="language-Objective-C">- (void)createSchedule {
     // 清空
@@ -367,7 +369,7 @@
 
 <p>在管理事件队列处，生成队列实例，创建队列，开启队列执行。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -480,12 +482,12 @@ gitment.render('gitmentContainer');
         </a>
         
         
-                <a data-sort="0014" 
+                <a data-sort="0015" 
                     href="/archive/?tag=something"
                     title="something"
                     rel="6">something</a>
         
-                <a data-sort="0008" 
+                <a data-sort="0009" 
                     href="/archive/?tag=iOS"
                     title="iOS"
                     rel="12">iOS

@@ -114,6 +114,8 @@
                     
                     
                     
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -252,7 +254,7 @@ Call this method on your application’s main thread when you want to adjust the
 
 <p>Subclasses can override this method as needed to perform more precise layout of their subviews. You should override this method only if the autoresizing and constraint-based behaviors of the subviews do not offer the behavior you want. You can use your implementation to set the frame rectangles of your subviews directly.</p>
 
-<p>You should not call this method directly. If you want to force a layout update, call the <code class="highlighter-rouge">setNeedsLayout</code> method instead to do so prior to the next drawing update. If you want to update the layout of your views immediately, call the <code class="highlighter-rouge">layoutIfNeeded</code> method.</p>
+<p>You should not call this method directly. If you want to force a layout update, call the <code class="language-plaintext highlighter-rouge">setNeedsLayout</code> method instead to do so prior to the next drawing update. If you want to update the layout of your views immediately, call the <code class="language-plaintext highlighter-rouge">layoutIfNeeded</code> method.</p>
 
 <h3 id="setneedsdisplay">setNeedsDisplay</h3>
 
@@ -336,12 +338,12 @@ gitment.render('gitmentContainer');
         </a>
         
         
-                <a data-sort="0014" 
+                <a data-sort="0015" 
                     href="/archive/?tag=something"
                     title="something"
                     rel="6">something</a>
         
-                <a data-sort="0008" 
+                <a data-sort="0009" 
                     href="/archive/?tag=iOS"
                     title="iOS"
                     rel="12">iOS

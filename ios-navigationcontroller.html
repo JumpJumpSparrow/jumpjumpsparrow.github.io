@@ -115,6 +115,8 @@
                     
                     
                     
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -237,14 +239,14 @@
                 
 
 				<h3 id="1遇到一个需求">1.遇到一个需求</h3>
-<p>使用<code class="highlighter-rouge">UINavigationController </code>push进入多个页面后，不再显示部分页面，直接返回到指定的页面。</p>
+<p>使用<code class="language-plaintext highlighter-rouge">UINavigationController </code>push进入多个页面后，不再显示部分页面，直接返回到指定的页面。</p>
 
 <p>根据描述，第一个想到的方案就是:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre> [self.navigationController popToViewController:toVC animated:YES];
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>通过遍历<code class="highlighter-rouge">UINavigationController</code>的<code class="highlighter-rouge">viewControllers</code>找到要跳转的页面，直接pop过去。</p>
+<p>通过遍历<code class="language-plaintext highlighter-rouge">UINavigationController</code>的<code class="language-plaintext highlighter-rouge">viewControllers</code>找到要跳转的页面，直接pop过去。</p>
 
 <p>遇到的问题就是，iOS 触发返回页面有两种交互方式：</p>
 
@@ -253,22 +255,22 @@
   <li>使用手势，在屏幕边缘从左往右滑动</li>
 </ol>
 
-<p>要想使用<code class="highlighter-rouge">pop</code>的API，就需要拦截边缘滑动的交互事件，重写<code class="highlighter-rouge">UINavigationController</code>的手势，（有的朋友说可以屏蔽右滑手势…）<br />
-由于不想改动 <code class="highlighter-rouge">UINavigationController</code>的手势事件，遂有了下一个方案。</p>
+<p>要想使用<code class="language-plaintext highlighter-rouge">pop</code>的API，就需要拦截边缘滑动的交互事件，重写<code class="language-plaintext highlighter-rouge">UINavigationController</code>的手势，（有的朋友说可以屏蔽右滑手势…）<br />
+由于不想改动 <code class="language-plaintext highlighter-rouge">UINavigationController</code>的手势事件，遂有了下一个方案。</p>
 
-<h3 id="2uinavigationcontroller实现原理">2.<code class="highlighter-rouge">UINavigationController</code>实现原理</h3>
-<p>在iOS开发过程中，<code class="highlighter-rouge">UINavigationController </code>是常用的容器类Controller，<code class="highlighter-rouge">UINavigationController </code>交互方式如下图，</p>
+<h3 id="2uinavigationcontroller实现原理">2.<code class="language-plaintext highlighter-rouge">UINavigationController</code>实现原理</h3>
+<p>在iOS开发过程中，<code class="language-plaintext highlighter-rouge">UINavigationController </code>是常用的容器类Controller，<code class="language-plaintext highlighter-rouge">UINavigationController </code>交互方式如下图，</p>
 
 <p><img src="../assets/images/UINavigationController/navigation-interface.png" alt="" /></p>
 
-<p>根据官方文档说明，<code class="highlighter-rouge">UINavigationController</code>通过管理一个用数组实现的栈结构来管理<code class="highlighter-rouge">childControllers </code>。 将<code class="highlighter-rouge">UIViewController</code>依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。</p>
+<p>根据官方文档说明，<code class="language-plaintext highlighter-rouge">UINavigationController</code>通过管理一个用数组实现的栈结构来管理<code class="language-plaintext highlighter-rouge">childControllers </code>。 将<code class="language-plaintext highlighter-rouge">UIViewController</code>依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。</p>
 
 <p><img src="../assets/images/UINavigationController/objects-managed-by-navi.jpeg" alt="" /></p>
 
 <h3 id="3解决方案">3.解决方案</h3>
-<p>于是想到，通过修改<code class="highlighter-rouge">UINavigationController</code><strong><em>栈内元素</em></strong>来控制页面的跳转。</p>
+<p>于是想到，通过修改<code class="language-plaintext highlighter-rouge">UINavigationController</code><strong><em>栈内元素</em></strong>来控制页面的跳转。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -286,9 +288,9 @@
 <p>需要注意的是：</p>
 
 <ol>
-  <li>当把一个<code class="highlighter-rouge">UIViewController</code>的实例push进栈后，该实例的<code class="highlighter-rouge">parentViewController</code>就是<code class="highlighter-rouge">UINavigationController</code></li>
-  <li>调用<code class="highlighter-rouge">UIViewController</code>的<code class="highlighter-rouge">- (void)removeFromParentViewController</code>方法，会将该实例从栈中移除，但会发生异常，具体表现为点击返回，<code class="highlighter-rouge">navigationBar</code> 有动画，但不会有页面跳转</li>
-  <li>注意内存的引用，如果要移除的<code class="highlighter-rouge">UIViewController </code>在其他地方存在引用，将不会释放内存，发生内存泄露。</li>
+  <li>当把一个<code class="language-plaintext highlighter-rouge">UIViewController</code>的实例push进栈后，该实例的<code class="language-plaintext highlighter-rouge">parentViewController</code>就是<code class="language-plaintext highlighter-rouge">UINavigationController</code></li>
+  <li>调用<code class="language-plaintext highlighter-rouge">UIViewController</code>的<code class="language-plaintext highlighter-rouge">- (void)removeFromParentViewController</code>方法，会将该实例从栈中移除，但会发生异常，具体表现为点击返回，<code class="language-plaintext highlighter-rouge">navigationBar</code> 有动画，但不会有页面跳转</li>
+  <li>注意内存的引用，如果要移除的<code class="language-plaintext highlighter-rouge">UIViewController </code>在其他地方存在引用，将不会释放内存，发生内存泄露。</li>
 </ol>
 
 <p>附：UI结构图</p>
@@ -321,6 +323,13 @@
                         </a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/install-jekyll" data-toggle="tooltip" data-placement="top" title="Jekyll 环境的搭建">
+                        Next<br>
+                        <span>Jekyll 环境的搭建</span>
+                        </a>
+                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
@@ -369,12 +378,12 @@ gitment.render('gitmentContainer');
         </a>
         
         
-                <a data-sort="0014" 
+                <a data-sort="0015" 
                     href="/archive/?tag=something"
                     title="something"
                     rel="6">something</a>
         
-                <a data-sort="0008" 
+                <a data-sort="0009" 
                     href="/archive/?tag=iOS"
                     title="iOS"
                     rel="12">iOS

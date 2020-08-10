@@ -114,6 +114,8 @@
                     
                     
                     
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -297,7 +299,7 @@
 
 <p>纯度</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -331,24 +333,24 @@ Haskell 的函数在默认情况下都是无副作用的：函数的结果只取
 
 <p>List 是一种单类型的数据结构，可以用来存储多个类型相同的元素。List 中的 List 可以是不同长度，但必须得是相同的类型.</p>
 
-<p>字符串是一组字符的 List，<code class="highlighter-rouge">"Hello"</code> 是 <code class="highlighter-rouge">['h','e','l','l','o']</code> 的语法糖。可以使用处理 List 的函数来对字符串进行操作。 将两个 List 合并，可以通过 <code class="highlighter-rouge">++</code> 运算符实现。
-  <code class="highlighter-rouge">:</code> 运算符可以连接一个元素到一个 List之中，而 <code class="highlighter-rouge">++</code> 运算符则是连接两个 List。若要使用 <code class="highlighter-rouge">++</code> 运算符连接单个元素到一个 List 之中，就用方括号把它括起使之成为单个元素的 List。<code class="highlighter-rouge">[1,2,3]</code> 实际上是 <code class="highlighter-rouge">1:2:3:[]</code> 的语法糖。<code class="highlighter-rouge">[]</code> 表示一个空 List,若要从前端插入 3，它就成了<code class="highlighter-rouge">[3]</code>, 再插入 2，它就成了<code class="highlighter-rouge">[2,3]</code>，以此类推。</p>
+<p>字符串是一组字符的 List，<code class="language-plaintext highlighter-rouge">"Hello"</code> 是 <code class="language-plaintext highlighter-rouge">['h','e','l','l','o']</code> 的语法糖。可以使用处理 List 的函数来对字符串进行操作。 将两个 List 合并，可以通过 <code class="language-plaintext highlighter-rouge">++</code> 运算符实现。
+  <code class="language-plaintext highlighter-rouge">:</code> 运算符可以连接一个元素到一个 List之中，而 <code class="language-plaintext highlighter-rouge">++</code> 运算符则是连接两个 List。若要使用 <code class="language-plaintext highlighter-rouge">++</code> 运算符连接单个元素到一个 List 之中，就用方括号把它括起使之成为单个元素的 List。<code class="language-plaintext highlighter-rouge">[1,2,3]</code> 实际上是 <code class="language-plaintext highlighter-rouge">1:2:3:[]</code> 的语法糖。<code class="language-plaintext highlighter-rouge">[]</code> 表示一个空 List,若要从前端插入 3，它就成了<code class="language-plaintext highlighter-rouge">[3]</code>, 再插入 2，它就成了<code class="language-plaintext highlighter-rouge">[2,3]</code>，以此类推。</p>
 
 <p>一些函数： <br />
-<code class="highlighter-rouge">head</code> 返回一个 List 的头部，也就是 List 的首个元素。<br />
-<code class="highlighter-rouge">tail</code> 返回一个 List 的尾部，也就是 List 除去头部之后的部分。<br />
-<code class="highlighter-rouge">last</code> 返回一个 List 的最后一个元素。<br />
-<code class="highlighter-rouge">init</code> 返回一个 List 除去最后一个元素的部分。<br />
-<code class="highlighter-rouge">reverse</code> 将一个 List 反转:<br />
-<code class="highlighter-rouge">take</code> 返回一个 List 的前几个元素</p>
+<code class="language-plaintext highlighter-rouge">head</code> 返回一个 List 的头部，也就是 List 的首个元素。<br />
+<code class="language-plaintext highlighter-rouge">tail</code> 返回一个 List 的尾部，也就是 List 除去头部之后的部分。<br />
+<code class="language-plaintext highlighter-rouge">last</code> 返回一个 List 的最后一个元素。<br />
+<code class="language-plaintext highlighter-rouge">init</code> 返回一个 List 除去最后一个元素的部分。<br />
+<code class="language-plaintext highlighter-rouge">reverse</code> 将一个 List 反转:<br />
+<code class="language-plaintext highlighter-rouge">take</code> 返回一个 List 的前几个元素</p>
 
 <h4 id="list-comprehension-列表推导式">List Comprehension 列表推导式</h4>
 
-<p>前十个偶数的 set comprehension 可以表示为<code class="highlighter-rouge">S = {2⋅𝓍 |𝓍 ∈ ℕ,𝓍 ≤ 10 }</code>，竖线左端的部分是输出函数，x 是变量，N 是输入集合，从既有的集合中按照规则产生一个新集合。
+<p>前十个偶数的 set comprehension 可以表示为<code class="language-plaintext highlighter-rouge">S = {2⋅𝓍 |𝓍 ∈ ℕ,𝓍 ≤ 10 }</code>，竖线左端的部分是输出函数，x 是变量，N 是输入集合，从既有的集合中按照规则产生一个新集合。
 在 Haskell 下，我们可以通过类似 take 10 [2,4..] 的代码来实现。但若是把简单的乘 2 改成更复杂的函数操作该怎么办呢？
-用 <code class="highlighter-rouge">list comprehension</code>，它与 <code class="highlighter-rouge">set comprehension</code> 十分的相似，用它取前十个偶数轻而易举。这个 <code class="highlighter-rouge">list comprehension</code> 可以表示为：</p>
+用 <code class="language-plaintext highlighter-rouge">list comprehension</code>，它与 <code class="language-plaintext highlighter-rouge">set comprehension</code> 十分的相似，用它取前十个偶数轻而易举。这个 <code class="language-plaintext highlighter-rouge">list comprehension</code> 可以表示为：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="rouge-code"><pre>ghci&gt; [x*2 | x &lt;- [1..10]]
 [2,4,6,8,10,12,14,16,18,20]
@@ -369,22 +371,22 @@ Haskell 的函数在默认情况下都是无副作用的：函数的结果只取
 从三个 List 中取值，并且通过输出函数将其组合为一个三元组</li>
 </ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>let triangles = [ (a,b,c) | c &lt;- [1..10], b &lt;- [1..10], a &lt;- [1..10] ]
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>注意： 三角形 3 条边的关系，<code class="highlighter-rouge">a + b  &gt; c</code></p>
+<p>注意： 三角形 3 条边的关系，<code class="language-plaintext highlighter-rouge">a + b  &gt; c</code></p>
 
 <ol>
   <li>添加一个限制条件，令其必须为直角三角形。同时也考虑上 b 边要短于斜边，a 边要短于 b 边情况：
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>let rightTriangles = [ (a,b,c) | c &lt;- [1..10], b &lt;- [1..c], a &lt;- [1..b], a^2 + b^2 == c^2]
 </pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>修改函数，告诉它只要周长为 24 的三角形
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>let rightTriangles' = [ (a,b,c) | c &lt;- [1..10], b &lt;- [1..c], a &lt;- [1..b], a^2 + b^2 == c^2, a+b+c == 24]
 </pre></td></tr></tbody></table></code></pre></div>    </div>
-    <p>调用 函数 <code class="highlighter-rouge">rightTriangles</code></p>
+    <p>调用 函数 <code class="language-plaintext highlighter-rouge">rightTriangles</code></p>
   </li>
 </ol>
 
@@ -398,7 +400,7 @@ Haskell 的函数在默认情况下都是无副作用的：函数的结果只取
 
 <p>如果一个值要经过多个函数，才能变成另外一个值，就可以把所有中间步骤合并成一个函数，这叫做”函数的合成”（compose）。</p>
 
-<p><code class="highlighter-rouge">f(x)</code>和<code class="highlighter-rouge">g(x)</code>合成为<code class="highlighter-rouge">f(g(x))</code>，有一个隐藏的前提，就是<code class="highlighter-rouge">f</code>和<code class="highlighter-rouge">g</code>都只能接受一个参数。如果可以接受多个参数，比如<code class="highlighter-rouge">f(x, y)</code>和<code class="highlighter-rouge">g(a, b, c)</code>，函数合成就非常麻烦。
+<p><code class="language-plaintext highlighter-rouge">f(x)</code>和<code class="language-plaintext highlighter-rouge">g(x)</code>合成为<code class="language-plaintext highlighter-rouge">f(g(x))</code>，有一个隐藏的前提，就是<code class="language-plaintext highlighter-rouge">f</code>和<code class="language-plaintext highlighter-rouge">g</code>都只能接受一个参数。如果可以接受多个参数，比如<code class="language-plaintext highlighter-rouge">f(x, y)</code>和<code class="language-plaintext highlighter-rouge">g(a, b, c)</code>，函数合成就非常麻烦。
 这时就需要函数柯里化了。所谓”柯里化”，就是把一个多参数的函数，转化为单参数函数。</p>
 
 <p>有了柯里化以后，我们就能做到，所有函数只接受一个参数。</p>
@@ -488,12 +490,12 @@ gitment.render('gitmentContainer');
         </a>
         
         
-                <a data-sort="0014" 
+                <a data-sort="0015" 
                     href="/archive/?tag=something"
                     title="something"
                     rel="6">something</a>
         
-                <a data-sort="0008" 
+                <a data-sort="0009" 
                     href="/archive/?tag=iOS"
                     title="iOS"
                     rel="12">iOS

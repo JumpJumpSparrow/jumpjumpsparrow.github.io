@@ -5,21 +5,111 @@
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
     <link>http://junziboxue.com/</link>
     <atom:link href="http://junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 26 Jun 2020 11:08:07 +0800</pubDate>
-    <lastBuildDate>Fri, 26 Jun 2020 11:08:07 +0800</lastBuildDate>
-    <generator>Jekyll v4.0.0</generator>
+    <pubDate>Mon, 10 Aug 2020 15:42:22 +0800</pubDate>
+    <lastBuildDate>Mon, 10 Aug 2020 15:42:22 +0800</lastBuildDate>
+    <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>Jekyll 环境的搭建</title>
+        <description>&lt;p&gt;最近换了台电脑，需要重新安装Jekyll环境，在这里记录下Mac安装Jekyell的过程。&lt;/p&gt;
+
+&lt;h3 id=&quot;一环境准备&quot;&gt;一.环境准备&lt;/h3&gt;
+
+&lt;p&gt;在安装Jekyll之前，需要具备以下条件：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Xcode 命令行&lt;/li&gt;
+  &lt;li&gt;Homebrew&lt;/li&gt;
+  &lt;li&gt;Ruby&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;1-homebrew&quot;&gt;1. Homebrew&lt;/h4&gt;
+
+&lt;p&gt;什么是 &lt;a href=&quot;https://brew.sh&quot;&gt;Homebrew&lt;/a&gt; ?. 用一句话说明：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Homebrew installs the stuff you need that Apple (or your Linux system) didn’t.&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/how-to-install-jekyll/homebrew.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Homebrow安装：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&quot;
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;将以上内容粘贴到命令窗口，即可安装 Homebrew，中途可能需要输入用户密码。&lt;/p&gt;
+
+&lt;h4 id=&quot;2-安装命令行工具&quot;&gt;2. 安装命令行工具&lt;/h4&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;xcode-select --install
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;如果你已经安装了Xcode，无需进行此步。&lt;/p&gt;
+
+&lt;h4 id=&quot;3安装ruby&quot;&gt;3.安装Ruby&lt;/h4&gt;
+
+&lt;p&gt;Jekyll 需要 2.5.0以上版本的 Ruby，macOS Catalina 10.15 自带 ruby 2.6.3，如果你是之前的 mac 系统，需要更新下Ruby。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+brew install ruby
+
+添加路径
+echo 'export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;' &amp;gt;&amp;gt; ~/.bash_profile
+echo 'export PATH=&quot;$HOME/.gem/ruby/X.X.0/bin:$PATH&quot;' &amp;gt;&amp;gt; ~/.bash_profile
+‘X.X.0’为本地Ruby版本
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;4安装jekyll&quot;&gt;4.安装Jekyll&lt;/h4&gt;
+
+&lt;p&gt;安装 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Bundler and Jekyll&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;gem install --user-install bundler jekyll
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;创建测试&quot;&gt;创建测试&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;jekyll new my-awesome-site
+cd my-awesome-site
+~/my-awesome-site $ bundle exec jekyll serve
+# =&amp;gt; Now browse to http://localhost:4000
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;如果已经创建 Jekyll，可能需要运行 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gem update jekyll&lt;/code&gt;来更新Jekyll。
+然后使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle update&lt;/code&gt;来更新依赖的包&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jekyllrb.com&quot;&gt;参考资料&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 10 Aug 2020 18:30:00 +0800</pubDate>
+        <link>http://junziboxue.com/install-jekyll</link>
+        <guid isPermaLink="true">http://junziboxue.com/install-jekyll</guid>
+        
+        <category>jekyll</category>
+        
+        
+      </item>
     
       <item>
         <title>深入了解 UINavigationController 的子控制器栈</title>
         <description>&lt;h3 id=&quot;1遇到一个需求&quot;&gt;1.遇到一个需求&lt;/h3&gt;
-&lt;p&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;push进入多个页面后，不再显示部分页面，直接返回到指定的页面。&lt;/p&gt;
+&lt;p&gt;使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;push进入多个页面后，不再显示部分页面，直接返回到指定的页面。&lt;/p&gt;
 
 &lt;p&gt;根据描述，第一个想到的方案就是:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; [self.navigationController popToViewController:toVC animated:YES];
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;通过遍历&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;viewControllers&lt;/code&gt;找到要跳转的页面，直接pop过去。&lt;/p&gt;
+&lt;p&gt;通过遍历&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;viewControllers&lt;/code&gt;找到要跳转的页面，直接pop过去。&lt;/p&gt;
 
 &lt;p&gt;遇到的问题就是，iOS 触发返回页面有两种交互方式：&lt;/p&gt;
 
@@ -28,22 +118,22 @@
   &lt;li&gt;使用手势，在屏幕边缘从左往右滑动&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;要想使用&lt;code class=&quot;highlighter-rouge&quot;&gt;pop&lt;/code&gt;的API，就需要拦截边缘滑动的交互事件，重写&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的手势，（有的朋友说可以屏蔽右滑手势…）&lt;br /&gt;
-由于不想改动 &lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的手势事件，遂有了下一个方案。&lt;/p&gt;
+&lt;p&gt;要想使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pop&lt;/code&gt;的API，就需要拦截边缘滑动的交互事件，重写&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的手势，（有的朋友说可以屏蔽右滑手势…）&lt;br /&gt;
+由于不想改动 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;的手势事件，遂有了下一个方案。&lt;/p&gt;
 
-&lt;h3 id=&quot;2uinavigationcontroller实现原理&quot;&gt;2.&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;实现原理&lt;/h3&gt;
-&lt;p&gt;在iOS开发过程中，&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;是常用的容器类Controller，&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;交互方式如下图，&lt;/p&gt;
+&lt;h3 id=&quot;2uinavigationcontroller实现原理&quot;&gt;2.&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;实现原理&lt;/h3&gt;
+&lt;p&gt;在iOS开发过程中，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;是常用的容器类Controller，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;交互方式如下图，&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../assets/images/UINavigationController/navigation-interface.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;根据官方文档说明，&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;通过管理一个用数组实现的栈结构来管理&lt;code class=&quot;highlighter-rouge&quot;&gt;childControllers &lt;/code&gt;。 将&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。&lt;/p&gt;
+&lt;p&gt;根据官方文档说明，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;通过管理一个用数组实现的栈结构来管理&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;childControllers &lt;/code&gt;。 将&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../assets/images/UINavigationController/objects-managed-by-navi.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;3解决方案&quot;&gt;3.解决方案&lt;/h3&gt;
-&lt;p&gt;于是想到，通过修改&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;&lt;strong&gt;&lt;em&gt;栈内元素&lt;/em&gt;&lt;/strong&gt;来控制页面的跳转。&lt;/p&gt;
+&lt;p&gt;于是想到，通过修改&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;&lt;strong&gt;&lt;em&gt;栈内元素&lt;/em&gt;&lt;/strong&gt;来控制页面的跳转。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -61,9 +151,9 @@
 &lt;p&gt;需要注意的是：&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;当把一个&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;的实例push进栈后，该实例的&lt;code class=&quot;highlighter-rouge&quot;&gt;parentViewController&lt;/code&gt;就是&lt;code class=&quot;highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;调用&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;- (void)removeFromParentViewController&lt;/code&gt;方法，会将该实例从栈中移除，但会发生异常，具体表现为点击返回，&lt;code class=&quot;highlighter-rouge&quot;&gt;navigationBar&lt;/code&gt; 有动画，但不会有页面跳转&lt;/li&gt;
-  &lt;li&gt;注意内存的引用，如果要移除的&lt;code class=&quot;highlighter-rouge&quot;&gt;UIViewController &lt;/code&gt;在其他地方存在引用，将不会释放内存，发生内存泄露。&lt;/li&gt;
+  &lt;li&gt;当把一个&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;的实例push进栈后，该实例的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parentViewController&lt;/code&gt;就是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;调用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;- (void)removeFromParentViewController&lt;/code&gt;方法，会将该实例从栈中移除，但会发生异常，具体表现为点击返回，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigationBar&lt;/code&gt; 有动画，但不会有页面跳转&lt;/li&gt;
+  &lt;li&gt;注意内存的引用，如果要移除的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIViewController &lt;/code&gt;在其他地方存在引用，将不会释放内存，发生内存泄露。&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;附：UI结构图&lt;/p&gt;
@@ -85,7 +175,7 @@
     
       <item>
         <title>批量并发-事件管理队列</title>
-        <description>&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
+        <description>&lt;p&gt;首先描述一下背景：目前在做电商 APP 的页面改版，主要工作集中在商品详情页上。商品详情页的数据比较繁多，涉及到近 20 个网络接口。 这些接口中有的还存在依赖关系，而且重要程度也不尽相同。为了兼顾这些接口的并发性能和依赖关系，模仿 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dispatch_group&lt;/code&gt; 的接口设计，写了一个批量事件管理队列的工具 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 。&lt;/p&gt;
 
 &lt;h3 id=&quot;模型抽象&quot;&gt;模型抽象&lt;/h3&gt;
 
@@ -116,14 +206,14 @@
 
 &lt;p&gt;&lt;img src=&quot;/assets/article_assets/eventScheduleUML.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;首先创建一个 队列模型类 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;，然后在 &lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 的子类内部创建队列。&lt;/p&gt;
+&lt;p&gt;首先创建一个 队列模型类 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;，然后在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt; 的子类内部创建队列。&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;EventUnit&lt;/code&gt;  事件类，包含唯一标志符、执行方法、执行状态。&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;EventMark&lt;/code&gt;  队列节点类，包含事件集合、批次名称&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;  队列管理类&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleDelegate&lt;/code&gt; 队列回调事件&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EventUnit&lt;/code&gt;  事件类，包含唯一标志符、执行方法、执行状态。&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EventMark&lt;/code&gt;  队列节点类，包含事件集合、批次名称&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;  队列管理类&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EventScheduleDelegate&lt;/code&gt; 队列回调事件&lt;/p&gt;
 
-&lt;p&gt;创建子类继承&lt;code class=&quot;highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;，在子类内部创建队列：&lt;/p&gt;
+&lt;p&gt;创建子类继承&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;EventScheduleManager&lt;/code&gt;，在子类内部创建队列：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;- (void)createSchedule {
     // 清空
@@ -217,7 +307,7 @@
 
 &lt;p&gt;在管理事件队列处，生成队列实例，创建队列，开启队列执行。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -294,7 +384,7 @@ CGFloat ratio = w/750.0;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;因为商品详情页在 PC 上的宽度为750像素， 我们根据手机频幕的宽度，计算出 H5 页面的缩放比例。&lt;br /&gt;
-根据 H5 页面 头部 meta 信息，设置 &lt;code class=&quot;highlighter-rouge&quot;&gt;initial-scale&lt;/code&gt;初始缩放比例，通过注入 JS 调整初始缩放比例&lt;/p&gt;
+根据 H5 页面 头部 meta 信息，设置 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;initial-scale&lt;/code&gt;初始缩放比例，通过注入 JS 调整初始缩放比例&lt;/p&gt;
 
 &lt;p&gt;加载页面之前，注入一段 JS 代码：&lt;/p&gt;
 
@@ -345,7 +435,7 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 &lt;p&gt;（图为阿波龙自动驾驶汽车）&lt;/p&gt;
 
-&lt;p&gt;  随着人工智能 AI (&lt;code class=&quot;highlighter-rouge&quot;&gt;Artificial Intelligence&lt;/code&gt;) 的事件处理能力和数据分析精度变得更强更高，自动驾驶技术也开始进入了实用阶段。当然，实现自动驾驶除了 AI 必不可少以外，还需要&lt;code class=&quot;highlighter-rouge&quot;&gt;计算机视觉&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;高精度地图&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;5G高速通信技术&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;激光雷达&lt;/code&gt;等环境感知技术。可以预见到不久的将来，自动驾驶功能将会成为汽车的标配功能，&lt;code class=&quot;highlighter-rouge&quot;&gt;AI&lt;/code&gt; 也继 &lt;code class=&quot;highlighter-rouge&quot;&gt;水&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;电&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;网络&lt;/code&gt;之后，势必成为生活中必不可少的基础元素，潜入到生活的方方面面。&lt;/p&gt;
+&lt;p&gt;  随着人工智能 AI (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Artificial Intelligence&lt;/code&gt;) 的事件处理能力和数据分析精度变得更强更高，自动驾驶技术也开始进入了实用阶段。当然，实现自动驾驶除了 AI 必不可少以外，还需要&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;计算机视觉&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;高精度地图&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;5G高速通信技术&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;激光雷达&lt;/code&gt;等环境感知技术。可以预见到不久的将来，自动驾驶功能将会成为汽车的标配功能，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AI&lt;/code&gt; 也继 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;水&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;电&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;网络&lt;/code&gt;之后，势必成为生活中必不可少的基础元素，潜入到生活的方方面面。&lt;/p&gt;
 
 &lt;p&gt;  然而 AI 作为自动驾驶的主要决策单元，代替驾驶员做出决策，控制车辆在道路上行走，这将带来一系列的社会伦理问题和法律问题。在这里列出一些自动驾驶在不久的将来可能会遇到的问题，与大家一起讨论、思考。&lt;/p&gt;
 
@@ -389,7 +479,7 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 &lt;p&gt;  写文章很有难度啊，写不下去了先在这里吐个槽，提升写作能力太有必要了。清楚明白地表达观点，并且让读者轻易的捕捉到你要表达的意思 ，让文章读起来感觉顺畅，同时保持整体有结构和层次，这些都不是那么容易的兼顾的到。想要提升写作能力，一番磨练必不可少啊。&lt;/p&gt;
 
-&lt;p&gt;有问题或想法可以联系我讨论，邮箱：&lt;code class=&quot;highlighter-rouge&quot;&gt;meowchunfat@hotmail.com&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;有问题或想法可以联系我讨论，邮箱：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;meowchunfat@hotmail.com&lt;/code&gt;。&lt;/p&gt;
 
 &lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;
 </description>
@@ -421,7 +511,7 @@ Call this method on your application’s main thread when you want to adjust the
 
 &lt;p&gt;Subclasses can override this method as needed to perform more precise layout of their subviews. You should override this method only if the autoresizing and constraint-based behaviors of the subviews do not offer the behavior you want. You can use your implementation to set the frame rectangles of your subviews directly.&lt;/p&gt;
 
-&lt;p&gt;You should not call this method directly. If you want to force a layout update, call the &lt;code class=&quot;highlighter-rouge&quot;&gt;setNeedsLayout&lt;/code&gt; method instead to do so prior to the next drawing update. If you want to update the layout of your views immediately, call the &lt;code class=&quot;highlighter-rouge&quot;&gt;layoutIfNeeded&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;You should not call this method directly. If you want to force a layout update, call the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;setNeedsLayout&lt;/code&gt; method instead to do so prior to the next drawing update. If you want to update the layout of your views immediately, call the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;layoutIfNeeded&lt;/code&gt; method.&lt;/p&gt;
 
 &lt;h3 id=&quot;setneedsdisplay&quot;&gt;setNeedsDisplay&lt;/h3&gt;
 
@@ -463,7 +553,7 @@ When this message is received, the layer’s super layers are traversed until a 
 
 &lt;p&gt;如何解决 在 runtime 环境中尝试调用静态库中分类的方法时，报 “selector not recognized” 异常？&lt;/p&gt;
 
-&lt;p&gt;  今天在浏览 YYKit 库时，一个宏定义引起了我的注意：&lt;code class=&quot;highlighter-rouge&quot;&gt;YYSYNTH_DUMMY_CLASS &lt;/code&gt;,从字面意思看是定义了一个不起任何作用的&lt;em&gt;哑&lt;/em&gt;类。相关描述如下：&lt;/p&gt;
+&lt;p&gt;  今天在浏览 YYKit 库时，一个宏定义引起了我的注意：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YYSYNTH_DUMMY_CLASS &lt;/code&gt;,从字面意思看是定义了一个不起任何作用的&lt;em&gt;哑&lt;/em&gt;类。相关描述如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;/**
  Add this macro before each category implementation, so we don't have to use
@@ -497,7 +587,7 @@ When this message is received, the layer’s super layers are traversed until a 
   &lt;/ol&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;译：当你在运行时调用一个在静态库中实现的分类的方法时，遇到 “selector not recognized” 运行时异常，那么你就撞到了本篇文档中描述的所谓的 “the link-time build issue” 问题，同时你需要在你的工程中加上 &lt;code class=&quot;highlighter-rouge&quot;&gt;-ObjC linker flag&lt;/code&gt; 来解决这个问题。具体步骤：(在这里就不翻译了么么哒)。&lt;/p&gt;
+&lt;p&gt;译：当你在运行时调用一个在静态库中实现的分类的方法时，遇到 “selector not recognized” 运行时异常，那么你就撞到了本篇文档中描述的所谓的 “the link-time build issue” 问题，同时你需要在你的工程中加上 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-ObjC linker flag&lt;/code&gt; 来解决这个问题。具体步骤：(在这里就不翻译了么么哒)。&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Figure 1:&lt;/em&gt;  Modifying the Other Linker Flags build setting.    &lt;br /&gt;
 &lt;br /&gt;&lt;img src=&quot;/assets/article_assets/qa1490_other_linker_flags_xcode_5.png&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
@@ -511,7 +601,7 @@ When this message is received, the layer’s super layers are traversed until a 
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;解决问题&quot;&gt;解决问题&lt;/h3&gt;
-&lt;p&gt;  如果添加&lt;code class=&quot;highlighter-rouge&quot;&gt;-ObjC flag&lt;/code&gt;没能解决这个问题，检查一下确保之前的操作没有与 Target build setting 冲突而使其无效。按照上面的步骤，在第二步时选择 &lt;em&gt;“TARGETS”&lt;/em&gt;下的target，而不是选择 project。&lt;/p&gt;
+&lt;p&gt;  如果添加&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-ObjC flag&lt;/code&gt;没能解决这个问题，检查一下确保之前的操作没有与 Target build setting 冲突而使其无效。按照上面的步骤，在第二步时选择 &lt;em&gt;“TARGETS”&lt;/em&gt;下的target，而不是选择 project。&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;h3 id=&quot;other-causes-of-selector-not-recognized-exceptions&quot;&gt;Other Causes of selector not recognized Exceptions&lt;/h3&gt;
@@ -534,12 +624,12 @@ When this message is received, the layer’s super layers are traversed until a 
   &lt;p&gt;Your app is trying to use an object after it has been deallocated, use the Zombies instrument to debug this kind of problem. You are seeing “selector not recognized” because the memory has been re-allocated as a different kind of object.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;导致selector-not-recognized-exceptions异常的其他原因&quot;&gt;导致&lt;code class=&quot;highlighter-rouge&quot;&gt;selector not recognized Exceptions&lt;/code&gt;异常的其他原因&lt;/h3&gt;
-&lt;p&gt;  导致&lt;code class=&quot;highlighter-rouge&quot;&gt;selector not recognized Exceptions&lt;/code&gt;异常的原因通常是：&lt;/p&gt;
+&lt;h3 id=&quot;导致selector-not-recognized-exceptions异常的其他原因&quot;&gt;导致&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;selector not recognized Exceptions&lt;/code&gt;异常的其他原因&lt;/h3&gt;
+&lt;p&gt;  导致&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;selector not recognized Exceptions&lt;/code&gt;异常的原因通常是：&lt;/p&gt;
 &lt;h4 id=&quot;方法不存在&quot;&gt;方法不存在&lt;/h4&gt;
 &lt;p&gt;  方法实际上是不存在的。检查你的拼写是否有误。查阅文档，确保你调用的方法在当前版本的操作系统内存在。&lt;/p&gt;
 &lt;h4 id=&quot;内存管理&quot;&gt;内存管理&lt;/h4&gt;
-&lt;p&gt;  在对象已释放后，你的应用又尝试去访问它，原先存放对象的内存已被重新分配给其他类的对象，所以当你再次访问原先的对象时，就会发生 “selector not recognized”异常。使用&lt;code class=&quot;highlighter-rouge&quot;&gt;Zombies instrument&lt;/code&gt;工具来debug这类问题。（这一段文档不通顺，稍作整理）&lt;/p&gt;
+&lt;p&gt;  在对象已释放后，你的应用又尝试去访问它，原先存放对象的内存已被重新分配给其他类的对象，所以当你再次访问原先的对象时，就会发生 “selector not recognized”异常。使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Zombies instrument&lt;/code&gt;工具来debug这类问题。（这一段文档不通顺，稍作整理）&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;h2 id=&quot;what-causes-those-exceptions&quot;&gt;What causes those exceptions?&lt;/h2&gt;
@@ -547,7 +637,7 @@ When this message is received, the layer’s super layers are traversed until a 
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;导致这些异常的原因&quot;&gt;导致这些异常的原因&lt;/h2&gt;
-&lt;p&gt;由于 &lt;code class=&quot;highlighter-rouge&quot;&gt;UNIX static libraries&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;dynamic nature of Objective-C&lt;/code&gt;不是很搭的原因，导致静态库中分类的方法不会被链接到app中去，以至于在 runtime 动态调用时无法找到方法，结果发生 “selector not recognized”异常。&lt;/p&gt;
+&lt;p&gt;由于 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UNIX static libraries&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dynamic nature of Objective-C&lt;/code&gt;不是很搭的原因，导致静态库中分类的方法不会被链接到app中去，以至于在 runtime 动态调用时无法找到方法，结果发生 “selector not recognized”异常。&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;h3 id=&quot;the-linker&quot;&gt;The Linker&lt;/h3&gt;
@@ -561,19 +651,19 @@ When this message is received, the layer’s super layers are traversed until a 
   &lt;p&gt;When a source file uses something (like a function) defined in another file, then an undefined symbol is written into the object file, to “stand in” for the missing thing. The linker resolves these symbols by pulling in the object files that include definitions of undefined symbols when building the final executable.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;当一个原文件调用某些在其他文件中定义的方法或者数据时，那么一个&lt;code class=&quot;highlighter-rouge&quot;&gt;未经定义的符号&lt;/code&gt;就被写入了 “object file”,用以代替缺失的方法或数据。在组成最终可执行文件时，链接器从那些包含 “undefined symbols” 定义的 “object files” 中抽取定义来解析这些符号。&lt;/p&gt;
+&lt;p&gt;当一个原文件调用某些在其他文件中定义的方法或者数据时，那么一个&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;未经定义的符号&lt;/code&gt;就被写入了 “object file”,用以代替缺失的方法或数据。在组成最终可执行文件时，链接器从那些包含 “undefined symbols” 定义的 “object files” 中抽取定义来解析这些符号。&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;For example, if main.c uses the function foo(), where foo is defined in another file, B.c, then the object file main.o will have an unresolved symbol for foo(), and B.o will include an implementation of foo(). At link time, B.o will be brought into the final executable, so that the code in main.o now references the implementation of foo() defined in B.o.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;举个例子，假如 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.c&lt;/code&gt; 调用方法 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo()&lt;/code&gt;,而 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt; 函数是在另一个文件 &lt;code class=&quot;highlighter-rouge&quot;&gt;B.c&lt;/code&gt; 中定义的，那么 &lt;code class=&quot;highlighter-rouge&quot;&gt;object file main.o&lt;/code&gt; 将会有一个未解析符号表示 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo()&lt;/code&gt;，同时 &lt;code class=&quot;highlighter-rouge&quot;&gt;B.o&lt;/code&gt; 将会包含 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo()&lt;/code&gt; 方法实现。在链接阶段，&lt;code class=&quot;highlighter-rouge&quot;&gt;B.o&lt;/code&gt; 将会被带入 最终执行文件，因此现在 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.o&lt;/code&gt; 中的代码就可以引用在 &lt;code class=&quot;highlighter-rouge&quot;&gt;B.o&lt;/code&gt; 中对 &lt;code class=&quot;highlighter-rouge&quot;&gt;foo()&lt;/code&gt; 的实现。&lt;/p&gt;
+&lt;p&gt;举个例子，假如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main.c&lt;/code&gt; 调用方法 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo()&lt;/code&gt;,而 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo&lt;/code&gt; 函数是在另一个文件 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B.c&lt;/code&gt; 中定义的，那么 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;object file main.o&lt;/code&gt; 将会有一个未解析符号表示 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo()&lt;/code&gt;，同时 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B.o&lt;/code&gt; 将会包含 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo()&lt;/code&gt; 方法实现。在链接阶段，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B.o&lt;/code&gt; 将会被带入 最终执行文件，因此现在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main.o&lt;/code&gt; 中的代码就可以引用在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;B.o&lt;/code&gt; 中对 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo()&lt;/code&gt; 的实现。&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;A UNIX static library is just a collection of object files. Normally the linker only pulls in an object file from a static library if doing so would resolve some undefined symbol. Not pulling in all object files reduces the size of the final executable.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;UNIX static library&lt;/code&gt; 只是将 &lt;code class=&quot;highlighter-rouge&quot;&gt;object files&lt;/code&gt; 集合在一起。链接器通常只会从&lt;code class=&quot;highlighter-rouge&quot;&gt;static library&lt;/code&gt;中提取那些包含&lt;code class=&quot;highlighter-rouge&quot;&gt;undefined symbol&lt;/code&gt;解析的 object file，而不是把所有 &lt;code class=&quot;highlighter-rouge&quot;&gt;object files&lt;/code&gt; 都集成进来。这样可以减小最终可执行文件的体积。&lt;/p&gt;
+&lt;p&gt;一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UNIX static library&lt;/code&gt; 只是将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;object files&lt;/code&gt; 集合在一起。链接器通常只会从&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static library&lt;/code&gt;中提取那些包含&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;undefined symbol&lt;/code&gt;解析的 object file，而不是把所有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;object files&lt;/code&gt; 都集成进来。这样可以减小最终可执行文件的体积。&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;h3 id=&quot;objective-c&quot;&gt;Objective-C&lt;/h3&gt;
@@ -588,13 +678,13 @@ When this message is received, the layer’s super layers are traversed until a 
   &lt;p&gt;For example, if main.m includes the code [[FooClass alloc] initWithBar:nil]; then main.o will contain an undefined symbol for FooClass, but no linker symbols for the -initWithBar: method will be in main.o.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;比如： 假如 main.m 包含了这样的代码：&lt;code class=&quot;highlighter-rouge&quot;&gt;[[FooClass alloc] initWithBar:nil];&lt;/code&gt;,那么 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.o&lt;/code&gt; 将会包含一个未定义符号表示 &lt;code class=&quot;highlighter-rouge&quot;&gt;FooClass&lt;/code&gt;，但是在 &lt;code class=&quot;highlighter-rouge&quot;&gt;main.o&lt;/code&gt; 文件中，并不生成链接符号去表示 &lt;code class=&quot;highlighter-rouge&quot;&gt;-initWithBar:&lt;/code&gt; 方法。&lt;/p&gt;
+&lt;p&gt;比如： 假如 main.m 包含了这样的代码：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[[FooClass alloc] initWithBar:nil];&lt;/code&gt;,那么 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main.o&lt;/code&gt; 将会包含一个未定义符号表示 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FooClass&lt;/code&gt;，但是在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main.o&lt;/code&gt; 文件中，并不生成链接符号去表示 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-initWithBar:&lt;/code&gt; 方法。&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Since categories are a collection of methods, using a category’s method does not generate an undefined symbol. This means the linker does not know to load an object file defining the category, if the class itself is already defined. This causes the same “selector not recognized” runtime exception you would see for any unimplemented method.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;因为分类是一组方法的集合，假如一个类已经定义了，在其中使用分类的方法并不生成 &lt;code class=&quot;highlighter-rouge&quot;&gt;undefined symbol&lt;/code&gt;,这意味着链接器不知道需要去加载对应的 &lt;code class=&quot;highlighter-rouge&quot;&gt;object file&lt;/code&gt; 去定义分类。调用任何未实现的方法也一样会导致 “selector not recognized” 运行时异常。&lt;/p&gt;
+&lt;p&gt;因为分类是一组方法的集合，假如一个类已经定义了，在其中使用分类的方法并不生成 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;undefined symbol&lt;/code&gt;,这意味着链接器不知道需要去加载对应的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;object file&lt;/code&gt; 去定义分类。调用任何未实现的方法也一样会导致 “selector not recognized” 运行时异常。&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;###The -ObjC Linker Flag
@@ -602,10 +692,10 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 &lt;/blockquote&gt;
 
 &lt;h3 id=&quot;the--objc-linker-flag&quot;&gt;The -ObjC Linker Flag&lt;/h3&gt;
-&lt;p&gt;指定 链接器的 &lt;code class=&quot;highlighter-rouge&quot;&gt;-ObjC&lt;/code&gt; 选项 可以使 链接器加载所有静态库总的成员，包括 &lt;code class=&quot;highlighter-rouge&quot;&gt;Objective-C&lt;/code&gt; 的类和分类。这将选入所有分类方法的实现。同时也使最最终的可执行文件体积更大，这也是为什么不作为默认选项。&lt;/p&gt;
+&lt;p&gt;指定 链接器的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-ObjC&lt;/code&gt; 选项 可以使 链接器加载所有静态库总的成员，包括 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Objective-C&lt;/code&gt; 的类和分类。这将选入所有分类方法的实现。同时也使最最终的可执行文件体积更大，这也是为什么不作为默认选项。&lt;/p&gt;
 
 &lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
-&lt;p&gt;YYKit 中的这个宏定义在 分类之前加了一个空类，这样&lt;code class=&quot;highlighter-rouge&quot;&gt;.m&lt;/code&gt;文件就包含了类，这样生成的 &lt;code class=&quot;highlighter-rouge&quot;&gt;.o&lt;/code&gt;文件就会被链接器打包进最终的可执行文件，从而避免了 “selector not recognized”异常的出现。&lt;/p&gt;
+&lt;p&gt;YYKit 中的这个宏定义在 分类之前加了一个空类，这样&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.m&lt;/code&gt;文件就包含了类，这样生成的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.o&lt;/code&gt;文件就会被链接器打包进最终的可执行文件，从而避免了 “selector not recognized”异常的出现。&lt;/p&gt;
 
 </description>
         <pubDate>Wed, 25 Sep 2019 02:00:00 +0800</pubDate>
@@ -637,7 +727,7 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 
 &lt;h4 id=&quot;添加键盘监听&quot;&gt;添加键盘监听：&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
  [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -645,7 +735,7 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 
 &lt;h4 id=&quot;键盘响应事件&quot;&gt;键盘响应事件：&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -661,7 +751,7 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -675,7 +765,7 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 
 &lt;h4 id=&quot;uitextfield-代理事件&quot;&gt;UITextField 代理事件：&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -697,13 +787,13 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 }
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h4 id=&quot;scrollview-偏移量计算&quot;&gt;scrollview 偏移量计算&lt;/h4&gt;
-&lt;p&gt;  scrollView 需要偏移的量 =&lt;code class=&quot;highlighter-rouge&quot;&gt;页面总高度&lt;/code&gt; - &lt;code class=&quot;highlighter-rouge&quot;&gt;输入框高度&lt;/code&gt; - &lt;code class=&quot;highlighter-rouge&quot;&gt;键盘高度&lt;/code&gt;,当输入框高于键盘时，偏移量小于零，反之，偏移量大于零。 
+&lt;p&gt;  scrollView 需要偏移的量 =&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;页面总高度&lt;/code&gt; - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;输入框高度&lt;/code&gt; - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;键盘高度&lt;/code&gt;,当输入框高于键盘时，偏移量小于零，反之，偏移量大于零。 
 &lt;br /&gt;
 &lt;img width=&quot;200&quot; src=&quot;/assets/images/auto-adjust-height-textfield/mark-line.png&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;偏移量计算方法：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -741,7 +831,7 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 
 &lt;p&gt;  当点击键盘回车时，自动跳转到下一个输入框进行输入，最后一个输入框点击回车时，收起键盘，整体回到原先的布局高度。&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -814,12 +904,12 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 
 &lt;h4 id=&quot;21-创建脚本&quot;&gt;2.1 创建脚本&lt;/h4&gt;
 
-&lt;p&gt;  首先创建一个shell脚本文件，在命令行工具中输入&lt;code class=&quot;highlighter-rouge&quot;&gt;touch xxx.sh&lt;/code&gt;就可以创建shell脚本文件,在这里将shell脚本命名为：&lt;code class=&quot;highlighter-rouge&quot;&gt;projectDeploy.sh&lt;/code&gt;。&lt;br /&gt;
-  运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:&lt;code class=&quot;highlighter-rouge&quot;&gt;sh projectDeploy.sh&lt;/code&gt;命令就可以运行脚本了。&lt;/p&gt;
+&lt;p&gt;  首先创建一个shell脚本文件，在命令行工具中输入&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;touch xxx.sh&lt;/code&gt;就可以创建shell脚本文件,在这里将shell脚本命名为：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;projectDeploy.sh&lt;/code&gt;。&lt;br /&gt;
+  运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sh projectDeploy.sh&lt;/code&gt;命令就可以运行脚本了。&lt;/p&gt;
 &lt;h4 id=&quot;22-脚本传参&quot;&gt;2.2 脚本传参&lt;/h4&gt;
 &lt;p&gt;我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -853,28 +943,28 @@ done
 
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;这里定义了两个全局变量 &lt;code class=&quot;highlighter-rouge&quot;&gt;environment&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;supplier&lt;/code&gt;，当调用脚本时，输入命令 &lt;code class=&quot;highlighter-rouge&quot;&gt;sh projectDeploy.sh -e prd -s xxx&lt;/code&gt;&lt;br /&gt;
+&lt;p&gt;这里定义了两个全局变量 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;environment&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;supplier&lt;/code&gt;，当调用脚本时，输入命令 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sh projectDeploy.sh -e prd -s xxx&lt;/code&gt;&lt;br /&gt;
 这种传参的好处是，指定了具体变量对应的值，不必保持参数的顺序。&lt;/p&gt;
 
 &lt;h4 id=&quot;23-资源替换&quot;&gt;2.3 资源替换&lt;/h4&gt;
 
-&lt;p&gt;  资源替换这里使用了shell脚本里的 &lt;code class=&quot;highlighter-rouge&quot;&gt;copy&lt;/code&gt; 命令：
-&lt;code class=&quot;highlighter-rouge&quot;&gt;cp source_file_directory destination_directory&lt;/code&gt;。&lt;br /&gt;
+&lt;p&gt;  资源替换这里使用了shell脚本里的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;copy&lt;/code&gt; 命令：
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cp source_file_directory destination_directory&lt;/code&gt;。&lt;br /&gt;
 将要替换的资源文件复制到指定位置，有时需要事先将路径下的文件清理一下再进行copy 操作：
-&lt;code class=&quot;highlighter-rouge&quot;&gt;rm -rf destination_directory&lt;/code&gt;&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm -rf destination_directory&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;  如果有同名文件存在，copy操作会覆盖原文件。&lt;br /&gt;
   这一操作可以用来替换启动图、桌面图标、图片资源、SDK、代码文件等文件类替换需求。&lt;/p&gt;
 
 &lt;h4 id=&quot;24-plist-字段修改&quot;&gt;2.4 plist 字段修改&lt;/h4&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;APP桌面名称&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;版本号&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;bundleID&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;scheme&lt;/code&gt;等等plist 内的值需要替换，&lt;br /&gt;
-这里我们使用 MAC 自带的plist 文件编辑工具 &lt;code class=&quot;highlighter-rouge&quot;&gt;PlistBuddy&lt;/code&gt; 来实现plist文件的维护，
-这个工具的访问路径为：&lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/libexec/PlistBuddy&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;APP桌面名称&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;版本号&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundleID&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scheme&lt;/code&gt;等等plist 内的值需要替换，&lt;br /&gt;
+这里我们使用 MAC 自带的plist 文件编辑工具 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PlistBuddy&lt;/code&gt; 来实现plist文件的维护，
+这个工具的访问路径为：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/libexec/PlistBuddy&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;具体命令为：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;/usr/libexec/PlistBuddy -c &quot;set CFBundleIdentifier com.xxx.xxx&quot; ${project_infoplist_path}  
@@ -886,26 +976,26 @@ done
 
 &lt;p&gt;  因为 scheme 的数据结构为 数组元素可能是字典，字典key对应的value可能是数组，因此需要事先知道要修改的值的数据结构和位置，在使用 plist 工具时指定字典对应的key，数组对应的下标：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;/usr/libexec/PlistBuddy -c &quot;set CFBundleURLTypes:0:CFBundleURLSchemes:0 xxx.xxx.xxx&quot; ${project_infoplist_path}
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;  以上命令的意思是取 &lt;code class=&quot;highlighter-rouge&quot;&gt;CFBundleURLTypes&lt;/code&gt; 数组下的第一个元素 X，再取 X 下 &lt;code class=&quot;highlighter-rouge&quot;&gt;CFBundleURLSchemes&lt;/code&gt; 数组下的第一个元素 Y，并更新Y的值为&lt;code class=&quot;highlighter-rouge&quot;&gt;xxx.xxx.xxx&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;  以上命令的意思是取 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CFBundleURLTypes&lt;/code&gt; 数组下的第一个元素 X，再取 X 下 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CFBundleURLSchemes&lt;/code&gt; 数组下的第一个元素 Y，并更新Y的值为&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xxx.xxx.xxx&lt;/code&gt;。&lt;/p&gt;
 
-&lt;p&gt;  至于 provisioning profile 的替换，只需要在打包脚本里去指定就可以了，至于&lt;code class=&quot;highlighter-rouge&quot;&gt;project.pbxproj&lt;/code&gt;文件的一些配置，也可以用 2.5 的方法去配置，见下一部分。&lt;/p&gt;
+&lt;p&gt;  至于 provisioning profile 的替换，只需要在打包脚本里去指定就可以了，至于&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;project.pbxproj&lt;/code&gt;文件的一些配置，也可以用 2.5 的方法去配置，见下一部分。&lt;/p&gt;
 
 &lt;h4 id=&quot;25-部分代码替换&quot;&gt;2.5 部分代码替换&lt;/h4&gt;
 
-&lt;p&gt;  假如需要修改代码里的部分字符，或批量修改某个变量名称，这里就用到了 &lt;code class=&quot;highlighter-rouge&quot;&gt;sed&lt;/code&gt; 命令.
-这里讲一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;sed &lt;/code&gt;命令的用法，如果有其他特殊需求，可查询sed 命令的其他用法：&lt;/p&gt;
+&lt;p&gt;  假如需要修改代码里的部分字符，或批量修改某个变量名称，这里就用到了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; 命令.
+这里讲一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed &lt;/code&gt;命令的用法，如果有其他特殊需求，可查询sed 命令的其他用法：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;sed -i '' 's/^\#define XXX_XX_URL.*$/\#define XXX_XX_URL  @\&quot;www.junziboxue.com\&quot;/g' ${configureFile}
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;  这个命令的意思是，匹配所有 &lt;code class=&quot;highlighter-rouge&quot;&gt;#define XXX_XX_URL&lt;/code&gt; 宏，然后替换为 &lt;code class=&quot;highlighter-rouge&quot;&gt;#define XXX_XX_URL  @&quot;www.junziboxue.com&quot;&lt;/code&gt;，这里是整行替换。shell 命令里需要对一些特殊字符进行转义，在这里需要注意。&lt;/p&gt;
+&lt;p&gt;  这个命令的意思是，匹配所有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#define XXX_XX_URL&lt;/code&gt; 宏，然后替换为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#define XXX_XX_URL  @&quot;www.junziboxue.com&quot;&lt;/code&gt;，这里是整行替换。shell 命令里需要对一些特殊字符进行转义，在这里需要注意。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;^\#define XXX_XX_URL.*$&lt;/code&gt;&lt;/em&gt; 是一个正则表达式，表示所有 以 &lt;code class=&quot;highlighter-rouge&quot;&gt;#define XXX_XX_URL&lt;/code&gt; 开头的字符，&lt;code class=&quot;highlighter-rouge&quot;&gt;/g&lt;/code&gt;表示全局替换。
+&lt;p&gt;&lt;em&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;^\#define XXX_XX_URL.*$&lt;/code&gt;&lt;/em&gt; 是一个正则表达式，表示所有 以 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#define XXX_XX_URL&lt;/code&gt; 开头的字符，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/g&lt;/code&gt;表示全局替换。
 具体 sed 的其他用法可自行查询。&lt;/p&gt;
 
 &lt;h3 id=&quot;3-总结&quot;&gt;3 总结&lt;/h3&gt;
@@ -920,116 +1010,6 @@ done
         <pubDate>Fri, 20 Sep 2019 07:00:00 +0800</pubDate>
         <link>http://junziboxue.com/script-configure</link>
         <guid isPermaLink="true">http://junziboxue.com/script-configure</guid>
-        
-        <category>iOS</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>iOS 圆角+阴影+离屏渲染问题</title>
-        <description>&lt;p&gt;iOS 圆角+阴影+离屏渲染问题&lt;/p&gt;
-
-&lt;p&gt;在近一期开发需求中，有个控件需要同时添加圆角和阴影效果。本以为是个非常简单的需求，但开发过程并不十分美丽。今天就整理一下控件添加圆角和阴影一些需要注意的地方。&lt;/p&gt;
-
-&lt;p&gt;为什么给一个控件同时添加 阴影和圆角这么困难呢？一句话解释就是：&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Because shadow is an effect done outside the View, and that masksToBounds set to YES will tell the UIView not to draw everything that is outside itself.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;简单来说就是：阴影效果是展示在 View 外的，而切圆角要求不显示 View 外部的内容。显然，圆角和阴影要同时显示本身就是矛盾的。&lt;/p&gt;
-
-&lt;p&gt;就单个操作来说，给控件加圆角或者阴影的时候，如果操作不当，因为离屏渲染的问题，会导致比较严重的性能问题。尤其在流式布局如：UITableView、UICollectionView 上，如果添加多个带有阴影或圆角的子视图，性能损耗非常明显。&lt;/p&gt;
-
-&lt;p&gt;一种折中方案：直接让美工把图片切成圆角进行显示，这是效率最高的一种方案。&lt;br /&gt;
-虽然图片的解析和展示会占用一部分内存，但是这是典型的用空间换取时间的情况，在优化时间有限的情况下，让美工做图是个不错的选择。&lt;/p&gt;
-
-&lt;p&gt;UIView、UILabel、UIImageView、UITextView 出现离屏渲染的条件存在略微差异，我们分开一一介绍。&lt;/p&gt;
-
-&lt;h3 id=&quot;优化&quot;&gt;优化&lt;/h3&gt;
-&lt;p&gt;在离屏渲染无法避免的时候，那么退而求其次，让离屏渲染的代价尽量小。一些优化措施可以尽可能的避免性能损耗过大。&lt;/p&gt;
-
-&lt;p&gt;先说两个实现方案，然后针对离屏渲染问题进行优化：&lt;/p&gt;
-
-&lt;p&gt;方案1: 在 view 上显示圆角效果，再在底部插一个阴影的layer。
-    ``` 
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(50, 100, 100, 100)];
-    bgView.backgroundColor = [UIColor brownColor];&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;bgView.layer.cornerRadius = 20.0f;
-bgView.layer.masksToBounds = YES;
-
-[self.view addSubview:bgView];
-
-CALayer *subLayer=[CALayer layer];
-CGRect fixframe = bgView.frame;
-subLayer.frame= fixframe;
-subLayer.cornerRadius=20;
-subLayer.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.8].CGColor;
-subLayer.masksToBounds=NO;
-subLayer.shadowColor = [UIColor blackColor].CGColor;//shadowColor阴影颜色
-subLayer.shadowOffset = CGSizeMake(3,2);//shadowOffset阴影偏移,x向右偏移3，y向下偏移2，默认(0, -3),这个跟shadowRadius配合使用
-subLayer.shadowOpacity = 0.8;//阴影透明度，默认0
-subLayer.shadowRadius = 4;//阴影半径，默认3
-[self.view.layer insertSublayer:subLayer below:bgView.layer];
-```
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;方案2: 不设置 layer.masksToBounds 。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;UIView *v=[[UIView alloc]initWithFrame:CGRectMake(200, 100, 100, 100)];
-    v.backgroundColor=[UIColor brownColor];
-    //v.layer.masksToBounds=YES;不设置 
-    v.layer.cornerRadius=20;
-    v.layer.shadowColor=[UIColor blackColor].CGColor;
-    v.layer.shadowOffset=CGSizeMake(5, 5);
-    v.layer.shadowOpacity=0.5;
-    v.layer.shadowRadius=5;
-    [self.view addSubview:v];
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;实际上，让一个控件既实现shadowPath&lt;/p&gt;
-
-&lt;p&gt;下面的情况或操作会引发离屏渲染：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;为图层设置遮罩（layer.mask）&lt;/li&gt;
-  &lt;li&gt;为图层设置阴影（layer.shadow *）。&lt;/li&gt;
-  &lt;li&gt;为图层设置layer.shouldRasterize=true&lt;/li&gt;
-  &lt;li&gt;文本（任何种类，包括UILabel，CATextLayer，Core Text等）。&lt;/li&gt;
-  &lt;li&gt;将图层的layer.masksToBounds / view.clipsToBounds属性设置为true&lt;/li&gt;
-  &lt;li&gt;将图层layer.allowsGroupOpacity属性设置为YES和layer.opacity小于1.0&lt;/li&gt;
-  &lt;li&gt;具有layer.cornerRadius，layer.edgeAntialiasingMask，layer.allowsEdgeAntialiasing的图层&lt;/li&gt;
-  &lt;li&gt;使用CGContext在drawRect :方法中绘制大部分情况下会导致离屏渲染，甚至仅仅是一个空的实现。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;优化方案1：使用贝塞尔曲线UIBezierPath和Core Graphics框架画出一个圆角&lt;/p&gt;
-
-&lt;p&gt;优化方案2：使用CAShapeLayer和UIBezierPath设置圆角&lt;/p&gt;
-
-&lt;p&gt;使用代码手动生成圆角Image设置到要显示的View上，利用UIBezierPath（CoreGraphics框架）画出来圆角图片&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 16 Sep 2019 18:00:00 +0800</pubDate>
-        <link>http://junziboxue.com/shadow-roundcorner</link>
-        <guid isPermaLink="true">http://junziboxue.com/shadow-roundcorner</guid>
         
         <category>iOS</category>
         

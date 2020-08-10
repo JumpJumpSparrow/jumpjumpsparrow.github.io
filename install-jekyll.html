@@ -11,26 +11,26 @@
     <meta name="theme-color" content="#000000">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Blog Initialized - Cunfa的博客 | CF Blog">
+    <meta property="og:title" content="Jekyll 环境的搭建 - Cunfa的博客 | CF Blog">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="Hey! Welcome to Miaocf’s blog, it’s great to have you :)
+    <meta property="og:description" content="最近换了台电脑，需要重新安装Jekyll环境，在这里记录下Mac安装Jekyell的过程。
 ">
     
-    <meta property="article:published_time" content="2019-06-01T18:00:00Z">
+    <meta property="article:published_time" content="2020-08-10T18:30:00Z">
     
     
     <meta property="article:author" content="Miaocf">
     
     
-    <meta property="article:tag" content="Getting started">
+    <meta property="article:tag" content="jekyll">
     
     
     <meta property="og:image" content="http://junziboxue.comimg/avatar-cf-ny.jpg">
-    <meta property="og:url" content="http://junziboxue.com/start">
+    <meta property="og:url" content="http://junziboxue.com/install-jekyll">
     <meta property="og:site_name" content="Cunfa的博客 | CF Blog">
     
-    <title>Blog Initialized - Cunfa的博客 | CF Blog</title>
+    <title>Jekyll 环境的搭建 - Cunfa的博客 | CF Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -39,7 +39,7 @@
     <link rel="shortcut icon" href="/img/favicon.ico">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://junziboxue.com/start">
+    <link rel="canonical" href="http://junziboxue.com/install-jekyll">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -205,13 +205,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Getting+started" title="Getting started">Getting started</a>
+                        <a class="tag" href="/archive/?tag=jekyll" title="jekyll">jekyll</a>
                         
                     </div>
-                    <h1>Blog Initialized</h1>
+                    <h1>Jekyll 环境的搭建</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Miaocf on June 1, 2019</span>
+                    <span class="meta">Posted by Miaocf on August 10, 2020</span>
                 </div>
             </div>
         </div>
@@ -237,20 +237,84 @@
                 <!-- Multi-Lingual -->
                 
 
-				<p>Hey! Welcome to Miaocf’s blog, it’s great to have you :)</p>
+				<p>最近换了台电脑，需要重新安装Jekyll环境，在这里记录下Mac安装Jekyell的过程。</p>
 
-<p>接触到个人品牌的概念后，就一直考虑着搭建一个 blog，今天算是 Personal Brand 第一天吧。</p>
+<h3 id="一环境准备">一.环境准备</h3>
 
-<h3 id="在人生的旅途中需要明白几点">在人生的旅途中需要明白几点:</h3>
+<p>在安装Jekyll之前，需要具备以下条件：</p>
+
 <ol>
-  <li>人随着年龄的增长，对事物的见知也在增长，心智和价值观也随之渐渐塑造成型。</li>
-  <li>在30岁之前，是一直处在学习的阶段，这个阶段主要是吸收知识，是内容的消费阶段.</li>
-  <li>在30岁之后，开始对世界有了较为全面的理解，开始输出价值观和内容.</li>
+  <li>Xcode 命令行</li>
+  <li>Homebrew</li>
+  <li>Ruby</li>
 </ol>
 
-<p>岁月是个单行道，积累的同时也要分享，在这里将会记录一些 <strong>技术开发</strong>、<strong>生活见闻</strong>等一些内容，欢迎一起讨论.</p>
+<h4 id="1-homebrew">1. Homebrew</h4>
 
-<p>我们都知道，如果可以回到过去，改变任何一件小事情，都将极大地改变未来。然而，几乎没有人想到，今天只要小小改变，就会改变自己的未来。</p>
+<p>什么是 <a href="https://brew.sh">Homebrew</a> ?. 用一句话说明：<code class="language-plaintext highlighter-rouge">Homebrew installs the stuff you need that Apple (or your Linux system) didn’t.</code></p>
+
+<p><img src="/assets/images/how-to-install-jekyll/homebrew.png" alt="" /></p>
+
+<p>Homebrow安装：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>将以上内容粘贴到命令窗口，即可安装 Homebrew，中途可能需要输入用户密码。</p>
+
+<h4 id="2-安装命令行工具">2. 安装命令行工具</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>xcode-select --install
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>如果你已经安装了Xcode，无需进行此步。</p>
+
+<h4 id="3安装ruby">3.安装Ruby</h4>
+
+<p>Jekyll 需要 2.5.0以上版本的 Ruby，macOS Catalina 10.15 自带 ruby 2.6.3，如果你是之前的 mac 系统，需要更新下Ruby。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install ruby
+
+添加路径
+echo 'export PATH="/usr/local/opt/ruby/bin:$PATH"' &gt;&gt; ~/.bash_profile
+echo 'export PATH="$HOME/.gem/ruby/X.X.0/bin:$PATH"' &gt;&gt; ~/.bash_profile
+‘X.X.0’为本地Ruby版本
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="4安装jekyll">4.安装Jekyll</h4>
+
+<p>安装 <code class="language-plaintext highlighter-rouge">Bundler and Jekyll</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>gem install --user-install bundler jekyll
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="创建测试">创建测试</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>jekyll new my-awesome-site
+cd my-awesome-site
+~/my-awesome-site $ bundle exec jekyll serve
+# =&gt; Now browse to http://localhost:4000
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>如果已经创建 Jekyll，可能需要运行 <code class="language-plaintext highlighter-rouge">gem update jekyll</code>来更新Jekyll。
+然后使用<code class="language-plaintext highlighter-rouge">bundle update</code>来更新依赖的包</p>
+
+<p><a href="https://jekyllrb.com">参考资料</a></p>
+
 
                 <div>
     <h3>
@@ -268,19 +332,12 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/net-biography" data-toggle="tooltip" data-placement="top" title="不期而遇-网络上的小贝壳">
+                        <a href="/ios-navigationcontroller" data-toggle="tooltip" data-placement="top" title="深入了解 UINavigationController 的子控制器栈">
                         Previous<br>
-                        <span>不期而遇-网络上的小贝壳</span>
+                        <span>深入了解 UINavigationController 的子控制器栈</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/haskell" data-toggle="tooltip" data-placement="top" title="Haskell 函数式编程">
-                        Next<br>
-                        <span>Haskell 函数式编程</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">

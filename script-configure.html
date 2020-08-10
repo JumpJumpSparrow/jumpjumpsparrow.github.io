@@ -114,6 +114,8 @@
                     
                     
                     
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -263,12 +265,12 @@
 
 <h4 id="21-创建脚本">2.1 创建脚本</h4>
 
-<p>  首先创建一个shell脚本文件，在命令行工具中输入<code class="highlighter-rouge">touch xxx.sh</code>就可以创建shell脚本文件,在这里将shell脚本命名为：<code class="highlighter-rouge">projectDeploy.sh</code>。<br />
-  运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:<code class="highlighter-rouge">sh projectDeploy.sh</code>命令就可以运行脚本了。</p>
+<p>  首先创建一个shell脚本文件，在命令行工具中输入<code class="language-plaintext highlighter-rouge">touch xxx.sh</code>就可以创建shell脚本文件,在这里将shell脚本命名为：<code class="language-plaintext highlighter-rouge">projectDeploy.sh</code>。<br />
+  运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:<code class="language-plaintext highlighter-rouge">sh projectDeploy.sh</code>命令就可以运行脚本了。</p>
 <h4 id="22-脚本传参">2.2 脚本传参</h4>
 <p>我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -302,28 +304,28 @@ done
 
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p>这里定义了两个全局变量 <code class="highlighter-rouge">environment</code> 和 <code class="highlighter-rouge">supplier</code>，当调用脚本时，输入命令 <code class="highlighter-rouge">sh projectDeploy.sh -e prd -s xxx</code><br />
+<p>这里定义了两个全局变量 <code class="language-plaintext highlighter-rouge">environment</code> 和 <code class="language-plaintext highlighter-rouge">supplier</code>，当调用脚本时，输入命令 <code class="language-plaintext highlighter-rouge">sh projectDeploy.sh -e prd -s xxx</code><br />
 这种传参的好处是，指定了具体变量对应的值，不必保持参数的顺序。</p>
 
 <h4 id="23-资源替换">2.3 资源替换</h4>
 
-<p>  资源替换这里使用了shell脚本里的 <code class="highlighter-rouge">copy</code> 命令：
-<code class="highlighter-rouge">cp source_file_directory destination_directory</code>。<br />
+<p>  资源替换这里使用了shell脚本里的 <code class="language-plaintext highlighter-rouge">copy</code> 命令：
+<code class="language-plaintext highlighter-rouge">cp source_file_directory destination_directory</code>。<br />
 将要替换的资源文件复制到指定位置，有时需要事先将路径下的文件清理一下再进行copy 操作：
-<code class="highlighter-rouge">rm -rf destination_directory</code></p>
+<code class="language-plaintext highlighter-rouge">rm -rf destination_directory</code></p>
 
 <p>  如果有同名文件存在，copy操作会覆盖原文件。<br />
   这一操作可以用来替换启动图、桌面图标、图片资源、SDK、代码文件等文件类替换需求。</p>
 
 <h4 id="24-plist-字段修改">2.4 plist 字段修改</h4>
 
-<p><code class="highlighter-rouge">APP桌面名称</code>、<code class="highlighter-rouge">版本号</code>、<code class="highlighter-rouge">bundleID</code>、<code class="highlighter-rouge">scheme</code>等等plist 内的值需要替换，<br />
-这里我们使用 MAC 自带的plist 文件编辑工具 <code class="highlighter-rouge">PlistBuddy</code> 来实现plist文件的维护，
-这个工具的访问路径为：<code class="highlighter-rouge">/usr/libexec/PlistBuddy</code></p>
+<p><code class="language-plaintext highlighter-rouge">APP桌面名称</code>、<code class="language-plaintext highlighter-rouge">版本号</code>、<code class="language-plaintext highlighter-rouge">bundleID</code>、<code class="language-plaintext highlighter-rouge">scheme</code>等等plist 内的值需要替换，<br />
+这里我们使用 MAC 自带的plist 文件编辑工具 <code class="language-plaintext highlighter-rouge">PlistBuddy</code> 来实现plist文件的维护，
+这个工具的访问路径为：<code class="language-plaintext highlighter-rouge">/usr/libexec/PlistBuddy</code></p>
 
 <p>具体命令为：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 </pre></td><td class="rouge-code"><pre>/usr/libexec/PlistBuddy -c "set CFBundleIdentifier com.xxx.xxx" ${project_infoplist_path}  
@@ -335,26 +337,26 @@ done
 
 <p>  因为 scheme 的数据结构为 数组元素可能是字典，字典key对应的value可能是数组，因此需要事先知道要修改的值的数据结构和位置，在使用 plist 工具时指定字典对应的key，数组对应的下标：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>/usr/libexec/PlistBuddy -c "set CFBundleURLTypes:0:CFBundleURLSchemes:0 xxx.xxx.xxx" ${project_infoplist_path}
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p>  以上命令的意思是取 <code class="highlighter-rouge">CFBundleURLTypes</code> 数组下的第一个元素 X，再取 X 下 <code class="highlighter-rouge">CFBundleURLSchemes</code> 数组下的第一个元素 Y，并更新Y的值为<code class="highlighter-rouge">xxx.xxx.xxx</code>。</p>
+<p>  以上命令的意思是取 <code class="language-plaintext highlighter-rouge">CFBundleURLTypes</code> 数组下的第一个元素 X，再取 X 下 <code class="language-plaintext highlighter-rouge">CFBundleURLSchemes</code> 数组下的第一个元素 Y，并更新Y的值为<code class="language-plaintext highlighter-rouge">xxx.xxx.xxx</code>。</p>
 
-<p>  至于 provisioning profile 的替换，只需要在打包脚本里去指定就可以了，至于<code class="highlighter-rouge">project.pbxproj</code>文件的一些配置，也可以用 2.5 的方法去配置，见下一部分。</p>
+<p>  至于 provisioning profile 的替换，只需要在打包脚本里去指定就可以了，至于<code class="language-plaintext highlighter-rouge">project.pbxproj</code>文件的一些配置，也可以用 2.5 的方法去配置，见下一部分。</p>
 
 <h4 id="25-部分代码替换">2.5 部分代码替换</h4>
 
-<p>  假如需要修改代码里的部分字符，或批量修改某个变量名称，这里就用到了 <code class="highlighter-rouge">sed</code> 命令.
-这里讲一个 <code class="highlighter-rouge">sed </code>命令的用法，如果有其他特殊需求，可查询sed 命令的其他用法：</p>
+<p>  假如需要修改代码里的部分字符，或批量修改某个变量名称，这里就用到了 <code class="language-plaintext highlighter-rouge">sed</code> 命令.
+这里讲一个 <code class="language-plaintext highlighter-rouge">sed </code>命令的用法，如果有其他特殊需求，可查询sed 命令的其他用法：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>sed -i '' 's/^\#define XXX_XX_URL.*$/\#define XXX_XX_URL  @\"www.junziboxue.com\"/g' ${configureFile}
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p>  这个命令的意思是，匹配所有 <code class="highlighter-rouge">#define XXX_XX_URL</code> 宏，然后替换为 <code class="highlighter-rouge">#define XXX_XX_URL  @"www.junziboxue.com"</code>，这里是整行替换。shell 命令里需要对一些特殊字符进行转义，在这里需要注意。</p>
+<p>  这个命令的意思是，匹配所有 <code class="language-plaintext highlighter-rouge">#define XXX_XX_URL</code> 宏，然后替换为 <code class="language-plaintext highlighter-rouge">#define XXX_XX_URL  @"www.junziboxue.com"</code>，这里是整行替换。shell 命令里需要对一些特殊字符进行转义，在这里需要注意。</p>
 
-<p><em><code class="highlighter-rouge">^\#define XXX_XX_URL.*$</code></em> 是一个正则表达式，表示所有 以 <code class="highlighter-rouge">#define XXX_XX_URL</code> 开头的字符，<code class="highlighter-rouge">/g</code>表示全局替换。
+<p><em><code class="language-plaintext highlighter-rouge">^\#define XXX_XX_URL.*$</code></em> 是一个正则表达式，表示所有 以 <code class="language-plaintext highlighter-rouge">#define XXX_XX_URL</code> 开头的字符，<code class="language-plaintext highlighter-rouge">/g</code>表示全局替换。
 具体 sed 的其他用法可自行查询。</p>
 
 <h3 id="3-总结">3 总结</h3>
@@ -443,12 +445,12 @@ gitment.render('gitmentContainer');
         </a>
         
         
-                <a data-sort="0014" 
+                <a data-sort="0015" 
                     href="/archive/?tag=something"
                     title="something"
                     rel="6">something</a>
         
-                <a data-sort="0008" 
+                <a data-sort="0009" 
                     href="/archive/?tag=iOS"
                     title="iOS"
                     rel="12">iOS

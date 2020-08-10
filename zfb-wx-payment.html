@@ -114,6 +114,8 @@
                     
                     
                     
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -239,7 +241,7 @@
 
 <p>   首先我们来看支付宝支付SDK的API是怎么设计的：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -269,7 +271,7 @@
 
 <p>  然后看一下微信支付的API：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -304,7 +306,7 @@
 + (BOOL)handleOpenURL:(NSURL *)url delegate:(nullable id&lt;WXApiDelegate&gt;)delegate;
 
 </pre></td></tr></tbody></table></code></pre></div></div>
-<p>  要发起微信支付，首先要实例化 一个<code class="highlighter-rouge">PayReq</code>对象，接着将这个对象的6个字段分别赋值，然后发起支付请求，等从微信返回到APP后，再从代理方法获取支付结果。相比支付宝SDK提供的接口，要繁琐了不少,可见接口设计是多么的重要，（当然支付宝的入参是事先拼接好的，拼接工作可以移交给后端）。</p>
+<p>  要发起微信支付，首先要实例化 一个<code class="language-plaintext highlighter-rouge">PayReq</code>对象，接着将这个对象的6个字段分别赋值，然后发起支付请求，等从微信返回到APP后，再从代理方法获取支付结果。相比支付宝SDK提供的接口，要繁琐了不少,可见接口设计是多么的重要，（当然支付宝的入参是事先拼接好的，拼接工作可以移交给后端）。</p>
 
 <p>  我们希望不管是微信支付还是支付宝支付，都能有统一风格的调用接口，方便逻辑复用，那么接下来的工作就是通过封装 使这这两者的接口统一。</p>
 
@@ -317,7 +319,7 @@
 
 <p>以下是设计的接口：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -379,8 +381,8 @@ typedef void(^wxShareCallback)(int resp);
 
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p>为了方便组织微信支付所需的字段，<code class="highlighter-rouge">fromMap </code>方法可以将包含数据的字典转换为 一个<code class="highlighter-rouge">PayReq </code>实例对象。在封装里，将微信SDK的 代理指定为 <code class="highlighter-rouge">PaymentHub </code>的实例，在实例内部处理微信的代理回调。
-考虑到微信SDK还可能会负责分享，在<code class="highlighter-rouge">handleOpenUrl </code>方法里需要做区分处理。</p>
+<p>为了方便组织微信支付所需的字段，<code class="language-plaintext highlighter-rouge">fromMap </code>方法可以将包含数据的字典转换为 一个<code class="language-plaintext highlighter-rouge">PayReq </code>实例对象。在封装里，将微信SDK的 代理指定为 <code class="language-plaintext highlighter-rouge">PaymentHub </code>的实例，在实例内部处理微信的代理回调。
+考虑到微信SDK还可能会负责分享，在<code class="language-plaintext highlighter-rouge">handleOpenUrl </code>方法里需要做区分处理。</p>
 
 <p><a href="https://github.com/JumpJumpSparrow/DemoCollection.git">demo链接</a></p>
 
@@ -462,12 +464,12 @@ gitment.render('gitmentContainer');
         </a>
         
         
-                <a data-sort="0014" 
+                <a data-sort="0015" 
                     href="/archive/?tag=something"
                     title="something"
                     rel="6">something</a>
         
-                <a data-sort="0008" 
+                <a data-sort="0009" 
                     href="/archive/?tag=iOS"
                     title="iOS"
                     rel="12">iOS

@@ -114,6 +114,8 @@
                     
                     
                     
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -247,14 +249,14 @@
 <ol>
   <li>
     <p><strong>第三方库会被编译成.a静态库供我们真正的工程使用。</strong><br />
-CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的工程，该工程在Pods目录下。整个第三方库工程会生成一个名称为<code class="highlighter-rouge">libPods-xxx.a</code>的静态库提供给主工程使用。对于资源文件，CocoaPods 提供了一个名为Pods-resources.sh的bash脚本，该脚本在每次项目编译的时候都会执行，将第三方库的各种资源文件复制到目标目录中。</p>
+CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的工程，该工程在Pods目录下。整个第三方库工程会生成一个名称为<code class="language-plaintext highlighter-rouge">libPods-xxx.a</code>的静态库提供给主工程使用。对于资源文件，CocoaPods 提供了一个名为Pods-resources.sh的bash脚本，该脚本在每次项目编译的时候都会执行，将第三方库的各种资源文件复制到目标目录中。</p>
   </li>
   <li>
     <p><strong>工程和第三方库所在的工程会由一个新生成的workspace管理</strong><br />
 为了方便我们直观的管理工程和第三方库，CocoaPodsTest工程和Pods工程会被以workspace的形式组织和管理，也就是xxxx.xcworkspace文件。</p>
   </li>
   <li>
-    <p><strong>CocoaPods通过<code class="highlighter-rouge">Pods-Podtest.release.xcconfig</code>的文件来在编译时设置所有的依赖和参数。</strong></p>
+    <p><strong>CocoaPods通过<code class="language-plaintext highlighter-rouge">Pods-Podtest.release.xcconfig</code>的文件来在编译时设置所有的依赖和参数。</strong></p>
   </li>
   <li>
     <p>原来的工程设置已经被更改了，直接打开原来的工程文件去编译就会报错，使用新生成的workspace来进行项目管理。</p>
@@ -277,14 +279,14 @@ CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的�
 <h4 id="2-创建pod私有库的项目工程">2. 创建pod私有库的项目工程</h4>
 
 <ul>
-  <li>cd到合适目录下用命令行创建工程,执行 <code class="highlighter-rouge">pod lib create Lib</code> ,按提示输入需要的内容.</li>
+  <li>cd到合适目录下用命令行创建工程,执行 <code class="language-plaintext highlighter-rouge">pod lib create Lib</code> ,按提示输入需要的内容.</li>
   <li>修改podspec文件</li>
-  <li>修改完成后,cd 到Lib目录下执行<code class="highlighter-rouge">pod lib lint</code> <br />
+  <li>修改完成后,cd 到Lib目录下执行<code class="language-plaintext highlighter-rouge">pod lib lint</code> <br />
 podspec 文件保存了所有要对三方库的配置,包括要引用的依赖、模块划分、源文件、公共头文件等.</li>
 </ul>
 
 <h4 id="3-将本地项目文件上传到远程私有库中">3. 将本地项目文件上传到远程私有库中</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -305,20 +307,20 @@ $ git push --tags
 
 <h4 id="4-校验spec">4. 校验spec</h4>
 
-<p>执行 <code class="highlighter-rouge">pod spec lint</code></p>
+<p>执行 <code class="language-plaintext highlighter-rouge">pod spec lint</code></p>
 
 <h4 id="5创建spec-repo">5.创建spec repo</h4>
 
-<p>进入文件夹<code class="highlighter-rouge">cd ~/.cocoapods/repos</code> 可以查看本地<code class="highlighter-rouge">spec repo</code>
+<p>进入文件夹<code class="language-plaintext highlighter-rouge">cd ~/.cocoapods/repos</code> 可以查看本地<code class="language-plaintext highlighter-rouge">spec repo</code>
 指定管理 lib repo 的 specs repo 的 url
-<code class="highlighter-rouge">pod repo add Lib http://git.xxxx.cn/APP/ios/Spec.git</code>
+<code class="language-plaintext highlighter-rouge">pod repo add Lib http://git.xxxx.cn/APP/ios/Spec.git</code>
 注意 此处地址是spec仓库地址
 推送 podspec 到 specs repo
-<code class="highlighter-rouge">pod repo push Lib Lib.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git</code></p>
+<code class="language-plaintext highlighter-rouge">pod repo push Lib Lib.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git</code></p>
 
 <h4 id="6-验证">6. 验证</h4>
 <p>创建一个新的项目  编写podfile文件</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -345,10 +347,10 @@ end
 <ol>
   <li>将更新的podspec 文件更新到 git 库</li>
   <li>更新本地 repo 相关私有库的 podspec 文件,命令如下:
-<code class="highlighter-rouge">zsspecs</code> 是私有库的名称.</li>
+<code class="language-plaintext highlighter-rouge">zsspecs</code> 是私有库的名称.</li>
 </ol>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>  pod repo update zsspecs
 </pre></td></tr></tbody></table></code></pre></div></div>
 
@@ -358,10 +360,10 @@ subspec 支持嵌套</p>
 
 <h3 id="注意事项">注意事项</h3>
 <ul>
-  <li>pods 在安装的时候,遇到体积较大的文件会报<code class="highlighter-rouge">early EOF</code>的错, 需要设置<code class="highlighter-rouge">postBuffer</code>来解决这个问题</li>
+  <li>pods 在安装的时候,遇到体积较大的文件会报<code class="language-plaintext highlighter-rouge">early EOF</code>的错, 需要设置<code class="language-plaintext highlighter-rouge">postBuffer</code>来解决这个问题</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="rouge-code"><pre> $ git config --global http.postBuffer 1073741824  
  $ git config --list
@@ -369,8 +371,8 @@ subspec 支持嵌套</p>
 
 <ul>
   <li>
-    <p><code class="highlighter-rouge">pod install</code> <code class="highlighter-rouge">pod update</code> 区别<br />
-<code class="highlighter-rouge">pod update AFNetworking</code> 单独更新某一个库.</p>
+    <p><code class="language-plaintext highlighter-rouge">pod install</code> <code class="language-plaintext highlighter-rouge">pod update</code> 区别<br />
+<code class="language-plaintext highlighter-rouge">pod update AFNetworking</code> 单独更新某一个库.</p>
   </li>
   <li>
     <p>不更新 podspec<br />
@@ -378,7 +380,7 @@ CocoaPods 在执行pod install和pod update时，会默认先更新一次podspec
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="rouge-code"><pre> pod install --no-repo-update
  pod update --no-repo-update
@@ -387,7 +389,7 @@ CocoaPods 在执行pod install和pod update时，会默认先更新一次podspec
 <ul>
   <li>使用私有的 pods<br />
 通过直接指定某一个依赖的podspec，就可以使用内部的私有库。有利于使企业内部的公共项目支持 CocoaPods。示例：<br />
-<code class="highlighter-rouge">pod 'MyCommon', :podspec =&gt; 'https://suning.com/common/myCommon.podspec'</code></li>
+<code class="language-plaintext highlighter-rouge">pod 'MyCommon', :podspec =&gt; 'https://suning.com/common/myCommon.podspec'</code></li>
 </ul>
 
 <p>参考资料<br />
@@ -474,12 +476,12 @@ gitment.render('gitmentContainer');
         </a>
         
         
-                <a data-sort="0014" 
+                <a data-sort="0015" 
                     href="/archive/?tag=something"
                     title="something"
                     rel="6">something</a>
         
-                <a data-sort="0008" 
+                <a data-sort="0009" 
                     href="/archive/?tag=iOS"
                     title="iOS"
                     rel="12">iOS

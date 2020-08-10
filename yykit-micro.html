@@ -116,6 +116,8 @@
                     
                     
                     
+                    
+                    
                 </ul>
             </div>
         </div>
@@ -243,7 +245,7 @@
 
 <p>如何解决 在 runtime 环境中尝试调用静态库中分类的方法时，报 “selector not recognized” 异常？</p>
 
-<p>  今天在浏览 YYKit 库时，一个宏定义引起了我的注意：<code class="highlighter-rouge">YYSYNTH_DUMMY_CLASS </code>,从字面意思看是定义了一个不起任何作用的<em>哑</em>类。相关描述如下：</p>
+<p>  今天在浏览 YYKit 库时，一个宏定义引起了我的注意：<code class="language-plaintext highlighter-rouge">YYSYNTH_DUMMY_CLASS </code>,从字面意思看是定义了一个不起任何作用的<em>哑</em>类。相关描述如下：</p>
 
 <pre><code class="language-Objective-C">/**
  Add this macro before each category implementation, so we don't have to use
@@ -277,7 +279,7 @@
   </ol>
 </blockquote>
 
-<p>译：当你在运行时调用一个在静态库中实现的分类的方法时，遇到 “selector not recognized” 运行时异常，那么你就撞到了本篇文档中描述的所谓的 “the link-time build issue” 问题，同时你需要在你的工程中加上 <code class="highlighter-rouge">-ObjC linker flag</code> 来解决这个问题。具体步骤：(在这里就不翻译了么么哒)。</p>
+<p>译：当你在运行时调用一个在静态库中实现的分类的方法时，遇到 “selector not recognized” 运行时异常，那么你就撞到了本篇文档中描述的所谓的 “the link-time build issue” 问题，同时你需要在你的工程中加上 <code class="language-plaintext highlighter-rouge">-ObjC linker flag</code> 来解决这个问题。具体步骤：(在这里就不翻译了么么哒)。</p>
 
 <p><em>Figure 1:</em>  Modifying the Other Linker Flags build setting.    <br />
 <br /><img src="/assets/article_assets/qa1490_other_linker_flags_xcode_5.png" /><br /></p>
@@ -291,7 +293,7 @@
 </blockquote>
 
 <h3 id="解决问题">解决问题</h3>
-<p>  如果添加<code class="highlighter-rouge">-ObjC flag</code>没能解决这个问题，检查一下确保之前的操作没有与 Target build setting 冲突而使其无效。按照上面的步骤，在第二步时选择 <em>“TARGETS”</em>下的target，而不是选择 project。</p>
+<p>  如果添加<code class="language-plaintext highlighter-rouge">-ObjC flag</code>没能解决这个问题，检查一下确保之前的操作没有与 Target build setting 冲突而使其无效。按照上面的步骤，在第二步时选择 <em>“TARGETS”</em>下的target，而不是选择 project。</p>
 
 <blockquote>
   <h3 id="other-causes-of-selector-not-recognized-exceptions">Other Causes of selector not recognized Exceptions</h3>
@@ -314,12 +316,12 @@
   <p>Your app is trying to use an object after it has been deallocated, use the Zombies instrument to debug this kind of problem. You are seeing “selector not recognized” because the memory has been re-allocated as a different kind of object.</p>
 </blockquote>
 
-<h3 id="导致selector-not-recognized-exceptions异常的其他原因">导致<code class="highlighter-rouge">selector not recognized Exceptions</code>异常的其他原因</h3>
-<p>  导致<code class="highlighter-rouge">selector not recognized Exceptions</code>异常的原因通常是：</p>
+<h3 id="导致selector-not-recognized-exceptions异常的其他原因">导致<code class="language-plaintext highlighter-rouge">selector not recognized Exceptions</code>异常的其他原因</h3>
+<p>  导致<code class="language-plaintext highlighter-rouge">selector not recognized Exceptions</code>异常的原因通常是：</p>
 <h4 id="方法不存在">方法不存在</h4>
 <p>  方法实际上是不存在的。检查你的拼写是否有误。查阅文档，确保你调用的方法在当前版本的操作系统内存在。</p>
 <h4 id="内存管理">内存管理</h4>
-<p>  在对象已释放后，你的应用又尝试去访问它，原先存放对象的内存已被重新分配给其他类的对象，所以当你再次访问原先的对象时，就会发生 “selector not recognized”异常。使用<code class="highlighter-rouge">Zombies instrument</code>工具来debug这类问题。（这一段文档不通顺，稍作整理）</p>
+<p>  在对象已释放后，你的应用又尝试去访问它，原先存放对象的内存已被重新分配给其他类的对象，所以当你再次访问原先的对象时，就会发生 “selector not recognized”异常。使用<code class="language-plaintext highlighter-rouge">Zombies instrument</code>工具来debug这类问题。（这一段文档不通顺，稍作整理）</p>
 
 <blockquote>
   <h2 id="what-causes-those-exceptions">What causes those exceptions?</h2>
@@ -327,7 +329,7 @@
 </blockquote>
 
 <h2 id="导致这些异常的原因">导致这些异常的原因</h2>
-<p>由于 <code class="highlighter-rouge">UNIX static libraries</code> 和 <code class="highlighter-rouge">dynamic nature of Objective-C</code>不是很搭的原因，导致静态库中分类的方法不会被链接到app中去，以至于在 runtime 动态调用时无法找到方法，结果发生 “selector not recognized”异常。</p>
+<p>由于 <code class="language-plaintext highlighter-rouge">UNIX static libraries</code> 和 <code class="language-plaintext highlighter-rouge">dynamic nature of Objective-C</code>不是很搭的原因，导致静态库中分类的方法不会被链接到app中去，以至于在 runtime 动态调用时无法找到方法，结果发生 “selector not recognized”异常。</p>
 
 <blockquote>
   <h3 id="the-linker">The Linker</h3>
@@ -341,19 +343,19 @@
   <p>When a source file uses something (like a function) defined in another file, then an undefined symbol is written into the object file, to “stand in” for the missing thing. The linker resolves these symbols by pulling in the object files that include definitions of undefined symbols when building the final executable.</p>
 </blockquote>
 
-<p>当一个原文件调用某些在其他文件中定义的方法或者数据时，那么一个<code class="highlighter-rouge">未经定义的符号</code>就被写入了 “object file”,用以代替缺失的方法或数据。在组成最终可执行文件时，链接器从那些包含 “undefined symbols” 定义的 “object files” 中抽取定义来解析这些符号。</p>
+<p>当一个原文件调用某些在其他文件中定义的方法或者数据时，那么一个<code class="language-plaintext highlighter-rouge">未经定义的符号</code>就被写入了 “object file”,用以代替缺失的方法或数据。在组成最终可执行文件时，链接器从那些包含 “undefined symbols” 定义的 “object files” 中抽取定义来解析这些符号。</p>
 
 <blockquote>
   <p>For example, if main.c uses the function foo(), where foo is defined in another file, B.c, then the object file main.o will have an unresolved symbol for foo(), and B.o will include an implementation of foo(). At link time, B.o will be brought into the final executable, so that the code in main.o now references the implementation of foo() defined in B.o.</p>
 </blockquote>
 
-<p>举个例子，假如 <code class="highlighter-rouge">main.c</code> 调用方法 <code class="highlighter-rouge">foo()</code>,而 <code class="highlighter-rouge">foo</code> 函数是在另一个文件 <code class="highlighter-rouge">B.c</code> 中定义的，那么 <code class="highlighter-rouge">object file main.o</code> 将会有一个未解析符号表示 <code class="highlighter-rouge">foo()</code>，同时 <code class="highlighter-rouge">B.o</code> 将会包含 <code class="highlighter-rouge">foo()</code> 方法实现。在链接阶段，<code class="highlighter-rouge">B.o</code> 将会被带入 最终执行文件，因此现在 <code class="highlighter-rouge">main.o</code> 中的代码就可以引用在 <code class="highlighter-rouge">B.o</code> 中对 <code class="highlighter-rouge">foo()</code> 的实现。</p>
+<p>举个例子，假如 <code class="language-plaintext highlighter-rouge">main.c</code> 调用方法 <code class="language-plaintext highlighter-rouge">foo()</code>,而 <code class="language-plaintext highlighter-rouge">foo</code> 函数是在另一个文件 <code class="language-plaintext highlighter-rouge">B.c</code> 中定义的，那么 <code class="language-plaintext highlighter-rouge">object file main.o</code> 将会有一个未解析符号表示 <code class="language-plaintext highlighter-rouge">foo()</code>，同时 <code class="language-plaintext highlighter-rouge">B.o</code> 将会包含 <code class="language-plaintext highlighter-rouge">foo()</code> 方法实现。在链接阶段，<code class="language-plaintext highlighter-rouge">B.o</code> 将会被带入 最终执行文件，因此现在 <code class="language-plaintext highlighter-rouge">main.o</code> 中的代码就可以引用在 <code class="language-plaintext highlighter-rouge">B.o</code> 中对 <code class="language-plaintext highlighter-rouge">foo()</code> 的实现。</p>
 
 <blockquote>
   <p>A UNIX static library is just a collection of object files. Normally the linker only pulls in an object file from a static library if doing so would resolve some undefined symbol. Not pulling in all object files reduces the size of the final executable.</p>
 </blockquote>
 
-<p>一个 <code class="highlighter-rouge">UNIX static library</code> 只是将 <code class="highlighter-rouge">object files</code> 集合在一起。链接器通常只会从<code class="highlighter-rouge">static library</code>中提取那些包含<code class="highlighter-rouge">undefined symbol</code>解析的 object file，而不是把所有 <code class="highlighter-rouge">object files</code> 都集成进来。这样可以减小最终可执行文件的体积。</p>
+<p>一个 <code class="language-plaintext highlighter-rouge">UNIX static library</code> 只是将 <code class="language-plaintext highlighter-rouge">object files</code> 集合在一起。链接器通常只会从<code class="language-plaintext highlighter-rouge">static library</code>中提取那些包含<code class="language-plaintext highlighter-rouge">undefined symbol</code>解析的 object file，而不是把所有 <code class="language-plaintext highlighter-rouge">object files</code> 都集成进来。这样可以减小最终可执行文件的体积。</p>
 
 <blockquote>
   <h3 id="objective-c">Objective-C</h3>
@@ -368,13 +370,13 @@
   <p>For example, if main.m includes the code [[FooClass alloc] initWithBar:nil]; then main.o will contain an undefined symbol for FooClass, but no linker symbols for the -initWithBar: method will be in main.o.</p>
 </blockquote>
 
-<p>比如： 假如 main.m 包含了这样的代码：<code class="highlighter-rouge">[[FooClass alloc] initWithBar:nil];</code>,那么 <code class="highlighter-rouge">main.o</code> 将会包含一个未定义符号表示 <code class="highlighter-rouge">FooClass</code>，但是在 <code class="highlighter-rouge">main.o</code> 文件中，并不生成链接符号去表示 <code class="highlighter-rouge">-initWithBar:</code> 方法。</p>
+<p>比如： 假如 main.m 包含了这样的代码：<code class="language-plaintext highlighter-rouge">[[FooClass alloc] initWithBar:nil];</code>,那么 <code class="language-plaintext highlighter-rouge">main.o</code> 将会包含一个未定义符号表示 <code class="language-plaintext highlighter-rouge">FooClass</code>，但是在 <code class="language-plaintext highlighter-rouge">main.o</code> 文件中，并不生成链接符号去表示 <code class="language-plaintext highlighter-rouge">-initWithBar:</code> 方法。</p>
 
 <blockquote>
   <p>Since categories are a collection of methods, using a category’s method does not generate an undefined symbol. This means the linker does not know to load an object file defining the category, if the class itself is already defined. This causes the same “selector not recognized” runtime exception you would see for any unimplemented method.</p>
 </blockquote>
 
-<p>因为分类是一组方法的集合，假如一个类已经定义了，在其中使用分类的方法并不生成 <code class="highlighter-rouge">undefined symbol</code>,这意味着链接器不知道需要去加载对应的 <code class="highlighter-rouge">object file</code> 去定义分类。调用任何未实现的方法也一样会导致 “selector not recognized” 运行时异常。</p>
+<p>因为分类是一组方法的集合，假如一个类已经定义了，在其中使用分类的方法并不生成 <code class="language-plaintext highlighter-rouge">undefined symbol</code>,这意味着链接器不知道需要去加载对应的 <code class="language-plaintext highlighter-rouge">object file</code> 去定义分类。调用任何未实现的方法也一样会导致 “selector not recognized” 运行时异常。</p>
 
 <blockquote>
   <p>###The -ObjC Linker Flag
@@ -382,10 +384,10 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 </blockquote>
 
 <h3 id="the--objc-linker-flag">The -ObjC Linker Flag</h3>
-<p>指定 链接器的 <code class="highlighter-rouge">-ObjC</code> 选项 可以使 链接器加载所有静态库总的成员，包括 <code class="highlighter-rouge">Objective-C</code> 的类和分类。这将选入所有分类方法的实现。同时也使最最终的可执行文件体积更大，这也是为什么不作为默认选项。</p>
+<p>指定 链接器的 <code class="language-plaintext highlighter-rouge">-ObjC</code> 选项 可以使 链接器加载所有静态库总的成员，包括 <code class="language-plaintext highlighter-rouge">Objective-C</code> 的类和分类。这将选入所有分类方法的实现。同时也使最最终的可执行文件体积更大，这也是为什么不作为默认选项。</p>
 
 <h2 id="总结">总结</h2>
-<p>YYKit 中的这个宏定义在 分类之前加了一个空类，这样<code class="highlighter-rouge">.m</code>文件就包含了类，这样生成的 <code class="highlighter-rouge">.o</code>文件就会被链接器打包进最终的可执行文件，从而避免了 “selector not recognized”异常的出现。</p>
+<p>YYKit 中的这个宏定义在 分类之前加了一个空类，这样<code class="language-plaintext highlighter-rouge">.m</code>文件就包含了类，这样生成的 <code class="language-plaintext highlighter-rouge">.o</code>文件就会被链接器打包进最终的可执行文件，从而避免了 “selector not recognized”异常的出现。</p>
 
 
                 <div>
@@ -465,12 +467,12 @@ gitment.render('gitmentContainer');
         </a>
         
         
-                <a data-sort="0014" 
+                <a data-sort="0015" 
                     href="/archive/?tag=something"
                     title="something"
                     rel="6">something</a>
         
-                <a data-sort="0008" 
+                <a data-sort="0009" 
                     href="/archive/?tag=iOS"
                     title="iOS"
                     rel="12">iOS
