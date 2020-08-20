@@ -5,12 +5,12 @@
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
     <link>http://junziboxue.com/</link>
     <atom:link href="http://junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 20 Aug 2020 09:19:40 +0800</pubDate>
-    <lastBuildDate>Thu, 20 Aug 2020 09:19:40 +0800</lastBuildDate>
+    <pubDate>Thu, 20 Aug 2020 15:34:48 +0800</pubDate>
+    <lastBuildDate>Thu, 20 Aug 2020 15:34:48 +0800</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
-        <title>Flutter 渐变AppBar</title>
+        <title>Flutter 透明渐变 AppBar</title>
         <description>&lt;p&gt;最近要用 Flutter 重构一个 Native 页面，效果如下：&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/fadeAppBar.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
@@ -270,7 +270,7 @@ Opacity(
 &lt;a href=&quot;https://github.com/JumpJumpSparrow/Flutter-FadeAppBar.git&quot;&gt;Demo&lt;/a&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Mon, 10 Aug 2020 18:30:00 +0800</pubDate>
+        <pubDate>Wed, 19 Aug 2020 18:30:00 +0800</pubDate>
         <link>http://junziboxue.com/flutter-fade-app-bar</link>
         <guid isPermaLink="true">http://junziboxue.com/flutter-fade-app-bar</guid>
         
@@ -798,24 +798,6 @@ When this message is received, the layer’s super layers are traversed until a 
       </item>
     
       <item>
-        <title>iOS Emoji 过滤</title>
-        <description>&lt;p&gt;  因为 emoji 字符在转码或存入数据库时，会遇到一些异常，因此在开发过程中，有过滤 emoji 或者禁止输入 emoji 的需求。&lt;/p&gt;
-
-&lt;h3 id=&quot;什么是-emoji-&quot;&gt;什么是 emoji ？&lt;/h3&gt;
-&lt;p&gt;  emoji 最早是由日本人&lt;em&gt;栗田穰崇&lt;/em&gt; (Shigetaka Kurita)创作的。emoji 是一些图形符号，例如：😊👏🚗🌞。和普通文字符号不同，emoji 通过一些图案来表达一些辨识度较高的场景或者含义，使阅读体验更好。在此可以查找各种 emoji &lt;a href=&quot;https://emojipedia.org&quot;&gt;emojipedia&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;(未完待续)d&lt;/p&gt;
-</description>
-        <pubDate>Sun, 13 Oct 2019 01:00:00 +0800</pubDate>
-        <link>http://junziboxue.com/emoji-filter</link>
-        <guid isPermaLink="true">http://junziboxue.com/emoji-filter</guid>
-        
-        <category>iOS</category>
-        
-        
-      </item>
-    
-      <item>
         <title>Building Objective-C static libraries with categories</title>
         <description>&lt;blockquote&gt;
   &lt;p&gt;Q:  How do I fix “selector not recognized” runtime exceptions when trying to use category methods from a static library?&lt;/p&gt;
@@ -1138,6 +1120,148 @@ Passing the -ObjC option to the linker causes it to load all members of static l
         <pubDate>Mon, 23 Sep 2019 22:00:00 +0800</pubDate>
         <link>http://junziboxue.com/textfield-auto-adjust</link>
         <guid isPermaLink="true">http://junziboxue.com/textfield-auto-adjust</guid>
+        
+        <category>iOS</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>使用 shell 脚本配置iOS工程生成多个APP</title>
+        <description>&lt;p&gt;  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。&lt;/p&gt;
+
+&lt;h3 id=&quot;1-需求分析&quot;&gt;1. 需求分析&lt;/h3&gt;
+
+&lt;p&gt;在配置工程中我们需要事先知道有哪些配置项：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;APP 启动图、图标等资源文件。&lt;/li&gt;
+  &lt;li&gt;APP 名称、版本号、bundleID。&lt;/li&gt;
+  &lt;li&gt;APP 相关的微信 APPKey、scheme。&lt;/li&gt;
+  &lt;li&gt;网络环境、部分代码替换。&lt;/li&gt;
+  &lt;li&gt;provisioning profile 修改&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;分析以上需要配置的项，我们可以发现这些配置项可以分为&lt;strong&gt;三类&lt;/strong&gt;，分别是：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;资源文件替换&lt;/li&gt;
+  &lt;li&gt;plist 字段修改&lt;/li&gt;
+  &lt;li&gt;部分代码替换&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;接下来介绍如何实现满足以上需求的Shell脚本。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-脚本设计实现&quot;&gt;2. 脚本设计&amp;amp;实现&lt;/h3&gt;
+
+&lt;h4 id=&quot;21-创建脚本&quot;&gt;2.1 创建脚本&lt;/h4&gt;
+
+&lt;p&gt;  首先创建一个shell脚本文件，在命令行工具中输入&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;touch xxx.sh&lt;/code&gt;就可以创建shell脚本文件,在这里将shell脚本命名为：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;projectDeploy.sh&lt;/code&gt;。&lt;br /&gt;
+  运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sh projectDeploy.sh&lt;/code&gt;命令就可以运行脚本了。&lt;/p&gt;
+&lt;h4 id=&quot;22-脚本传参&quot;&gt;2.2 脚本传参&lt;/h4&gt;
+&lt;p&gt;我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;while getopts &quot;:e:s:&quot; opt
+
+do
+    case $opt in
+        e)
+            environment=$OPTARG;;
+
+        s)
+            supplier=$OPTARG;;
+
+        ?)
+            echo &quot;请输入正确的参数&quot;
+            exit 1;;
+    esac
+done
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里定义了两个全局变量 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;environment&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;supplier&lt;/code&gt;，当调用脚本时，输入命令 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sh projectDeploy.sh -e prd -s xxx&lt;/code&gt;&lt;br /&gt;
+这种传参的好处是，指定了具体变量对应的值，不必保持参数的顺序。&lt;/p&gt;
+
+&lt;h4 id=&quot;23-资源替换&quot;&gt;2.3 资源替换&lt;/h4&gt;
+
+&lt;p&gt;  资源替换这里使用了shell脚本里的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;copy&lt;/code&gt; 命令：
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cp source_file_directory destination_directory&lt;/code&gt;。&lt;br /&gt;
+将要替换的资源文件复制到指定位置，有时需要事先将路径下的文件清理一下再进行copy 操作：
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm -rf destination_directory&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;  如果有同名文件存在，copy操作会覆盖原文件。&lt;br /&gt;
+  这一操作可以用来替换启动图、桌面图标、图片资源、SDK、代码文件等文件类替换需求。&lt;/p&gt;
+
+&lt;h4 id=&quot;24-plist-字段修改&quot;&gt;2.4 plist 字段修改&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;APP桌面名称&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;版本号&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundleID&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scheme&lt;/code&gt;等等plist 内的值需要替换，&lt;br /&gt;
+这里我们使用 MAC 自带的plist 文件编辑工具 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PlistBuddy&lt;/code&gt; 来实现plist文件的维护，
+这个工具的访问路径为：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/libexec/PlistBuddy&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;具体命令为：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;/usr/libexec/PlistBuddy -c &quot;set CFBundleIdentifier com.xxx.xxx&quot; ${project_infoplist_path}  
+/usr/libexec/PlistBuddy -c &quot;set CFBundleShortVersionString ${appVersion}&quot; ${project_infoplist_path}
+/usr/libexec/PlistBuddy -c &quot;set CFBundleDisplayName xxx&quot; ${project_infoplist_path}
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;scheme 值修改&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;  因为 scheme 的数据结构为 数组元素可能是字典，字典key对应的value可能是数组，因此需要事先知道要修改的值的数据结构和位置，在使用 plist 工具时指定字典对应的key，数组对应的下标：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;/usr/libexec/PlistBuddy -c &quot;set CFBundleURLTypes:0:CFBundleURLSchemes:0 xxx.xxx.xxx&quot; ${project_infoplist_path}
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;  以上命令的意思是取 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CFBundleURLTypes&lt;/code&gt; 数组下的第一个元素 X，再取 X 下 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CFBundleURLSchemes&lt;/code&gt; 数组下的第一个元素 Y，并更新Y的值为&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xxx.xxx.xxx&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;  至于 provisioning profile 的替换，只需要在打包脚本里去指定就可以了，至于&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;project.pbxproj&lt;/code&gt;文件的一些配置，也可以用 2.5 的方法去配置，见下一部分。&lt;/p&gt;
+
+&lt;h4 id=&quot;25-部分代码替换&quot;&gt;2.5 部分代码替换&lt;/h4&gt;
+
+&lt;p&gt;  假如需要修改代码里的部分字符，或批量修改某个变量名称，这里就用到了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; 命令.
+这里讲一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed &lt;/code&gt;命令的用法，如果有其他特殊需求，可查询sed 命令的其他用法：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;sed -i '' 's/^\#define XXX_XX_URL.*$/\#define XXX_XX_URL  @\&quot;www.junziboxue.com\&quot;/g' ${configureFile}
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;  这个命令的意思是，匹配所有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#define XXX_XX_URL&lt;/code&gt; 宏，然后替换为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#define XXX_XX_URL  @&quot;www.junziboxue.com&quot;&lt;/code&gt;，这里是整行替换。shell 命令里需要对一些特殊字符进行转义，在这里需要注意。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;^\#define XXX_XX_URL.*$&lt;/code&gt;&lt;/em&gt; 是一个正则表达式，表示所有 以 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#define XXX_XX_URL&lt;/code&gt; 开头的字符，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/g&lt;/code&gt;表示全局替换。
+具体 sed 的其他用法可自行查询。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-总结&quot;&gt;3 总结&lt;/h3&gt;
+
+&lt;p&gt;  在掌握以上方法后，我们基本可以任意配置一份代码工程，修改其一些APP的基本配置。
+假如要配置的项很多，可能导致脚本非常臃肿，面对这样的情况，我们需要设计一下脚本的结构：&lt;br /&gt;
+  我们可以把要配置的项剥离出来，然后设计一个函数执行具体配置，然后在函数内传入参数去指定具体的配置。
+或者将配置项事先写好，然后让函数取读就可以了。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/deploy_project_with_shell_script.git&quot;&gt;script_demo&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 20 Sep 2019 07:00:00 +0800</pubDate>
+        <link>http://junziboxue.com/script-configure</link>
+        <guid isPermaLink="true">http://junziboxue.com/script-configure</guid>
         
         <category>iOS</category>
         
