@@ -5,8 +5,8 @@
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
     <link>http://junziboxue.com/</link>
     <atom:link href="http://junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 20 Aug 2020 09:13:28 +0800</pubDate>
-    <lastBuildDate>Thu, 20 Aug 2020 09:13:28 +0800</lastBuildDate>
+    <pubDate>Thu, 20 Aug 2020 09:19:40 +0800</pubDate>
+    <lastBuildDate>Thu, 20 Aug 2020 09:19:40 +0800</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -274,7 +274,7 @@ Opacity(
         <link>http://junziboxue.com/flutter-fade-app-bar</link>
         <guid isPermaLink="true">http://junziboxue.com/flutter-fade-app-bar</guid>
         
-        <category>jekyll</category>
+        <category>Flutter</category>
         
         
       </item>
