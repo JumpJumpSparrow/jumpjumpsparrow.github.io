@@ -5,9 +5,222 @@
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
     <link>http://junziboxue.com/</link>
     <atom:link href="http://junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 26 Aug 2020 10:27:44 +0800</pubDate>
-    <lastBuildDate>Wed, 26 Aug 2020 10:27:44 +0800</lastBuildDate>
+    <pubDate>Thu, 04 Feb 2021 14:51:38 +0800</pubDate>
+    <lastBuildDate>Thu, 04 Feb 2021 14:51:38 +0800</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>从里到外，聊一聊 FLutter</title>
+        <description>&lt;h3 id=&quot;1-什么是flutter&quot;&gt;1. 什么是flutter&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/whatIsFlutter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Flutter 是 Google 开源的 UI 工具包，帮助开发者通过一套代码库,&lt;br /&gt;
+高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。&lt;/p&gt;
+
+&lt;h4 id=&quot;11-flutter-优势&quot;&gt;1.1 flutter 优势&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Flutter 很好的解决了跨端一致性问题，一套代码无差异的同时跑在 iOS 与 Android 两端；&lt;/li&gt;
+  &lt;li&gt;开发体验基本接近前端.&lt;/li&gt;
+  &lt;li&gt;支持 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;on device&lt;/code&gt; 的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hot Reload&lt;/code&gt; ，&lt;/li&gt;
+  &lt;li&gt;Flutter 在 Android Studio 中通过插件实现实时预览并支持交互的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hot UI&lt;/code&gt; 能力，以及&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; Layout Explorer&lt;/code&gt; 可视化布局，让Flutter 的开发效率和前端效率基本持平。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.zhihu.com/question/374113031/answer/1252582543&quot;&gt;阿里巴巴淘系技术&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-flutter-架构&quot;&gt;2. FLutter 架构&lt;/h3&gt;
+
+&lt;p&gt;Flutter的整体架构共分为三层，从下到上分别为：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Embedder层&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Engine层&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Framework层&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/arch-diagram.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;分别对应：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Framework层：用Dart实现的上层UI SDK。&lt;/li&gt;
+  &lt;li&gt;Engine层：渲染引擎层。&lt;/li&gt;
+  &lt;li&gt;Embedder层：操作系统底层适配层。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Framework&lt;/code&gt; 层：Dart实现的上层UI SDK
+实现了：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Animation（动画&lt;/code&gt;）、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Painting（图形绘制）&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gestures（手势操作）&lt;/code&gt;等功能，并包装成对应的 api 提供给上层开发者调用。为了保证Flutter所绘制的控件与原生控件风格类似，Flutter封装了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Material&lt;/code&gt;（对应Android）、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cupertino&lt;/code&gt;（对应iOS）风格的UI组件库，供开发者直接使用。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Engine&lt;/code&gt; 层：Skia渲染 + DartVM 引擎 &lt;br /&gt;
+  这层主要包含三块：Skia、Dart、Text。&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Skia 是渲染引擎，为 Framework 层提供“底层渲染”能力。&lt;/li&gt;
+      &lt;li&gt;Dart 是 Dart 运行时引擎，为 Framework 层提供运行时调用Dart和渲染能力。&lt;/li&gt;
+      &lt;li&gt;Text 是文字排版，为 Framework 层提供视图排版能力。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Embedder&lt;/code&gt; 层：操作系统适配&lt;br /&gt;
+对不同平台操作系统的适配，包括一些配置：surface、线程、插件等特性。
+由于Flutter相关特性并不多，因此对不同平台操作系统的适配成本很低。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;3执行流程&quot;&gt;3.执行流程&lt;/h3&gt;
+
+&lt;p&gt;从结构上看，Flutter渲染由UI Thread与GPU Thread相互配合完成。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/architect.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;1）UI Thread&lt;/p&gt;
+
+&lt;p&gt;对应图中1-5，执行Dart VM中的Dart代码（包含应用程序和Flutter框架代码），主要负责Widget Tree、Element Tree、RenderObject Tree的构建，布局、以及绘制生成绘制指令，生成Layer Tree（保存绘制指令）等工作。&lt;/p&gt;
+
+&lt;p&gt;2）GPU Thread&lt;/p&gt;
+
+&lt;p&gt;对应图中6-7，执行Flutter引擎中图形相关代码（Skia），这个线程通过与GPU通信，获取Layer Tree并执行栅格化以及合成上屏等操作，将Layer Tree显示在屏幕上。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;注：图层树（Layer Tree）是Flutter组织绘制指令的方式， 
+类似于Android Rendering里的View DisplayList，都是组织绘制指令的一种方式。
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;UI Thread与GPU Thread属于生产者和消费者的角色。&lt;/p&gt;
+
+&lt;h3 id=&quot;flutter-渲染工作流水线&quot;&gt;Flutter 渲染工作流水线&lt;/h3&gt;
+
+&lt;p&gt;渲染原理解释了 flutter 是如何跨平台的
+&lt;img src=&quot;../assets/images/new-to-flutter/rendering-pipline.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;渲染过程，UI线程完成布局、绘制操作，生成Layer Tree；
+GPU线程执行合成并光栅化后交给GPU来处理，其中几个关键步骤：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Animate: 遍历_transientCallbacks，执行动画回调方法；&lt;/li&gt;
+  &lt;li&gt;Build: 对于dirty的元素会执行build构造，没有dirty元素则不会执行，对应于buildScope()&lt;/li&gt;
+  &lt;li&gt;Layout: 计算渲染对象的大小和位置，对应于flushLayout()，这个过程可能会嵌套再调用build操作；&lt;/li&gt;
+  &lt;li&gt;Compositing bits: 更新具有脏合成位的任何渲染对象， 对应于flushCompositingBits()；&lt;/li&gt;
+  &lt;li&gt;Paint: 将绘制命令记录到Layer， 对应于flushPaint()；&lt;/li&gt;
+  &lt;li&gt;Compositing: 将Compositing bits发送给GPU， 对应于compositeFrame()；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;GPU线程通过skia向GPU硬件绘制一帧的数据，GPU将帧信息保存到FrameBuffer里面，
+然后视频控制器会根据VSync信号，从FrameBuffer取帧数据传递给显示器，从而显示出最终的画面。（Vulkan,OpenGL,Metal）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/render-flow.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;4渲染策略&quot;&gt;4.渲染策略&lt;/h3&gt;
+
+&lt;p&gt;在Flutter中，Everything is widget。所有 Widget 会组成 Widget Tree 。&lt;br /&gt;
+界面更新时，会更新 Widget Tree ，再更新 Element Tree ，最后更新 RenderObjectTree 。&lt;/p&gt;
+
+&lt;p&gt;分为4个阶段，分别是：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;布局阶段 =&amp;gt; 绘制阶段 =&amp;gt; 合成阶段 =&amp;gt; 渲染阶段  
+（Layout =&amp;gt; Paint =&amp;gt; Composite =&amp;gt; Rasterize）
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/layout-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;布局（Layout）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Flutter采用 “深度优先” 机制遍历Widget Tree。
+ 为了防止孩子节点的变化，导致整个 Widget Tree 重新布局。
+ Flutter加入了 “布局边界” 机制（Relayout Boundary）
+ 布局完成后，树上每个节点都确定了“尺寸大小”和“位置”。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;绘制（Paint）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;布局完成后，确定了树上的控件的“尺寸”与“位置”。
+接下来是绘制阶段。&lt;/p&gt;
+
+&lt;p&gt;和布局类似，Flutter也是采用 “深度优先” 机制遍历渲染树。
+先绘制自身，再绘制子节点。
+为了解决绘制覆盖问题，Flutter采用了也是和布局阶段相似的策略： 重绘边界 机制（Repaint Boundary）。
+其实，本质上就是加个新的图层，避免在同一图层重绘产生影响。
+典型的例子是，ScrollView。
+一旦设置好重绘边界，滚动时，只会重绘ScollView中的视图内容，而其他部分不用重新绘制。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;合成（Composite）
+ 由于绘制出来的渲染树，会有很多层，同步多层渲染会出现性能问题。&lt;br /&gt;
+ 因此，Flutter会在渲染前，将多个渲染树图层进行合成。&lt;br /&gt;
+ 根据多层渲染树的大小、层级、透明度等计算后， &lt;br /&gt;
+ 合成为最终“简化版”的渲染树，以提高下一步的渲染效率。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;渲染（Rasterize）
+ 将处理过的“简化版”渲染树，交给Skia引擎转换成“二维图像数据”。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;然后 Skia 把计算好的图形数据，通过 OpenGL 接口交给 GPU 渲染，走 GPU 工作流水线：
+ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;顶点着色器 =&amp;gt; 形状装配 =&amp;gt; 几何着色器 =&amp;gt; 光栅化 =&amp;gt; 片段着色器 =&amp;gt; 测试与混合&lt;/code&gt;。&lt;br /&gt;
+ 然后，GPU工作流水线六阶段完成。最终，展示到终端屏幕上。&lt;br /&gt;
+ 当然这只是一个垂直同步信号（VSync）的过程。（按60fps算，一秒需要60个VSync才不会感到卡顿。）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/full-pip-line.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;5工程实例讲解&quot;&gt;5.工程实例讲解&lt;/h3&gt;
+
+&lt;h5 id=&quot;51常用组件&quot;&gt;5.1.常用组件&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/widget-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;52特性展示&quot;&gt;5.2特性展示&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;4.1 hotReload&lt;/li&gt;
+  &lt;li&gt;4.2 Android/iOS style&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;参考资料&lt;br /&gt;
+&lt;a href=&quot;https://flutter.github.io/samples/#&quot;&gt;Flutter Samples&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://zhuanlan.zhihu.com/p/183770848?utm_source=wechat_session&quot;&gt;了解Flutter渲染机制&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.jianshu.com/p/8b0572f2c23a&quot;&gt;iOS 浅谈GPU及“App渲染流程”&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://juejin.im/post/6844904122257276936&quot;&gt;Flutter 究竟是如何渲染的&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://gityuan.com/2019/06/16/flutter_gpu_draw/&quot;&gt;Flutter渲染机制—GPU线程&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/zhying719/article/details/108162396&quot;&gt;谈一谈Flutter外接纹理&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.yuque.com/xytech/flutter/cqhql4&quot;&gt;Flutter初始化流程&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.yuque.com/xytech/flutter/tge705&quot;&gt;深入了解Flutter界面开发&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.yuque.com/xytech/flutter/sh4fbm&quot;&gt;深入理解flutter的编译原理与优化&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.yuque.com/xytech/flutter/fu7h25&quot;&gt;深入理解Flutter Platform Channel&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.yuque.com/xytech/flutter/hc0xq7&quot;&gt;Flutter快速上车之Widget&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://flutter.cn/docs/resources/inside-flutter&quot;&gt;Flutter 工作原理&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://flutter.cn/docs/get-started/install&quot;&gt;Flutter 中文文档&lt;/a&gt;  &lt;br /&gt;
+&lt;a href=&quot;https://flutter.cn/docs/resources/architectural-overview&quot;&gt;Flutter 架构概览&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://flutter.dev&quot;&gt;Flutter 文档&lt;/a&gt;  &lt;br /&gt;
+&lt;a href=&quot;https://dart.cn&quot;&gt;Dart&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 02 Nov 2020 18:30:00 +0800</pubDate>
+        <link>http://junziboxue.com/new-to-flutter</link>
+        <guid isPermaLink="true">http://junziboxue.com/new-to-flutter</guid>
+        
+        <category>Flutter</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Reactivex? React? Rxjs? .....</title>
+        <description>&lt;p&gt;&lt;a href=&quot;http://reactivex.io&quot;&gt;Reactivex社区&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/facebook/react/&quot;&gt;facebook/react&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://reactjs.org&quot;&gt;facebook/react/doc&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://github.com/ReactiveX/rxjs&quot;&gt;Rxjs&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 02 Nov 2020 18:30:00 +0800</pubDate>
+        <link>http://junziboxue.com/Rx-design-guidelines</link>
+        <guid isPermaLink="true">http://junziboxue.com/Rx-design-guidelines</guid>
+        
+        <category>Flutter</category>
+        
+        
+      </item>
     
       <item>
         <title>Flutter 透明渐变 AppBar</title>
@@ -953,315 +1166,6 @@ Passing the -ObjC option to the linker causes it to load all members of static l
         <pubDate>Wed, 25 Sep 2019 02:00:00 +0800</pubDate>
         <link>http://junziboxue.com/yykit-micro</link>
         <guid isPermaLink="true">http://junziboxue.com/yykit-micro</guid>
-        
-        <category>iOS</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>UITextField 随键盘高度自适应</title>
-        <description>&lt;p&gt;  在开发APP过程中，不免会遇到页面需要多个 UITextField 的需求，那么问题来了：当输入框过多时，弹起键盘会遮盖住输入框，或者需要依次点击输入框才能输入。用户的输入体验非常差。为解决这个问题，我们让输入框跟随键盘自动调整高度，并且点击回车键自动跳转到下一个输入框进行输入。&lt;/p&gt;
-
-&lt;p&gt;具体效果如图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/auto-adjust-height-textfield/auto-adjust-height-textfield.gif&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;需求分析&quot;&gt;需求分析：&lt;/h3&gt;
-&lt;p&gt;  简单分析一下：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;点击输入框时，输入框随着键盘弹起，自动调整高度，使输入框位于键盘上方。&lt;/li&gt;
-  &lt;li&gt;点击回车，自动切换到下一个输入框进行输入，同时调整输入框高度。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;为了使输入框能够上下滑动，这里将所有 UITextField 放在一个 scrollview 上，然后添加键盘监听事件，当用户点击输入框时，触发键盘弹起，此时调整scrollView 的 contentOffset，使输入框正好位于键盘上方。&lt;/p&gt;
-
-&lt;h4 id=&quot;添加键盘监听&quot;&gt;添加键盘监听：&lt;/h4&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
- [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;键盘响应事件&quot;&gt;键盘响应事件：&lt;/h4&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; - (void)keyboardWillShow:(NSNotification *)notification {
-    //获取键盘高度，在不同设备上，以及中英文下是不同的
-    CGFloat kbHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-    _keyBoardHeight = kbHeight;
-    [self boardAutoAdjust:kbHeight];
-}
-
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; - (void)keyboardWillHide:(NSNotification *)notify {
-    // 键盘动画时间
-    _keyBoardHeight = 0;
-    [self.board setContentOffset:CGPointMake(0,-64) animated:YES];
-}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;uitextfield-代理事件&quot;&gt;UITextField 代理事件：&lt;/h4&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    
-    NSLog(@&quot;=== %@&quot;, [NSValue valueWithCGRect:textField.frame]);
-    self.fistField = textField;
-    
-    if (_keyBoardHeight &amp;gt; 0) {
-        [self boardAutoAdjust:_keyBoardHeight];
-    }
-    return YES;
-}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h4 id=&quot;scrollview-偏移量计算&quot;&gt;scrollview 偏移量计算&lt;/h4&gt;
-&lt;p&gt;  scrollView 需要偏移的量 =&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;页面总高度&lt;/code&gt; - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;输入框高度&lt;/code&gt; - &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;键盘高度&lt;/code&gt;,当输入框高于键盘时，偏移量小于零，反之，偏移量大于零。 
-&lt;br /&gt;
-&lt;img width=&quot;200&quot; src=&quot;/assets/images/auto-adjust-height-textfield/mark-line.png&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;偏移量计算方法：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;- (void)boardAutoAdjust:(CGFloat)keyboardHeight {
-    
-    if (self.fistField) {
-        
-        CGRect rec = _fistField.frame;
-        
-        CGFloat max_y = CGRectGetMaxY(rec);
-        
-        CGFloat b_offset = self.view.height - max_y - keyboardHeight;
-        
-        CGPoint point = self.board.contentOffset;
-        point.y = -b_offset;
-        
-        [self.board setContentOffset:point animated:YES];
-    }
-}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;键盘回车事件&quot;&gt;键盘回车事件&lt;/h4&gt;
-
-&lt;p&gt;  当点击键盘回车时，自动跳转到下一个输入框进行输入，最后一个输入框点击回车时，收起键盘，整体回到原先的布局高度。&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    if (textField.returnKeyType == UIReturnKeyNext) {
-        
-        [textField resignFirstResponder];
-        UITextField *next = [self.textfields objectAtIndex:(textField.tag + 1)];
-        [next becomeFirstResponder];
-        
-    } else if (textField.returnKeyType == UIReturnKeyDone) {
-        
-        [textField resignFirstResponder];
-    }
-    
-    return YES;;
-}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/DemoCollection.git&quot;&gt;demo链接&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 23 Sep 2019 22:00:00 +0800</pubDate>
-        <link>http://junziboxue.com/textfield-auto-adjust</link>
-        <guid isPermaLink="true">http://junziboxue.com/textfield-auto-adjust</guid>
-        
-        <category>iOS</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>使用 shell 脚本配置iOS工程生成多个APP</title>
-        <description>&lt;p&gt;  APP开发过程中，往往需要在多个网络环境或配置中进行切换，以获取不同配置的APP，甚至有时需要用一套代码经过简单的配置生成不同的APP。而手动配置费时费力，且容易出错。这里介绍用脚本工具，去生成不同配置的APP工程。&lt;/p&gt;
-
-&lt;h3 id=&quot;1-需求分析&quot;&gt;1. 需求分析&lt;/h3&gt;
-
-&lt;p&gt;在配置工程中我们需要事先知道有哪些配置项：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;APP 启动图、图标等资源文件。&lt;/li&gt;
-  &lt;li&gt;APP 名称、版本号、bundleID。&lt;/li&gt;
-  &lt;li&gt;APP 相关的微信 APPKey、scheme。&lt;/li&gt;
-  &lt;li&gt;网络环境、部分代码替换。&lt;/li&gt;
-  &lt;li&gt;provisioning profile 修改&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;分析以上需要配置的项，我们可以发现这些配置项可以分为&lt;strong&gt;三类&lt;/strong&gt;，分别是：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;资源文件替换&lt;/li&gt;
-  &lt;li&gt;plist 字段修改&lt;/li&gt;
-  &lt;li&gt;部分代码替换&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;接下来介绍如何实现满足以上需求的Shell脚本。&lt;/p&gt;
-
-&lt;h3 id=&quot;2-脚本设计实现&quot;&gt;2. 脚本设计&amp;amp;实现&lt;/h3&gt;
-
-&lt;h4 id=&quot;21-创建脚本&quot;&gt;2.1 创建脚本&lt;/h4&gt;
-
-&lt;p&gt;  首先创建一个shell脚本文件，在命令行工具中输入&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;touch xxx.sh&lt;/code&gt;就可以创建shell脚本文件,在这里将shell脚本命名为：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;projectDeploy.sh&lt;/code&gt;。&lt;br /&gt;
-  运行脚本时在命令行工具中切换到脚本文件所在的路径，输入:&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sh projectDeploy.sh&lt;/code&gt;命令就可以运行脚本了。&lt;/p&gt;
-&lt;h4 id=&quot;22-脚本传参&quot;&gt;2.2 脚本传参&lt;/h4&gt;
-&lt;p&gt;我们需要传入参数告诉脚需要的具体配置,shell 脚本传入参数的方式有多种，这里只介绍一种：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;while getopts &quot;:e:s:&quot; opt
-
-do
-    case $opt in
-        e)
-            environment=$OPTARG;;
-
-        s)
-            supplier=$OPTARG;;
-
-        ?)
-            echo &quot;请输入正确的参数&quot;
-            exit 1;;
-    esac
-done
-
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;这里定义了两个全局变量 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;environment&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;supplier&lt;/code&gt;，当调用脚本时，输入命令 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sh projectDeploy.sh -e prd -s xxx&lt;/code&gt;&lt;br /&gt;
-这种传参的好处是，指定了具体变量对应的值，不必保持参数的顺序。&lt;/p&gt;
-
-&lt;h4 id=&quot;23-资源替换&quot;&gt;2.3 资源替换&lt;/h4&gt;
-
-&lt;p&gt;  资源替换这里使用了shell脚本里的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;copy&lt;/code&gt; 命令：
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cp source_file_directory destination_directory&lt;/code&gt;。&lt;br /&gt;
-将要替换的资源文件复制到指定位置，有时需要事先将路径下的文件清理一下再进行copy 操作：
-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm -rf destination_directory&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;  如果有同名文件存在，copy操作会覆盖原文件。&lt;br /&gt;
-  这一操作可以用来替换启动图、桌面图标、图片资源、SDK、代码文件等文件类替换需求。&lt;/p&gt;
-
-&lt;h4 id=&quot;24-plist-字段修改&quot;&gt;2.4 plist 字段修改&lt;/h4&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;APP桌面名称&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;版本号&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundleID&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scheme&lt;/code&gt;等等plist 内的值需要替换，&lt;br /&gt;
-这里我们使用 MAC 自带的plist 文件编辑工具 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PlistBuddy&lt;/code&gt; 来实现plist文件的维护，
-这个工具的访问路径为：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/usr/libexec/PlistBuddy&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;具体命令为：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;/usr/libexec/PlistBuddy -c &quot;set CFBundleIdentifier com.xxx.xxx&quot; ${project_infoplist_path}  
-/usr/libexec/PlistBuddy -c &quot;set CFBundleShortVersionString ${appVersion}&quot; ${project_infoplist_path}
-/usr/libexec/PlistBuddy -c &quot;set CFBundleDisplayName xxx&quot; ${project_infoplist_path}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;scheme 值修改&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;  因为 scheme 的数据结构为 数组元素可能是字典，字典key对应的value可能是数组，因此需要事先知道要修改的值的数据结构和位置，在使用 plist 工具时指定字典对应的key，数组对应的下标：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;/usr/libexec/PlistBuddy -c &quot;set CFBundleURLTypes:0:CFBundleURLSchemes:0 xxx.xxx.xxx&quot; ${project_infoplist_path}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;  以上命令的意思是取 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CFBundleURLTypes&lt;/code&gt; 数组下的第一个元素 X，再取 X 下 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CFBundleURLSchemes&lt;/code&gt; 数组下的第一个元素 Y，并更新Y的值为&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xxx.xxx.xxx&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;  至于 provisioning profile 的替换，只需要在打包脚本里去指定就可以了，至于&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;project.pbxproj&lt;/code&gt;文件的一些配置，也可以用 2.5 的方法去配置，见下一部分。&lt;/p&gt;
-
-&lt;h4 id=&quot;25-部分代码替换&quot;&gt;2.5 部分代码替换&lt;/h4&gt;
-
-&lt;p&gt;  假如需要修改代码里的部分字符，或批量修改某个变量名称，这里就用到了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; 命令.
-这里讲一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed &lt;/code&gt;命令的用法，如果有其他特殊需求，可查询sed 命令的其他用法：&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;sed -i '' 's/^\#define XXX_XX_URL.*$/\#define XXX_XX_URL  @\&quot;www.junziboxue.com\&quot;/g' ${configureFile}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;  这个命令的意思是，匹配所有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#define XXX_XX_URL&lt;/code&gt; 宏，然后替换为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#define XXX_XX_URL  @&quot;www.junziboxue.com&quot;&lt;/code&gt;，这里是整行替换。shell 命令里需要对一些特殊字符进行转义，在这里需要注意。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;^\#define XXX_XX_URL.*$&lt;/code&gt;&lt;/em&gt; 是一个正则表达式，表示所有 以 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#define XXX_XX_URL&lt;/code&gt; 开头的字符，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/g&lt;/code&gt;表示全局替换。
-具体 sed 的其他用法可自行查询。&lt;/p&gt;
-
-&lt;h3 id=&quot;3-总结&quot;&gt;3 总结&lt;/h3&gt;
-
-&lt;p&gt;  在掌握以上方法后，我们基本可以任意配置一份代码工程，修改其一些APP的基本配置。
-假如要配置的项很多，可能导致脚本非常臃肿，面对这样的情况，我们需要设计一下脚本的结构：&lt;br /&gt;
-  我们可以把要配置的项剥离出来，然后设计一个函数执行具体配置，然后在函数内传入参数去指定具体的配置。
-或者将配置项事先写好，然后让函数取读就可以了。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/deploy_project_with_shell_script.git&quot;&gt;script_demo&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Fri, 20 Sep 2019 07:00:00 +0800</pubDate>
-        <link>http://junziboxue.com/script-configure</link>
-        <guid isPermaLink="true">http://junziboxue.com/script-configure</guid>
         
         <category>iOS</category>
         
