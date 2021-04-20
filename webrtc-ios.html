@@ -1,0 +1,179 @@
+
+<p><img src="../assets/images/webRTC/WebRTC_Logo.png" alt="" /></p>
+
+<h3 id="1什么是-webrtc">1.什么是 WebRTC</h3>
+
+<p>WebRTC，全称：(Web Real-Time Communication),是一个免费的开源工程。 <br />
+Google 把 WebRTC 视为和 HTTP 一样，不仅仅是一种解决方案，而是一种标准。<br />
+使各种终端，包括 浏览器、原生应用等具备音视频通讯和即时通讯的能力。</p>
+
+<h3 id="2安装接入">2.安装接入</h3>
+
+<p>拿iOS来说，使用 webRTC 需要以下步骤：</p>
+
+<h4 id="21-接入-webrtc-sdk">2.1 接入 webRTC SDK</h4>
+<p>通过pods安装 webRTC sdk, 注意使用的是谷歌官方的 ‘GoogleWebRTC’ SDK<br />
+最新版本的 GoogleWebRTC SDK 需要 iOS 10.0以上，<br />
+因此工程需要设置为： iOS Deplopment Target 10.0</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>pod 'GoogleWebRTC'
+</pre></td></tr></tbody></table></code></pre></div></div>
+<h4 id="22-工程设置">2.2 工程设置</h4>
+<p>因为需要访问相机、麦克风等音视频设备，需要在工程中添加配置</p>
+
+<p>info.plist 文件中添加</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>//访问相机
+&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;
+&lt;string&gt;访问相机和拍照功能&lt;/string&gt;
+//访问麦克风
+&lt;key&gt;NSMicrophoneUsageDescription&lt;/key&gt;
+&lt;string&gt;打开麦克风发送语音&lt;/string&gt;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>如果想在应用进入后台时，继续保持通话，还需要添加</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>音视频通话要额外添加
+&lt;key&gt;UIBackgroundModes&lt;/key&gt;
+	&lt;array&gt;
+		&lt;string&gt;voip&lt;/string&gt;
+	&lt;/array&gt;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>这个版本的 SDK 并不支持 bitcode,因此还需要关闭 bitCode,<br />
+在这里是以开发SDK的形式接入webRTC,因此需要以下设置</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>Pods -&gt; TARGETS -&gt; XXX -&gt; BuildSettings -&gt; Build Options -&gt; Enable Bitcode -&gt;NO  
+Pods -&gt; TARGETS -&gt; GoogleWebRTC -&gt; BuildSettings -&gt; Build Options -&gt; Enable Bitcode -&gt;NO
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>因为 视频通话使用 RTCMTLVideoView 渲染视频，其内部使用 Metal 图形接口来渲染图像，<br />
+该接口不支持ArmV7,因此需要在 valid Architecture 选项中 移除 arm v7指令集</p>
+
+<h3 id="3-架构设计">3. 架构设计</h3>
+
+<ol>
+  <li>Factory 类：全局持有一个 RTCPeerConnectionFactory 类实例，管理本地 <code class="language-plaintext highlighter-rouge">RTCVideoTrack</code>,<code class="language-plaintext highlighter-rouge">RTCAudioTrack</code>,<code class="language-plaintext highlighter-rouge">RTCVideoSource</code>,<code class="language-plaintext highlighter-rouge">RTCAudioSource</code>,<code class="language-plaintext highlighter-rouge">RTCCameraVideoCapturer</code>等类的实例，以上类的实例都是全局唯一的。</li>
+  <li>Device 类: 控制本地 摄像头的开/关，前后摄像头的切换，音频输出 扬声器和听筒的切换。</li>
+  <li>RTCManager类: 负责管理所有 peer connection，包括生成、关闭、断线重连等功能</li>
+  <li>RTCClient 类：由 <code class="language-plaintext highlighter-rouge">RTCManager </code>管理，负责 一个 Peer connection 的所有事务，包括webrtc的事件回调、生成/接收SDP和ICE信息.</li>
+  <li>RoomManager 类: 负责信令层的事务，管理通话事件.</li>
+  <li>AVChatManager 类: 对外暴露的接口类。外部统一由此类访问 音视频通话功能</li>
+</ol>
+
+<p>注意事项：webRTC 生成的很多对象需要由外部持有，否则生成后会自动释放。如 <code class="language-plaintext highlighter-rouge">RTCVideoSource</code>、<code class="language-plaintext highlighter-rouge">RTCVideoTrack</code>等</p>
+
+<p>事件集合：</p>
+
+<h3 id="4群聊建立流程">4.群聊建立流程</h3>
+
+<p>因为 WebRTC 是 P2P 连接，如果需要多人同时通信的话，就需要建立复杂的连接关系。</p>
+
+<p><img src="../assets/images/webRTC/p2p_connection.png" alt="" /></p>
+
+<p>如图，如果3个人通话，就需要建立 3条 P2P 连接，而4个人通话就需要 6 条P2P连接，5个人通话就需要 10条P2P连接。 <br />
+如果是 N 个人通话（N &gt;= 3),就需要 <code class="language-plaintext highlighter-rouge">N(N-3)/2 + N</code> 条连接。人数越多，需要建立的连接会呈O(n^2)的趋势增长。<br />
+因此，P2P方案并不适合多人通讯，考虑到 终端 带宽和计算能力，要想保持高质量的音视频通话，人数上限大概在 6 个左右(参考微信)。 <br />
+超过6人 P2S 方案更适合。如果仅是音频通话的情况，那么 P2P 通话人数可以增加一个数量级（估计）。</p>
+
+<p>接下来说一下，如何建立起 多人通话的流程,此处已 <code class="language-plaintext highlighter-rouge">A B C D</code> 4人通话为例：</p>
+
+<p><img src="../assets/images/webRTC/p2p_topology.png" alt="" /></p>
+
+<h4 id="41-p2p连接流程">4.1 P2P连接流程</h4>
+
+<p>假设 A 与 B建立连接. A 发起邀请等待 B 回复:</p>
+
+<ol>
+  <li>
+    <p>B 接受后, Server 发送Accept信令给A</p>
+  </li>
+  <li>
+    <p>A 接收到 ACCEPT信令后, 创建 PeerConnecton, 生成 OFFER, 返回给B,</p>
+  </li>
+  <li>
+    <p>B接到OFFER后,创建与之对应的PeerConnecton,设置OFFER, 然后生成 ANSWER 返回给A.</p>
+  </li>
+  <li>
+    <p>SDP 信息交换完毕后,交换ICE信息,连接完成.</p>
+  </li>
+</ol>
+
+<h4 id="42-多端-p2p-连接建立流程">4.2 多端 P2P 连接建立流程</h4>
+
+<p>假设 有 A B C D 四个客户端</p>
+
+<ol>
+  <li>
+    <p>A 向 B C D 发起邀请。</p>
+  </li>
+  <li>
+    <p>假设 B C D 依次接受邀请，（无论是何种顺序，还是同时接受，这里都要串行处理）</p>
+  </li>
+  <li>
+    <p>B 接受，同时给 A 发送 ACCEPT 信令。</p>
+  </li>
+  <li>
+    <p>A 接到 B 发来的 ACCEPT 信令，A 发送 OFFER SDP 信息给B,
+ B 返回 ANSWER SDP 给A, A　B交换ICE信息,A B 连接完毕.</p>
+  </li>
+  <li>C 接受,  同时给 A B 发送 ACCEPT 信令,A B 发送 OFFER SDP 信息给C,
+ C 返回 ANSWER SDP 给A B, AC BC交换ICE信息,A B C 连接完毕.</li>
+  <li>D 接受, 同时给 A B C发送 ACCEPT 信令,A B C发送 OFFER SDP 信息给D,
+ D 返回 ANSWER SDP 给A B C, AD  BD CD交换ICE信息,A B C D 连接完毕.</li>
+</ol>
+
+<p>一次连接 对于邀请者来说,就算是发送一次 OFFER 和接到一次 ANSWER,对于被邀请者来说,就是接到 一次OFFER 和发送一次ANSWER.
+一个PeerConnection 只能建立一次连接 不能建立两次连接（例如 不能重复的发送和接收同一个客户端的OFFER</p>
+
+<h3 id="5-断线重连-机制">5 断线重连 机制</h3>
+<p>假设 A B连接失败,A为主动发起对话的那方,</p>
+<ul>
+  <li>主动发起邀请的那方,销毁原先的 PeerConnection,</li>
+  <li>重新创建与B相对应的 Peer Connection,然后发送 OFFER SDP给 B,</li>
+  <li>B 收到 OFFER SDP 后,将B本地与A相对应的PeerConnection 销毁,</li>
+  <li>创建新的Peer Connection 与A对应,设置 OFFER SDP 后,</li>
+  <li>生成 ANSWER 返回给A，交换ICE　重新连接．</li>
+</ul>
+
+<h3 id="6-连接状态展示">6. 连接状态展示</h3>
+
+<p>PC 间连接状态变化,通过<code class="language-plaintext highlighter-rouge">onconnectionstatechange</code>接口回调获得.
+共6种状态,分别是:</p>
+
+<p>“new”
+“connecting”
+“connected”
+“disconnected”
+“failed”
+“closed”</p>
+
+<p>连接状态变化后,给出相应的提示文案.</p>
+
+<h3 id="7多媒体控制">7.多媒体控制</h3>
+<p>多媒体控制<br />
+1.镜头反转<br />
+2.静音/关闭摄像头<br />
+3.扬声器选择(听筒/外放)<br />
+4.画面分辨率选择(一般,清晰,高清)</p>
+
+<p>参考资料：</p>
+
+<p><a href="https://webrtc.github.io/samples/">官方示例</a><br />
+<a href="https://www.cocoapods.org/pods/GoogleWebRTC">Pods 安装</a><br />
+<a href="https://webrtc.org/?hl=en">WebRTC 官网</a>
+<a href="https://webrtc.org.cn/20190517_tutorial4_webrtc_ios/">WebRTC 入门教程</a><br />
+<a href="https://github.com/ChenYilong/WebRTC.git">WebRTC入门教程</a></p>

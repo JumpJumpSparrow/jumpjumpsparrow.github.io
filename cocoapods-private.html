@@ -267,17 +267,17 @@ CocoaPods会将所有的第三方库以target的方式组成一个名为Pods的�
 
 <h4 id="1-准备工作">1. 准备工作</h4>
 
-<p>创建两个私有远程仓库 Spec 和 Lib</p>
+<p>创建两个私有远程仓库 SpecRepo 和 LibRepo</p>
 
 <ul>
-  <li>Spec仓库用来存储spec</li>
-  <li>Lib用来存储项目工程文件</li>
+  <li>SpecRepo 仓库用来存储spec文件</li>
+  <li>LibRepo 用来存储项目工程文件</li>
 </ul>
 
 <h4 id="2-创建pod私有库的项目工程">2. 创建pod私有库的项目工程</h4>
 
 <ul>
-  <li>cd到合适目录下用命令行创建工程,执行 <code class="language-plaintext highlighter-rouge">pod lib create Lib</code> ,按提示输入需要的内容.</li>
+  <li>cd到合适目录下用命令行创建工程,执行 <code class="language-plaintext highlighter-rouge">pod lib create podName</code> ,按提示输入需要的内容.</li>
   <li>修改podspec文件</li>
   <li>修改完成后,cd 到Lib目录下执行<code class="language-plaintext highlighter-rouge">pod lib lint</code> <br />
 podspec 文件保存了所有要对三方库的配置,包括要引用的依赖、模块划分、源文件、公共头文件等.</li>
@@ -292,7 +292,7 @@ podspec 文件保存了所有要对三方库的配置,包括要引用的依赖�
 6
 7
 8
-</pre></td><td class="rouge-code"><pre>$ git remote add origin http://git.xxxx.cn/APP/ios/Lib.git
+</pre></td><td class="rouge-code"><pre>$ git remote add origin http://git.xxxx.cn/APP/ios/LibRepo.git
 $ git add .
 $ git commit -m "Initial commit"
 $ git push -u origin master
@@ -305,13 +305,13 @@ $ git push --tags
 
 <h4 id="4-校验spec">4. 校验spec</h4>
 
-<p>执行 <code class="language-plaintext highlighter-rouge">pod spec lint</code></p>
+<p>在项目所在目录执行 <code class="language-plaintext highlighter-rouge">pod spec lint</code></p>
 
 <h4 id="5创建spec-repo">5.创建spec repo</h4>
 
 <p>进入文件夹<code class="language-plaintext highlighter-rouge">cd ~/.cocoapods/repos</code> 可以查看本地<code class="language-plaintext highlighter-rouge">spec repo</code>
 指定管理 lib repo 的 specs repo 的 url
-<code class="language-plaintext highlighter-rouge">pod repo add Lib http://git.xxxx.cn/APP/ios/Spec.git</code>
+<code class="language-plaintext highlighter-rouge">pod repo add SpecRepo http://git.xxxx.cn/APP/ios/Spec.git</code>
 注意 此处地址是spec仓库地址
 推送 podspec 到 specs repo
 <code class="language-plaintext highlighter-rouge">pod repo push Lib Lib.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git</code></p>
@@ -480,14 +480,14 @@ gitment.render('gitmentContainer');
                     rel="10">iOS</a>
         
                 <a data-sort="0015" 
-                    href="/archive/?tag=Flutter"
-                    title="Flutter"
-                    rel="3">Flutter</a>
-        
-                <a data-sort="0015" 
                     href="/archive/?tag=something"
                     title="something"
-                    rel="3">something
+                    rel="3">something</a>
+        
+                <a data-sort="0016" 
+                    href="/archive/?tag=Flutter"
+                    title="Flutter"
+                    rel="2">Flutter
     </div>
 </section>
 
