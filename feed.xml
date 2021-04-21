@@ -5,14 +5,13 @@
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
     <link>http://junziboxue.com/</link>
     <atom:link href="http://junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 20 Apr 2021 18:07:39 +0800</pubDate>
-    <lastBuildDate>Tue, 20 Apr 2021 18:07:39 +0800</lastBuildDate>
+    <pubDate>Wed, 21 Apr 2021 10:03:04 +0800</pubDate>
+    <lastBuildDate>Wed, 21 Apr 2021 10:03:04 +0800</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
-        <title>Webrtc Ios</title>
-        <description>
-&lt;p&gt;&lt;img src=&quot;../assets/images/webRTC/WebRTC_Logo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+        <title>WebRTC 信令交换与群聊实现</title>
+        <description>&lt;p&gt;&lt;img src=&quot;../assets/images/webRTC/WebRTC_Logo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;1什么是-webrtc&quot;&gt;1.什么是 WebRTC&lt;/h3&gt;
 
@@ -191,9 +190,11 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 &lt;a href=&quot;https://webrtc.org.cn/20190517_tutorial4_webrtc_ios/&quot;&gt;WebRTC 入门教程&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://github.com/ChenYilong/WebRTC.git&quot;&gt;WebRTC入门教程&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Mon, 11 Jan 2021 00:00:00 +0800</pubDate>
+        <pubDate>Mon, 11 Jan 2021 18:30:00 +0800</pubDate>
         <link>http://junziboxue.com/webrtc-ios</link>
         <guid isPermaLink="true">http://junziboxue.com/webrtc-ios</guid>
+        
+        <category>WebRTC</category>
         
         
       </item>
