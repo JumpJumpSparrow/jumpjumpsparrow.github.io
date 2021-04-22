@@ -5,21 +5,91 @@
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
     <link>http://junziboxue.com/</link>
     <atom:link href="http://junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 21 Apr 2021 10:09:04 +0800</pubDate>
-    <lastBuildDate>Wed, 21 Apr 2021 10:09:04 +0800</lastBuildDate>
+    <pubDate>Thu, 22 Apr 2021 18:08:05 +0800</pubDate>
+    <lastBuildDate>Thu, 22 Apr 2021 18:08:05 +0800</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
         <title>WebRTC 信令交换与群聊实现</title>
         <description>&lt;p&gt;&lt;img src=&quot;../assets/images/webRTC/WebRTC_Logo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;1什么是-webrtc&quot;&gt;1.什么是 WebRTC&lt;/h3&gt;
+&lt;h2 id=&quot;1什么是-webrtc&quot;&gt;1.什么是 WebRTC&lt;/h2&gt;
 
 &lt;p&gt;WebRTC，全称：(Web Real-Time Communication),是一个免费的开源工程。 &lt;br /&gt;
 Google 把 WebRTC 视为和 HTTP 一样，不仅仅是一种解决方案，而是一种标准。&lt;br /&gt;
 使各种终端，包括 浏览器、原生应用等具备音视频通讯和即时通讯的能力。&lt;/p&gt;
 
-&lt;h3 id=&quot;2安装接入&quot;&gt;2.安装接入&lt;/h3&gt;
+&lt;h3 id=&quot;11-webrtc术语&quot;&gt;1.1 webrtc术语&lt;/h3&gt;
+
+&lt;p&gt;####Signaling channel(信令通道)&lt;/p&gt;
+
+&lt;p&gt;一种资源，使应用程序可以通过交换信令消息来发现，建立，控制和终止对等连接。信令消息是两个应用程序相互交换以建立对等连接的元数据。该元数据包括本地媒体信息，例如媒体编解码器和编解码器参数，以及两个应用程序可能相互连接以进行实时流传输的可能的网络候选路径。
+PS：信令通道通常由信令服务器提供（或信令服务）&lt;/p&gt;
+
+&lt;h4 id=&quot;peer对等节点&quot;&gt;Peer（对等节点）&lt;/h4&gt;
+
+&lt;p&gt;接入同一webrtc房间（逻辑划分的管理单元）的进行实时双向流传输的任何设备或应用程序&lt;/p&gt;
+
+&lt;h4 id=&quot;session-traversal-utilities-for-nat-stun&quot;&gt;Session Traversal Utilities for NAT (STUN)&lt;/h4&gt;
+
+&lt;p&gt;一种协议，用于发现您的公共地址(公网IP)并确定路由器中可能阻止与对等方直接连接的任何限制条件。
+PS：Stun服务由STUN服务器提供&lt;/p&gt;
+
+&lt;h4 id=&quot;traversal-using-relays-around-nat-turn&quot;&gt;Traversal Using Relays around NAT (TURN)&lt;/h4&gt;
+
+&lt;p&gt;通过打开与TURN服务器的连接并通过该服务器中继所有信息来绕过对称NAT限制的服务器。
+PS：当P2P链接建立失败，仍需要保证功能可用，这里就需要TURN服务器对所有数据进行中继。建立relay模式的链接
+PS: TURN服务由TURN服务器提供&lt;/p&gt;
+
+&lt;h4 id=&quot;session-description-protocol-sdp&quot;&gt;Session Description Protocol (SDP)&lt;/h4&gt;
+
+&lt;p&gt;一种描述连接的多媒体内容的标准，例如分辨率，格式，编解码器，加密等，以便一旦数据传输，两个对等方就可以相互理解。
+PS:描述终端信息的规范。&lt;/p&gt;
+
+&lt;h4 id=&quot;sdp-offer&quot;&gt;SDP Offer&lt;/h4&gt;
+
+&lt;p&gt;发起建立会话链接的SDP消息(主动发送方)，生成会话描述以创建或修改会话。它描述了所需媒体通信的各个方面。
+PS：比如想要和一个对等节点建立链接。首先就得告诉对端，自身终端信息（分辨率，格式，编解码器，加密），而为了描述自身终端信息产生SDP 就被称为SDP offer&lt;/p&gt;
+
+&lt;h4 id=&quot;sdp-answer&quot;&gt;SDP Answer&lt;/h4&gt;
+
+&lt;p&gt;answer SDP由响应者响应邀约者发送的offer SDP。Answer主要包含终端协商结果(answer端终端信息)。例如，如果offer中的所有音频和视频流都被接受。&lt;/p&gt;
+
+&lt;h4 id=&quot;interactive-connectivity-establishment-ice&quot;&gt;Interactive Connectivity Establishment (ICE)&lt;/h4&gt;
+
+&lt;p&gt;一个允许您的Web浏览器(webrtc终端)与对等方连接的框架。&lt;/p&gt;
+
+&lt;p&gt;ICE Candidate(Candidate)
+一种能与对等方用来通信的一种方法(方式)。&lt;/p&gt;
+
+&lt;h3 id=&quot;12-stun-turn-ice如何工作&quot;&gt;1.2 STUN TURN ICE如何工作&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;ClientA首先创建PeerConnection对象，然后打开本地音视频设备，将音视频数据封装成MediaStream添加到PeerConnection中。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ClientA调用PeerConnection的CreateOffer方法创建一个用于offer的SDP对象，SDP对象中保存当前音视频的相关参数。ClientA通过PeerConnection的SetLocalDescription方法将该SDP对象保存起来，并通过Signal服务器发送给ClientB。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ClientB接收到ClientA发送过的offer SDP对象，通过PeerConnection的SetRemoteDescription方法将其保存起来，并调用PeerConnection的CreateAnswer方法创建一个应答的SDP对象，通过PeerConnection的SetLocalDescription的方法保存该应答SDP对象并将它通过Signal服务器发送给ClientA。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ClientA接收到ClientB发送过来的应答SDP对象，将其通过PeerConnection的SetRemoteDescription方法保存起来。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在SDP信息的offer/answer流程中，ClientA和ClientB已经根据SDP信息创建好相应的音频Channel和视频Channel并开启Candidate数据的收集，Candidate数据可以简单地理解成Client端的IP地址信息（本地IP地址、公网IP地址、Relay服务端分配的地址）。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;当ClientA收集到Candidate信息后，PeerConnection会通过OnIceCandidate接口给ClientA发送通知，ClientA将收到的Candidate信息通过Signal服务器发送给ClientB，ClientB通过PeerConnection的AddIceCandidate方法保存起来。同样的操作ClientB对ClientA再来一次。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这样ClientA和ClientB就已经建立了音视频传输的P2P通道，ClientB接收到ClientA传送过来的音视频流，会通过PeerConnection的OnAddStream回调接口返回一个标识ClientA端音视频流的MediaStream对象，在ClientB端渲染出来即可。同样操作也适应ClientB到ClientA的音视频流的传输。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/images/webRTC/8fdbd5edc57ac9b4df227b875e1c0324.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2安装接入&quot;&gt;2.安装接入&lt;/h2&gt;
 
 &lt;p&gt;拿iOS来说，使用 webRTC 需要以下步骤：&lt;/p&gt;
 
@@ -75,7 +145,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 &lt;p&gt;因为 视频通话使用 RTCMTLVideoView 渲染视频，其内部使用 Metal 图形接口来渲染图像，&lt;br /&gt;
 该接口不支持ArmV7,因此需要在 valid Architecture 选项中 移除 arm v7指令集&lt;/p&gt;
 
-&lt;h3 id=&quot;3-架构设计&quot;&gt;3. 架构设计&lt;/h3&gt;
+&lt;h2 id=&quot;3-架构设计&quot;&gt;3. 架构设计&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Factory 类：全局持有一个 RTCPeerConnectionFactory 类实例，管理本地 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RTCVideoTrack&lt;/code&gt;,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RTCAudioTrack&lt;/code&gt;,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RTCVideoSource&lt;/code&gt;,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RTCAudioSource&lt;/code&gt;,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RTCCameraVideoCapturer&lt;/code&gt;等类的实例，以上类的实例都是全局唯一的。&lt;/li&gt;
@@ -90,7 +160,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 
 &lt;p&gt;事件集合：&lt;/p&gt;
 
-&lt;h3 id=&quot;4群聊建立流程&quot;&gt;4.群聊建立流程&lt;/h3&gt;
+&lt;h2 id=&quot;4群聊建立流程&quot;&gt;4.群聊建立流程&lt;/h2&gt;
 
 &lt;p&gt;因为 WebRTC 是 P2P 连接，如果需要多人同时通信的话，就需要建立复杂的连接关系。&lt;/p&gt;
 
@@ -151,7 +221,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 &lt;p&gt;一次连接 对于邀请者来说,就算是发送一次 OFFER 和接到一次 ANSWER,对于被邀请者来说,就是接到 一次OFFER 和发送一次ANSWER.
 一个PeerConnection 只能建立一次连接 不能建立两次连接（例如 不能重复的发送和接收同一个客户端的OFFER&lt;/p&gt;
 
-&lt;h3 id=&quot;5-断线重连-机制&quot;&gt;5 断线重连 机制&lt;/h3&gt;
+&lt;h2 id=&quot;5-断线重连-机制&quot;&gt;5 断线重连 机制&lt;/h2&gt;
 &lt;p&gt;假设 A B连接失败,A为主动发起对话的那方,&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;主动发起邀请的那方,销毁原先的 PeerConnection,&lt;/li&gt;
@@ -161,7 +231,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
   &lt;li&gt;生成 ANSWER 返回给A，交换ICE　重新连接．&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;6-连接状态展示&quot;&gt;6. 连接状态展示&lt;/h3&gt;
+&lt;h2 id=&quot;6-连接状态展示&quot;&gt;6. 连接状态展示&lt;/h2&gt;
 
 &lt;p&gt;PC 间连接状态变化,通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onconnectionstatechange&lt;/code&gt;接口回调获得.
 共6种状态,分别是:&lt;/p&gt;
@@ -175,7 +245,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 
 &lt;p&gt;连接状态变化后,给出相应的提示文案.&lt;/p&gt;
 
-&lt;h3 id=&quot;7多媒体控制&quot;&gt;7.多媒体控制&lt;/h3&gt;
+&lt;h2 id=&quot;7多媒体控制&quot;&gt;7.多媒体控制&lt;/h2&gt;
 &lt;p&gt;多媒体控制&lt;br /&gt;
 1.镜头反转&lt;br /&gt;
 2.静音/关闭摄像头&lt;br /&gt;
@@ -188,7 +258,9 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 &lt;a href=&quot;https://www.cocoapods.org/pods/GoogleWebRTC&quot;&gt;Pods 安装&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://webrtc.org/?hl=en&quot;&gt;WebRTC 官网&lt;/a&gt;
 &lt;a href=&quot;https://webrtc.org.cn/20190517_tutorial4_webrtc_ios/&quot;&gt;WebRTC 入门教程&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://github.com/ChenYilong/WebRTC.git&quot;&gt;WebRTC入门教程&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;https://github.com/ChenYilong/WebRTC.git&quot;&gt;WebRTC入门教程&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/m0_37263637/article/details/103999418&quot;&gt;WebRTC 连接建立&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://docs.aws.amazon.com/zh_cn/kinesisvideostreams-webrtc-dg/latest/devguide/kvswebrtc-how-it-works.html&quot;&gt;webRET 工作方式&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 11 Jan 2021 18:30:00 +0800</pubDate>
         <link>http://junziboxue.com/webrtc-ios</link>
