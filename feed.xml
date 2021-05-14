@@ -5,8 +5,8 @@
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
     <link>http://junziboxue.com/</link>
     <atom:link href="http://junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 22 Apr 2021 18:08:05 +0800</pubDate>
-    <lastBuildDate>Thu, 22 Apr 2021 18:08:05 +0800</lastBuildDate>
+    <pubDate>Fri, 14 May 2021 17:01:18 +0800</pubDate>
+    <lastBuildDate>Fri, 14 May 2021 17:01:18 +0800</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -21,7 +21,7 @@ Google 把 WebRTC 视为和 HTTP 一样，不仅仅是一种解决方案，而�
 
 &lt;h3 id=&quot;11-webrtc术语&quot;&gt;1.1 webrtc术语&lt;/h3&gt;
 
-&lt;p&gt;####Signaling channel(信令通道)&lt;/p&gt;
+&lt;p&gt;Signaling channel(信令通道)&lt;/p&gt;
 
 &lt;p&gt;一种资源，使应用程序可以通过交换信令消息来发现，建立，控制和终止对等连接。信令消息是两个应用程序相互交换以建立对等连接的元数据。该元数据包括本地媒体信息，例如媒体编解码器和编解码器参数，以及两个应用程序可能相互连接以进行实时流传输的可能的网络候选路径。
 PS：信令通道通常由信令服务器提供（或信令服务）&lt;/p&gt;

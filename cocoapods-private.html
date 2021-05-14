@@ -309,12 +309,20 @@ $ git push --tags
 
 <h4 id="5创建spec-repo">5.创建spec repo</h4>
 
-<p>进入文件夹<code class="language-plaintext highlighter-rouge">cd ~/.cocoapods/repos</code> 可以查看本地<code class="language-plaintext highlighter-rouge">spec repo</code>
-指定管理 lib repo 的 specs repo 的 url
-<code class="language-plaintext highlighter-rouge">pod repo add SpecRepo http://git.xxxx.cn/APP/ios/Spec.git</code>
-注意 此处地址是spec仓库地址
-推送 podspec 到 specs repo
-<code class="language-plaintext highlighter-rouge">pod repo push Lib Lib.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git</code></p>
+<p>运行以下命令：
+<code class="language-plaintext highlighter-rouge">pod repo add SpecRepo http://git.xxxx.cn/APP/ios/Spec.git</code><br />
+在本地创建 SpecRepo，进入文件夹<code class="language-plaintext highlighter-rouge">cd ~/.cocoapods/repos</code> 可以查看本地的repo list，  <br />
+可以看到新添加的 SpecRepo， SpecRepo根据需要可自定义命名。<br />
+注意 此处地址是spec仓库地址<br />
+推送 podspec 到 specs repo<br />
+进入到代码路径，也就是包含<code class="language-plaintext highlighter-rouge">SpecRepo.podspec</code>文件的路径，然后运行命令
+<code class="language-plaintext highlighter-rouge">pod repo push SpecRepo SpecRepo.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git</code></p>
+
+<p>如果发生异常或失败，可以尝试添加两个参数：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> pod repo push SpecRepo SpecRepo.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git --allow-warnings --verbose --use-libraries
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="6-验证">6. 验证</h4>
 <p>创建一个新的项目  编写podfile文件</p>
