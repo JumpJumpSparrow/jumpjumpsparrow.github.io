@@ -3,10 +3,10 @@
   <channel>
     <title>CF Blog</title>
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
-    <link>http://junziboxue.com/</link>
-    <atom:link href="http://junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 22 Oct 2021 14:27:49 +0800</pubDate>
-    <lastBuildDate>Fri, 22 Oct 2021 14:27:49 +0800</lastBuildDate>
+    <link>http://www.junziboxue.com/</link>
+    <atom:link href="http://www.junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 28 Dec 2021 10:44:41 +0800</pubDate>
+    <lastBuildDate>Tue, 28 Dec 2021 10:44:41 +0800</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -263,8 +263,8 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 &lt;a href=&quot;https://docs.aws.amazon.com/zh_cn/kinesisvideostreams-webrtc-dg/latest/devguide/kvswebrtc-how-it-works.html&quot;&gt;webRET 工作方式&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 11 Jan 2021 18:30:00 +0800</pubDate>
-        <link>http://junziboxue.com/webrtc-ios</link>
-        <guid isPermaLink="true">http://junziboxue.com/webrtc-ios</guid>
+        <link>http://www.junziboxue.com/webrtc-ios</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/webrtc-ios</guid>
         
         <category>WebRTC</category>
         
@@ -460,8 +460,8 @@ GPU线程执行合成并光栅化后交给GPU来处理，其中几个关键步�
 
 </description>
         <pubDate>Mon, 02 Nov 2020 18:30:00 +0800</pubDate>
-        <link>http://junziboxue.com/new-to-flutter</link>
-        <guid isPermaLink="true">http://junziboxue.com/new-to-flutter</guid>
+        <link>http://www.junziboxue.com/new-to-flutter</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/new-to-flutter</guid>
         
         <category>Flutter</category>
         
@@ -730,8 +730,8 @@ Opacity(
 
 </description>
         <pubDate>Wed, 19 Aug 2020 18:30:00 +0800</pubDate>
-        <link>http://junziboxue.com/flutter-fade-app-bar</link>
-        <guid isPermaLink="true">http://junziboxue.com/flutter-fade-app-bar</guid>
+        <link>http://www.junziboxue.com/flutter-fade-app-bar</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/flutter-fade-app-bar</guid>
         
         <category>Flutter</category>
         
@@ -820,8 +820,8 @@ cd my-awesome-site
 
 </description>
         <pubDate>Mon, 10 Aug 2020 18:30:00 +0800</pubDate>
-        <link>http://junziboxue.com/install-jekyll</link>
-        <guid isPermaLink="true">http://junziboxue.com/install-jekyll</guid>
+        <link>http://www.junziboxue.com/install-jekyll</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/install-jekyll</guid>
         
         <category>jekyll</category>
         
@@ -894,8 +894,8 @@ cd my-awesome-site
 
 </description>
         <pubDate>Mon, 22 Jun 2020 18:30:00 +0800</pubDate>
-        <link>http://junziboxue.com/ios-navigationcontroller</link>
-        <guid isPermaLink="true">http://junziboxue.com/ios-navigationcontroller</guid>
+        <link>http://www.junziboxue.com/ios-navigationcontroller</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/ios-navigationcontroller</guid>
         
         <category>iOS</category>
         
@@ -1073,8 +1073,8 @@ cd my-awesome-site
 &lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/EventScheduleManager.git&quot;&gt;Demo EventScheduleManager&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
-        <link>http://junziboxue.com/concurrent-events-queue</link>
-        <guid isPermaLink="true">http://junziboxue.com/concurrent-events-queue</guid>
+        <link>http://www.junziboxue.com/concurrent-events-queue</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/concurrent-events-queue</guid>
         
         <category>iOS</category>
         
@@ -1146,8 +1146,8 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 &lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
-        <link>http://junziboxue.com/scales-pagesize-to-fit</link>
-        <guid isPermaLink="true">http://junziboxue.com/scales-pagesize-to-fit</guid>
+        <link>http://www.junziboxue.com/scales-pagesize-to-fit</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/scales-pagesize-to-fit</guid>
         
         <category>iOS</category>
         
@@ -1213,8 +1213,8 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 &lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;
 </description>
         <pubDate>Fri, 08 Nov 2019 00:00:00 +0800</pubDate>
-        <link>http://junziboxue.com/auto-pilot-ethics</link>
-        <guid isPermaLink="true">http://junziboxue.com/auto-pilot-ethics</guid>
+        <link>http://www.junziboxue.com/auto-pilot-ethics</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/auto-pilot-ethics</guid>
         
         <category>something</category>
         
@@ -1248,8 +1248,8 @@ Call this method on your application’s main thread when you want to adjust the
 When this message is received, the layer’s super layers are traversed until a ancestor layer is found that does not require layout. Then layout is performed on the entire layer-tree beneath that ancestor.&lt;/p&gt;
 </description>
         <pubDate>Fri, 18 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://junziboxue.com/UIView-drawing-cycle</link>
-        <guid isPermaLink="true">http://junziboxue.com/UIView-drawing-cycle</guid>
+        <link>http://www.junziboxue.com/UIView-drawing-cycle</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/UIView-drawing-cycle</guid>
         
         <category>iOS</category>
         
@@ -1410,8 +1410,8 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 
 </description>
         <pubDate>Wed, 25 Sep 2019 02:00:00 +0800</pubDate>
-        <link>http://junziboxue.com/yykit-micro</link>
-        <guid isPermaLink="true">http://junziboxue.com/yykit-micro</guid>
+        <link>http://www.junziboxue.com/yykit-micro</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/yykit-micro</guid>
         
         <category>iOS</category>
         
