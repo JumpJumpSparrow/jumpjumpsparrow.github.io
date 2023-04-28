@@ -5,13 +5,13 @@
     <description>iOS 开发，会 1.5 点web前端，Java web入门开发者</description>
     <link>http://www.junziboxue.com/</link>
     <atom:link href="http://www.junziboxue.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 01 Sep 2022 14:48:05 +0800</pubDate>
-    <lastBuildDate>Thu, 01 Sep 2022 14:48:05 +0800</lastBuildDate>
-    <generator>Jekyll v4.1.1</generator>
+    <pubDate>Fri, 28 Apr 2023 10:06:06 +0800</pubDate>
+    <lastBuildDate>Fri, 28 Apr 2023 10:06:06 +0800</lastBuildDate>
+    <generator>Jekyll v4.3.2</generator>
     
       <item>
         <title>WebRTC 信令交换与群聊实现</title>
-        <description>&lt;p&gt;&lt;img src=&quot;../assets/images/webRTC/WebRTC_Logo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+        <description>&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/webRTC/WebRTC_Logo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1什么是-webrtc&quot;&gt;1.什么是 WebRTC&lt;/h2&gt;
 
@@ -87,7 +87,7 @@ PS：比如想要和一个对等节点建立链接。首先就得告诉对端，
 
 &lt;p&gt;这样ClientA和ClientB就已经建立了音视频传输的P2P通道，ClientB接收到ClientA传送过来的音视频流，会通过PeerConnection的OnAddStream回调接口返回一个标识ClientA端音视频流的MediaStream对象，在ClientB端渲染出来即可。同样操作也适应ClientB到ClientA的音视频流的传输。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/webRTC/8fdbd5edc57ac9b4df227b875e1c0324.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/webRTC/8fdbd5edc57ac9b4df227b875e1c0324.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;2安装接入&quot;&gt;2.安装接入&lt;/h2&gt;
 
@@ -99,7 +99,7 @@ PS：比如想要和一个对等节点建立链接。首先就得告诉对端，
 因此工程需要设置为： iOS Deplopment Target 10.0&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pod 'GoogleWebRTC'
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pod &apos;GoogleWebRTC&apos;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h4 id=&quot;22-工程设置&quot;&gt;2.2 工程设置&lt;/h4&gt;
 &lt;p&gt;因为需要访问相机、麦克风等音视频设备，需要在工程中添加配置&lt;/p&gt;
@@ -164,7 +164,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 
 &lt;p&gt;因为 WebRTC 是 P2P 连接，如果需要多人同时通信的话，就需要建立复杂的连接关系。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/webRTC/p2p_connection.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/webRTC/p2p_connection.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;如图，如果3个人通话，就需要建立 3条 P2P 连接，而4个人通话就需要 6 条P2P连接，5个人通话就需要 10条P2P连接。 &lt;br /&gt;
 如果是 N 个人通话（N &amp;gt;= 3),就需要 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;N(N-3)/2 + N&lt;/code&gt; 条连接。人数越多，需要建立的连接会呈O(n^2)的趋势增长。&lt;br /&gt;
@@ -173,7 +173,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 
 &lt;p&gt;接下来说一下，如何建立起 多人通话的流程,此处已 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;A B C D&lt;/code&gt; 4人通话为例：&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/webRTC/p2p_topology.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/webRTC/p2p_topology.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;41-p2p连接流程&quot;&gt;4.1 P2P连接流程&lt;/h4&gt;
 
@@ -262,9 +262,9 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 &lt;a href=&quot;https://blog.csdn.net/m0_37263637/article/details/103999418&quot;&gt;WebRTC 连接建立&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://docs.aws.amazon.com/zh_cn/kinesisvideostreams-webrtc-dg/latest/devguide/kvswebrtc-how-it-works.html&quot;&gt;webRET 工作方式&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Mon, 11 Jan 2021 18:30:00 +0800</pubDate>
-        <link>http://www.junziboxue.com/webrtc-ios</link>
-        <guid isPermaLink="true">http://www.junziboxue.com/webrtc-ios</guid>
+        <pubDate>Mon, 11 Jan 2021 10:30:00 +0800</pubDate>
+        <link>http://www.junziboxue.com/2021/01/11/webrtc-ios/</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/2021/01/11/webrtc-ios/</guid>
         
         <category>WebRTC</category>
         
@@ -275,7 +275,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
         <title>从里到外，聊一聊 FLutter</title>
         <description>&lt;h3 id=&quot;1-什么是flutter&quot;&gt;1. 什么是flutter&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/whatIsFlutter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/new-to-flutter/whatIsFlutter.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Flutter 是 Google 开源的 UI 工具包，帮助开发者通过一套代码库,&lt;br /&gt;
 高效构建多平台精美应用，支持移动、Web、桌面和嵌入式平台。&lt;/p&gt;
@@ -295,7 +295,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 
 &lt;p&gt;Flutter的整体架构共分为三层，从下到上分别为：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Embedder层&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Engine层&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Framework层&lt;/code&gt;。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/arch-diagram.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/new-to-flutter/arch-diagram.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;分别对应：&lt;/p&gt;
 
@@ -331,7 +331,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 
 &lt;p&gt;从结构上看，Flutter渲染由UI Thread与GPU Thread相互配合完成。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/architect.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/new-to-flutter/architect.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;1）UI Thread&lt;/p&gt;
 
@@ -351,7 +351,7 @@ Pods -&amp;gt; TARGETS -&amp;gt; GoogleWebRTC -&amp;gt; BuildSettings -&amp;gt; 
 &lt;h3 id=&quot;flutter-渲染工作流水线&quot;&gt;Flutter 渲染工作流水线&lt;/h3&gt;
 
 &lt;p&gt;渲染原理解释了 flutter 是如何跨平台的
-&lt;img src=&quot;../assets/images/new-to-flutter/rendering-pipline.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://junziboxue.com/assets/images/new-to-flutter/rendering-pipline.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;渲染过程，UI线程完成布局、绘制操作，生成Layer Tree；
 GPU线程执行合成并光栅化后交给GPU来处理，其中几个关键步骤：&lt;/p&gt;
@@ -368,7 +368,7 @@ GPU线程执行合成并光栅化后交给GPU来处理，其中几个关键步�
 &lt;p&gt;GPU线程通过skia向GPU硬件绘制一帧的数据，GPU将帧信息保存到FrameBuffer里面，
 然后视频控制器会根据VSync信号，从FrameBuffer取帧数据传递给显示器，从而显示出最终的画面。（Vulkan,OpenGL,Metal）&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/render-flow.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/new-to-flutter/render-flow.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;4渲染策略&quot;&gt;4.渲染策略&lt;/h3&gt;
 
@@ -383,7 +383,7 @@ GPU线程执行合成并光栅化后交给GPU来处理，其中几个关键步�
 （Layout =&amp;gt; Paint =&amp;gt; Composite =&amp;gt; Rasterize）
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/layout-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/new-to-flutter/layout-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;布局（Layout）&lt;/li&gt;
@@ -427,12 +427,12 @@ GPU线程执行合成并光栅化后交给GPU来处理，其中几个关键步�
  然后，GPU工作流水线六阶段完成。最终，展示到终端屏幕上。&lt;br /&gt;
  当然这只是一个垂直同步信号（VSync）的过程。（按60fps算，一秒需要60个VSync才不会感到卡顿。）&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/full-pip-line.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/new-to-flutter/full-pip-line.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;5工程实例讲解&quot;&gt;5.工程实例讲解&lt;/h3&gt;
 
 &lt;h5 id=&quot;51常用组件&quot;&gt;5.1.常用组件&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;../assets/images/new-to-flutter/widget-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/new-to-flutter/widget-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;h5 id=&quot;52特性展示&quot;&gt;5.2特性展示&lt;/h5&gt;
 
 &lt;ul&gt;
@@ -459,9 +459,9 @@ GPU线程执行合成并光栅化后交给GPU来处理，其中几个关键步�
 &lt;a href=&quot;https://dart.cn&quot;&gt;Dart&lt;/a&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Mon, 02 Nov 2020 18:30:00 +0800</pubDate>
-        <link>http://www.junziboxue.com/new-to-flutter</link>
-        <guid isPermaLink="true">http://www.junziboxue.com/new-to-flutter</guid>
+        <pubDate>Mon, 02 Nov 2020 10:30:00 +0800</pubDate>
+        <link>http://www.junziboxue.com/2020/11/02/new-to-flutter/</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/2020/11/02/new-to-flutter/</guid>
         
         <category>Flutter</category>
         
@@ -554,7 +554,7 @@ Scaffold(
             color: Colors.orange,
             height: bottomBarHeight,
             child: Center(
-              child: Text('bottom bar'),
+              child: Text(&apos;bottom bar&apos;),
             )));
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -579,7 +579,7 @@ Opacity(
       child: Container(
         height: appBarHeight,
         child: AppBar(
-          title: Text('app bar'),
+          title: Text(&apos;app bar&apos;),
           backgroundColor: Colors.deepOrange,
         ),
       ),
@@ -679,7 +679,7 @@ Opacity(
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; double maxOffset = 80.0;
 
   scrollViewDidScrolled(double offSet) {
-    //print('scroll offset ' + offSet.toString());
+    //print(&apos;scroll offset &apos; + offSet.toString());
 
     ///appbar 透明度
     double appBarOpacity = offSet / maxOffset;
@@ -708,7 +708,7 @@ Opacity(
     } else if (rectOpacity &amp;gt; 1) {
       rectOpacity = 1.0;
     }
-    //print('roundOpacity $roundOpacity rectOpacity $rectOpacity');
+    //print(&apos;roundOpacity $roundOpacity rectOpacity $rectOpacity&apos;);
 
     ///更新透明度
     if (appBar != null &amp;amp;&amp;amp; appBar.updateAppBarOpacity != null) {
@@ -729,9 +729,9 @@ Opacity(
 &lt;a href=&quot;https://github.com/JumpJumpSparrow/Flutter-FadeAppBar.git&quot;&gt;Demo&lt;/a&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Wed, 19 Aug 2020 18:30:00 +0800</pubDate>
-        <link>http://www.junziboxue.com/flutter-fade-app-bar</link>
-        <guid isPermaLink="true">http://www.junziboxue.com/flutter-fade-app-bar</guid>
+        <pubDate>Wed, 19 Aug 2020 10:30:00 +0800</pubDate>
+        <link>http://www.junziboxue.com/2020/08/19/flutter-fade-app-bar/</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/2020/08/19/flutter-fade-app-bar/</guid>
         
         <category>Flutter</category>
         
@@ -789,8 +789,8 @@ Opacity(
 brew install ruby
 
 添加路径
-echo 'export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;' &amp;gt;&amp;gt; ~/.bash_profile
-echo 'export PATH=&quot;$HOME/.gem/ruby/X.X.0/bin:$PATH&quot;' &amp;gt;&amp;gt; ~/.bash_profile
+echo &apos;export PATH=&quot;/usr/local/opt/ruby/bin:$PATH&quot;&apos; &amp;gt;&amp;gt; ~/.bash_profile
+echo &apos;export PATH=&quot;$HOME/.gem/ruby/X.X.0/bin:$PATH&quot;&apos; &amp;gt;&amp;gt; ~/.bash_profile
 ‘X.X.0’为本地Ruby版本
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -819,9 +819,9 @@ cd my-awesome-site
 &lt;p&gt;&lt;a href=&quot;https://jekyllrb.com&quot;&gt;参考资料&lt;/a&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Mon, 10 Aug 2020 18:30:00 +0800</pubDate>
-        <link>http://www.junziboxue.com/install-jekyll</link>
-        <guid isPermaLink="true">http://www.junziboxue.com/install-jekyll</guid>
+        <pubDate>Mon, 10 Aug 2020 10:30:00 +0800</pubDate>
+        <link>http://www.junziboxue.com/2020/08/10/install-jekyll/</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/2020/08/10/install-jekyll/</guid>
         
         <category>jekyll</category>
         
@@ -853,11 +853,11 @@ cd my-awesome-site
 &lt;h3 id=&quot;2uinavigationcontroller实现原理&quot;&gt;2.&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;实现原理&lt;/h3&gt;
 &lt;p&gt;在iOS开发过程中，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;是常用的容器类Controller，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController &lt;/code&gt;交互方式如下图，&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/UINavigationController/navigation-interface.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/UINavigationController/navigation-interface.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;根据官方文档说明，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;通过管理一个用数组实现的栈结构来管理&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;childControllers &lt;/code&gt;。 将&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UIViewController&lt;/code&gt;依次压入栈中，记录了页面的先后顺序，同时栈持有子视图，实现了内存的管理。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/UINavigationController/objects-managed-by-navi.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/UINavigationController/objects-managed-by-navi.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;3解决方案&quot;&gt;3.解决方案&lt;/h3&gt;
 &lt;p&gt;于是想到，通过修改&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;UINavigationController&lt;/code&gt;&lt;strong&gt;&lt;em&gt;栈内元素&lt;/em&gt;&lt;/strong&gt;来控制页面的跳转。&lt;/p&gt;
@@ -887,15 +887,15 @@ cd my-awesome-site
 
 &lt;p&gt;附：UI结构图&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/images/UINavigationController/views-of-navi.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://junziboxue.com/assets/images/UINavigationController/views-of-navi.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;参考资料：&lt;br /&gt;
 &lt;a href=&quot;https://developer.apple.com/documentation/uikit/uinavigationcontroller?language=objc&quot;&gt;UINavigationController&lt;/a&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Mon, 22 Jun 2020 18:30:00 +0800</pubDate>
-        <link>http://www.junziboxue.com/ios-navigationcontroller</link>
-        <guid isPermaLink="true">http://www.junziboxue.com/ios-navigationcontroller</guid>
+        <pubDate>Mon, 22 Jun 2020 10:30:00 +0800</pubDate>
+        <link>http://www.junziboxue.com/2020/06/22/ios-navigationcontroller/</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/2020/06/22/ios-navigationcontroller/</guid>
         
         <category>iOS</category>
         
@@ -1072,9 +1072,9 @@ cd my-awesome-site
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/JumpJumpSparrow/EventScheduleManager.git&quot;&gt;Demo EventScheduleManager&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
-        <link>http://www.junziboxue.com/concurrent-events-queue</link>
-        <guid isPermaLink="true">http://www.junziboxue.com/concurrent-events-queue</guid>
+        <pubDate>Tue, 17 Dec 2019 23:00:00 +0800</pubDate>
+        <link>http://www.junziboxue.com/2019/12/17/concurrent-events-queue/</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/2019/12/17/concurrent-events-queue/</guid>
         
         <category>iOS</category>
         
@@ -1107,9 +1107,9 @@ CGFloat ratio = w/750.0;
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'UTF-8'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'viewport'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'format-detection'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'telephone=no'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;UTF-8&apos;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;viewport&apos;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=0&apos;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;format-detection&apos;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&apos;telephone=no&apos;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;因为商品详情页在 PC 上的宽度为750像素， 我们根据手机频幕的宽度，计算出 H5 页面的缩放比例。&lt;br /&gt;
@@ -1120,7 +1120,7 @@ CGFloat ratio = w/750.0;
 &lt;pre&gt;&lt;code class=&quot;language-objective-c&quot;&gt;CGFloat w = [[UIScreen mainScreen] bounds].size.width;
 CGFloat ratio = w/750.0;
 
-NSString *jScript = @&quot;var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width,initial-scale=ratio,minimum-scale=0.30, maximum-scale=3.0, user-scalable=0'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);&quot;;
+NSString *jScript = @&quot;var meta = document.createElement(&apos;meta&apos;); meta.setAttribute(&apos;name&apos;, &apos;viewport&apos;); meta.setAttribute(&apos;content&apos;, &apos;width=device-width,initial-scale=ratio,minimum-scale=0.30, maximum-scale=3.0, user-scalable=0&apos;); meta.setAttribute(&apos;content&apos;, &apos;width=device-width&apos;); document.getElementsByTagName(&apos;head&apos;)[0].appendChild(meta);&quot;;
 
 jScript = [jScript stringByReplacingOccurrencesOfString:@&quot;ratio&quot; withString:[NSString stringWithFormat:@&quot;%f&quot;,ratio]];
 
@@ -1145,9 +1145,9 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 &lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit&quot;&gt;参考链接&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Wed, 18 Dec 2019 07:00:00 +0800</pubDate>
-        <link>http://www.junziboxue.com/scales-pagesize-to-fit</link>
-        <guid isPermaLink="true">http://www.junziboxue.com/scales-pagesize-to-fit</guid>
+        <pubDate>Tue, 17 Dec 2019 23:00:00 +0800</pubDate>
+        <link>http://www.junziboxue.com/2019/12/17/scales-pagesize-to-fit/</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/2019/12/17/scales-pagesize-to-fit/</guid>
         
         <category>iOS</category>
         
@@ -1212,9 +1212,9 @@ wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebCon
 
 &lt;p&gt;声明：本篇为个人原创，允许转载，转载请注明出处。&lt;/p&gt;
 </description>
-        <pubDate>Fri, 08 Nov 2019 00:00:00 +0800</pubDate>
-        <link>http://www.junziboxue.com/auto-pilot-ethics</link>
-        <guid isPermaLink="true">http://www.junziboxue.com/auto-pilot-ethics</guid>
+        <pubDate>Thu, 07 Nov 2019 16:00:00 +0800</pubDate>
+        <link>http://www.junziboxue.com/2019/11/07/auto-pilot-ethics/</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/2019/11/07/auto-pilot-ethics/</guid>
         
         <category>something</category>
         
@@ -1247,9 +1247,9 @@ Call this method on your application’s main thread when you want to adjust the
 &lt;p&gt;Recalculate the receiver’s layout, if required.&lt;br /&gt;
 When this message is received, the layer’s super layers are traversed until a ancestor layer is found that does not require layout. Then layout is performed on the entire layer-tree beneath that ancestor.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 18 Oct 2019 00:00:00 +0800</pubDate>
-        <link>http://www.junziboxue.com/UIView-drawing-cycle</link>
-        <guid isPermaLink="true">http://www.junziboxue.com/UIView-drawing-cycle</guid>
+        <pubDate>Thu, 17 Oct 2019 16:00:00 +0800</pubDate>
+        <link>http://www.junziboxue.com/2019/10/17/UIView-drawing-cycle/</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/2019/10/17/UIView-drawing-cycle/</guid>
         
         <category>iOS</category>
         
@@ -1267,7 +1267,7 @@ When this message is received, the layer’s super layers are traversed until a 
 &lt;p&gt;  今天在浏览 YYKit 库时，一个宏定义引起了我的注意：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YYSYNTH_DUMMY_CLASS &lt;/code&gt;,从字面意思看是定义了一个不起任何作用的&lt;em&gt;哑&lt;/em&gt;类。相关描述如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-Objective-C&quot;&gt;/**
- Add this macro before each category implementation, so we don't have to use
+ Add this macro before each category implementation, so we don&apos;t have to use
  -all_load or -force_load to load object files from static libraries that only
  contain categories and no classes.
  More info: http://developer.apple.com/library/mac/#qa/qa2006/qa1490.html .
@@ -1409,9 +1409,9 @@ Passing the -ObjC option to the linker causes it to load all members of static l
 &lt;p&gt;YYKit 中的这个宏定义在 分类之前加了一个空类，这样&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.m&lt;/code&gt;文件就包含了类，这样生成的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.o&lt;/code&gt;文件就会被链接器打包进最终的可执行文件，从而避免了 “selector not recognized”异常的出现。&lt;/p&gt;
 
 </description>
-        <pubDate>Wed, 25 Sep 2019 02:00:00 +0800</pubDate>
-        <link>http://www.junziboxue.com/yykit-micro</link>
-        <guid isPermaLink="true">http://www.junziboxue.com/yykit-micro</guid>
+        <pubDate>Tue, 24 Sep 2019 18:00:00 +0800</pubDate>
+        <link>http://www.junziboxue.com/2019/09/24/yykit-micro/</link>
+        <guid isPermaLink="true">http://www.junziboxue.com/2019/09/24/yykit-micro/</guid>
         
         <category>iOS</category>
         
