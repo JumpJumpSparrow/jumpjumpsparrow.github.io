@@ -339,13 +339,13 @@ $ git push --tags
 可以看到新添加的 SpecRepo， SpecRepo根据需要可自定义命名。<br />
 注意 此处地址是spec仓库地址<br />
 推送 podspec 到 specs repo<br />
-进入到代码路径，也就是包含<code class="language-plaintext highlighter-rouge">SpecRepo.podspec</code>文件的路径，然后运行命令
-<code class="language-plaintext highlighter-rouge">pod repo push SpecRepo SpecRepo.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git</code></p>
+进入到代码路径，也就是包含<code class="language-plaintext highlighter-rouge">podName.podspec</code>文件的路径，然后运行命令
+<code class="language-plaintext highlighter-rouge">pod repo push SpecRepo podName.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git</code></p>
 
 <p>如果发生异常或失败，可以尝试添加两个参数：</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> pod repo push SpecRepo SpecRepo.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git --allow-warnings --verbose --use-libraries
+</pre></td><td class="rouge-code"><pre> pod repo push SpecRepo podName.podspec --sources=http://git.xxx.cn/APP/ios/Spec.git --allow-warnings --verbose --use-libraries
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h4 id="6-验证">6. 验证</h4>
@@ -365,7 +365,7 @@ platform :ios, '9.0'
 
 target 'TestPods' do
   use_frameworks!
-  pod 'Lib'
+  pod 'podName'
 
 end
 </pre></td></tr></tbody></table></code></pre></div></div>
@@ -377,11 +377,11 @@ end
 <ol>
   <li>将更新的podspec 文件更新到 git 库</li>
   <li>更新本地 repo 相关私有库的 podspec 文件,命令如下:
-<code class="language-plaintext highlighter-rouge">zsspecs</code> 是私有库的名称.</li>
+<code class="language-plaintext highlighter-rouge">podName</code> 是私有库的名称.</li>
 </ol>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>  pod repo update zsspecs
+</pre></td><td class="rouge-code"><pre>  pod repo update podName
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h3 id="subspec">subspec</h3>
@@ -514,17 +514,17 @@ pod spec lint --verbose --use-libraries --allow-warnings --sources='https://gith
         
         
         
-                <a data-sort="0008" 
+                <a data-sort="0010" 
                     href="/archive/?tag=iOS"
                     title="iOS"
                     rel="10">iOS</a>
         
-                <a data-sort="0015" 
+                <a data-sort="0017" 
                     href="/archive/?tag=something"
                     title="something"
                     rel="3">something</a>
         
-                <a data-sort="0016" 
+                <a data-sort="0018" 
                     href="/archive/?tag=Flutter"
                     title="Flutter"
                     rel="2">Flutter</a>

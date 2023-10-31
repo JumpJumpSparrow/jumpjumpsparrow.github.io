@@ -1,6 +1,22 @@
 [
   
     {
+      "title"    : "linux 常见命令",
+      "subtitle" : "命令全程及功能范围",
+      "tags"     : "linux",
+      "url"      : "/2023/09/07/linux-command/",
+      "date"     : "2023-09-07 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "关于 AI 的一些思考",
+      "subtitle" : "something about ai",
+      "tags"     : "AI",
+      "url"      : "/2023/05/05/all-about-ai/",
+      "date"     : "2023-05-05 00:00:00 +0800"
+    } ,
+  
+    {
       "title"    : "WebRTC 信令交换与群聊实现",
       "subtitle" : "WebRTC 信令交换与群聊实现",
       "tags"     : "WebRTC",
